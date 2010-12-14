@@ -8,8 +8,12 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-
     public $config;
+
+<<<<<<< HEAD
+=======
+    public $config;
+>>>>>>> 382fc74836455d52d2fddc56b83d53e82fc570a8
     protected function _initView()
     {
 
