@@ -11,6 +11,11 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        echo ' in index action';
+        $form = new Application_Form_JQueryForm();
+        $this->view->form = $form;
+//  print_r($form);
+        //die;
     }
 
 
