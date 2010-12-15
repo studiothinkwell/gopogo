@@ -1,19 +1,11 @@
 <?php
-/*
-$view= new Zend_View();
-$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
-$view->addHelperPath("ZendX/JQuery/View/Helper/", "ZendX_JQuery_View_Helper");
-$viewRenderer->setView($view);
-Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-*/
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     public $config;
 
-<<<<<<< HEAD
-=======
     public $config;
->>>>>>> 382fc74836455d52d2fddc56b83d53e82fc570a8
+
     protected function _initView()
     {
 
