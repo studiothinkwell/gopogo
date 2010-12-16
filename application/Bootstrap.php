@@ -3,9 +3,7 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     public $config;
-
-    public $config;
-
+    
     protected function _initView()
     {
 
