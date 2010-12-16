@@ -13,6 +13,32 @@ class User_AccountController extends Zend_Controller_Action
         // action body
     }
 
+    public function loginAction()
+    {
+    }
+
+    public function isLoggedIn()
+    {
+        
+    }
+
+    public function signupAction()
+    {
+    }
+
+    public function activateAction()
+    {
+
+    }
+
+    public function logoutAction()
+    {
+    }
+
+    public function profileAction()
+    {
+    }
+
 
 }
 
