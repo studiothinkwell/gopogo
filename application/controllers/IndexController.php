@@ -40,6 +40,11 @@ class IndexController extends Zend_Controller_Action
 
         */
 
+        // testimng for langhuage translator
+        //$translate = Zend_Registry::get('Zend_Translate');
+        //echo $translate->_("Invalid type given. Numeric string, integer or float expected") . "\n";
+
+
     }
 
 
