@@ -132,7 +132,7 @@ Class GP_GPCache
      * initilize the configuration
      */
     protected function _initConfig()
-    {        
+    {
         /**
          * Load application configurations
          *
@@ -140,10 +140,10 @@ Class GP_GPCache
         if(self::$appConfigs===null)
         {
             $bootstrap = self::getFronIntance()->getParam('bootstrap');
-            $options = $bootstrap->getOptions();            
+            $options = $bootstrap->getOptions();
             self::$appConfigs = $options;
-        }    
-        
+        }
+
         /**
          * Load cache configurations
          */
@@ -181,12 +181,12 @@ Class GP_GPCache
          */
 
         $this->_initConfig();
-        
+
 
         //print_r(self::$configs);
 
         /*
-         * Initilize caching 
+         * Initilize caching
          *
          */
 
@@ -194,7 +194,7 @@ Class GP_GPCache
 
     }
     /**
-     * Initilize caching 
+     * Initilize caching
      */
 
     protected function _initCache()
@@ -305,7 +305,7 @@ Class GP_GPCache
     public static function set($cdata,$key,$frontend='Core', $backend='File',$frontendOptions=array(),$backendOptions=array())
     {
         //echo "sdfsd";
-        
+
         new self();
 
         ///echo "sdfsd";
@@ -438,16 +438,16 @@ Class GP_GPCache
     public static function removeByKey($key)
     {
         new self();
-        
+
         if(self::$cache!==null)
         {
             if($key!==null)
             {
                 self::$cache->clean($key);
-               
-            }            
+
+            }
         }
-        
+
     }
 
     /**
@@ -472,7 +472,7 @@ Class GP_GPCache
 
     /**
      * Delete data from  cache by tags
-     * @params     *  
+     * @params     *
      *  $mode constant Zend_Cache::CLEANING_MODE options
      *  $tags array
      */

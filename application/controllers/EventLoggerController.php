@@ -1,6 +1,5 @@
 <?php
-require_once("IndexController.php");
-class EventLoggerController extends IndexController
+class EventLoggerController extends Zend_Controller_Action
 {
     //private $event_logger_obj;
 
