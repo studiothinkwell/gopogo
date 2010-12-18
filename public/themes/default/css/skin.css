@@ -56,72 +56,6 @@ body
 	line-height:20px;
 	text-decoration:none;
 }
-
-.submenu a
-{
-	border:0px solid red;
-	color:#FFF;
-	font-size:15px;
-	font-weight:600;
-	line-height:20px;
-	text-decoration:none;
-}
-
-.submenu-box
-{
-	position:relative;
-	float:left;
-	width:auto;
-	height:auto;
-	padding:4px;
-}
-.selected .submenu-left
-{
-	position:relative;
-	float:left;
-	width:7px;
-	height:22px;
-	background-image:url(/themes/default/images/sub-bg_01.png);
-	background-repeat:no-repeat;
-}
-.selected .submenu-middle
-{
-	position:relative;
-	float:left;
-	background-image:url(/themes/default/images/sub-bg_02.png);
-	background-repeat:repeat-x;
-	height:22px;
-}
-.selected .submenu-right
-{
-	position:relative;
-	float:left;
-	background-image:url(/themes/default/images/sub-bg_03.png);
-	background-repeat:no-repeat;
-	width:7px;
-	height:22px;
-}
-.submenu-left
-{
-	position:relative;
-	float:left;
-	width:7px;
-	height:22px;
-}
-.submenu-middle
-{
-	position:relative;
-	float:left;
-	height:22px;
-}
-.submenu-right
-{
-	position:relative;
-	float:left;
-	width:7px;
-	height:22px;
-}
-
 .search
 {
     position:relative;
@@ -133,6 +67,33 @@ body
     font-size:15px;
 }
 
+.submenu-left
+{
+    position:relative;
+    float:left;
+    background-image:url(/themes/default/images/sub-bg_01.jpg);
+    background-repeat:no-repeat;
+    width:4px;
+    height:22px;
+}
+.submenu-center
+{
+    position:relative;
+    float:left;
+    background-image:url(/themes/default/images/sub-bg_02.png);
+    background-repeat:repeat-x;
+    width:auto;
+    height:22px;
+}
+.submenu-right
+{
+    position:relative;
+    float:left;
+    background-image:url(/themes/default/images/sub-bg_03.png);
+    background-repeat:no-repeat;
+    width:4px;
+    height:22px;
+}
 .logo
 {
     position:relative;
@@ -870,10 +831,6 @@ body
 }
 .your-personal-button
 {
-/*
-    float:left;
-    top:-20px;
-    left:35%;*/
     width:350px;
     height:43px;
     margin:0px auto;
@@ -1039,6 +996,7 @@ body
     font-size:12px;
     font-weight:600;
     color:#757575;
+    width: 100%;
 }
 .create-ac-input4
 {
@@ -1141,40 +1099,28 @@ body
     border:0px solid red;
     top:20px;
     left:23px;
+
 }
 
-
-                                                /************************************** Sign in END **************************************/
-
-                                                /**************************************Input styles START**************************************/
-.create-ac-right input
+.submenu a
 {
-    width:290px;
-    height:28px;
-    font-size:15px;
-    font-weight:600;
-    color:#a9a9a9;
-    border:1px solid #a9a9a9;
-}
-.sign-in-right input
-{
-    width:290px;
-    height:28px;
-    font-size:15px;
-    font-weight:600;
-    color:#a9a9a9;
-    border:1px solid #a9a9a9;
+	border:0px solid red;
+	color:#FFF;
+	font-size:15px;
+	font-weight:600;
+	line-height:20px;
+	text-decoration:none;
 }
 
-                                                /**************************************Input styles END**************************************/
-                                                /**************************************TEXT Styles START**************************************/
-.create-ac-head-txt
+.submenu-box
 {
-    font-size:26px;
-    line-height:50px;
-    color:#FFF;
-    text-align:left;
+	position:relative;
+	float:left;
+	width:auto;
+	height:auto;
+	padding:4px;
 }
+
                                                 /**************************************TEXT Styles END**************************************/
 
 #your-personal-button{
@@ -1182,3 +1128,27 @@ cursor: hand;
 cursor: pointer;
 border:1px solid red;
 }
+
+
+.h15{
+    height: 15px;
+}
+
+.clear{
+    clear:both;
+}
+
+/************** Message in START *********************/
+#messageBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:346px;
+    height:302px;
+    border:0px solid red;
+}
+
+/************** Message in END *********************/
+

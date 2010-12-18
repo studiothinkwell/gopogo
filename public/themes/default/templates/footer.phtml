@@ -18,14 +18,29 @@
 <?php 
 echo $this->partial('partials/login.phtml'); 
 echo $this->partial('partials/signup.phtml');
+echo $this->partial('partials/message.phtml');
 ?>
 <!-- Footer Middle END-->
 <script type="text/javascript" src="./js/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/jquery.ui.core.js"></script>
 <script type="text/javascript" src="./js/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="./js/jquery.ui.mouse.js"></script>
 <script type="text/javascript" src="./js/jquery.ui.draggable.js"></script>    
 <script type="text/javascript" src="./js/lightbox.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+
+<script language="javascript" >
+
+// set appl;ication configurations
+
+var app = [];
+app.gopogo = [];
+
+// base url of the site
+app.gopogo.baseurl = '<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>';
+
+
+
+</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
+
 <!--Create an account START-->
             <div id="signupBox" style="display: none;">
+                <form id="signupBoxForm" name="signupBoxForm" method="post">
                 <div class="create-ac-head">
                     <div class="create-ac-leftbg"></div>
                     <div class="create-ac-middlebg">
@@ -14,16 +16,20 @@
                         <img src="/themes/default/images/create-account-img.jpg"  alt=""/>
                     </div>
                     <div class="create-ac-right">
-                        <div class="create-ac-input1"><input type="text" value="Email Address" /></div>
-                        <div class="create-ac-input2"><input type="text" value="Password" /></div>
+                        <span id="signup_error_msg" ></span>
+                        <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
+                        <div class="create-ac-input2"><input type="password" value="Password" name="passwd" /></div>
+                        <div class="h15 clear" ></div>
+                        <div class="create-ac-input2"><input type="password" value="Password"  name="retype_passwd" /></div>
                         <div class="create-ac-input3">
                             <div class="create-ac-txt">Already have an account</div>
                             <div class="create-ac-login">&nbsp;Login?</div>
-                            <div class="create-ac-create-but"></div>
-                       </div>
-                        <div class="create-ac-input4"></div>
+                            <div class="create-ac-create-but" id="signupSubmitBox" ></div>
+                        </div>
+                        <div class="create-ac-input4" ></div>
                     </div>
                 </div>
                 <div class="create-ac-bottombg"></div>
+                </form>
             </div>
 <!--Create an account END-->
