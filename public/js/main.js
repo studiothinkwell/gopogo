@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 
 // login url
@@ -309,6 +310,5 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 document.cookie = thecookie[i] + "; expires ="+ new_date;
             }
         }
-
 
 });

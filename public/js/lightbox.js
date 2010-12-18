@@ -1,4 +1,5 @@
 
+
 $(document).ready(function(){
     
  var divId;
@@ -159,3 +160,4 @@ function ___getPageSize() {
 	var jqueryPageSize = new Array($(document).width(),$(document).height(), $(window).width(), $(window).height());
 	return jqueryPageSize;
 };
+
