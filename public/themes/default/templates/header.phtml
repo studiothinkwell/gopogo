@@ -1,62 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Welcome to Gopogo - Homepage</title>
-    <base href="http://<?php echo($_SERVER['HTTP_HOST']); ?>" /> 
-    <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Welcome to Gopogo - Homepage</title>
+<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
     <div id="master" align="center">
 	<div id="submaster">
-<!-- Header START-->
-        <div class="header">
-            <div class="head-mainbg">
-                    <div class="logo"></div>
-                    <div class="menu">
-                        <div class="menu1"><a href="#"></a></div>
-                        <div class="menu2"><a href="#"></a></div>
-                        <div class="menu3"><a href="#"></a></div>
-                        <div class="menu4"><a href="#"></a></div>
-                    </div>
-                    <div class="topmenu">
-                        <a href="#" id='sign-in' >Sign in</a>or
-                        <a href="#" id='sign-up' >Create an Account</a>|
-                        <a href="#">How it works</a>|
-                         <a href="#" id='logout' >Logout</a>
-                    </div>
-                    <div class="search"><input type="text" value="" style="width:205px;"/></div>
-                    <div class="submenu">
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">Featured</a></div>
-                            <div class="submenu-right"></div>
+            <!-- Header START-->
+            <div class="header">
+                <div class="head-mainbg">
+                        <div class="logo"></div>
+                        <div class="menu">
+                            <div class="menu1"><a href="#"></a></div>
+                            <div class="menu2"><a href="#"></a></div>
+                            <div class="menu3"><a href="#"></a></div>
+                            <div class="menu4"><a href="#"></a></div>
                         </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">Recommendations</a></div>
-                            <div class="submenu-right"></div>
+                        <div class="topmenu">
+                            <a href="#" id='sign-in' >Sign in</a>or
+                            <a href="#" id='sign-up' >Create an Account</a>|
+                            <a href="#">How it works</a> |
+                            <a href="#" id='logout' >Logout</a>
                         </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">All Playlists</a></div>
-                            <div class="submenu-right"></div>
+                        <div class="search"><input type="text" value="" style="width:205px;"/></div>
+                        <div class="submenu">
+                            <div><a>Featured</a><a>Recommendations</a><a>All Playlists</a><a>All Places</a></div>
                         </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">All Places</a></div>
-                            <div class="submenu-right"></div>
-                        </div>
-                    </div>     
+                </div>
             </div>
-<!-- Header END-->    
+            <!-- Header END-->
+
 
                 <?php if (count($this->messages)) : ?>
-                    <ul id="messages">
+                <ul id="messages">
                 <?php foreach ($this->messages as $message) : ?>
-                        <li><?php echo $this->escape($message); ?></li>
+                    <li><?php echo $this->escape($message); ?></li>
                 <?php endforeach; ?>
-                    </ul>
+                </ul>
                 <?php endif; ?>
