@@ -77,21 +77,20 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // login success
 
         $.fn.loginSuccess = function(resp){
-            console.log('loginSuccess');
-            console.log(resp);
+           // console.log('loginSuccess');
+          //  console.log(resp);
 
             // show message
             
             $().errorMessage(resp.msg,'error_msg');
 
             var dspid = 'loginBox';
-            $().finish(dspid);
+            $().finish();
 
             // profile url
-            $().redirect(app.gopogo.profile_url);
+            $().redirect(app.gopogo.profile_url);    
             
-            
-            //_finish();
+           
         };
 
         // login welcome
@@ -135,13 +134,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 window.location = url;
         }
 
-        // hide the popup
-        $.fn.finish = function (dspid) {
-            $('#'+dspid).css({display:'none'});
-            $('#overlay').fadeOut(function() { $('#overlay').remove(); });
-            // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-            $('embed, object, select').css({ 'visibility' : 'visible' });
-        }
+
 
 // functions to handle the signup
         // do signup
@@ -194,13 +187,11 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
             $().errorMessage(resp.msg,'signup_error_msg');
 
             var dspid = 'signupBox';
-            $().finish(dspid);
+            $().finish();
 
             // profile url
             $().redirect(app.gopogo.baseurl);
-
-
-            //_finish();
+           
         };
 
         // signup welcome
@@ -230,7 +221,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
              $().delCookie();
 
              // show popup
-             ___addModalWindow('messageBox');
+             $().addModalWindow('messageBox');
 
              // make ajax request for logout
              $.ajax({
@@ -310,5 +301,15 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 document.cookie = thecookie[i] + "; expires ="+ new_date;
             }
         }
+
+        $('.submenu-box').hover
+          (
+               function(){
+                           $(this).addClass('selected');
+                        },
+               function(){
+                           $(this).removeClass('selected');
+                         }
+           );
 
 });
