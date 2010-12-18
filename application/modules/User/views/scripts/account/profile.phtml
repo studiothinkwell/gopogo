@@ -1,0 +1,26 @@
+<?php
+$this->title = "Login";
+$this->headTitle($this->title);
+//echo $this->form ;
+//echo $this->msg;
+?>
+
+
+    <div style="height:110px;"></div>
+    <!--  Body START-->
+        <div class="container" >
+            <div class="con-box" >
+
+
+                <?php if (count($this->messages)) : ?>
+                <ul id="messages">
+                <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+
+
+             </div>
+             <div class="blankdiv"></div>
+        </div>

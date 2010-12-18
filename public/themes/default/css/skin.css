@@ -997,6 +997,7 @@ body
     font-size:12px;
     font-weight:600;
     color:#757575;
+    width: 100%;
 }
 .create-ac-input4
 {
@@ -1140,7 +1141,7 @@ cursor: hand;
 cursor: pointer;
 border:1px solid red;
 }
-=======
+/*=======*/
 body
 {
     margin:0px;
@@ -2287,3 +2288,24 @@ cursor: pointer;
 border:1px solid red;
 }
 
+.h15{
+    height: 15px;
+}
+
+.clear{
+    clear:both;
+}
+
+/************** Message in START *********************/
+#messageBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:346px;
+    height:302px;
+    border:0px solid red;
+}
+
+/************** Message in END *********************/
