@@ -54,6 +54,14 @@ class User_AccountController extends Zend_Controller_Action
         // action body
     }
 
+    /**
+     * User login
+     * @access public
+     * @parems in post
+     *  1- email : email address
+     *  2- passwd : password
+     */
+
     public function loginAction()
     {
         // action body
@@ -188,6 +196,12 @@ class User_AccountController extends Zend_Controller_Action
 
     }
 
+    /**
+     * User logout
+     * @access public
+     *
+     */
+
     public function logoutAction()
     {
         // action body
@@ -224,10 +238,337 @@ class User_AccountController extends Zend_Controller_Action
 
     }
 
-    public function forgetpasswordAction()
+    /**
+     * User Forgot password
+     * @access public
+     * @parems in post
+     *  1- email : email address
+     */
+
+    public function forgotpasswordAction()
     {
         // action body
-    }
+        // ?action=reset&token=asdasdas
+
+        /*
+
+
+            Request Parameters:
+
+            array (
+              'module' => 'User',
+              'controller' => 'Account',
+              'action' => 'forgotpassword',
+              'do' => 'reset',
+              'token' => 'asdasdas',
+            )
+
+
+
+        */
+        //$doaction = $this->getRequest()->getParam('do');
+        //echo $doaction;
+
+        //$token = $this->getRequest()->getParam('token');
+
+        //echo $token;
+
+        //throw new Exception('hellow');
+
+        //$text = $view->render('mail/new-user.php');
+        //echo $this->render('footer.phtml');
+        //echo $this->partial('partials/login.phtml');
+
+        //$text = $view->render('mail/forget_password.html');
+
+        //$view = $this->getHelper('ViewRenderer')->view;
+        //$this->view->name = 'mahesh';
+        //$this->view->link = 'url';
+        //$text = $this->render('mail/forget_password.html');
+        //$text = $view->render('mails/forget_password.phtml');
+
+        //echo $text;
+
+        //GP_GPAuth::sendEmailForgotPassword('mahesh@techdharma.com','safadasd34343','mahesh');
+
+        /*
+        $email = "mahesh@techdharma.com";
+        $name = "mahesh";
+
+        $mail = new Zend_Mail();
+        $mail->setBodyText('You have requested for forgot password!.')
+            ->setBodyHtml('My Nice <b>Test</b> Text')
+            ->setFrom('no-reply@gopogo.com', 'GOPOGGO')
+            ->addTo($email, $name)
+            ->setSubject('forgot password!')
+            ->send();
+        // addCc():
+        // addBcc():
+        //*/
+
+        $data = array();
+
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg = '';
+        $status = 0;
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $email = $formData['email'];
+
+            // checking for valid email
+            //*
+            if (Zend_Validate::is($email, 'EmailAddress')) {
+                // Yes, email appears to be valid
+            } else {
+                $msg .= "Enter valid email!";
+                //$msg .= $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
+                //$msg .= printf($msg2, $email);
+
+                //$msg .= $this->view->translate("'%value%' is no valid email address in the basic format local-part@hostname",$email);
+
+                $validFlag = false;
+            }
+            //*/
+
+            //$validFlag = true;
+            if($validFlag){
+                //echo $msg;
+
+                try {
+
+                    $user = new Application_Model_DbTable_User();
+
+                    // reset temporary password
+                    $token = $user->getUserFogotPassword($email);
+
+                    //print_r($userData);
+                    $status = 1;
+
+                    // send email to user for reset the new password
+
+                    //GP_GPAuth::sendEmail($email,$temp_password);
+
+                    GP_GPAuth::sendEmailForgotPassword($email,$token);
+
+                    $this->_helper->flashMessenger->addMessage('We have send a mail to your provided email, check the email and reset your password  form given link!');
+
+                    //$this->_helper->redirector('profile');
+
+
+                    $msg = "'We have send a mail to your provided email, check the email and reset your password  form given link!'";
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+                        //echo $e->getMessage();
+                        $msg .= $br . "Unknown Error!";
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        //echo $e->getMessage();
+                        $msg .= $br . "not found Error!";
+                    } else {
+                        //echo $e->getMessage();
+                        $msg .= $br . $e->getMessage();
+                        //throw $e;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                //echo $msg;
+                //die;
+                $this->view->msg = $msg;
+            }
+
+
+        } // end of es post
+        else
+        {
+            $msg = "'Post data not available!'";
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        //if($doaction!='reset')
+            $this->_helper->json($data, array('enableJsonExprFinder' => true));
+        
+
+    } // end of forgot password
+
+    /**
+     * User Reset password
+     * @access public
+     * @parems in post
+     *  1- email : email address
+     */
+
+    public function resetpasswordAction()
+    {
+        // action body
+        // ?action=reset&token=asdasdas
+
+        /*
+
+
+            Request Parameters:
+
+            array (
+              'module' => 'User',
+              'controller' => 'Account',
+              'action' => 'forgotpassword',
+              'do' => 'reset',
+              'token' => 'asdasdas',
+            )
+
+
+
+        */
+        //$doaction = $this->getRequest()->getParam('do');
+        //echo $doaction;
+
+        $token = $this->getRequest()->getParam('token');
+
+        $user = new Application_Model_DbTable_User();
+        
+        $tokensData = $user->getUserFogotPasswordToken($token);
+
+        //echo $token;
+
+        //throw new Exception('hellow');
+
+        //$text = $view->render('mail/new-user.php');
+        //echo $this->render('footer.phtml');
+        //echo $this->partial('partials/login.phtml');
+
+        //$text = $view->render('mail/forget_password.html');
+
+        //$view = $this->getHelper('ViewRenderer')->view;
+        //$this->view->name = 'mahesh';
+        //$this->view->link = 'url';
+        //$text = $this->render('mail/forget_password.html');
+        //$text = $view->render('mails/forget_password.phtml');
+
+        //echo $text;
+
+        //GP_GPAuth::sendEmailForgotPassword('mahesh@techdharma.com','safadasd34343','mahesh');
+
+        /*
+        $email = "mahesh@techdharma.com";
+        $name = "mahesh";
+
+        $mail = new Zend_Mail();
+        $mail->setBodyText('You have requested for forgot password!.')
+            ->setBodyHtml('My Nice <b>Test</b> Text')
+            ->setFrom('no-reply@gopogo.com', 'GOPOGGO')
+            ->addTo($email, $name)
+            ->setSubject('forgot password!')
+            ->send();
+        // addCc():
+        // addBcc():
+        //*/
+
+        $data = array();
+
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg = '';
+        $status = 0;
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $email = $formData['email'];
+
+            // checking for valid email
+            //*
+            if (Zend_Validate::is($email, 'EmailAddress')) {
+                // Yes, email appears to be valid
+            } else {
+                $msg .= "Enter valid email!";
+                //$msg .= $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
+                //$msg .= printf($msg2, $email);
+
+                //$msg .= $this->view->translate("'%value%' is no valid email address in the basic format local-part@hostname",$email);
+
+                $validFlag = false;
+            }
+            //*/
+
+            //$validFlag = true;
+            if($validFlag){
+                //echo $msg;
+
+                try {
+
+                    
+
+                    // check and get user data if email and password match
+                    //$temp_password = $user->getUserFogotPassword($email);
+
+                    $user->getUserResetPassword($email,$temp_password,$expiredate);
+
+                    //print_r($userData);
+                    $status = 1;
+
+                    // send email to user for reset the new password
+
+                    //GP_GPAuth::sendEmail($email,$temp_password);
+
+                    GP_GPAuth::sendEmailResetPassword($email);
+
+                    $this->_helper->flashMessenger->addMessage('We have send a mail to your provided email, check the email and reset your password  form given link!');
+
+                    //$this->_helper->redirector('profile');
+
+
+                    $msg = "'Welcome! You have Signedin Successfully!'";
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+                        //echo $e->getMessage();
+                        $msg .= $br . "Unknown Error!";
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        //echo $e->getMessage();
+                        $msg .= $br . "not found Error!";
+                    } else {
+                        //echo $e->getMessage();
+                        $msg .= $br . $e->getMessage();
+                        //throw $e;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                //echo $msg;
+                //die;
+                $this->view->msg = $msg;
+            }
+
+
+        } // end of es post
+        else
+        {
+            $msg = "'Post data not available!'";
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        //if($doaction!='reset')
+        //    $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+
+    } // end of reset password
 
     public function profileAction()
     {
@@ -245,7 +586,7 @@ class User_AccountController extends Zend_Controller_Action
 
     }
 
-    /*
+    /**
      * User signup
      * @access public
      * @parems in post

@@ -67,6 +67,9 @@ $(window).scroll(function() {
 
  function ___addModalWindow(objId) {
 
+    console.log('___addModalWindow');
+    console.log(objId);
+
     divId = objId;
 
     $('#'+objId).draggable();
@@ -77,29 +80,30 @@ $(window).scroll(function() {
     $('#'+objId).css({display:''});
 
     var arrPageSizes = ___getPageSize();
-            // Style overlay and show it
-            $('#overlay').css({
-                backgroundColor:    '#000',
-                opacity:             0.5,
-                width:               arrPageSizes[0],
-                height:              arrPageSizes[1]
-            }).fadeIn();
-            // Get page scroll
-            var arrPageScroll = ___getPageScroll();
+    // Style overlay and show it
+    $('#overlay').css({
+        backgroundColor:    '#000',
+        opacity:             0.5,
+        width:               arrPageSizes[0],
+        height:              arrPageSizes[1]
+    }).fadeIn();
+    // Get page scroll
+    var arrPageScroll = ___getPageScroll();
 
-            // Calculate top and left offset for the jquery-lightbox div object and show it
-            $('#'+objId).css({
-                top:    parseInt((arrPageSizes[3]/2) - (($('#'+objId).height()) / 2)),
-                left:    parseInt((arrPageSizes[2]/2) - (($('#'+objId).width()) / 2))
-            }).show();
+    // Calculate top and left offset for the jquery-lightbox div object and show it
+    $('#'+objId).css({
+        top:    parseInt((arrPageSizes[3]/2) - (($('#'+objId).height()) / 2)),
+        left:    parseInt((arrPageSizes[2]/2) - (($('#'+objId).width()) / 2))
+    }).show();
 
-            // Assigning click events in elements to close overlay
-            $('#overlay').click(function() {
-                _finish(objId);
-            });
+    // Assigning click events in elements to close overlay
+    $('#overlay').click(function() {
+        _finish(objId);
+    });
 
 
-            _enable_keyboard_navigation();
+    _enable_keyboard_navigation();
+
  }
 
 

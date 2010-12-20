@@ -18,6 +18,34 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
     });
 
+
+    // add forgot your password event
+    $(".Forgot-Your-Password").click(function(){
+        console.log('Forgot-Your-Password');
+        var dspid = 'loginBox';
+        $().finish(dspid);
+        //_finish();
+        ___addModalWindow('forgotBox');
+    });
+    
+    // add create account event
+    $(".Create-Account").click(function(){
+        console.log('Create-Account');
+        var dspid = 'loginBox';
+        $().finish(dspid);
+        //_finish();
+        ___addModalWindow('signupBox');
+    });
+
+    // add signin  event
+    $(".Login").click(function(){
+        console.log('Login');
+        var dspid = 'signupBox';
+        $().finish(dspid);
+        //_finish();
+        ___addModalWindow('loginBox');
+    });
+
     // add login event
     $("#loginSubmitBox").click(function(){
         $().doLogin();
@@ -129,8 +157,8 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         $.fn.redirect = function(url){
             console.log('redirect');
             console.log(url);            
-            if(typeof url == undefined || url=='' || url=='/' )
-                location.reload();
+            if(typeof url == undefined || url=='' || url=='/' ) // //location.reload();
+                window.location = app.gopogo.baseurl
             else
                 window.location = url;
         }
@@ -230,7 +258,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
              $().delCookie();
 
              // show popup
-             ___addModalWindow('messageBox');
+             //___addModalWindow('messageBox');
 
              // make ajax request for logout
              $.ajax({
@@ -249,6 +277,9 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                     }
                     else
                     {
+
+                        // show popup
+                        ___addModalWindow('messageBox');
                         //$().errorMessage(resp.msg);
                         $().logoutFail(resp);
                     }
@@ -268,10 +299,10 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
             console.log(resp);            
 
             // show message
-            $().errorMessage(resp.msg,'message_error_msg');
+            //$().errorMessage(resp.msg,'message_error_msg');
 
-            var dspid = 'logoutBox';
-            $().finish(dspid);
+            //var dspid = 'logoutBox';
+            //$().finish(dspid);
 
             // profile url
             $().redirect(app.gopogo.baseurl);
@@ -296,6 +327,11 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 $().errorMessage(resp.msg,'message_error_msg');
             }
         };
+
+
+// functions to handle the forgot possword
+
+
         
 
 // some utilities

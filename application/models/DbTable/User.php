@@ -33,6 +33,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
     protected $_name = 'user_master';
 
+    protected $encript_key = 'gopogo-xyz';
+
 
 
     /*
@@ -47,6 +49,66 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
     {
         return sha1($str, true);
     }
+
+
+    /*
+     * User : Generate Token for temporary password
+     * @access private
+     * @parems     *
+     * @return string  token string 16 chars
+     */
+
+    private function createRandomKey($amount)
+    {
+        $keyset  = "abcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $randkey = "";
+        for ($i=0; $i<$amount; $i++)
+                $randkey .= substr($keyset, rand(0, strlen($keyset)-1), 1);
+        return $randkey;
+    }
+
+    /**
+     * Encode a String
+     * @param String $string
+     * @param String $key
+     * @return String encoded string
+     */
+    private function encrypt($string, $key)
+    {
+        $result = '';
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)+ord($keychar));
+            $result.=$char;
+        }
+        return base64_encode($result);
+    }
+    /**
+     * Decode a String
+     * @param String $string
+     * @param String $key
+     * @return String decoded string
+     */
+    private function decrypt($string, $key)
+    {
+        $result = '';
+        $string = base64_decode($string);
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)-ord($keychar));
+            $result.=$char;
+        }
+        return $result;
+    }
+    
+
+    /**
+     *
+     */
+
+    // base64_encode($str);
 
     /*
      * User : Get User data
@@ -191,7 +253,6 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
                 return FALSE;
         }
 
-
         //*/
 
     }
@@ -290,7 +351,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
 
     /**
-     * Destroy Loggedin User data in session     * 
+     * Destroy Loggedin User data in session
+     * 
      */
 
     public function destroySession()
@@ -304,7 +366,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
     /**
      * Get Loggedin User data in session
-     * @var Array User Data array
+     * @return Array User Data array
      */
 
     public function getSession()
@@ -314,6 +376,66 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         return $userSession;
 
     }
+
+     /**
+     * set temporary password on forgot password and return a token for mail
+     * @var String email
+     * @return String encoded token
+     */
+
+    public function getUserFogotPassword($email)
+    {
+        //$userSession = new Zend_Session_Namespace('user-session');
+
+        //return $userSession;
+
+        $keystring = $this->encript_key;
+
+        $temp_password = $this->createRandomKey(16);
+
+        // $mysqldate = date( 'Y-m-d H:i:s', $phpdate );
+        $expire_date = date( 'Y-m-d H:i:s', time() );
+
+        $data = array();
+
+        $data['email'] = $email;
+        $data['password'] = $temp_password;
+        $data['expire_date'] = $expire_date;
+
+        $json_encoded_data = json_encode($data);
+
+        
+        $token = $this->encrypt($json_encoded_data, $keystring);
+
+
+        // now update this infor on table means update temporary password on table
+
+
+
+        return $token;
+    }
+    
+    /**
+     * Get decoded data from token
+     * @param <type> $token
+     * @return Array decoded data    
+     */
+    public function getUserFogotPasswordToken($token)
+    {
+        $keystring = $this->encript_key;
+
+        $data = array();
+
+        $json_encoded_data = $this->decrypt($token, $keystring);
+
+        $json_decoded_data = json_decode($json_encoded_data);
+        
+        $data = $json_decoded_data;
+
+        return $data;
+
+    }
+
 
 }
 
