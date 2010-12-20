@@ -25,7 +25,7 @@
 
 
 
-Class GP_Eventlogger
+Class GP_EventLogger extends Zend_Db_Table
 {
     /**
      * @var EventLog
@@ -33,6 +33,11 @@ Class GP_Eventlogger
     public static $userId;
 
      /**
+     * @var EventLog
+     */
+    public static $modelObj;
+
+    /**
      * @var EventLog
      */
     public static $eventId;
@@ -61,11 +66,15 @@ Class GP_Eventlogger
         $this->attributes       =   array('user_event_log_attibutes_id'=>'NULL','user_event_log_id'=>'NULL','event_log_attributes_id'=>'NULL','user_event_log_attibutes_value'=>'NULL','create_date'=>'NULL');
     }
     */
-    function __destruct() {
-        unset($this->model_obj);
-	unset($this->entity_data);
+    function __construct() {
+
+           require_once(APPLICATION_PATH . '/models/EventLogger.php');
+           self::$modelObj = new EventLogger();
     }
 
+    function __destruct() {
+            unset($this->model_obj);
+    }
     public function __set($var, $val){
 	$this->$var = $val;
     }
@@ -88,17 +97,16 @@ Class GP_Eventlogger
      * @param
      * @return last inserted id.
      */
-    public static function generateLog($data){
+    public static function generateLog($data,$attributesData){
 
-        //$this->model_name       =   "EventLogger";
-	$this->model_obj        =   new EventLogger();
+        new self();
+
+     //print_r($data);
         
-        $this->model_obj->addLog($data);
+        self::$modelObj->addLog($data,$attributesData);
         
 	//return $inserted_id;
        }
-   
-
     /**
      * Add object data in database.
      * @param
