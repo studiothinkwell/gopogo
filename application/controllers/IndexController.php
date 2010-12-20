@@ -46,16 +46,6 @@ class IndexController extends Zend_Controller_Action
 
     }
 
-    public function doAction()
-    {
-        
-    }
-
-    public function loginAction()
-    {
-        // action body
-    }
-
 
 }
 

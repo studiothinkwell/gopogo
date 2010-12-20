@@ -31,7 +31,7 @@
             <!-- Header START-->
             <div class="header">
                 <div class="head-mainbg">
-                        <div class="logo"></div>
+                    <a href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>"><div class="logo"></div></a>
                         <div class="menu">
                             <div class="menu1"><a href="#"></a></div>
                             <div class="menu2"><a href="#"></a></div>
@@ -39,6 +39,7 @@
                             <div class="menu4"><a href="#"></a></div>
                         </div>
                         <div class="topmenu">
+
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
                             <a href="#" id='logout' >Logout</a> |
@@ -48,11 +49,31 @@
                             <a href="#" id='sign-up' >Create an Account</a> |
                             <?php } ?>
                             <a href="#">How it works</a>                            
+
                         </div>
                         <div class="search"><input type="text" value="" style="width:205px;"/></div>
                         <div class="submenu">
-                            <div><a>Featured</a><a>Recommendations</a><a>All Playlists</a><a>All Places</a></div>
+                        <div class="submenu-box">
+                            <div class="submenu-left"></div>
+                            <div class="submenu-middle"><a href="#">Featured</a></div>
+                            <div class="submenu-right"></div>
                         </div>
+                        <div class="submenu-box">
+                            <div class="submenu-left"></div>
+                            <div class="submenu-middle"><a href="#">Recommendations</a></div>
+                            <div class="submenu-right"></div>
+                        </div>
+                        <div class="submenu-box">
+                            <div class="submenu-left"></div>
+                            <div class="submenu-middle"><a href="#">All Playlists</a></div>
+                            <div class="submenu-right"></div>
+                        </div>
+                        <div class="submenu-box">
+                            <div class="submenu-left"></div>
+                            <div class="submenu-middle"><a href="#">All Places</a></div>
+                            <div class="submenu-right"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Header END-->
