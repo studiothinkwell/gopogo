@@ -68,15 +68,13 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
     // add create account event
     $(".createAccount").click(function(){                  
         $("#loginBox").css({display:'none'});        
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 0 );
     });
 
     // add signin  event
     $(".login").click(function(){       
         $("#signupBox").css({display:'none'});        
-        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg");
-        
-
+        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 0 );
     });
 
     // add login event

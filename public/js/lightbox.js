@@ -5,12 +5,12 @@ $(document).ready(function(){
 
     $("#sign-in").click(function(){
         divId = "#loginBox";
-        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg");
+        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
     });
 
     $("#sign-up").click(function(){
         divId = "#signupBox";
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");   
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
     });
 
     $(".create-ac-close").click(function(){
@@ -69,16 +69,17 @@ $.fn.addScroll = function() {
 
 
 
-$.fn.addModalWindow = function(objId) {
+$.fn.addModalWindow = function(objId, createOverlay) {
 
     $().debugLog('___addModalWindow');
     $().debugLog(objId);
 
     divId = objId;    
 
+ if(createOverlay) {
     $('embed, object, select').css({ 'visibility' : 'hidden' });
     $('body').append('<div id="overlay"></div>');
-
+ }
     $(objId).css({display:''});
 
     var arrPageSizes = $().getPageSize();
@@ -108,7 +109,7 @@ $.fn.addModalWindow = function(objId) {
     
 }
 
-$.fn.displayModalBox = function(mainBox, titleBox, container ) {
+$.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
        
         $(mainBox).draggable();
 
@@ -120,7 +121,7 @@ $.fn.displayModalBox = function(mainBox, titleBox, container ) {
                 $(mainBox).draggable('disable');
             });
 
-        $().addModalWindow(mainBox);
+        $().addModalWindow(mainBox, createOverlay);
 }
 
 
