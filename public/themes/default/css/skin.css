@@ -1332,6 +1332,13 @@ border:1px solid red;
     height:302px;
     border:0px solid red;
 }
+.errorMsg
+{
+    color: #FF0000;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
