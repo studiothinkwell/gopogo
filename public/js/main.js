@@ -12,11 +12,36 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
 // add events on load
 
+/**
+ * This will apply toggle effect to bottom of page for advance search
+ */
     $(".your-personal-button").click(function(){
-            $(".footer-middle").slideToggle("show");          
+
+            $(".footer-middle").slideToggle("show");
+
     });
 
+/**
+ * This will apply toggle effect to forgot password functionality of login modal window
+ */
+    $("#forgotPassword").click(function(){
+            $("#errorMsg").text('');
+            $("#toggleLogin").slideToggle("hide");
+            $("#toggleForgot").slideToggle("show");
+    });
+    
+/**
+ * This will apply toggle effect to login functionality of login modal window
+ */
+     $("#loginPassword").click(function(){
+            $("#errorMsg").text('');
+            $("#toggleForgot").slideToggle("hide");
+            $("#toggleLogin").slideToggle("show");
+    });
 
+/**
+ * This will hide/show top main menus
+ */
     $('.submenu-box').hover(
            function(){
                        $(this).addClass('selected');
@@ -27,6 +52,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
        );
 
 
+    /*
     // add forgot your password event
     $(".Forgot-Your-Password").click(function(){
         $().debugLog('Forgot-Your-Password');
@@ -34,18 +60,21 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         $().addModalWindow('forgotBox');
     });
     
+    */
+
+    
     // add create account event
-    $(".Create-Account").click(function(){
-        $().debugLog('Create-Account'); 
-        $().finish();        
-        $().addModalWindow('signupBox');
+    $(".createAccount").click(function(){                  
+        $("#loginBox").css({display:'none'});        
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
     });
 
     // add signin  event
-    $(".Login").click(function(){
-        $().debugLog('Login');        
-        $().finish();
-        $().addModalWindow('loginBox');
+    $(".login").click(function(){       
+        $("#signupBox").css({display:'none'});        
+        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg");
+        
+
     });
 
     // add login event
@@ -109,7 +138,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
             // show message
             
-            $().errorMessage(resp.msg,'error_msg');
+            $().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
 
@@ -135,7 +164,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
            
             if(resp.status == 0) // show error message
             {
-                $().errorMessage(resp.msg,'error_msg');
+                $().errorMessage(resp.msg,'errorMsg');
             }
         };
 
@@ -148,8 +177,9 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
             if(typeof msgid == undefined || msgid=='' )
                 msgid = 'error_msg';
+
             $().debugLog(msgid);
-            
+
             $('#'+msgid).html(msg);
         }
 

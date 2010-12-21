@@ -1,6 +1,5 @@
 <!--Sign in START-->
-            <div  id="loginBox" >
-                <form id="loginBoxForm" name="loginBoxForm" method="post">
+            <div  id="loginBox" >                
                 <div class="create-ac-head" >
                     <div class="sign-in-leftbg"></div>
                     <div class="sign-in-middlebg">
@@ -10,23 +9,39 @@
                     <div class="login-close"></div>
                 </div>
                 <div class="sign-in-centerbg" id="sign-in-centerbg">
-                    <div class="sign-in-right" valign="top">
-                        <span id="error_msg" ></span>
-                    	<div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
-                    	<div class="create-ac-input2"><input type="password" value="Password"  name="passwd" /></div>
+                    <span class="errorMsg" id="errorMsg" ></span>
+                    <div id="toggleLogin">
+                        <form id="loginBoxForm" name="loginBoxForm" method="post">
+                        <div class="sign-in-right" valign="top">                            
+                            <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
+                            <div class="create-ac-input2"><input type="password" value="Password"  name="passwd" /></div>
 
-                    	<div class="sign-in-input3">
-                                <span class="sign-in-txt">Forgot your</span>
-                                <span class="sign-in-create-account Forgot-Your-Password">&nbsp;password</span>
-                                <span>&nbsp;or&nbsp;</span>
-                                <span class="sign-in-create-account Create-Account" >create account</span>
+                            <div class="sign-in-input3">
+                                    <span class="sign-in-txt">Forgot your&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
+                                    <span>&nbsp;or&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
+                            </div>
+                            <div class="sign-in-button">&nbsp;<img id="loginSubmitBox" src="themes/default/images/sign-in.png"></div>
+                            <div class="sign-in-input4"></div>
                         </div>
-                        <div class="sign-in-button">&nbsp;<img id="loginSubmitBox" src="themes/default/images/sign-in.png"></div>
-                    	<div class="sign-in-input4"></div>
-                        
+                       </form>
+                    </div>
+                    <div id="toggleForgot" style="display:none">
+                        <form id="forgotBoxForm" name="forgotBoxForm" method="post">
+                        <div class="sign-in-right" valign="top">                           
+                            <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
+                            <div class="sign-in-input3">                                    
+                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
+                                    <span>&nbsp;or&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
+                            </div>
+                            <div class="sign-in-button">&nbsp;<img id="loginSubmitBox" src="themes/default/images/sign-in.png"></div>
+                            <div class="sign-in-input4"></div>
+                        </div>
+                       </form>
                     </div>
                 </div>
-                <div class="sign-in-bottombg"></div>
-                </form>
+                <div class="sign-in-bottombg"></div>                
             </div>
 <!--Sign in END-->

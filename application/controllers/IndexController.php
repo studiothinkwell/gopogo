@@ -74,9 +74,16 @@ class IndexController extends Zend_Controller_Action
 
 
 
+                //Below is test case to getBasePath
+                ///////////echo '<br>my Base Path ='.$myBasePath = GP_ToolKit::getBasePath();
+
+                //"http://[bucket].s3.amazonaws.com/skin/frontend/interface/theme/css/"
+                // Assume /images/image1.jpg need to convert something like below
+                //http:\\gpbucket1.s3.amazonaws.com\images\b5e7d988cfdb78bc3be1a9c221a8f744.jpg
+                $img = 'image1.jpg';
+                echo '<br>http:\\\\'. BUCKET_NAME.'.'. AMAZON_S3_URL . '\\images\\' . GP_ToolKit::getEncriptedUrl($img);
+
     }
-
-
 }
 
 
