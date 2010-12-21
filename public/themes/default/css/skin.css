@@ -267,7 +267,7 @@ body
     text-decoration:underline;
 }
 
-.contenter
+.container
 {
     position:relative;
     background-color:#e1dfd5;
@@ -276,6 +276,8 @@ body
     height:auto;
     border:0px solid red;
     margin:0 auto;
+    overflow:hidden;
+    text-align: left;
 }
 .con-box
 {
@@ -665,6 +667,7 @@ body
     width:100%;
     height:auto;
     bottom:0px;
+    left: 0px;
 }
 .footer-topbg
 {

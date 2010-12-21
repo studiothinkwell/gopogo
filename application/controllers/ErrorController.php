@@ -30,7 +30,7 @@ class ErrorController extends Zend_Controller_Action
         
         // Log exception, if logger available
         if ($log = $this->getLog()) {
-            $log->crit($this->view->message, $errors->exception);
+            $log->crit($this->view->message . ' :  ' . $errors->exception);
         }
         
         // conditionally display exceptions
@@ -44,10 +44,18 @@ class ErrorController extends Zend_Controller_Action
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
+        /*
         if (!$bootstrap->hasResource('Log')) {
             return false;
         }
         $log = $bootstrap->getResource('Log');
+        */
+        if (!$bootstrap->hasResource('Log')) {
+            //return false;
+            $log = Zend_Registry::get('log');
+        }else{
+            $log = $bootstrap->getResource('Log');
+        }
         return $log;
     }
 
