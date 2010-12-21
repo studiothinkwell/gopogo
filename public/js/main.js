@@ -9,6 +9,8 @@ app.gopogo.signup_url = app.gopogo.baseurl + 'User/Account/signup/';
 app.gopogo.profile_url = app.gopogo.baseurl + 'User/Account/profile/';
 // logout url
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
+// forgot url
+app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
 // add events on load
 
@@ -89,7 +91,10 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
     $("#logout").click(function(){
         $().doLogout();
     });
-    
+    // add forgot password event
+    $("#forgotSubmitBox").click(function(){
+        $().doForgot();
+    });
 
 
 // functions to handle the login / signin
@@ -331,6 +336,75 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
 
 // functions to handle the forgot possword
+
+        // do forgot
+        $.fn.doForgot = function(){
+
+             // get serialized form data of forgot form
+             var fdata = $("#forgotBoxForm").serialize();
+
+             // make ajax request for signup
+             $.ajax({
+                url: app.gopogo.forgot_url,
+                type: 'POST',
+                dataType: 'json',
+                data:fdata,
+                timeout: 1000,
+                error: function(resp){
+                    $().forgotFail(resp);
+                },
+                success: function(resp){
+                    // do something with resp
+                    if(resp.status == 1) // show error message
+                    {
+                        $().forgotSuccess(resp);
+                    }
+                    else
+                    {
+
+                        $().forgotFail(resp);
+                    }
+                },
+                complete: function(resp){
+                    $().forgotWelcome(resp);
+                }
+
+            });
+
+        }; // end of do forgot
+
+        // forgot success
+
+        $.fn.forgotSuccess = function(resp){
+            $().debugLog('forgotSuccess');
+            $().debugLog(resp);
+            // show message
+            $().errorMessage(resp.msg,'errorMsg');
+
+            $().finish();
+
+            // redirect to home
+            $().redirect(app.gopogo.baseurl);
+
+        };
+
+        // forgot welcome
+
+        $.fn.forgotWelcome = function(){
+            $().debugLog('forgotWelcome');
+            $().debugLog(resp);
+        };
+
+        // signup fail
+
+        $.fn.forgotFail = function(resp){
+            $().debugLog('forgotFail');
+            $().debugLog(resp);
+            if(resp.status == 0) // show error message
+            {
+                $().errorMessage(resp.msg,'errorMsg');
+            }
+        };
 
 
         

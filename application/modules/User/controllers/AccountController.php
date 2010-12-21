@@ -150,7 +150,7 @@ class User_AccountController extends Zend_Controller_Action
                     }
                     else
                     {
-                        $lang_msg = $this->translate->_('Some error Occured, Try after some time!');
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
@@ -441,13 +441,16 @@ class User_AccountController extends Zend_Controller_Action
                 $validFlag = false;
             }
 
+
+            //*/
+
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
 
             } else if($validFlag) {
-                $msg .= $br . "Passowrd and Retype passowrd must match!";
+                $lang_msg = $this->translate->_("Passowrd and Retype passowrd does not match!");
+                $msg .= $lang_msg;
                 $validFlag = false;
             }
-            //*/
 
             $user = new Application_Model_DbTable_User();
 
