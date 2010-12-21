@@ -1,27 +1,28 @@
 <?php
-/**
-* Gopogo : Gopogo Cache management
-*
-* <p></p>
-*
-* @category gopogo web portal
-* @package Library
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @version  1.0
-* @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
-* @path /library/GP/
-*/
 
 /**
-*
+ * Gopogo : Gopogo Cache management
+ *
+ * <p></p>
+ *
+ * @category gopogo web portal
+ * @package Library
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @version  1.0
+ * @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
+ * @path /library/GP/
+ */
+
+/**
+ *
  * Gopogo cache management class
-*
-* @package  Library
-* @subpackage Gopogo
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @access   public
-* @path /library/GP/
-*/
+ *
+ * @package  Library
+ * @subpackage Gopogo
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @access   public
+ * @path /library/GP/
+ */
 
 
 // extends Zend_Cache
@@ -61,7 +62,7 @@ Class GP_GPCache
     protected $frontendOptions;
 
 
-    /*
+    /**
      * @var Zend_Cache
      */
 
@@ -79,7 +80,7 @@ Class GP_GPCache
      */
     protected static $cacheSettings = null;
 
-    /*
+    /**
      * @var Application configurations
      */
 
@@ -99,7 +100,7 @@ Class GP_GPCache
 
     static $gpCache = null;
 
-    /*
+    /**
      * get self object
      * @return object self
      *
@@ -111,7 +112,7 @@ Class GP_GPCache
             self::$gpCache = new self();
         }
         return self::$gpCache;
-    }
+    } //  end of getIntance
 
     /**
      * get front controller object
@@ -125,11 +126,11 @@ Class GP_GPCache
             self::$frontObject = Zend_Controller_Front::getInstance();
         }
         return self::$frontObject;
-    }
+    } //  end of getFronIntance
 
 
     /**
-     * initilize the configuration
+     * Initialize the configuration
      */
     protected function _initConfig()
     {
@@ -163,13 +164,11 @@ Class GP_GPCache
         }
 
 
-    }
-
-
+    } //  end of _initConfig
 
 
     /**
-     * create load configurations
+     * constructor
      */
 
     public function  __construct()
@@ -182,9 +181,6 @@ Class GP_GPCache
 
         $this->_initConfig();
 
-
-        //print_r(self::$configs);
-
         /*
          * Initilize caching
          *
@@ -192,7 +188,10 @@ Class GP_GPCache
 
         $this->_initCache();
 
-    }
+    } // end  of  __construct
+
+
+
     /**
      * Initilize caching
      */
@@ -201,43 +200,7 @@ Class GP_GPCache
     {
         if(self::$cache===null)
         {
-            //echo "****************************************************";
 
-
-            //ZC_FileLogger::debug("Initilize caching!");
-
-
-            /*
-
-            // Standard frontends
-
-            public static $standardFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
-
-            // Standard backends
-
-            public static $standardBackends =
-            array('File', 'Sqlite', 'Memcached', 'Libmemcached',
-                    'Apc', 'ZendPlatform','Xcache', 'TwoLevels', 'ZendServer_Disk',
-                    'ZendServer_ShMem');
-
-            // Standard backends which implement the ExtendedInterface
-
-            public static $standardExtendedBackends =
-            array('File', 'Apc', 'TwoLevels', 'Memcached', 'Libmemcached', 'Sqlite');
-
-            // Only for backward compatibility (may be removed in next major release)
-
-            public static $availableFrontends =
-                array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
-
-            // Only for backward compatibility (may be removed in next major release)
-
-            public static $availableBackends =
-            array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform',
-                    'Xcache', 'TwoLevels');
-
-
-            */
 
             if(empty($this->cacheSettings['frontendOptions']))
             {
@@ -279,36 +242,29 @@ Class GP_GPCache
             $this->backend='File';
             if(empty(self::$configs['default']['backend']))
                 $this->backend=self::$configs['default']['backend'];
-            //echo "/********************************************************/";
-            //$this->backend;
+            
             // getting a Zend_Cache_Core object
             self::$cache = Zend_Cache::factory($this->frontend, $this->backend, $this->frontendOptions, $this->backendOptions);
 
-
         }
 
-    }
+    } // end of _initCache
 
-    // $cache->save($result, 'myresult');
     /**
-     * set data in cache
-     * @params
-     *  $cdata string data to cache
-     *  $key string   key for data
-     *  $frontend string
-     *  $backend  string
-     *  $frontendOptions array
-     *  $backendOptions array
+     * Save data in cache
+     * 
+     * @param String | Array | object data to cache
+     * @param String key for cache
+     * @param String frontend for cache
+     * @param String backend for cache
+     * @param Array frontendOptions for cache
+     * @param Array backendOptions for cache 
      */
 
 
     public static function set($cdata,$key,$frontend='Core', $backend='File',$frontendOptions=array(),$backendOptions=array())
-    {
-        //echo "sdfsd";
-
+    {        
         new self();
-
-        ///echo "sdfsd";
 
         $initFlag = false;
 
@@ -317,7 +273,6 @@ Class GP_GPCache
             $initFlag = true;
             $this->frontend=$frontend;
         }
-
 
         if($backend!='File')
         {
@@ -348,13 +303,12 @@ Class GP_GPCache
 
         self::$cache->save($cdata, $key);
 
-    }
+    } // end of  set
 
     /**
      * Get data from  cache
-     * @params
-     *  $key string key for data
-     * @return data cached data
+     * @param String Key 
+     * @return String | Array | object cached data
      */
 
     public static function get($key)
@@ -364,29 +318,21 @@ Class GP_GPCache
         $result = self::$cache->load($key);
 
         return $result;
-    }
-
-
-    // $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+    } // end of  get
 
     /**
-     * set data in cache by tags
-     * @params
-     *  $cdata string data to cache
-     *  $key string   key for data
-     *  $tags array   tags for data
-     *  $frontend string
-     *  $backend  string
-     *  $frontendOptions array
-     *  $backendOptions array
+     * Save data in cache by tags
+     * @param String | Array | object data to cache
+     * @param String tags for cache
+     * @param Array frontendOptions for cache
+     * @param String frontend for cache
+     * @param String backend for cache
+     * @param Array frontendOptions for cache
+     * @param Array backendOptions for cache 
      */
     public static function setByTag($cdata,$key,$tags=array(),$frontend='Core', $backend='File',$frontendOptions=array(),$backendOptions=array())
-    {
-        //echo "sdfsd";
-
+    {        
         new self();
-
-        ///echo "sdfsd";
 
         $initFlag = false;
 
@@ -395,7 +341,6 @@ Class GP_GPCache
             $initFlag = true;
             $this->frontend=$frontend;
         }
-
 
         if($backend!='File')
         {
@@ -428,12 +373,12 @@ Class GP_GPCache
             self::$cache->save($cdata, $key,$tags);
         else
             self::$cache->save($cdata, $key);
-    }
+    } // end of  setByTag
 
     /**
      * Delete data from  cache by key
-     * @params
-     *  $key string key for data
+     * @param String Key
+     *  
      */
     public static function removeByKey($key)
     {
@@ -448,12 +393,11 @@ Class GP_GPCache
             }
         }
 
-    }
+    } // end of  removeByKey
 
     /**
-     * Delete data from  cache by key
-     * @params
-     *  $mode constant Zend_Cache::CLEANING_MODE options
+     * Delete data from  cache by mode
+     * @param Constant mode Zend_Cache::CLEANING_MODE options
      */
     public static function removeByMode($mode)
     {
@@ -464,17 +408,15 @@ Class GP_GPCache
             if($mode!==null)
             {
                 self::$cache->clean($mode);
-
             }
         }
 
-    }
+    } // end of removeByMode
 
     /**
-     * Delete data from  cache by tags
-     * @params     *
-     *  $mode constant Zend_Cache::CLEANING_MODE options
-     *  $tags array
+     * Delete data from  cache by mode and tags
+     * @param Constant mode Zend_Cache::CLEANING_MODE options
+     * @param Array tags array
      */
     public static function removeByModeAndTags($mode=null,$tags=array())
     {
@@ -495,7 +437,7 @@ Class GP_GPCache
             }
         }
 
-    }
+    } // end of removeByModeAndTags
 
 
 

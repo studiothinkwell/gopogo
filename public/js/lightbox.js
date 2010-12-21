@@ -84,9 +84,10 @@ $(document).ready(function(){
 
 
 $.fn.addModalWindow = function(objId) {
-
-    console.log('___addModalWindow');
-    console.log(objId);
+    
+    $().debugLog('___addModalWindow');
+    $().debugLog(objId);
+    
 
     divId = objId;
 

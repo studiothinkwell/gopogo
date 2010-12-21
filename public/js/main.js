@@ -13,9 +13,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // add events on load
 
     $(".your-personal-button").click(function(){
-            $(".footer-middle").slideToggle("show");
-          //$('.footer-middle').toggle();
-
+            $(".footer-middle").slideToggle("show");          
     });
 
 
@@ -31,33 +29,22 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
     // add forgot your password event
     $(".Forgot-Your-Password").click(function(){
-        console.log('Forgot-Your-Password');
-        var dspid = 'loginBox';
-        $().finish(dspid);
-        //_finish();
-        //___addModalWindow('forgotBox');
+        $().debugLog('Forgot-Your-Password');
+        $().finish();        
         $().addModalWindow('forgotBox');
     });
     
     // add create account event
     $(".Create-Account").click(function(){
-        console.log('Create-Account');
-        //var dspid = 'loginBox';
-        //$().finish(dspid);
-        $().finish();
-        //_finish();
-        //___addModalWindow('signupBox');
+        $().debugLog('Create-Account'); 
+        $().finish();        
         $().addModalWindow('signupBox');
     });
 
     // add signin  event
     $(".Login").click(function(){
-        console.log('Login');
-        //var dspid = 'signupBox';
-        //$().finish(dspid);
+        $().debugLog('Login');        
         $().finish();
-        //_finish();
-        //___addModalWindow('loginBox');
         $().addModalWindow('loginBox');
     });
 
@@ -96,18 +83,14 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 },
                 success: function(resp){
                     // do something with resp
-
                     if(resp.status == 1) // show error message
                     {
                         $().loginSuccess(resp);
                     }
                     else
-                    {
-                        //$().errorMessage(resp.msg);
+                    {                       
                         $().loginFail(resp);
                     }
-
-                    //$().loginSuccess(resp);
                 },
                 complete: function(resp){
                     $().loginWelcome(resp);
@@ -120,17 +103,17 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // login success
 
         $.fn.loginSuccess = function(resp){
-           // console.log('loginSuccess');
-          //  console.log(resp);
+
+            $().debugLog('loginSuccess');
+            $().debugLog(resp);
 
             // show message
             
             $().errorMessage(resp.msg,'error_msg');
 
-            //var dspid = 'loginBox';
             $().finish();
 
-            // profile url
+            // redirect to profile
             $().redirect(app.gopogo.profile_url);    
             
            
@@ -139,16 +122,17 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // login welcome
 
         $.fn.loginWelcome = function(){
-            console.log('loginWelcome');
-            console.log(resp);
+            $().debugLog('loginWelcome');
+            $().debugLog(resp);
         };
 
 
         // login fail
 
         $.fn.loginFail = function(resp){
-            console.log('loginFail');
-            console.log(resp);
+            $().debugLog('loginFail');
+            $().debugLog(resp);
+           
             if(resp.status == 0) // show error message
             {
                 $().errorMessage(resp.msg,'error_msg');
@@ -157,20 +141,22 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
         // show error message
         $.fn.errorMessage = function(msg,msgid){
-            console.log('errorMessage');
 
-            console.log(typeof msgid);
+            $().debugLog('errorMessage');
+            $().debugLog(msg);
+            $().debugLog(msgid);
+
             if(typeof msgid == undefined || msgid=='' )
                 msgid = 'error_msg';
-            console.log(msgid);
-            // error_msg
+            $().debugLog(msgid);
+            
             $('#'+msgid).html(msg);
         }
 
         // redirect to some url or reload the page
         $.fn.redirect = function(url){
-            console.log('redirect');
-            console.log(url);            
+            $().debugLog('redirect');
+            $().debugLog(url);
             if(typeof url == undefined || url=='' || url=='/' ) // //location.reload();
                 window.location = app.gopogo.baseurl
             else
@@ -198,18 +184,15 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 },
                 success: function(resp){
                     // do something with resp
-
                     if(resp.status == 1) // show error message
                     {
                         $().signupSuccess(resp);
                     }
                     else
                     {
-                        //$().errorMessage(resp.msg);
+                       
                         $().signupFail(resp);
-                    }
-
-                    //$().loginSuccess(resp);
+                    }                   
                 },
                 complete: function(resp){
                     $().signupWelcome(resp);
@@ -222,17 +205,14 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // signup success
 
         $.fn.signupSuccess = function(resp){
-            console.log('signupSuccess');
-            console.log(resp);
-
+            $().debugLog('signupSuccess');
+            $().debugLog(resp);
             // show message
-
             $().errorMessage(resp.msg,'signup_error_msg');
-
-            //var dspid = 'signupBox';
+           
             $().finish();
 
-            // profile url
+            // redirect to home
             $().redirect(app.gopogo.baseurl);
            
         };
@@ -240,15 +220,15 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // signup welcome
 
         $.fn.signupWelcome = function(){
-            console.log('signupWelcome');
-            console.log(resp);
+            $().debugLog('signupWelcome');
+            $().debugLog(resp);
         };
 
         // signup fail
 
         $.fn.signupFail = function(resp){
-            console.log('signupFail');
-            console.log(resp);
+            $().debugLog('signupFail');
+            $().debugLog(resp);
             if(resp.status == 0) // show error message
             {
                 $().errorMessage(resp.msg,'signup_error_msg');
@@ -263,13 +243,6 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 
              $().delCookie();
 
-             // show popup
-
-             //___addModalWindow('messageBox');
-
-             //$().addModalWindow('messageBox');
-
-
              // make ajax request for logout
              $.ajax({
                 url: app.gopogo.logout_url,
@@ -280,18 +253,14 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
                 },
                 success: function(resp){
                     // do something with resp
-
                     if(resp.status == 1) // show error message
                     {
                         $().logoutSuccess(resp);
                     }
                     else
                     {
-
-                        // show popup
-                        //___addModalWindow('messageBox');
-                        $().addModalWindow('messageBox');
-                        //$().errorMessage(resp.msg);
+                        // show message box popup
+                        $().addModalWindow('messageBox');                       
                         $().logoutFail(resp);
                     }
                 },
@@ -306,33 +275,24 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
         // logout success
 
         $.fn.logoutSuccess = function(resp){
-            console.log('logoutSuccess');
-            console.log(resp);            
-
-            // show message
-            //$().errorMessage(resp.msg,'message_error_msg');
-
-            //var dspid = 'logoutBox';
-            //$().finish(dspid);
-
-            // profile url
+            $().debugLog('logoutSuccess');
+            $().debugLog(resp);
+            // redirect to home 
             $().redirect(app.gopogo.baseurl);
-
         };
 
         // logout welcome
 
         $.fn.logoutWelcome = function(){
-            console.log('logoutWelcome');
-            console.log(resp);
+            $().debugLog('logoutWelcome');
+            $().debugLog(resp);
         };
 
         // logout fail
 
         $.fn.logoutFail = function(resp){
-            console.log('logoutFail');
-            console.log(resp);
-
+            $().debugLog('logoutFail');
+            $().debugLog(resp);
             if(resp.status == 0) // show error message
             {
                 $().errorMessage(resp.msg,'message_error_msg');
@@ -356,6 +316,23 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
             {
                 document.cookie = thecookie[i] + "; expires ="+ new_date;
             }
+        };
+
+        // log message if console is available else not
+        // if force then alert if console is not available
+        $.fn.debugLog = function (msg,force){
+            var debugFlag = true;
+            // console is defined
+            if(app.gopogo.debug==1 && typeof console !== 'undefined' )
+            {
+                debugFlag = false;
+                console.log(msg);
+            }
+            // if force debug
+            if(app.gopogo.debug==1 && debugFlag && ( force || force==1) )
+            {
+                alert(msg);
+            }                
         }
 
 

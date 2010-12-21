@@ -1,8 +1,7 @@
 <?php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{
-    public $config;
+{    
 
     /**
      *  Initialize View
@@ -46,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initLog()
     {
 
-        //*
+        /*
         // for starting log in file
         if($this->hasPluginResource('Log'))
         {
@@ -59,41 +58,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
         // start DB session save handler
-
+        // get configs
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'Error-Log');
 
         //get your database connection ready
-
-        /*
-
-            [Error-Log]
-            resources.log.db.writerName = "Db"
-            resources.log.db.writerParams.adapter = "pdo_mysql"
-            resources.log.db.writerParams.host = 172.16.0.219
-            resources.log.db.writerParams.username = Gopogo
-            resources.log.db.writerParams.password = Gopogo123@
-            resources.log.db.writerParams.dbname = "gopogo_dev"
-            resources.log.db.writerParams.table = "log"
-            resources.log.db.writerParams.columnMap.priority = "level"
-            resources.log.db.writerParams.columnMap.message  = "message"
-            resources.log.db.writerParams.columnMap.timestamp  = "eventTime"
-            resources.log.db.writerParams.columnMap.pid  = "pid"
-         */
-
 
         $params = array (	'host'     => $config->resources->log->db->writerParams->host,
                                 'username' => $config->resources->log->db->writerParams->username,
                                 'password' => $config->resources->log->db->writerParams->password,
                                 'dbname'   => $config->resources->log->db->writerParams->dbname);
+        // get DB adapter
         $dbAdapter = Zend_Db::factory($config->resources->log->db->writerParams->adapter, $params);
 
+        // make log db collumn mapping
         $columnMapping = array(	$config->resources->log->db->writerParams->columnMap->priority	=> 'priorityName',
                                 $config->resources->log->db->writerParams->columnMap->message	=> 'message',
                                 $config->resources->log->db->writerParams->columnMap->timestamp	=> 'timestamp' /*,
                                 $config->resources->log->db->writerParams->columnMap->pid       => 'pid'*/);
+        // create db log writer
         $writer = new Zend_Log_Writer_Db($dbAdapter, $config->resources->log->db->writerParams->table, $columnMapping);
 
+        // create Zend_Log object
         $logger = new Zend_Log($writer);
+
+        // register logger
         Zend_Registry::set('log', $logger);
 
 
@@ -109,21 +97,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // start DB session save handler
 
-        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'session_db');
+        $sessionConfig = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'session_db');
 
         //get your database connection ready
-        $db = Zend_Db::factory($config->session->db->adapter, array(
-            'host'        => $config->session->db->params->host,
-            'username'    => $config->session->db->params->username,
-            'password'    => $config->session->db->params->password,
-            'dbname'    => $config->session->db->params->dbname
+        $db = Zend_Db::factory($sessionConfig->session->db->adapter, array(
+            'host'        => $sessionConfig->session->db->params->host,
+            'username'    => $sessionConfig->session->db->params->username,
+            'password'    => $sessionConfig->session->db->params->password,
+            'dbname'    => $sessionConfig->session->db->params->dbname
         ));
 
         //you can either set the Zend_Db_Table default adapter
         //or you can pass the db connection straight to the save handler $config
         Zend_Db_Table_Abstract::setDefaultAdapter($db);
-        $config2 = array(
-            'name'           => $config->session->db->params->table,
+        $config = array(
+            'name'           => $sessionConfig->session->db->params->table,
             'primary'        => 'id',
             'modifiedColumn' => 'modified',
             'dataColumn'     => 'data',
@@ -132,7 +120,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         //create your Zend_Session_SaveHandler_DbTable and
         //set the save handler for Zend_Session
-        Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config2));
+        Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config));
 
         //start your session!
         Zend_Session::start();
@@ -151,10 +139,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front = $this->getResource('frontController');
         $front->setRequest(new Zend_Controller_Request_Http());
 
+        // get request lang ffrom url
         $request = $front->getRequest();
         $lang = $request->getParam('lang');
-        //echo $lang;
-        if(empty($lang))
+
+        if(empty($lang)) // if not then ge from config
         {
             $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
 
@@ -162,16 +151,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             {
                 $localeValue = $this->config->resources->locale->default;
             }
-            else // resources.locale.default = "en"
+            else // else set english : en
                 $localeValue = 'en';
-        }
-        else {
+        } else {
             $localeValue = $lang;
         }
 
-        // resources\languages\en
-        // E:\wamp\www\zf-tutorial\resources\languages\en
-        //echo $this->_root;
+        // make translation file path
         $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
 
         if(!file_exists($translationFile))
@@ -187,23 +173,95 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
         }
 
-        //echo $translationFile;
-
         if(file_exists($translationFile))
         {
             try{
+                // set locale
                 $locale = new Zend_Locale($localeValue);
                 Zend_Registry::set('Zend_Locale', $locale);
-
+                // create Zend_Translate object
                 $translate = new Zend_Translate('array', $translationFile, $localeValue);
+
+                // register  Zend_Translate in registry
                 Zend_Registry::set('Zend_Translate', $translate);
             }
             catch (Exception $e)
             {
+                // if exception then through exception
                 throw new Exception($e->getMessage(), Zend_Log::ERR);
             }
         }
 
     } // end _initLocale
+
+
+    /*
+     * Initialize Zend Mail
+     *
+     */
+    protected function _initMail()
+    {
+
+        //1.) normal
+        $zendMailTransport = new Zend_Mail_Transport_Sendmail();
+
+        //2.) SMTP
+
+        //$options = $this->getOption('mail');
+        //Zend_Debug::dump($options);        
+        /*
+        $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
+        $config = array(
+            'auth'      =>$mailConfigs->mail->params->login,
+            'username'  =>$mailConfigs->mail->params->username,
+            'password'  =>$mailConfigs->mail->params->password,
+            'ssl'       =>$mailConfigs->mail->params->ssl,
+            'port'      =>$mailConfigs->mail->params->port
+        );
+        $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
+        //*/
+
+        // set default transport
+        Zend_Mail::setDefaultTransport($zendMailTransport);
+
+        // make zend mail object
+        $mail = new Zend_Mail();
+
+        // set zend mail object in registry
+        Zend_Registry::set('mailer', $mail);
+
+    } // end _initMail
+
+    /**
+     * Initialize Database
+     */
+    protected function  _initDb()
+    {
+        $pdoParams = array(
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+        );
+
+        // get DB configurations form configs
+        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+        $params = array(
+            'host' => $config->resources->db->params->host,
+            'username' => $config->resources->db->params->username,
+            'password' => $config->resources->db->params->password,
+            'dbname' => $config->resources->db->params->dbname,
+            'driver_options' => $pdoParams
+        );
+
+        // get db object
+        $db = Zend_Db::factory($config->resources->db->adapter, $params);
+
+        // set db in registry
+        Zend_Registry::set('db', $db);
+
+    } // end _initDb
+
+
+
+
     
 }
