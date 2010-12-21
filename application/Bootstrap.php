@@ -37,7 +37,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 
         return $view;
+
     } // end _initView
+
 
     /*
      * Initialize logging
@@ -141,6 +143,38 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     } // end _initSession
 
     /**
+     * sets application path , BASE_URL a string constant
+     * @return void
+     */
+     protected function _initBasePath() {
+       $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'cdn');
+       print_r($config);
+       $baseUrl = $config->baseHttp;  
+                    define('BASE_URL', $baseUrl);
+     }
+
+     /**
+      * Defines HAS_CDN a string constant, if hasCdn is set in application.ini
+      * <p>
+      * Defines CDN_PREFIX a string constant, if both hasCdn and cdnPrefix are set in application.ini
+      * <p>
+      * Defines AMOZON_S3_URL a string constant, if both hasCdn and amazonS3Url are set in application.ini
+      * 
+      * @return void
+      */
+     protected function _initHasCdn() {
+       $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'cdn');
+		$hasCdn      = $config->hasCdn;
+                $cdnPrefix   = $config->cdnPrefix;
+                $bucket      = $config->bucket;
+                $amazonS3Url = $config->amazonS3Url;
+		
+                define('HAS_CDN', $hasCdn);
+                if( ''!= $cdnPrefix) define('CDN_PREFIX', $cdnPrefix);
+                if( ''!= $amazonS3Url) define('AMAZON_S3_URL', $amazonS3Url);
+                if( ''!= $bucket) define('BUCKET_NAME', $bucket);
+     }
+    /**
      * Initialize Locale and Translation
      *
      * @return void
@@ -207,3 +241,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     } // end _initLocale
     
 }
+
