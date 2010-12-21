@@ -41,55 +41,106 @@ body
     width:1000px;
     height:113px;
 }
-.submenu
-{
-    position:absolute;
-    float:left;
-    width:750px;
-    height:25px;
-    top:76px;
-    border:0px solid red;
-    color:#FFF;
-    font-size:15px;
-    line-height:20px;
-}
+
 .search
 {
-    position:relative;
-    float:left;
-    width:150px;;
-    height:25px;
-    top:50px;
-    left:114px;
-    font-size:15px;
+	position:relative;
+	float:left;
+	width:150px;;
+	height:25px;
+	top:52px;
+	left:114px;
+	font-size:15px;
+}
+.search input
+{
+	width:207px;
+	height:16px;
+	font-size:14px;
+	font-weight:600;
+	color:#CCC;
+	text-align:center;
 }
 
+.submenu
+{
+	position:absolute;
+	float:left;
+	width:750px;
+	height:25px;
+	top:76px;
+	left:200px;
+	border:0px solid red;
+	color:#FFF;
+	font-size:15px;
+	font-weight:600;
+	line-height:20px;
+	text-decoration:none;
+}
+.submenu a
+{
+	border:0px solid red;
+	color:#FFF;
+	font-size:15px;
+	font-weight:600;
+	line-height:20px;
+	text-decoration:none;
+}
+
+.submenu-box
+{
+	position:relative;
+	float:left;
+	width:auto;
+	height:auto;
+	padding:4px;
+}
+.selected .submenu-left
+{
+	position:relative;
+	float:left;
+	width:7px;
+	height:22px;
+	background-image:url(/themes/default/images/sub-bg_01.png);
+	background-repeat:no-repeat;
+}
+.selected .submenu-middle
+{
+	position:relative;
+	float:left;
+	/*background-image:url(/themes/default/images/sub-bg_02.png);*/
+        background-color: #5ea6bf;
+	background-repeat:repeat-x;
+	height:22px;
+}
+.selected .submenu-right
+{
+	position:relative;
+	float:left;
+	background-image:url(/themes/default/images/sub-bg_03.png);
+	background-repeat:no-repeat;
+	width:7px;
+	height:22px;
+}
 .submenu-left
 {
-    position:relative;
-    float:left;
-    background-image:url(/themes/default/images/sub-bg_01.jpg);
-    background-repeat:no-repeat;
-    width:4px;
-    height:22px;
+	position:relative;
+	float:left;
+	width:7px;
+	height:22px;
 }
-.submenu-center
+.submenu-middle
 {
-    position:relative;
-    float:left;
-    background-image:url(/themes/default/images/sub-bg_02.png);
-    background-repeat:repeat-x;
-    width:auto;
-    height:22px;
+	position:relative;
+	float:left;
+	height:22px;
 }
 .submenu-right
 {
-    position:relative;
-    float:left;
-    background-image:url(/themes/default/images/sub-bg_03.png);
-    background-repeat:no-repeat;
-    width:4px;
-    height:22px;
+	position:relative;
+	float:left;
+	width:7px;
+	height:22px;
 }
 .logo
 {
@@ -382,39 +433,67 @@ body
 }
 .rg-thum-img-cel1
 {
-    position:relative;
-    float:left;
-    width:67px;
-    height:60px;
-    background:transparent url(/themes/default/images/icon-right.png) no-repeat scroll 0px -6px;
+	position:relative;
+	float:left;
+	width:67px;
+	height:60px;
+	background:transparent url(/themes/default/images/icon-right.png) no-repeat scroll 0px -6px;
+}
+.rg-thum-img-cel12
+{
+	position:relative;
+	float:left;
+	width:67px;
+	height:60px;
+	background:transparent url(/themes/default/images/icon-right.png) no-repeat scroll -78px -4px;
 }
 .rg-thum-iconbox
 {
-    position:relative;
-    float:left;
-    height:60px;
-    width:70px;
-    left:10px;
+	position:relative;
+	float:left;
+	height:60px;
+	width:70px;
+	left:10px;
 }
 .rg-thum-img-cel2
 {
-    position:relative;
-    float:left;
-    width:40px;
-    height:30px;
-    background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
-    margin-left:-11px;
-    margin-top:10px;
+	position:relative;
+	float:left;
+	width:40px;
+	height:30px;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
+	margin-left:-11px;
+	margin-top:10px;
+}
+.rg-thum-img-cel22
+{
+	position:relative;
+	float:left;
+	width:40px;
+	height:30px;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 0px -2px transparent;
+	margin-left:-11px;
+	margin-top:10px;
 }
 .rg-thum-img-cel3
 {
-    background:url(../images/thumb-icon.png) no-repeat scroll -95px -2px transparent;
-    float:left;
-    height:30px;
-    margin-left:-11px;
-    margin-top:10px;
-    position:relative;
-    width:50px;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -95px 0px transparent;
+	float:left;
+	height:30px;
+	margin-left:-11px;
+	margin-top:10px;
+	position:relative;
+	width:50px;
+}
+.rg-thum-img-cel33
+{
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -140px -2px transparent;
+	float:left;
+	height:30px;
+	margin-left:-11px;
+	margin-top:10px;
+	position:relative;
+	width:50px;
 }
 .rg-thum-img-cel4
 {
@@ -450,6 +529,7 @@ body
     font-size: 12px;
     font-weight:600;
     line-height: 21px;
+    color: #363231;
 }
 .radio-button-right
 {
@@ -465,15 +545,16 @@ body
 }
 .skip-txt
 {
+    clear: both;
     position:absolute;
-    float:left;
-    width:100px;
+    width:20px;
     text-align:left;
     top:108px;
     left:260px;
     height:25px;
     font-size:11px;
-    text-decoration:underline;
+    border: 0px solid red;
+    
 }
 .head-txt
 {
@@ -562,23 +643,39 @@ body
 }
 .interest-button
 {
-    position:relative;
-    float:left;
-    width:96px;
-    height:25px;
-    left: 10px;
-    margin-top:5px;
-    background:url(/themes/default/images/icons.png) no-repeat scroll -2px -73px transparent;
+	position:relative;
+	float:left;
+	width:96px;
+	height:25px;
+	left: 10px;
+	margin-top:5px;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -73px transparent;
 }
+.interest-button a
+{
+	position:relative;
+	float:left;
+	width:96px;
+	height:25px;
+}
+.interest-button a:hover
+{
+	position:relative;
+	float:left;
+	width:96px;
+	height:25px;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -49px transparent;
+}
+
 .interest-button-over
 {
-    position:relative;
-    float:left;
-    width:96px;
-    height:25px;
-    left: 10px;
-    margin-top:5px;
-    background:url(/themes/default/images/icons.png) no-repeat scroll -4px -51px transparent;
+	position:relative;
+	float:left;
+	width:96px;
+	height:25px;
+	left: 10px;
+	margin-top:5px;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -49px transparent;
 }
 
 .star-button
@@ -852,30 +949,35 @@ body
 }
 .footerlink
 {
-    position:relative;
-    float:left;
-    font-size:12px;
-    color:#363231;
-    font-weight:600;
-    text-align:center;
-    width:100%;
-    text-decoration:none;
-    padding-top:10px;
+	position:relative;
+	float:left;
+	font-size:12px;
+	color:#363231;
+	font-weight:600;
+	text-align:center;
+	width:100%;
+	padding-left:10px;
+	padding-right:10px;
+        padding-top: 10px;
+	text-decoration:none;
 }
 .footerlink a
 {
-    font-size:12px;
-    color:#363231;
-    text-align:center;
-    padding-left:20px;
-    text-decoration:none;
+	font-size:12px;
+	color:#363231;
+	text-align:center;
+	padding-left:10px;
+	padding-right:10px;
+	text-decoration:none;
 }
 .footerlink a:hover
 {
-    font-size:12px;
-    color:#FFF;
-    text-align:center;
-    text-decoration:underline;
+	font-size:12px;
+	color:#FFF;
+	text-align:center;
+	text-decoration:underline;
+	padding-left:10px;
+	padding-right:10px;
 }
 .blankdiv
 {
@@ -904,6 +1006,9 @@ body
     width:601px;
     height:352px;
     border:0px solid red;
+    display: none;
+    top: 0px;
+    left: 0px;
 } 
 
 .create-ac-head
@@ -912,20 +1017,21 @@ body
     float:left;
     width:100%;
     height:53px;
+    cursor: move;
 }
 .create-ac-leftbg
 {
     position:relative;
     float:left;
-    width:23px;
+    width:21px;
     height:53px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll 2px 2px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
 .create-ac-middlebg
 {
     position:relative;
     float:left;
-    width:520px;
+    width:522px;
     height:51px;
     top:2px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
@@ -938,14 +1044,18 @@ body
     width:45px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    cursor: move;
 }
 .create-ac-close
 {
-    position:relative;
+    position:absolute;
     float:left;
+    left: 545px;
     width:30px;
-    height:53px;
+    height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
+    cursor: hand;
 }
 .create-ac-centerbg
 {
@@ -1000,6 +1110,7 @@ body
     font-size:12px;
     font-weight:600;
     color:#757575;
+    width: 100%; 
 }
 .create-ac-input4
 {
@@ -1020,8 +1131,8 @@ body
 }
 .create-ac-login
 {
-    position:relative;
-    float:left;
+     position:relative;
+     float:left;
     font-size:12px;
     color:#538ea3;
     text-decoration:underline;
@@ -1049,6 +1160,9 @@ body
     width:346px;
     height:302px;
     border:0px solid red;
+    display: none;
+    top:0px;
+    left:0px
 }                                                
 .sign-in-leftbg
 {
@@ -1057,7 +1171,31 @@ body
     width:21px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
-}                                                
+}
+
+.create-ac-txt
+{
+    font-size:12px;
+    color:#6c6c6c;
+}
+
+.sign-in-create-account
+{  
+    font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
+}
+
+.sign-in-input3
+{
+    position:relative;
+    float:left;
+    top:30px;
+    font-size:12px;
+    font-weight:600;
+    color:#757575;
+    width: 100%;
+}
 .sign-in-centerbg
 {
     position:relative;
@@ -1084,6 +1222,7 @@ body
     width:38px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    cursor: move;
 }
 .sign-in-bottombg
 {
@@ -1097,13 +1236,42 @@ body
 {
     position:relative;
     float:left;
-    width:90%;
+    width:93%;
     height:auto;
     border:0px solid red;
     top:20px;
-    left:23px;
+    left:12px;
 }
+.sign-in-button
+{
+    position:relative;
+    float: left;
+    padding-top: 12px;
+    left: 240px;
 
+
+}
+.sign-in-input4
+{
+    position:relative;
+    float:left;
+    width:162px;
+    height:29px;
+    border:0px solid red;    
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent;
+    clear: both;
+}
+.login-close
+{
+    position:absolute;
+    float:left;
+    left: 306px;
+    width:30px;
+    height:31px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
+    cursor: hand;
+}
 
                                                 /************************************** Sign in END **************************************/
 
@@ -1143,3 +1311,43 @@ cursor: hand;
 cursor: pointer;
 border:1px solid red;
 }
+
+
+.h15{
+    height: 15px;
+}
+
+.clear{
+    clear:both;
+}
+
+/************** Message in START *********************/
+#messageBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:346px;
+    height:302px;
+    border:0px solid red;
+}
+
+/************** Message in END *********************/
+/***************** For Chrome  Start*********************/
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+    @font-face
+    {
+    font-family: Arial;
+    src: url('/font/arial.ttf');
+    font-weight:600;
+    }
+    .thum-txt
+    {
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+/***************** For Chrome End*********************/

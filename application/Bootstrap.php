@@ -3,6 +3,11 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     public $config;
+
+    /**
+     *  Initialize View
+     * @return Zend_View
+     */
     
     protected function _initView()
     {
@@ -32,7 +37,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 
         return $view;
-    }
+
+    } // end _initView
+
 
     /*
      * Initialize logging
@@ -94,7 +101,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     } // end _initLog
 
-
     /*
      * Initialize Database Session
      * Loads configuration from application.ini
@@ -145,7 +151,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
        print_r($config);
        $baseUrl = $config->baseHttp;  
                     define('BASE_URL', $baseUrl);
-    }
+     }
 
      /**
       * Defines HAS_CDN a string constant, if hasCdn is set in application.ini
@@ -168,4 +174,71 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 if( ''!= $amazonS3Url) define('AMAZON_S3_URL', $amazonS3Url);
                 if( ''!= $bucket) define('BUCKET_NAME', $bucket);
      }
+    /**
+     * Initialize Locale and Translation
+     *
+     * @return void
+     */
+    protected function _initLocale()
+    {
+        $this->bootstrap('frontController');
+        $front = $this->getResource('frontController');
+        $front->setRequest(new Zend_Controller_Request_Http());
+
+        $request = $front->getRequest();
+        $lang = $request->getParam('lang');
+        //echo $lang;
+        if(empty($lang))
+        {
+            $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+            if(!empty($this->config->resources->locale->default))
+            {
+                $localeValue = $this->config->resources->locale->default;
+            }
+            else // resources.locale.default = "en"
+                $localeValue = 'en';
+        }
+        else {
+            $localeValue = $lang;
+        }
+
+        // resources\languages\en
+        // E:\wamp\www\zf-tutorial\resources\languages\en
+        //echo $this->_root;
+        $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
+
+        if(!file_exists($translationFile))
+        {
+            $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+            if(!empty($this->config->resources->locale->default))
+            {
+                $localeValue = $this->config->resources->locale->default;
+            }
+            else // resources.locale.default = "en"
+                $localeValue = 'en';
+            $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
+        }
+
+        //echo $translationFile;
+
+        if(file_exists($translationFile))
+        {
+            try{
+                $locale = new Zend_Locale($localeValue);
+                Zend_Registry::set('Zend_Locale', $locale);
+
+                $translate = new Zend_Translate('array', $translationFile, $localeValue);
+                Zend_Registry::set('Zend_Translate', $translate);
+            }
+            catch (Exception $e)
+            {
+                throw new Exception($e->getMessage(), Zend_Log::ERR);
+            }
+        }
+
+    } // end _initLocale
+    
 }
+
