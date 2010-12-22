@@ -1,27 +1,28 @@
 <?php
-/**
-* Gopogo : Gopogo Auth management
-*
-* <p></p>
-*
-* @category gopogo web portal
-* @package Library
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @version  1.0
-* @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
-* @path /library/GP/
-*/
 
 /**
-*
+ * Gopogo : Gopogo Auth management
+ *
+ * <p></p>
+ *
+ * @category gopogo web portal
+ * @package Library
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @version  1.0
+ * @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
+ * @path /library/GP/
+ */
+
+/**
+ *
  * Gopogo cache management class
-*
-* @package  Library
-* @subpackage Gopogo
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @access   public
-* @path /library/GP/
-*/
+ *
+ * @package  Library
+ * @subpackage Gopogo
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @access   public
+ * @path /library/GP/
+ */
 
 Class GP_GPAuth
 {
@@ -47,13 +48,40 @@ Class GP_GPAuth
      * @var Zend_Mail
      */
 
-    protected static $zendMail = null; 
+    protected static $zendMail = null;
+
+    /**
+     * @var Zend_Mail_Transport_Sendmail
+     */
+
+    protected static $zendMailTransport = null;
     
     /**
      * @var Zend_View
      */
 
     protected static $zendView = null;
+
+
+    /*
+     * @var Application configurations
+     */
+
+    protected static $appConfigs = null;
+
+
+    /**
+     * Front object
+     */
+
+    protected static $frontObject = null;
+
+
+    /**
+     * $var Zend_Translate
+     */
+    protected $translate = null;
+
 
     /*
      * get self object
@@ -67,7 +95,7 @@ Class GP_GPAuth
             self::$gpAuth = new self();
         }
         return self::$gpAuth;
-    }
+    } // end of getIntance
 
     /**
      * get user model object
@@ -81,7 +109,7 @@ Class GP_GPAuth
             self::$user = new Application_Model_DbTable_User();
         }
         return self::$user;
-    }
+    } // end of getUserIntance
 
     /**
      * get Zend_Mail object
@@ -92,10 +120,10 @@ Class GP_GPAuth
     {
         if(self::$zendMail===null)
         {
-            self::$zendMail = new Zend_Mail();
+            self::$zendMail = Zend_Registry::get('mailer');
         }
         return self::$zendMail;
-    }
+    } // end of getMailIntance
 
     /**
      * get Zend_View object
@@ -109,7 +137,7 @@ Class GP_GPAuth
             self::$zendView = new Zend_View();
         }
         return self::$zendView;
-    }
+    } // end of getViewIntance
 
 
     /**
@@ -119,13 +147,14 @@ Class GP_GPAuth
 
     public function  __construct()
     {
-
-    }
+        // Zend_Translate object for langhuage translator
+        $this->translate = Zend_Registry::get('Zend_Translate');
+    } // end of __construct
 
     /**
      * Get user session data
      * 
-     * @return array users session data
+     * @return Array user's session data
      */
 
     public static function getSession()
@@ -135,24 +164,55 @@ Class GP_GPAuth
             self::$session = self::getIntance()->getUserIntance()->getSession();
         }
         return self::$session;
-    }
+    } // end of getSession
 
 
     /**
-     * send email template to user for reseting password
-     *    
+     * get front controller object
+     * @return object front controller
+     *
+     */
+    protected function getFronIntance()
+    {
+        if(self::$frontObject===null)
+        {
+            self::$frontObject = Zend_Controller_Front::getInstance();
+        }
+        return self::$frontObject;
+    } // end of getFronIntance
+
+    /**
+     * Initialize the configuration
+     */
+    protected function getConfig()
+    {
+        /**
+         * Load application configurations         
+         */
+        if(self::$appConfigs===null)
+        {
+            self::$appConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        }
+        return self::$appConfigs;
+    } // end of getConfig
+
+
+
+    /**
+     * Send email template to user for resetting password : forgot password
+     * @param String email
+     * @param String temporary password
+     * @param String user name
+     *
      */
 
     public static function sendEmailForgotPassword($email,$temp_password,$name='')
     {
-        //echo "sendEmailForgotPassword";
-        
+        $configs = self::getIntance()->getConfig();
 
-        //$view = $this->getHelper('ViewRenderer')->view;
+        $baseurl = $configs->gopogo->url->base;
 
         $view = self::getIntance()->getViewIntance();
-        
-        // public\themes\default\templates\mails
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
@@ -160,38 +220,49 @@ Class GP_GPAuth
             $name = substr($email, 0, strpos($email,'@'));
 
         $view->name = $name;
-        $view->link = 'url';
-        //$text = $this->render('mail/forget_password.html');
+        $view->email = $email;
+        $view->temp_password = $temp_password;
+        $view->link = $baseurl;
+        
         $text = $view->render('mails/forgot_password.phtml');
 
-        //echo $text;
-        $email = "mahesh@techdharma.com";
-        $name = "mahesh";
+        $lang_msg = self::getIntance()->translate->_('You have requested Gopogo - forgot password!');
+        $subject = $lang_msg;
 
-        self::getIntance()->getMailIntance()->setBodyText('You have requested for forgot password!')
-                                            ->setBodyHtml('My Nice <b>Test</b> Text')
-                                            ->setFrom('no-reply@gopogo.com', 'GOPOGGO')
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+        self::getIntance()->getMailIntance()->setBodyText($subject)
+                                            ->setBodyHtml($text)
+                                            ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->setSubject('You have requested for forgot password!')
-                                            ->send();         
-    }
+                                            ->addTo($to, 'GOPOGGO')
+                                            ->setFrom($from, 'GOPOGGO')
+                                            ->addCc($cc,'GOPOGGO')
+                                            ->addBcc($bcc,'GOPOGGO')
+                                            ->setReplyTo($reply_to,'GOPOGGO')
+                                            ->setReturnPath($return_path,'GOPOGGO')
+                                            ->send(); // self::getIntance()->getMailTransport()
+    } // end of sendEmailForgotPassword
+
 
     /**
-     * send email template to user for reseting new password
-     *
+     * Send Welcome Email to signedup user
+     * @param String $email : user email
+     * @param String $passwd : user password
+     * @param String $name : user name
      */
-
-    public static function sendEmailResetPassword($email,$name='')
+    public static function sendEmailSignupWelcome($email,$passwd,$name='')
     {
-        echo "sendEmailResetPassword";
+        $configs = self::getIntance()->getConfig();
 
-
-
-        //$view = $this->getHelper('ViewRenderer')->view;
+        $baseurl = $configs->gopogo->url->base;
 
         $view = self::getIntance()->getViewIntance();
-
-        // public\themes\default\templates\mails
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
@@ -199,24 +270,36 @@ Class GP_GPAuth
             $name = substr($email, 0, strpos($email,'@'));
 
         $view->name = $name;
-        $view->link = 'url';
-        //$text = $this->render('mail/forget_password.html');
-        $text = $view->render('mails/reset_forgot_password.phtml');
+        $view->email = $email;
+        $view->password = $passwd;
+        $view->link = $baseurl;
 
-        //echo $text;
-        $email = "mahesh@techdharma.com";
-        $name = "mahesh";
+        $text = $view->render('mails/signup_welcome.phtml');
 
-        self::getIntance()->getMailIntance()->setBodyText('You have changed your password!')
-                                            ->setBodyHtml('My Nice <b>Test</b> Text')
-                                            ->setFrom('no-reply@gopogo.com', 'GOPOGGO')
+        $lang_msg = self::getIntance()->translate->_('Welcome, %value% To GOPOGO!');
+
+        $subject = str_replace('%value%', $name, $lang_msg);
+
+
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+        self::getIntance()->getMailIntance()->setBodyText($subject)
+                                            ->setBodyHtml($text)
+                                            ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->setSubject('You have changed your password!')
+                                            ->addTo($to, 'GOPOGGO')
+                                            ->setFrom($from, 'GOPOGGO')
+                                            ->addCc($cc,'GOPOGGO')
+                                            ->addBcc($bcc,'GOPOGGO')
+                                            ->setReplyTo($reply_to,'GOPOGGO')
+                                            ->setReturnPath($return_path,'GOPOGGO')
                                             ->send();
-    }
-
-
-
+    } // end of sendEmailSignupWelcome
 
 
 

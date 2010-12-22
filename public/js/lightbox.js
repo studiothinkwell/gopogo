@@ -1,40 +1,16 @@
 
 $(document).ready(function(){
 
-    var divId;
+    var divId;    
 
     $("#sign-in").click(function(){
-        divId = 'loginBox';
-     
-        $("#loginBox").draggable();        
-
-        $(".sign-in-centerbg").mouseover(function(){
-                $("#loginBox").draggable('disable');
-            });
-
-        $(".create-ac-head").mouseover(function(){              
-                $("#loginBox").draggable('enable');
-           });           
-
-        $().addModalWindow('loginBox');
-
+        divId = "#loginBox";
+        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
     });
 
     $("#sign-up").click(function(){
-        divId = 'signupBox';
-
-        $("#signupBox").draggable();
-
-        $(".create-ac-centerbg").mouseover(function(){
-                $("#signupBox").draggable('disable');
-            });
-
-        $(".create-ac-head").mouseover(function(){
-                $("#signupBox").draggable('enable');
-           });
-           
-        $().addModalWindow('signupBox');
-
+        divId = "#signupBox";
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
     });
 
     $(".create-ac-close").click(function(){
@@ -44,8 +20,13 @@ $(document).ready(function(){
      $(".login-close").click(function(){
         $().finish();
     });
+    
+    $().addResize();
+    $().addScroll();    
+    
+});
 
-
+$.fn.addResize = function() {
     $(window).resize(function() {
 
         var arrPageSizes = $().getPageSize();
@@ -57,45 +38,49 @@ $(document).ready(function(){
         // Get page scroll
         var arrPageScroll = $().getPageScroll();
 
-        $('#'+divId).css({
-            top:	parseInt(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($('#'+divId).height()) / 2))),
-            left:	parseInt(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($('#'+divId).width()) / 2)))
+        $(divId).css({
+            top:	parseInt(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
+            left:	parseInt(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
         });
     });
+}
 
-    $(window).scroll(function() {
+$.fn.addScroll = function() {
 
-        var arrPageSizes = $().getPageSize();
+     $(window).scroll(function() {
+            var arrPageSizes = $().getPageSize();
 
-        $('#overlay').css({
-        width:		arrPageSizes[0],
-        height:		arrPageSizes[1]
+            $('#overlay').css({
+            width:		arrPageSizes[0],
+            height:		arrPageSizes[1]
+            });
+
+            var arrPageScroll = $().getPageScroll();
+
+            $(divId).css({
+            top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
+            left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
+            });
         });
-
-        var arrPageScroll = $().getPageScroll();
-
-        $('#'+divId).css({
-        top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($('#'+divId).height()) / 2))),
-        left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($('#'+divId).width()) / 2)))
-        });
-    });
-    
-});
-
-
-$.fn.addModalWindow = function(objId) {
-
-    console.log('___addModalWindow');
-    console.log(objId);
-
-    divId = objId;
-
     
 
+}
+
+
+
+
+$.fn.addModalWindow = function(objId, createOverlay) {
+
+    $().debugLog('___addModalWindow');
+    $().debugLog(objId);
+
+    divId = objId;    
+
+ if(createOverlay) {
     $('embed, object, select').css({ 'visibility' : 'hidden' });
     $('body').append('<div id="overlay"></div>');
-
-    $('#'+objId).css({display:''});
+ }
+    $(objId).css({display:''});
 
     var arrPageSizes = $().getPageSize();
 
@@ -107,35 +92,48 @@ $.fn.addModalWindow = function(objId) {
         height:              arrPageSizes[1]
     }).fadeIn();
 
-    // Get page scroll
-    var arrPageScroll = $().getPageScroll();
-
-
+   
     // Calculate top and left offset for the jquery-lightbox div object and show it
-    $('#'+objId).css({
-        top:    parseInt((arrPageSizes[3]/2) - (($('#'+objId).height()) / 2)),
-        left:    parseInt((arrPageSizes[2]/2) - (($('#'+objId).width()) / 2))
+    $(objId).css({
+        top:    parseInt((arrPageSizes[3]/2) - (($(objId).height()) / 2)),
+        left:    parseInt((arrPageSizes[2]/2) - (($(objId).width()) / 2))
     }).show();
 
     // Assigning click events in elements to close overlay
-    $('#overlay').click(function() {
-
+    $('#overlay').click(function() {         
         $().finish();
     });
 
-    $().enable_keyboard_navigation();
+    $().enableKeyboardNavigation();
+
+    
+}
+
+$.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
+       
+        $(mainBox).draggable();
+
+        $(titleBox).mouseover(function(){
+            $(mainBox).draggable('enable');
+           });
+
+        $(container).mouseover(function(){
+                $(mainBox).draggable('disable');
+            });
+
+        $().addModalWindow(mainBox, createOverlay);
 }
 
 
 
-$.fn.enable_keyboard_navigation = function() {
+$.fn.enableKeyboardNavigation = function() {
     $(document).keydown(function(objEvent) {
-        $().keyboard_action(objEvent);
+        $().keyboardAction(objEvent);
     });
 }
 
 
-$.fn.keyboard_action = function(objEvent) {
+$.fn.keyboardAction = function(objEvent) {
     var escapeKey = 27;
 
         if ( objEvent == null ) {
@@ -147,15 +145,15 @@ $.fn.keyboard_action = function(objEvent) {
         key = String.fromCharCode(keycode).toLowerCase();
 
         // Verify the keys to close the ligthBox
-        if ( ( keycode == escapeKey ) ) {
-            $().finish();
+        if ( ( keycode == escapeKey ) ) {            
+            $().finish();            
         }
 }
 
 
 $.fn.finish = function() {
-
-    $('#'+divId).css({display:'none'});
+    
+    $(divId).css({display:'none'});
     $('#overlay').fadeOut(function() { $('#overlay').remove(); });
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
     $('embed, object, select').css({ 'visibility' : 'visible' });
@@ -181,3 +179,4 @@ $.fn.getPageSize = function() {
     var jqueryPageSize = new Array($(document).width(),$(document).height(), $(window).width(), $(window).height());
     return jqueryPageSize;
 };
+

@@ -38,10 +38,40 @@ class IndexController extends Zend_Controller_Action
                 echo GP_GPCache::get('mahesh');
         
                 */
-        
+                //$zt = new Zend_Translate();
+
                 // testimng for langhuage translator
                 //$translate = Zend_Registry::get('Zend_Translate');
                 //echo $translate->_("Invalid type given. Numeric string, integer or float expected") . "\n";
+
+                //$email = "mahesh@techdharma.com";
+
+                //echo sprintf($translate->_("%s is no valid email address in the basic format local-part@hostname"),$email);
+
+            // zend mail testing
+            /*
+            $email = "mahesh@techdharma.com";
+            $name = "mahesh";
+
+            //$mailer = new Zend_MaiL();
+
+            $mailer = Zend_Registry::get('mailer');
+
+            $mailer->addTo($email, $name)
+                 ->setFrom('mahesh@techdharma.com', 'GOPOGGO')
+                 ->setSubject('You have requested for forgot password!')
+                 ->setBodyText('You have requested for forgot password!')
+                 ->send();
+
+            */
+
+
+
+
+        // testing for translator
+
+        
+
 
 
                 //Below is test case to getBasePath

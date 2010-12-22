@@ -1332,6 +1332,13 @@ border:1px solid red;
     height:302px;
     border:0px solid red;
 }
+.errorMsg
+{
+    color: #FF0000;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
@@ -1339,9 +1346,9 @@ border:1px solid red;
 {
     @font-face
     {
-    font-family: Arial;
-    src: url('/font/arial.ttf');
-    font-weight:600;
+        font-family: Arial;
+        src: url('/font/arial.ttf');
+        font-weight:600;
     }
     .thum-txt
     {
