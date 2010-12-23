@@ -5,19 +5,26 @@ $(document).ready(function(){
 
     $("#sign-in").click(function(){
         divId = "#loginBox";
+        $(".errorMsg").text('');
+        
+        $().enableLoginBox();
+
         $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
     });
 
     $("#sign-up").click(function(){
         divId = "#signupBox";
+        $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
     });
 
     $(".create-ac-close").click(function(){
+        $(".errorMsg").text('');
         $().finish();
     });
 
      $(".login-close").click(function(){
+        $(".errorMsg").text('');
         $().finish();
     });
     
@@ -71,13 +78,13 @@ $.fn.addScroll = function() {
 
 $.fn.addModalWindow = function(objId, createOverlay) {
 
-    $().debugLog('___addModalWindow');
+    $().debugLog('addModalWindow');
     $().debugLog(objId);
 
     divId = objId;    
 
  if(createOverlay) {
-    $('embed, object, select').css({ 'visibility' : 'hidden' });
+    $('embed, object, select').css({'visibility' : 'hidden'});
     $('body').append('<div id="overlay"></div>');
  }
     $(objId).css({display:''});
@@ -132,6 +139,14 @@ $.fn.enableKeyboardNavigation = function() {
     });
 }
 
+$.fn.enableLoginBox = function() {
+
+     if($("#toggleForgot").css('display')== 'block'){
+           $("#toggleForgot").css({display:'none'});
+           $("#toggleLogin").css({display:''});
+        }
+}
+
 
 $.fn.keyboardAction = function(objEvent) {
     var escapeKey = 27;
@@ -154,9 +169,9 @@ $.fn.keyboardAction = function(objEvent) {
 $.fn.finish = function() {
     
     $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
+    $('#overlay').fadeOut(function() {$('#overlay').remove();});
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-    $('embed, object, select').css({ 'visibility' : 'visible' });
+    $('embed, object, select').css({'visibility' : 'visible'});
 }
 
 $.fn.getPageScroll = function() {
