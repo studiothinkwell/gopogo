@@ -153,17 +153,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $request = $front->getRequest();
         $lang = $request->getParam('lang');
 
+        $lang_session = new Zend_Session_Namespace('lang_session');
+        
         if(empty($lang)) // if not then ge from config
         {
-            $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
-
-            if(!empty($this->config->resources->locale->default))
+            // get session lang option form session
+            $lang = $lang_session->lang;
+            if(empty($lang)) // if not then ge from config
             {
-                $localeValue = $this->config->resources->locale->default;
+                $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+                if(!empty($this->config->resources->locale->default))
+                {
+                    $localeValue = $this->config->resources->locale->default;
+                }
+                else // else set english : en
+                    $localeValue = 'en';
             }
-            else // else set english : en
-                $localeValue = 'en';
+            else
+            {
+                $localeValue = $lang;
+            }
         } else {
+            // set post data on session, on user lang selection
+            $lang_session->lang = $lang; // first time
             $localeValue = $lang;
         }
 
@@ -182,7 +195,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $localeValue = 'en';
             $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
         }
-
+        //echo $translationFile;
         if(file_exists($translationFile))
         {
             try{

@@ -5,12 +5,34 @@ class IndexController extends Zend_Controller_Action {
         /* Initialize action controller here */
     }
 
-    public function indexAction() {
+
+    public function indexAction()
+    {
+        //$this->title = "Add new album";
+        //$this->view->headTitle('mpd');
+
+        // set header information
+
+        //$this->view->headTitle('mpd');
+        //$this->view->headMeta()->appendName('keywords', 'Profile');
+        //$this->view->headMeta()->appendName('description', 'Profile');
+
         // action body
         // testing error log in DB
         // throw new Exception("mahesh prasad", Zend_Log::ERR);
         
+
         // testing session in DB
+
+                // testing error log in DB
+                //throw new Exception("mahesh prasad", Zend_Log::ERR);
+                // or
+                //$logger = Zend_Registry::get('log');
+                //$logger->log($lang_msg,Zend_Log::ERR);
+
+        
+                // testing session in DB
+
                 /*
                 $defaultNamespace = new Zend_Session_Namespace('Default');
         
@@ -36,8 +58,8 @@ class IndexController extends Zend_Controller_Action {
                 //$zt = new Zend_Translate();
 
                 // testimng for langhuage translator
-                //$translate = Zend_Registry::get('Zend_Translate');
-                //echo $translate->_("Invalid type given. Numeric string, integer or float expected") . "\n";
+                // $translate = Zend_Registry::get('Zend_Translate');
+                // echo $translate->_("Invalid type given. Numeric string, integer or float expected") . "\n";
 
                 //$email = "mahesh@techdharma.com";
 
@@ -68,6 +90,25 @@ class IndexController extends Zend_Controller_Action {
                 //http:\\gpbucket1.s3.amazonaws.com\images\b5e7d988cfdb78bc3be1a9c221a8f744.jpg
                 //$img = 'image1.jpg';
                 //echo '<br>http:\\\\'. BUCKET_NAME.'.'. AMAZON_S3_URL . '\\images\\' . GP_ToolKit::getEncriptedUrl($img);
+
+
+
+        // testing event log
+        /*
+        $eventId = 1;
+        $userId = 25;
+        $eventDescription = "Signup";
+
+        $eventAttributes = array(
+            '2'=> "zyz",
+            "mahesh"=>"prasad"
+        );
+        
+        GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+        //die();
+        //*/
+        
+
     }
 }
 

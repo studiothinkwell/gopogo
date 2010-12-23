@@ -27,7 +27,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
  * This will apply toggle effect to forgot password functionality of login modal window
  */
     $("#forgotPassword").click(function(){
-            $("#errorMsg").text('');
+            $(".errorMsg").text('');
             $("#toggleLogin").slideToggle("hide");
             $("#toggleForgot").slideToggle("show");
     });
@@ -36,7 +36,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
  * This will apply toggle effect to login functionality of login modal window
  */
      $("#loginPassword").click(function(){
-            $("#errorMsg").text('');
+            $(".errorMsg").text('');
             $("#toggleForgot").slideToggle("hide");
             $("#toggleLogin").slideToggle("show");
     });
@@ -66,14 +66,19 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
     
     // add create account event
-    $(".createAccount").click(function(){                  
+    $(".createAccount").click(function(){
+        $(".errorMsg").text('');
         $("#loginBox").css({display:'none'});        
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 0 );
     });
 
     // add signin  event
-    $(".login").click(function(){       
-        $("#signupBox").css({display:'none'});        
+    $(".login").click(function(){
+        $(".errorMsg").text('');
+        $("#signupBox").css({display:'none'});
+
+        $().enableLoginBox();
+
         $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 0 );
     });
 
@@ -102,7 +107,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
              // get serialized form data of login form
              var fdata = $("#loginBoxForm").serialize();
-
+             $(".errorMsg").text('');
+             
              // make ajax request for login
              $.ajax({
                 url: app.gopogo.signin_url,
@@ -153,7 +159,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // login welcome
 
-        $.fn.loginWelcome = function(){
+        $.fn.loginWelcome = function(resp){
             $().debugLog('loginWelcome');
             $().debugLog(resp);
         };
@@ -179,7 +185,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().debugLog(msgid);
 
             if(typeof msgid == undefined || msgid=='' )
-                msgid = 'error_msg';
+                msgid = 'errorMsg';
 
             $().debugLog(msgid);
 
@@ -204,6 +210,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
              // get serialized form data of login form
              var fdata = $("#signupBoxForm").serialize();
+             $(".errorMsg").text('');
 
              // make ajax request for signup
              $.ajax({
@@ -252,7 +259,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // signup welcome
 
-        $.fn.signupWelcome = function(){
+        $.fn.signupWelcome = function(resp){
             $().debugLog('signupWelcome');
             $().debugLog(resp);
         };
@@ -316,7 +323,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // logout welcome
 
-        $.fn.logoutWelcome = function(){
+        $.fn.logoutWelcome = function(resp){
             $().debugLog('logoutWelcome');
             $().debugLog(resp);
         };
@@ -340,6 +347,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
              // get serialized form data of forgot form
              var fdata = $("#forgotBoxForm").serialize();
+             $(".errorMsg").text('');
 
              // make ajax request for signup
              $.ajax({
@@ -388,7 +396,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // forgot welcome
 
-        $.fn.forgotWelcome = function(){
+        $.fn.forgotWelcome = function(resp){
             $().debugLog('forgotWelcome');
             $().debugLog(resp);
         };
