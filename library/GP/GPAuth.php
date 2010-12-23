@@ -82,6 +82,11 @@ Class GP_GPAuth
      */
     protected $translate = null;
 
+    /**
+     * $var
+     */
+
+    protected $gpName = "GOPOGO";
 
     /*
      * get self object
@@ -240,12 +245,12 @@ Class GP_GPAuth
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->addTo($to, 'GOPOGGO')
-                                            ->setFrom($from, 'GOPOGGO')
-                                            ->addCc($cc,'GOPOGGO')
-                                            ->addBcc($bcc,'GOPOGGO')
-                                            ->setReplyTo($reply_to,'GOPOGGO')
-                                            ->setReturnPath($return_path,'GOPOGGO')
+                                            ->addTo($to, $this->gpName)
+                                            ->setFrom($from, $this->gpName)
+                                            ->addCc($cc, $this->gpName)
+                                            ->addBcc($bcc, $this->gpName)
+                                            ->setReplyTo($reply_to, $this->gpName)
+                                            ->setReturnPath($return_path, $this->gpName)
                                             ->send(); // self::getIntance()->getMailTransport()
     } // end of sendEmailForgotPassword
 
@@ -292,12 +297,12 @@ Class GP_GPAuth
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->addTo($to, 'GOPOGGO')
-                                            ->setFrom($from, 'GOPOGGO')
-                                            ->addCc($cc,'GOPOGGO')
-                                            ->addBcc($bcc,'GOPOGGO')
-                                            ->setReplyTo($reply_to,'GOPOGGO')
-                                            ->setReturnPath($return_path,'GOPOGGO')
+                                            ->addTo($to, $this->gpName)
+                                            ->setFrom($from, $this->gpName)
+                                            ->addCc($cc, $this->gpName)
+                                            ->addBcc($bcc, $this->gpName)
+                                            ->setReplyTo($reply_to, $this->gpName)
+                                            ->setReturnPath($return_path, $this->gpName)
                                             ->send();
     } // end of sendEmailSignupWelcome
 
