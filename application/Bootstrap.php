@@ -132,6 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * sets application path , BASE_URL a string constant
+     * @access protected
      * @return void
      */
      protected function _initBasePath() {
@@ -144,6 +145,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      /**
      * defines application theme path, THEME_URL a string constant
      * defines application theme name, THEME_NAME a string constant
+     * @access protected
      * @return void
      */
      protected function _initGetThemePathAndName() {
@@ -325,8 +327,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     } // end _initDb
 
+    /**
+     * Get the global config (if any) from the Registry.
+     * @return php string array as config options
+     * @access public
+     */
+    public static function _getConfigOptions()
+    {
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $options = $bootstrap->getOptions();
+        print_r($options);
 
-
+    }
 
     
 }

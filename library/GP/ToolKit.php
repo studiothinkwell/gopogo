@@ -29,14 +29,13 @@
 class GP_ToolKit {
 
      /**
-      * used to encripte a CDN server requested url, if [cdn] hasCdn = 1
+      * Used to encripte a CDN server requested url, if hasCdn is set in application.ini
       *
       * @param string $str
       * @return md5 hash of a string $str
-      *
+      * @access public
       *
       */
-   
     public static function getEncriptedUrl( $str )
     {
         $hasCdn = GP_ToolKit::getHasCdn();
@@ -51,7 +50,8 @@ class GP_ToolKit {
       }
 
     /**
-     * 
+     * Gets the application base path, sets it to BASE_URL
+     * @access   public
      * @return string as base path
      */
     public static function getBasePath() {
@@ -60,7 +60,8 @@ class GP_ToolKit {
     }
 
     /**
-     *
+     * Defines HAS_CDN a string constant, if hasCdn is set in application.ini
+     *  @access   public
      * @return string as base path
      */
     public static function getHasCdn() {
@@ -69,14 +70,15 @@ class GP_ToolKit {
     }
 
     /**
-     *
+     * Get the global config (if any) from the Registry.
      * @return php string array as config options
      */
-    public static function getConfigOptions()
+    /*public static function getConfigOptions()
     {
-        $bootstrap = $this->getInvokeArg('bootstrap');
-        $options = $bootstrap->getOptions();
-    
-    }
+        //$bootstrap = $this->getInvokeArg('bootstrap');
+        //$options = $bootstrap->getOptions();
+        $configOptions = _getConfigOptions();
+    }*/
+
 }
 ?>
