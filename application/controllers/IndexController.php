@@ -82,7 +82,11 @@ class IndexController extends Zend_Controller_Action
                 //http:\\gpbucket1.s3.amazonaws.com\images\b5e7d988cfdb78bc3be1a9c221a8f744.jpg
                 $img = 'image1.jpg';
                 echo '<br>http:\\\\'. BUCKET_NAME.'.'. AMAZON_S3_URL . '\\images\\' . GP_ToolKit::getEncriptedUrl($img);
-
+    }
+    
+    public function cssAction()
+    {
+        // action body
     }
 }
 

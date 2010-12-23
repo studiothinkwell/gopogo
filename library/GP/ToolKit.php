@@ -68,5 +68,15 @@ class GP_ToolKit {
        return HAS_CDN;
     }
 
+    /**
+     *
+     * @return php string array as config options
+     */
+    public static function getConfigOptions()
+    {
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $options = $bootstrap->getOptions();
+    
+    }
 }
 ?>

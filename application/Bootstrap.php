@@ -142,6 +142,36 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      } // end of _initBasePath
 
      /**
+     * defines application theme path, THEME_URL a string constant
+     * defines application theme name, THEME_NAME a string constant
+     * @return void
+     */
+     protected function _initGetThemePathAndName() {
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'themes');
+        //print_r($config);
+        $themeUrl = $config->theme->path;
+        $themeName = $config->theme->name;
+        define('THEME_NAME', $themeName );
+        define('THEME_URL', $themeUrl );
+        define('THEME_CSS', 'css' );
+        define('THEME_IMAGES', 'images' );
+     } // end of _initGetThemePathAndName
+
+     /**
+	 * Initialize the application autoload
+	 *
+	 * @return Zend_Application_Module_Autoloader
+	 */
+    protected function _initAppAutoload()
+    {
+        $autoloader = new Zend_Application_Module_Autoloader(array(
+            'namespace' => 'App',
+            'basePath'  => dirname(__FILE__),
+        ));
+        return $autoloader;
+    }
+
+     /**
       * Defines HAS_CDN a string constant, if hasCdn is set in application.ini
       * <p>
       * Defines CDN_PREFIX a string constant, if both hasCdn and cdnPrefix are set in application.ini
