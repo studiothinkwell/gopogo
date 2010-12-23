@@ -31,12 +31,10 @@ extends Zend_Controller_Action_Helper_AutoComplete_Abstract
      * @param  mixed $data
      * @return boolean
      */
-    public function validateData($data)
-    {
+    public function validateData($data) {
         if (!is_array($data)) {
             return false;
         }
-
         return true;
     }
 
@@ -47,8 +45,7 @@ extends Zend_Controller_Action_Helper_AutoComplete_Abstract
      * @param  boolean $keepLayouts
      * @return mixed
      */
-    public function prepareAutoCompletion($data, $keepLayouts = false)
-    {
+    public function prepareAutoCompletion($data, $keepLayouts = false) {
         if (!$this->validateData($data)) {
             /**
              * @see Zend_Controller_Action_Exception
@@ -70,7 +67,6 @@ extends Zend_Controller_Action_Helper_AutoComplete_Abstract
         if (!$keepLayouts) {
             $this->disableLayouts();
         }
-
         return $output;
     }
 }

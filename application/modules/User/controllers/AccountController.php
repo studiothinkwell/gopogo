@@ -75,7 +75,6 @@ class User_AccountController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
-            
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
@@ -122,9 +121,7 @@ class User_AccountController extends Zend_Controller_Action
             //*/
 
             if($validFlag){
-
                 try {
-
                     // create user model object
                     $user = new Application_Model_DbTable_User();
 
@@ -133,7 +130,6 @@ class User_AccountController extends Zend_Controller_Action
 
                     if($userData)
                     {
-
                         $status = 1;
 
                         // set user info in session
@@ -210,21 +206,15 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function logoutAction()
-    {
-       
+    public function logoutAction() {       
         $user = new Application_Model_DbTable_User();
-
         // distroy loggedin user's session data from session
         $user->destroySession();
-
         $data['msg'] =  "You have successfully logged out from system!";
         $data['status'] =  1;
 
         // return json response
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
-
-
     } // end logoutAction
 
     /**
@@ -281,10 +271,8 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
-            if($validFlag){               
-
+            if($validFlag) {
                 try {
-
                     $user = new Application_Model_DbTable_User();
 
                     // reset temporary password
