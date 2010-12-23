@@ -45,7 +45,7 @@ $.fn.addResize = function() {
         // Get page scroll
         var arrPageScroll = $().getPageScroll();
 
-        $(divId).css({
+        $('#divId').css({
             top:	parseInt(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
             left:	parseInt(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
         });
@@ -64,9 +64,9 @@ $.fn.addScroll = function() {
 
             var arrPageScroll = $().getPageScroll();
 
-            $(divId).css({
-            top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
-            left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
+            $('#divId').css({
+            top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($('#divId').height()) / 2))),
+            left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($('#divId').width()) / 2)))
             });
         });
     
@@ -168,8 +168,9 @@ $.fn.keyboardAction = function(objEvent) {
 
 $.fn.finish = function() {
     
-    $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() {$('#overlay').remove();});
+    $('#divId').css({display:'none'});
+    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
+
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
     $('embed, object, select').css({'visibility' : 'visible'});
 }

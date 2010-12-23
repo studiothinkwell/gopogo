@@ -1,9 +1,17 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
+$this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('GOPOGO');
+//echo $this->doctype(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<?php echo $this->headMeta(); ?>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Welcome to Gopogo - Homepage</title>
+<?php echo $this->headTitle(); ?>
+
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
@@ -23,14 +31,21 @@
             $loginFlag = true;
             $user_name = $session->user_name;
         }
-    ?>
+      $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
 
+      if(empty($baseurl)) {
+          $baseurl = "#";
+      }
+
+    ?>
     <div id="master" align="center">
 	<div id="submaster">
             <!-- Header START-->
             <div class="header">
                 <div class="head-mainbg">
-                    <a href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>"><div class="logo"></div></a>
+                    <div>
+                    <a class="logo" href="<?php echo $baseurl; ?>" title="gopogo" ></a>
+                    </div>
                         <div class="menu">
                             <div class="menu1"><a href="#"></a></div>
                             <div class="menu2"><a href="#"></a></div>

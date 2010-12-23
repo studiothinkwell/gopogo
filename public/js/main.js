@@ -185,7 +185,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().debugLog(msgid);
 
             if(typeof msgid == undefined || msgid=='' )
-                msgid = 'error_msg';
+                msgid = 'errorMsg';
 
             $().debugLog(msgid);
 
@@ -323,7 +323,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // logout welcome
 
-        $.fn.logoutWelcome = function(){
+        $.fn.logoutWelcome = function(resp){
             $().debugLog('logoutWelcome');
             $().debugLog(resp);
         };
@@ -396,7 +396,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // forgot welcome
 
-        $.fn.forgotWelcome = function(){
+        $.fn.forgotWelcome = function(resp){
             $().debugLog('forgotWelcome');
             $().debugLog(resp);
         };
