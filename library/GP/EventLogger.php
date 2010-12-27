@@ -14,7 +14,7 @@
 
 /**
 *
- * Gopogo Event Logger class
+* Gopogo Event Logger class
 *
 * @package  Library
 * @subpackage Gopogo
@@ -25,47 +25,46 @@
 
 
 
-Class GP_EventLogger extends Zend_Db_Table
+Class GP_EventLogger 
 {
     /**
-     * @var EventLog
-     */
+    * @var userId
+    * @access public
+    */
+
     public static $userId;
 
      /**
-     * @var EventLog
+     * @var modelObj
+     * @access public
      */
     public static $modelObj;
 
     /**
-     * @var EventLog
+     * @var eventId
+     * @access public
      */
     public static $eventId;
 
      /**
-     * @var EventLog
+     * @var eventDate
+     * @access public
      */
     public static $eventDate;
 
-     /**
-     * @var EventLog
+      /**
+     * @var description
+     * @access public
      */
     public static $description;
 
-     /**
-     * @var EventLog
+      /**
+     * @var attributes
+     * @access public
      */
     public static $attributes=array();
 
 
-    /*
-    function initObject() {
-        $this->model_name       =   "EventLogger";
-	$this->model_obj        =   new EventLogger();
-	$this->entity_data      =   array('event_log_id'=>'NULL','event_log_desc'=>'NULL','user_id'=>'NULL','event_log_date'=>'NULL');
-        $this->attributes       =   array('user_event_log_attibutes_id'=>'NULL','user_event_log_id'=>'NULL','event_log_attributes_id'=>'NULL','user_event_log_attibutes_value'=>'NULL','create_date'=>'NULL');
-    }
-    */
     function __construct() {
 
            require_once(APPLICATION_PATH . '/models/EventLogger.php');
@@ -92,43 +91,20 @@ Class GP_EventLogger extends Zend_Db_Table
     }
 
 
-    /**
-     * Add object data in database.
-     * @param
-     * @return last inserted id.
+     /**
+     * This method collects event log parameters and sends them to event model
+     * which deals with this data for database insertion
+     * @param  array  $data event log data in array format
+     * @param  array  $attributesData event log attributes in array format
      */
     public static function generateLog($data,$attributesData){
 
         new self();
-
-     //print_r($data);
         
         self::$modelObj->addLog($data,$attributesData);
-        
-	//return $inserted_id;
+    
        }
-    /**
-     * Add object data in database.
-     * @param
-     * @return last inserted id.
-     */
-
-   /* public static function generateLogWithAttributes()
-    {
-        $inserted_id=$this->model_obj->addLogWithAttributes($this->attributes);
-	return $inserted_id;
-       /* $this->eventId          = is_null($eventId) ? null : $eventId;
-        $this->userId           = is_null($userId) ? null : $userId;
-        $this->eventDate        = is_null($eventDate) ? null : $eventDate;
-        $this->descrtiption     = is_null($description) ? null : $description;
-        $this->attributes       = is_null($attributes) ? null : $attributes;
-        $this->model()
-        //$data = GP_eventlog
-        return $this;
-     
-
-
-    }*/
+   
   
 }
 

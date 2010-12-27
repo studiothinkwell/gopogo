@@ -206,4 +206,74 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     } // end _initLocale
 
+
+    /*
+     * Initialize Zend Mail
+     *
+     */
+    protected function _initMail()
+    {
+
+        //1.) normal
+        $zendMailTransport = new Zend_Mail_Transport_Sendmail();
+
+        //2.) SMTP
+
+        //$options = $this->getOption('mail');
+        //Zend_Debug::dump($options);
+        //exit;
+        /*
+        $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
+
+
+
+        $config = array(
+            'auth'      =>$mailConfigs->mail->params->login,
+            'username'  =>$mailConfigs->mail->params->username,
+            'password'  =>$mailConfigs->mail->params->password,
+            'ssl'       =>$mailConfigs->mail->params->ssl,
+            'port'      =>$mailConfigs->mail->params->port
+        );
+
+        $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
+        //*/
+        Zend_Mail::setDefaultTransport($zendMailTransport);
+
+        $mail = new Zend_Mail();
+
+        Zend_Registry::set('mailer', $mail);
+
+    }
+
+    /**
+     * Initialize Database
+     */
+    protected function  _initDb()
+    {
+        $pdoParams = array(
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+        );
+
+        // get DB configurations form configs
+        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+        $params = array(
+            'host' => $config->resources->db->params->host,
+            'username' => $config->resources->db->params->username,
+            'password' => $config->resources->db->params->password,
+            'dbname' => $config->resources->db->params->dbname,
+            'driver_options' => $pdoParams
+        );
+
+        $db = Zend_Db::factory($config->resources->db->adapter, $params);
+
+
+        Zend_Registry::set('db', $db);
+
+    }
+
+
+
+
+
 }

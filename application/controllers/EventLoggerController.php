@@ -1,7 +1,6 @@
 <?php
 class EventloggerController extends Zend_Controller_Action
 {
-    //private $event_logger_obj;
 
     public function init()
     {
@@ -14,10 +13,13 @@ class EventloggerController extends Zend_Controller_Action
     	echo "Index";
     }
 
-	/**
-     * Save education
-     * @param
-     * @return
+    /**
+     * This method passes the event parameters to the library class function,for testing purpose
+     * this controller has been made,later the parameters will be passed to event
+     * libraray class from the controller specific to the event
+     * @param  string  $user_id id of user
+     * @param  string  $eventId id of event
+     * @param  string  $description event description
      */
     public function addeventloggerAction()
     {
@@ -29,40 +31,14 @@ class EventloggerController extends Zend_Controller_Action
     	$attributeTwo           =$this->_request->getParam('attribute_two');
 
 
-
-    	/*
-        $this->event_logger_obj->initObject(
-			array(
-			'event_log_id'=>$eventId,
-			'event_log_desc'=>$description,
-			'user_id'=>$userId,
-			'event_log_date'=>$eventDate
-			)
-		);
-    	$id=$this->event_logger_obj->generateLog();
-		if(is_numeric($id) && $id >0){
-			echo '<response_text>Log added</response_text>';
-		}
-         *
-         *
-FieldTypeComment
-user_event_log_attibutes_idsmallint(6) NOT NULL
-user_event_log_idint(11) NULL
-event_log_attributes_idsmallint(6) NOT NULL
-user_event_log_attibutes_valuevarchar(50) NOT NULL
-create_datevarchar(20) NULL
-         *
-         */
-
-       $eventLog = 	array(
+        $eventLog = 	array(
 			'event_log_id'=>$eventId,
 			'event_log_desc'=>$description,
 			'user_id'=>$userId
                         );
 
-       $eventLogAttributesValue = array($attributeOne,$attributeTwo);
+        $eventLogAttributesValue = array($attributeOne,$attributeTwo);
 
-      // print_r($eventLog);
         GP_EventLogger::generateLog($eventLog,$eventLogAttributesValue);
 
     }
