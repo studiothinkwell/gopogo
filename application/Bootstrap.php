@@ -7,7 +7,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      *  Initialize View
      * @return Zend_View
      */
-
+    
     protected function _initView()
     {
 
@@ -256,7 +256,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //2.) SMTP
 
         //$options = $this->getOption('mail');
-
         //Zend_Debug::dump($options);        
         /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
@@ -269,15 +268,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
         //*/
+
+        // set default transport
         Zend_Mail::setDefaultTransport($zendMailTransport);
 
+        // make zend mail object
         $mail = new Zend_Mail();
 
+        // set zend mail object in registry
         Zend_Registry::set('mailer', $mail);
 
     } // end _initMail
-  
-     /**
+
+    /**
      * Initialize Database
      */
     protected function  _initDb()
@@ -297,7 +300,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'driver_options' => $pdoParams
         );
 
-
         // get db object
         $db = Zend_Db::factory($config->resources->db->adapter, $params);
 
@@ -305,6 +307,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('db', $db);
 
     } // end _initDb
+
+
 
 
     
