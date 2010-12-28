@@ -12,9 +12,6 @@
  * @path /library/GP/
  */
 
-
-
-
 /**
  *
  * Gopogo Url Encription class
@@ -27,7 +24,6 @@
  */
 
 class GP_ToolKit {
-
      /**
       * used to encripte a CDN server requested url, if [cdn] hasCdn = 1
       *
@@ -37,8 +33,7 @@ class GP_ToolKit {
       *
       */
    
-    public static function getEncriptedUrl( $str )
-    {
+    public static function getEncriptedUrl( $str ) {
         $hasCdn = GP_ToolKit::getHasCdn();
         if( (""!= $str) && ("1" == $hasCdn )) {
             $jpg = explode('.', $str);
@@ -46,7 +41,6 @@ class GP_ToolKit {
             $ext = '.'.$jpg[1];
             $str = $jpg[0];
         }
-      
         return $hasCdn ? md5($str).$ext : $str;
       }
 
@@ -67,6 +61,5 @@ class GP_ToolKit {
 
        return HAS_CDN;
     }
-
 }
 ?>

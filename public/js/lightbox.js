@@ -1,21 +1,23 @@
-
+var divId; 
 $(document).ready(function(){
-
-    var divId;    
-
-    $("#sign-in").click(function(){
+   $(".sign-in").click(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');
         
         $().enableLoginBox();
 
         $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
+        $("#email").attr("value","Email Address");
+        $("#email").focus();
+        $("#passwd").attr("type","text");
+        $("#passwd").attr("value","Password");
     });
 
-    $("#sign-up").click(function(){
+    $(".sign-up").click(function(){
         divId = "#signupBox";
         $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
+        $("#email1").focus();
     });
 
     $(".create-ac-close").click(function(){

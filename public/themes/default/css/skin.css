@@ -1156,7 +1156,7 @@ body
     z-index: 999;
     overflow: auto;       
     float:left;
-    width:346px;
+    width:363px;
     height:302px;
     border:0px solid red;
     display: none;
@@ -1339,7 +1339,7 @@ border:1px solid red;
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
-@media screen and (-webkit-min-device-pixel-ratio:0)
+/*@media screen and (-webkit-min-device-pixel-ratio:0)
 {
     @font-face
     {
@@ -1352,6 +1352,6 @@ border:1px solid red;
         font-size: 12px;
         font-weight: 600;
     }
-}
+}*/
 
 /***************** For Chrome End*********************/

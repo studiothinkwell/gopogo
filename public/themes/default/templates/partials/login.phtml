@@ -13,8 +13,8 @@
                     <div id="toggleLogin">
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
                         <div class="sign-in-right">                            
-                            <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
-                            <div class="create-ac-input2"><input type="password" value="Password"  name="passwd" /></div>
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" name="email" id="email"/></div>
+                            <div class="create-ac-input2"><input type="text" onfocus="if(this.value=='Password') {this.value = '';this.type='password'}" onblur="if(this.value=='') {this.value = 'Password';this.type='text'}" value="Password"  name="passwd" id="passwd"/></div>
 
                             <div class="sign-in-input3">
                                     <span class="sign-in-txt">Forgot your&nbsp;</span>
@@ -30,7 +30,7 @@
                     <div id="toggleForgot" style="display:none">
                         <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
                         <div class="sign-in-right">                           
-                            <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" name="email" /></div>
                             <div class="sign-in-input3">                                    
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
                                     <span>&nbsp;or&nbsp;</span>
