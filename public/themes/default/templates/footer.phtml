@@ -19,6 +19,7 @@
 echo $this->partial('partials/login.phtml'); 
 echo $this->partial('partials/signup.phtml');
 echo $this->partial('partials/message.phtml');
+echo $this->partial('partials/forgotpassword.phtml');
 ?>
 <!-- Footer Middle END-->
 <script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery-1.4.2.js"></script>
@@ -29,13 +30,22 @@ echo $this->partial('partials/message.phtml');
 <script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/lightbox.js"></script>
 <script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/main.js"></script>
 
-<script language="javascript" >
+<script type="text/javascript"  language="javascript" >
 
 // set appl;ication configurations
 var app = [];
 app.gopogo = [];
 // base url of the site
-app.gopogo.baseurl = '<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>';
+app.gopogo.baseurl = '<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl()); ?>/';
+
+<?php
+
+$gpConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
+// gopogo.debug.default
+// debug mode on:1 off:0
+// print_r($gpConfigs);
+?>
+app.gopogo.debug = <?php echo $gpConfigs->gopogo->debug->default ?>;
 
 </script>
 </body>

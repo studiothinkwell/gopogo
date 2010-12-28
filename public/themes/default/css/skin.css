@@ -346,8 +346,7 @@ body
     background-color:#FFF;
     width:59%;
     min-height:100%;
-    border-left:1px solid grey;
-
+    border-left:1px solid #bab9b8;
 }
 .con-right
 {
@@ -356,8 +355,8 @@ body
     background-color:#FFF;
     width:39%;
     height:100%;
-    border-right:1px solid grey;
-    border-left:1px solid grey;
+    border-right:1px solid #bab9b8;
+    border-left:1px solid #bab9b8;
 
 }
 .con-left-row1
@@ -461,7 +460,7 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 1px 0px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
@@ -471,13 +470,13 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 0px -2px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px -3px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
 .rg-thum-img-cel3
 {
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -95px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -139px 0px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -487,7 +486,7 @@ body
 }
 .rg-thum-img-cel33
 {
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -140px -2px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -96px -2px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -515,7 +514,7 @@ body
     height:auto;
     width:230px;
     border:0px solid red;
-    font-size:12px;
+    font-size:11px;
     text-align:left;
     left:10px;
 }
@@ -714,11 +713,12 @@ body
 
 .link-txt
 {
-    width:120px;
+    width:75%;
     font-size:10px;
     font-weight:600;
     text-align:left;
     color:#535353;
+    margin-left: 16px;
 }
 .link-txt a
 {
@@ -1054,8 +1054,7 @@ body
     width:30px;
     height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
-    cursor: pointer;
-    cursor: hand;
+    cursor: pointer;    
 }
 .create-ac-centerbg
 {
@@ -1269,8 +1268,7 @@ body
     width:30px;
     height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
-    cursor: pointer;
-    cursor: hand;
+    cursor: pointer;    
 }
 
                                                 /************************************** Sign in END **************************************/
@@ -1307,7 +1305,6 @@ body
                                                 /**************************************TEXT Styles END**************************************/
 
 #your-personal-button{
-cursor: hand;
 cursor: pointer;
 border:1px solid red;
 }
@@ -1332,6 +1329,13 @@ border:1px solid red;
     height:302px;
     border:0px solid red;
 }
+.errorMsg
+{
+    color: #FF0000;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
@@ -1339,9 +1343,9 @@ border:1px solid red;
 {
     @font-face
     {
-    font-family: Arial;
-    src: url('/font/arial.ttf');
-    font-weight:600;
+        font-family: Arial;
+        src: url('/themes/default/images/arial.ttf');
+        font-weight:600;
     }
     .thum-txt
     {

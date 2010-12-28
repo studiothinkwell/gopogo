@@ -1,38 +1,39 @@
 <?php
+
 /**
  * Account Controller for User Module
  *
- * <p>This controller was designed to handle all user related activities like login, logout, sign-up</p>
- *
- *
+ * <p>This controller was designed to handle all user related activities like </p>
+ * <p> login, logout, sign-up, profile, forgot password </p>
+ * <p>
  * user profile
  * user login
  * user logout
  * user signup
- * user forget password
+ * user forg0t password
  *
-* </p>
-*
-* @category gopogo web portal
-* @package User
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @version  1.0
-* @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
-* @link http://www.gopogo.com/user/account/
-*/
+ * </p>
+ *
+ * @category gopogo web portal
+ * @package User
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @version  1.0
+ * @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
+ * @link http://www.gopogo.com/User/Account/
+ */
 
 /**
-*
-* User_AccountController is a class that has no real actual code, but merely
-* exists to help provide people with an understanding as to how the
-* various PHPDoc tags are used.
-*
-* @package  User module
-* @subpackage classes
-* @author   Mahesh Prasad <mahesh@techdharma.com>
-* @access   public
-* @see      http://www.gopogo.com/user/account/
-*/
+ *
+ * User_AccountController is a class that has real actual code for handling login, logout, profile, signup, forgot password
+ * exists to help provide people with an understanding as to how the
+ * various PHPDoc tags are used.
+ *
+ * @package  User module
+ * @subpackage classes
+ * @author   Mahesh Prasad <mahesh@techdharma.com>
+ * @access   public
+ * @see      http://www.gopogo.com/User/Account/
+ */
 
 class User_AccountController extends Zend_Controller_Action
 {
@@ -47,25 +48,25 @@ class User_AccountController extends Zend_Controller_Action
 
         // Zend_Translate object for langhuage translator
         $this->translate = Zend_Registry::get('Zend_Translate');
-    }
+
+    } // end init
 
     public function indexAction()
     {
         // action body
-    }
+    } // end loginAction
+
+    /**
+     * User login
+     * @access public
+     * @param String email : email address in post
+     * @param String passwd : password in post
+     * @return json object - :msg, :status
+     */
 
     public function loginAction()
-    {
-        // action body
-
-        //$this->_helper->disableLayouts();
-
-        //$this->_helper->contextSwitch()->setAutoJsonSerialization(true);
-        
+    {        
         $data = array();
-
-
-        //$response = $this->_helper->autoComplete();
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
@@ -84,12 +85,13 @@ class User_AccountController extends Zend_Controller_Action
             if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
             } else {
-                $msg .= "Enter valid email!";
-                //$msg .= $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
-                //$msg .= printf($msg2, $email);
-
+                //$msg .= "Enter valid email!";
+                //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
                 //$msg .= $this->view->translate("'%value%' is no valid email address in the basic format local-part@hostname",$email);
 
+                $lang_msg = $this->translate->_("Enter Valid Email!");
+                $msg .= $lang_msg;
                 $validFlag = false;
             }
             //*/
@@ -109,107 +111,146 @@ class User_AccountController extends Zend_Controller_Action
             //*/
             // end checking for valid email
 
-            $passwd = $formData['passwd']; //$form->getValue('passwd');
+            $passwd = $formData['passwd'];
             
             /*
             // check length of passowrd
             
-            if ($validFlag && Zend_Validate::is($passwd, 'Between', array('min' => 3, 'max' => 16))) {
+            if ($validFlag && Zend_Validate::is($passwd, 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
                 $msg .= $br . "Passowrd lenght must be between 6-16!";
                 $validFlag = false;
             }
-
             //*/
 
+            if($validFlag){
 
+                try {
 
-                //$validFlag = true;
-                if($validFlag){
-                    //echo $msg;
+                    // create user model object
+                    $user = new Application_Model_DbTable_User();
 
-                    try {
+                    // check and get user data if email and password match
+                    $userData = $user->getUserByEmailAndPassword($email,$passwd);
 
-                        $user = new Application_Model_DbTable_User();
+                    if($userData)
+                    {
 
-                        // check and get user data if email and password match
-                        $userData = $user->getUserByEmailAndPassword($email,$passwd);
-                        
-                        //print_r($userData);
                         $status = 1;
-                        
+
                         // set user info in session
 
                         $user->logSession($userData);
 
-                        $this->_helper->flashMessenger->addMessage('Welcome! You have Signedin Successfully!');
+                        // other data
 
+                        $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
                         //$this->_helper->redirector('profile');
 
+                        // log event signin
+                        $eventId = 1;
+                        $userId = $userData['user_id'];
+                        $eventDescription = "signin-login";
 
-                        $msg = "'Welcome! You have Signedin Successfully!'";
+                        $eventAttributes = array();
 
-                    } catch (Some_Component_Exception $e) {
-                        if (strstr($e->getMessage(), 'unknown')) {
-                            // handle one type of exception
-                            //echo $e->getMessage();
-                            $msg .= $br . "Unknown Error!";
-                        } elseif (strstr($e->getMessage(), 'not found')) {
-                            // handle another type of exception
-                            //echo $e->getMessage();
-                            $msg .= $br . "not found Error!";
-                        } else {
-                            //echo $e->getMessage();
-                            $msg .= $br . $e->getMessage();
-                            //throw $e;
-                        }
+                        GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+
+                    }
+                    else
+                    {
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
                     }
 
-                    $this->view->msg = $msg;
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
 
-                }else{
-                    //echo $msg;
-                    //die;
-                    $this->view->msg = $msg;
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
+                        $msg .= $lang_msg;
+
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_('Not Found Error!');
+                        $msg .= $lang_msg;
+
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
                 }
 
+                $this->view->msg = $msg;
 
+            }else{
+                $this->view->msg = $msg;
+            }
         } // end of es post
         else
         {
-            $msg = "'Post data not available!'";
+            $lang_msg = $this->translate->_('Post data not available!');
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {            
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
         }
 
         $data['msg'] =  $msg;
         $data['status'] =  $status;
 
+        // return json response
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
-    }
+    } // end loginAction
+
+    /**
+     * User logout : destroy session data
+     * @access public
+     * @return json object - :msg, :status
+     */
 
     public function logoutAction()
     {
-        // action body
+       
         $user = new Application_Model_DbTable_User();
 
         // distroy loggedin user's session data from session
         $user->destroySession();
 
-        $data['msg'] =  "You have successfully logged out from system!";
+        $lang_msg = $this->translate->_("You have successfully logged out from system!");
+
+        $data['msg'] =  $lang_msg;
         $data['status'] =  1;
 
+        // return json response
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
 
-    }
+    } // end logoutAction
 
     /**
      * Did the current user log in?
      * This method simply answers the question
      * "Did the current user log in?"
      *
-     * @author   Ajay Bhosale <ajay@techdharam.com>
+     * @author Ajay Bhosale <ajay@techdharam.com>
      * @access public
      * @return bool
      */
@@ -217,21 +258,123 @@ class User_AccountController extends Zend_Controller_Action
     public function isLoggedIn()
     {
 
-    }
+    } // end isLoggedIn
 
     public function activateAction()
     {
 
-    }
+    } // end activateAction
 
-    public function forgetpasswordAction()
+    /**
+     * User Forgot password
+     * @access public
+     * @param String email : email address in post
+     * @return json object - :msg, :status
+     */
+
+    public function forgotpasswordAction()
     {
-        // action body
-    }
+
+        $data = array();
+
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg = '';
+        $status = 0;
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $email = $formData['email'];
+
+            // checking for valid email
+            //*
+            if (Zend_Validate::is($email, 'EmailAddress')) {
+                // Yes, email appears to be valid
+            } else {                
+                $lang_msg = $this->translate->_("Enter Valid Email!");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+
+            if($validFlag){               
+
+                try {
+
+                    $user = new Application_Model_DbTable_User();
+
+                    // reset temporary password
+                    $temp_password = $user->getUserFogotPassword($email);
+                    
+                    $status = 1;
+
+                    // send email to user for reset the new password
+
+                    GP_GPAuth::sendEmailForgotPassword($email,$temp_password);
+
+                    $lang_msg = $this->translate->_('We have send a mail to your provided email, check the email and follow the steps form given link!');
+
+                    $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                    //$this->_helper->redirector('profile');
+
+                    $msg = $lang_msg;
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception                       
+                        $lang_msg = $this->translate->_('Unknown Error!');
+                        $msg .= $lang_msg;
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception                        
+                        $lang_msg = $this->translate->_('Not found Error!');
+                        $msg .= $lang_msg;
+                    } else {                        
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;                        
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{               
+                $this->view->msg = $msg;
+            }
+
+
+        } // end of es post
+        else
+        {
+            $lang_msg = $this->translate->_("'Post data not available!'");
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {           
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);            
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+        
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+        
+
+    } // end of forgot password
+
+    /**
+     * User Profile
+     * 
+     */
 
     public function profileAction()
-    {
-        // action body
+    {       
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
@@ -239,26 +382,27 @@ class User_AccountController extends Zend_Controller_Action
 
         $session = $user->getSession();
 
-        //print_r($session->user_emailid);
 
-        //$user->destroySession();
+        // set header information
+        /*
+        $this->view->headTitle('mpd');
+        $this->view->headMeta()->appendName('keywords', 'Profile');
+        $this->view->headMeta()->appendName('description', 'Profile');
+        */
 
-    }
+    } // end of profileAction
 
-    /*
+    /**
      * User signup
      * @access public
-     * @parems in post
-     *  1- email : email address
-     *  2- passwd : password
-     *  3- retype_passwd : retype password
+     * @param String email : email address in post
+     * @param String passwd : password in post
+     * @param String retype_passwd : retype password in post
+     * @return json object - :msg, :status
      */
 
     public function signupAction()
     {
-        // action body
-
-        //$this->_helper->flashMessenger->addMessage('welcome! you have successfully signedup!');
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
@@ -279,8 +423,11 @@ class User_AccountController extends Zend_Controller_Action
             //*
             if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
-            } else {
-                $msg .= "Enter valid email!";
+            } else {                
+                //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $lang_msg = $this->translate->_("Enter Valid Email!");
+                $msg .= $lang_msg;
                 $validFlag = false;
             }
             //*/
@@ -323,51 +470,37 @@ class User_AccountController extends Zend_Controller_Action
                 $validFlag = false;
             }
 
+
+            //*/
+
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
 
             } else if($validFlag) {
-                $msg .= $br . "Passowrd and Retype passowrd must match!";
+                $lang_msg = $this->translate->_("Passowrd and Retype passowrd does not match!");
+                $msg .= $lang_msg;
                 $validFlag = false;
             }
-            //*/
 
             $user = new Application_Model_DbTable_User();
 
             // check this email user exist or not
             $userFlag = $user->checkUserByEmail($email);
-            //echo "--$userFlag--" ;
-            //die ();
-
-            //$userFlag = FALSE;
-            //$validFlag = TRUE;
-            if($userFlag){
-                $msg .= $br . "User already signedup by this email : '$email'";
+            
+            if($userFlag){                
+                $lang_msg = $this->translate->_("User already signedup by this email : '%value%'");
+                $msg .= str_replace('%value%', $email, $lang_msg);
                 $validFlag = FALSE;
                 $this->view->msg = $msg;
             } else {
-                //$validFlag = true;
+               
                 if($validFlag){
                     //echo $msg;
                     $udata = array();
-                    // user_password user_emailid user_type_id
-
-                    // user_fname user_dbo user_genderid user_lname
-                    /*
-                    $udata['user_fname'] = '';
-                    $udata['user_lname'] = '';
-                    $udata['user_dbo'] = '';
-                    $udata['user_genderid'] = '12';
-                    $udata['user_type_id'] = 1;
-                    */
+                    
 
                     $udata['user_emailid'] = $email;
                     $udata['user_password'] = $passwd;
-                    //$udata['retype_passwd'] = $retype_passwd;
-
-                    // Application_Model_DbTable_User
-
-
-                    //print_r($user);
+                    
                     try {
 
                         // add data to database
@@ -375,38 +508,33 @@ class User_AccountController extends Zend_Controller_Action
 
                         $status = 1;
 
-                        $this->_helper->flashMessenger->addMessage('welcome! you have successfully signedup!');
+                        $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
                         
-                        $msg .= $br . "'Welcome! you have successfully signedup!'";
+                        $msg .= $lang_msg;
                         
                         // send the welcome email
-                        
-                        
+                        GP_GPAuth::sendEmailSignupWelcome($email,$passwd);                        
 
                         //$this->_helper->redirector('login');
 
                     } catch (Some_Component_Exception $e) {
                         if (strstr($e->getMessage(), 'unknown')) {
-                            // handle one type of exception
-                            //echo $e->getMessage();
-                            $msg .= $br . "Unknown Error!";
+                            // handle one type of exception                            
+                            $lang_msg = $this->translate->_("Unknown Error!");
+                            $msg .= $lang_msg;
                         } elseif (strstr($e->getMessage(), 'not found')) {
-                            // handle another type of exception
-                            //echo $e->getMessage();
-                            $msg .= $br . "Not Found Error!";
-                        } else {
-                            //echo $e->getMessage();
-                            $msg .= $br . $e->getMessage();
-                            //throw $e;
+                            // handle another type of exception                            
+                            $lang_msg = $this->translate->_("Not Found Error!");
+                            $msg .= $lang_msg;
+                        } else {                            
+                            $lang_msg = $this->translate->_($e->getMessage());
+                            $msg .= $lang_msg;                            
                         }
                     }
-
                     $this->view->msg = $msg;
-
-                }else{
-                    //echo $msg;
-                    //die;
+                }else{                   
                     $this->view->msg = $msg;
                 }
             }
@@ -414,7 +542,16 @@ class User_AccountController extends Zend_Controller_Action
         } // end of es post
         else
         {
-            $msg = "'Post data not available!'";
+            $lang_msg = $this->translate->_("'Post data not available!'");
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {            
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);            
         }
 
         $data['msg'] =  $msg;
@@ -422,7 +559,7 @@ class User_AccountController extends Zend_Controller_Action
 
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
-    }
+    } // end of signupAction
 
 
     
