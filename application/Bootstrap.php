@@ -1,26 +1,19 @@
 <?php
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{    
-
+{
     /**
      *  Initialize View
      * @return Zend_View
      */
-    
-    protected function _initView()
-    {
 
+    protected function _initView() {
         $theme = 'default';
-
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'themes');
-
         if (isset($this->config->theme->name)) {
             $themePath = $this->config->theme->path;
             $themeName = $this->config->theme->name;
         }
         $layoutPath = $themePath.$themeName.'/templates';
-
         $layout = Zend_Layout::startMvc()
             ->setLayout('layout')
             ->setLayoutPath($layoutPath)
@@ -34,19 +27,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->addHelperPath("ZendX/JQuery/View/Helper/", "ZendX_JQuery_View_Helper");
         $viewRenderer->setView($view);
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-
         return $view;
-
     } // end _initView
-
 
     /*
      * Initialize logging
      *
      */
-    protected function _initLog()
-    {
-
+    protected function _initLog() {
         /*
         // for starting log in file
         if($this->hasPluginResource('Log'))
@@ -57,14 +45,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Zend_Registry::set('Log',$log);
         }
         //*/
-
-
         // start DB session save handler
         // get configs
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'Error-Log');
-
         //get your database connection ready
-
         $params = array (	'host'     => $config->resources->log->db->writerParams->host,
                                 'username' => $config->resources->log->db->writerParams->username,
                                 'password' => $config->resources->log->db->writerParams->password,
@@ -85,8 +69,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // register logger
         Zend_Registry::set('log', $logger);
-
-
     } // end _initLog
 
     /*
@@ -94,13 +76,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * Loads configuration from application.ini
      * Start Database Sssion
      */
-    protected function _initSession()
-    {
 
+    protected function _initSession() {
         // start DB session save handler
-
         $sessionConfig = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'session_db');
-
         //get your database connection ready
         $db = Zend_Db::factory($sessionConfig->session->db->adapter, array(
             'host'        => $sessionConfig->session->db->params->host,
@@ -123,16 +102,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //create your Zend_Session_SaveHandler_DbTable and
         //set the save handler for Zend_Session
         Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config));
-
         //start your session!
         Zend_Session::start();
-
-
     } // end _initSession
 
     /**
      * sets application path , BASE_URL a string constant
-     * @access protected
      * @return void
      */
      protected function _initBasePath() {
@@ -143,43 +118,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      } // end of _initBasePath
 
      /**
-     * defines application theme path, THEME_URL a string constant
-     * defines application theme name, THEME_NAME a string constant
-     * @access protected
-     * @return void
-     */
-     protected function _initGetThemePathAndName() {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'themes');
-        //print_r($config);
-        $themeUrl = $config->theme->path;
-        $themeName = $config->theme->name;
-        define('THEME_NAME', $themeName );
-        define('THEME_URL', $themeUrl );
-        define('THEME_CSS', 'css' );
-        define('THEME_IMAGES', 'images' );
-     } // end of _initGetThemePathAndName
-
-     /**
-	 * Initialize the application autoload
-	 *
-	 * @return Zend_Application_Module_Autoloader
-	 */
-    protected function _initAppAutoload()
-    {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'App',
-            'basePath'  => dirname(__FILE__),
-        ));
-        return $autoloader;
-    }
-
-     /**
       * Defines HAS_CDN a string constant, if hasCdn is set in application.ini
       * <p>
       * Defines CDN_PREFIX a string constant, if both hasCdn and cdnPrefix are set in application.ini
       * <p>
       * Defines AMOZON_S3_URL a string constant, if both hasCdn and amazonS3Url are set in application.ini
-      * 
+      *
       * @return void
       */
      protected function _initHasCdn() {
@@ -188,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $cdnPrefix   = $config->cdnPrefix;
                 $bucket      = $config->bucket;
                 $amazonS3Url = $config->amazonS3Url;
-		
+
                 define('HAS_CDN', $hasCdn);
                 if( ''!= $cdnPrefix) define('CDN_PREFIX', $cdnPrefix);
                 if( ''!= $amazonS3Url) define('AMAZON_S3_URL', $amazonS3Url);
@@ -200,8 +144,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      *
      * @return void
      */
-    protected function _initLocale()
-    {
+    protected function _initLocale() {
         $this->bootstrap('frontController');
         $front = $this->getResource('frontController');
         $front->setRequest(new Zend_Controller_Request_Http());
@@ -210,17 +153,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $request = $front->getRequest();
         $lang = $request->getParam('lang');
 
+        $lang_session = new Zend_Session_Namespace('lang_session');
+
         if(empty($lang)) // if not then ge from config
         {
-            $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
-
-            if(!empty($this->config->resources->locale->default))
+            // get session lang option form session
+            $lang = $lang_session->lang;
+            if(empty($lang)) // if not then ge from config
             {
-                $localeValue = $this->config->resources->locale->default;
+                $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'production');
+
+                if(!empty($this->config->resources->locale->default))
+                {
+                    $localeValue = $this->config->resources->locale->default;
+                }
+                else // else set english : en
+                    $localeValue = 'en';
             }
-            else // else set english : en
-                $localeValue = 'en';
+            else
+            {
+                $localeValue = $lang;
+            }
         } else {
+            // set post data on session, on user lang selection
+            $lang_session->lang = $lang; // first time
             $localeValue = $lang;
         }
 
@@ -239,7 +195,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $localeValue = 'en';
             $translationFile = ROOT_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . $localeValue . DIRECTORY_SEPARATOR . 'Zend_Validate.php';
         }
-
+        //echo $translationFile;
         if(file_exists($translationFile))
         {
             try{
@@ -275,7 +231,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //2.) SMTP
 
         //$options = $this->getOption('mail');
-        //Zend_Debug::dump($options);        
+        //Zend_Debug::dump($options);
         /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
@@ -324,22 +280,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // set db in registry
         Zend_Registry::set('db', $db);
-
     } // end _initDb
-
-    /**
-     * Get the global config (if any) from the Registry.
-     * @return php string array as config options
-     * @access public
-     */
-    public static function _getConfigOptions()
-    {
-        $bootstrap = $this->getInvokeArg('bootstrap');
-        $options = $bootstrap->getOptions();
-        print_r($options);
-
-    }
-
-    
 }
 

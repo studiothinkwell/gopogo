@@ -1,6 +1,6 @@
 <!--Create an account START-->
             <div id="signupBox" >
-                <form id="signupBoxForm" name="signupBoxForm" method="post">
+                <form action=""  id="signupBoxForm" name="signupBoxForm" method="post">
                 <div class="create-ac-head">
                     <div class="create-ac-leftbg"></div>
                     <div class="create-ac-middlebg">
@@ -14,11 +14,11 @@
                         <img src="/themes/default/images/create-account-img.jpg"  alt=""/>
                     </div>
                     <div class="create-ac-right">
-                        <span id="signup_error_msg" ></span>
-                        <div class="create-ac-input1"><input type="text" value="Email Address" name="email" /></div>
-                        <div class="create-ac-input2"><input type="password" value="Password" name="passwd" /></div>
+                        <span id="signup_error_msg" class="errorMsg" ></span>
+                        <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" name="email" id="email1"/></div>
+                        <div class="create-ac-input2"><input type="text" value="Password" onfocus="if(this.value=='Password') {this.value = '';this.type='password'}" onblur="if(this.value=='') {this.value = 'Password';this.type='text'}" name="passwd" id="passwd"/></div>
                         <div class="h15 clear" ></div>
-                        <div class="create-ac-input2"><input type="password" value="Password"  name="retype_passwd" /></div>
+                        <div class="create-ac-input2"><input type="text" value="Retype Password"  onfocus="if(this.value=='Retype Password') {this.value = '';this.type='password'}" onblur="if(this.value=='') {this.value = 'Retype Password';this.type='text'}" name="retype_passwd" id="retype_passwd"/></div>
                         <div class="create-ac-input3">
 
                             <span class="create-ac-txt">Already have an account&nbsp;</span>

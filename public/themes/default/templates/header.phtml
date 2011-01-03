@@ -1,16 +1,26 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
+$this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('GOPOGO');
+//echo $this->doctype(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<?php echo $this->headMeta(); ?>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Welcome to Gopogo - Homepage</title>
-<!-- <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" /> -->
-<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.php" rel="stylesheet" type="text/css" media="screen" />
+<?php echo $this->headTitle(); ?>
 
+<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
+<?php
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+ $base_url = $config->gopogo->url->base;
 
-<body>
+?>
+<body >
     <?php
 
         $session = GP_GPAuth::getSession();
@@ -25,14 +35,21 @@
             $loginFlag = true;
             $user_name = $session->user_name;
         }
-    ?>
+      $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
 
+      if(empty($baseurl)) {
+          $baseurl = "#";
+      }
+
+    ?>
     <div id="master" align="center">
 	<div id="submaster">
             <!-- Header START-->
             <div class="header">
                 <div class="head-mainbg">
-                    <a href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>"><div class="logo"></div></a>
+                    <div>
+                    <a class="logo" href="<?php echo $base_url; ?>" title="gopogo" ></a>
+                    </div>
                         <div class="menu">
                             <div class="menu1"><a href="#"></a></div>
                             <div class="menu2"><a href="#"></a></div>
@@ -46,10 +63,10 @@
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="#" id='sign-in' >Sign in</a> or
-                            <a href="#" id='sign-up' >Create an Account</a> |
+                            <a href="javascript:void(0)" class='CLS_sign-in' >Sign in</a> or
+                            <a href="javascript:void(0)" class='CLS_sign-up' >Create an Account</a> |
                             <?php } ?>
-                            <a href="#">How it works</a>                            
+                            <a href="/index/comingsoon/module/1">How it works</a>
 
                         </div>
                         <div class="search"><input type="text" value="" style="width:205px;"/></div>
