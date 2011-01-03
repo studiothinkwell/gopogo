@@ -160,7 +160,7 @@ class User_AccountController extends Zend_Controller_Action
                     }
                     else
                     {
-                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet using this email!');
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
@@ -264,9 +264,7 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function forgotpasswordAction()
-    {
-
+    public function forgotpasswordAction() {
         $data = array();
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
@@ -333,8 +331,6 @@ class User_AccountController extends Zend_Controller_Action
             }else{               
                 $this->view->msg = $msg;
             }
-
-
         } // end of es post
         else
         {
@@ -363,9 +359,7 @@ class User_AccountController extends Zend_Controller_Action
      * 
      */
 
-    public function profileAction()
-    {       
-
+    public function profileAction() {       
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $user = new Application_Model_DbTable_User();
@@ -391,9 +385,7 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function signupAction()
-    {
-
+    public function signupAction() {
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $data = array();

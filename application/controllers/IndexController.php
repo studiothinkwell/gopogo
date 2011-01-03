@@ -106,9 +106,26 @@ class IndexController extends Zend_Controller_Action {
         
         GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
         //die();
-        //*/
-        
+        //*/        
+    }
 
+    //==== ACTION FOR COMMING SOON PAGE ====//
+    public function comingsoonAction() {
+        $module = $this->_request->getParam("module");
+        switch ($module) {
+            case 1 :
+                $this->view->module = "How it works";
+                break;
+            case 2 :
+                $this->view->module = "About us";
+                break;
+            case 3 :
+                $this->view->module = "Contact us";
+                break;
+            case 4 :
+                $this->view->module = "Legal";
+                break;
+        }
     }
 }
 

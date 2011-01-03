@@ -1,19 +1,19 @@
 var divId; 
 $(document).ready(function(){
-   $(".sign-in").click(function(){
+   $(".CLS_sign-in").click(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');
         
         $().enableLoginBox();
 
-        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );
         $("#email").attr("value","Email Address");
         $("#email").focus();
         $("#passwd").attr("type","text");
         $("#passwd").attr("value","Password");
     });
 
-    $(".sign-up").click(function(){
+    $(".CLS_sign-up").click(function(){
         divId = "#signupBox";
         $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
@@ -26,8 +26,9 @@ $(document).ready(function(){
     });
 
      $(".login-close").click(function(){
-        $(".errorMsg").text('');
+        $(".errorMsg").text('');        
         $().finish();
+        //$().empty(); alert(1);
     });
     
     $().addResize();
@@ -47,16 +48,18 @@ $.fn.addResize = function() {
         // Get page scroll
         var arrPageScroll = $().getPageScroll();
 
-        $('#divId').css({
+        $(divId).css({
             top:	parseInt(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
             left:	parseInt(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
         });
     });
 }
 
-$.fn.addScroll = function() {
+$.fn.addScroll = function() { 
 
-     $(window).scroll(function() {
+     $(window).scroll(function() {                  
+//            window.innerHeight="1500";
+//            window.innerWidth="100";
             var arrPageSizes = $().getPageSize();
 
             $('#overlay').css({
@@ -66,9 +69,9 @@ $.fn.addScroll = function() {
 
             var arrPageScroll = $().getPageScroll();
 
-            $('#divId').css({
-            top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($('#divId').height()) / 2))),
-            left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($('#divId').width()) / 2)))
+            $(divId).css({
+            top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
+            left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
             });
         });
     
@@ -168,10 +171,10 @@ $.fn.keyboardAction = function(objEvent) {
 }
 
 
-$.fn.finish = function() {
+$.fn.finish = function() { 
     
-    $('#divId').css({display:'none'});
-    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
+    $(divId).css({display:'none'});
+    $('#overlay').fadeOut(function() {$('#overlay').remove();});
 
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
     $('embed, object, select').css({'visibility' : 'visible'});

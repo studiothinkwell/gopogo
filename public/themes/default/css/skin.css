@@ -1235,10 +1235,10 @@ body
 {
     position:relative;
     float:left;
-    width:93%;
+/*    width:93%;*/
     height:auto;
     border:0px solid red;
-    top:20px;
+    top:8px;
     left:12px;
 }
 .sign-in-button
@@ -1329,17 +1329,23 @@ border:1px solid red;
     height:302px;
     border:0px solid red;
 }
-.errorMsg
-{
+.errorMsg {
     color: #FF0000;
+    float: left;
     font-size: 12px;
-    padding-left: 10px;
+    font-weight: 600;
+    margin-left: 12px;
     padding-top: 5px;
+    position: relative;
 }
+
+
+
+
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
-/*@media screen and (-webkit-min-device-pixel-ratio:0)
+@media screen and (-webkit-min-device-pixel-ratio:0)
 {
     @font-face
     {
@@ -1352,6 +1358,33 @@ border:1px solid red;
         font-size: 12px;
         font-weight: 600;
     }
-}*/
+}
 
 /***************** For Chrome End*********************/
+/***************** For Coming SOON *********************/
+.coming-soon {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width:1000px;
+    height:345px;
+}
+.coming-soon * {
+    vertical-align: middle;
+}
+/*\*//*/
+.coming-soon {
+    display: block;
+}
+.coming-soon span {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+/**/
+
+.coming-soon span
+{
+    display: inline-block;
+    height: 100%;
+}
