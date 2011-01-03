@@ -3,6 +3,11 @@
 class IndexController extends Zend_Controller_Action {
     public function init() {
         /* Initialize action controller here */
+
+        //code to get baseurl and assign to view
+        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $baseurl = $config->gopogo->url->base;
+        $this->view->baseurl = $baseurl;
     }
 
 
@@ -109,23 +114,24 @@ class IndexController extends Zend_Controller_Action {
         //*/        
     }
 
-    //==== ACTION FOR COMMING SOON PAGE ====//
-    public function comingsoonAction() {
-        $module = $this->_request->getParam("module");
-        switch ($module) {
-            case 1 :
-                $this->view->module = "How it works";
-                break;
-            case 2 :
-                $this->view->module = "About us";
-                break;
-            case 3 :
-                $this->view->module = "Contact us";
-                break;
-            case 4 :
-                $this->view->module = "Legal";
-                break;
-        }
+    //==== ACTION FOR HOW IT WORKS ====//
+    public function howitworksAction() {
+        
+    }
+
+    //==== ACTION FOR ABOUT US ====//
+    public function aboutusAction() {
+        
+    }
+
+    //==== ACTION FOR CONTACT US ====//
+    public function contactusAction() {
+        
+    }
+
+    //==== ACTION FOR LEGAL ====//
+    public function legalAction() {
+        
     }
 }
 
