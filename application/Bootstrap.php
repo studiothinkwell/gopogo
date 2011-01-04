@@ -281,5 +281,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // set db in registry
         Zend_Registry::set('db', $db);
     } // end _initDb
+
+
+    public function _initRoutes()
+    {
+        
+        $indexController  = Zend_Controller_Front::getInstance();
+
+        $route = new Zend_Controller_Router_Route(
+                                    'coming-soon/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'comingsoon'
+                                                   ));
+        $indexController->getRouter()->addRoute('coming-soon',$route);
+    
+
+    }
+
+
 }
 
