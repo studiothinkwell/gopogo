@@ -114,11 +114,11 @@ class User_AccountController extends Zend_Controller_Action
             
             /*
             // check length of passowrd */
-            
-            if ($validFlag && Zend_Validate::is($passwd, 'Between', array('min' => 6, 'max' => 16))) {
+            $chkLength = Zend_Validate::is( strlen($passwd), 'Between', array('min' => 6, 'max' => 16));
+            if ($validFlag && $chkLength) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
-                $lang_msg = $this->translate->_("Passowrd lenght must be between 6-16!");
+                $lang_msg = $this->translate->_($chkLength."Passowrd lenght must be between 6-16!");
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
@@ -438,7 +438,7 @@ class User_AccountController extends Zend_Controller_Action
             
             // check length of passowrd
             
-            if ($validFlag && Zend_Validate::is($passwd, 'Between', array('min' => 6, 'max' => 16))) {
+            if ($validFlag && Zend_Validate::is(strlen($passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
                 $msg .= $br . "Passowrd lenght must be between 6-16!";
@@ -447,7 +447,7 @@ class User_AccountController extends Zend_Controller_Action
 
             // check length of passowrd
             
-            if ($validFlag && Zend_Validate::is($retype_passwd, 'Between', array('min' => 6, 'max' => 16))) {
+            if ($validFlag && Zend_Validate::is(strlen($retype_passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
                 $msg .= $br . "Retype passowrd lenght must be between 6-16!";

@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-
 // login url
 app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
@@ -30,6 +29,9 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $(".errorMsg").text('');
             $("#toggleLogin").slideToggle("hide");
             $("#toggleForgot").slideToggle("show");
+            //==== CALL FUNCTION TO SET DEFAULT VALUES ====//
+            $().setdefaultval();
+            $(".clsForgotEmail").focus();
     });
     
 /**
@@ -39,6 +41,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $(".errorMsg").text('');
             $("#toggleForgot").slideToggle("hide");
             $("#toggleLogin").slideToggle("show");
+            $().setdefaultval();
+            $(".clsSignInEmail").focus();
     });
 
 /**
@@ -70,6 +74,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $(".errorMsg").text('');
         $("#loginBox").css({display:'none'});        
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 0 );
+        $().setdefaultval();
+        $(".clsSignUpEmail").focus();
     });
 
     // add signin  event
@@ -80,15 +86,18 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $().enableLoginBox();
 
         $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 0 );
+        $().setdefaultval();
+        $(".clsSignInEmail").focus();
     });
 
     // add login event
     $("#loginSubmitBox").click(function(){
-        $().doLogin();
+        $().doLogin(); 
     });
     // add signup event
     $("#signupSubmitBox").click(function(){
         $().doSignup();
+        $(".clsSignUpEmail").focus();
     });
     // add logout event
     $("#logout").click(function(){
@@ -444,6 +453,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 alert(msg);
             }                
         }
-
-
 });
+
+$.fn.hideShow = function() {
+    alert(1);
+}
