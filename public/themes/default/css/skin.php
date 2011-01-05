@@ -1,18 +1,29 @@
 <?php header("Content-type: text/css"); 
-/**
- * take control of your colors in CSS using PHP
- */
 
-// absolute path
-//require '/home/pirs/gopogo//library/GP/ToolKit.php';
+define('BUCKET_NAME', "http://bucket1." );
+define('AMAZON_S3_URL', "s3.amazon.com/" );
+$hasCdn = 1;
+$urlStart = '';
+$urlEnd = '';
+if($hasCdn)
+{
+    $urlStart = 'md5("'.BUCKET_NAME.AMAZON_S3_URL;
+    $urlEnd = '")';
+}
+function getEncriptedUrl($base_url, $str )
+    {   $str = trim($str);
+        $hasCdn = GP_ToolKit::getHasCdn();
+        if( (""!= $str) && ("1" == $hasCdn )) {
+            $azUrl = 'http:\\\\'.BUCKET_NAME.'.'. AMAZON_S3_URL;
+            $jpg = explode('.', $str);
+            $ext = '.'.$jpg[1];
+            $str = $jpg[0];
+        }
+       // echo '<<br> str in  getEncriptedUrl =' . $hasCdn ? md5($str).$ext : $str;
+        return $hasCdn ? $azUrl.'\\'.md5(trim($str)).$ext : trim($base_url).trim($str);
+      }
 
-//$objtoolkit = new GP_ToolKit();//::getBasePath();
-//echo $baseUrl = GP_ToolKit::getConfigOptions();
-define('THEME_URL', "/themes/" );
-define('THEME_NAME', "/default/" );
-define('THEME_CSS', 'css' );
-define('THEME_IMAGES', 'images' );
-
+echo $urlStart.'sajad'. $urlEnd;
 //require_once ('../../../../../../gopogo/library/GP_ToolKit.php');
 //$config = Zend_Registry::get('config');
 //echo '<pre>';
@@ -25,7 +36,9 @@ define('THEME_IMAGES', 'images' );
 
 //die();
 ?>
+background-image:url(<?php echo   md5("/themes/default/images/bg-left"); ?>.png )
 
+background-image:url(<?php  $urlStart ?>/themes/default/images/bg-left<?php  $urlEnd;?>.png )
 body
 {
     margin:0px;
