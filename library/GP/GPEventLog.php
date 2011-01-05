@@ -66,7 +66,7 @@ class GP_GPEventLog
      *
      */
     protected function getEventLogIntance()
-    {   
+    {
         return $this->gpEventLog;
     } // end of getEventLogIntance
 
@@ -76,7 +76,7 @@ class GP_GPEventLog
      * @param Integer   $eventId
      * @param Integer   $userId
      * @param String    $eventDescription
-     * @param Array     $eventAttributes 
+     * @param Array     $eventAttributes
      */
     public static function log($eventId,$userId,$eventDescription='',$eventAttributes=array())
     {
@@ -112,7 +112,7 @@ class GP_GPEventLog
         $attributesData = array();
 
         $attributeIds = array();
-        
+
         if(!empty($dbEventAttributes))
         {
             //Zend_Debug::dump($dbEventAttributes);
@@ -153,7 +153,7 @@ class GP_GPEventLog
                     $msg = "This event information not availabe : event_log_id - " . $eventId . " ,  attribute_id - " . $dbEventAttribute['event_log_attributes_id'];
 
                     $logger->log($msg,Zend_Log::DEBUG);
-                    
+
                 }
                 /*
                     echo "121";
@@ -161,7 +161,7 @@ class GP_GPEventLog
                     // Call the $foo->bar() method with 2 arguments
                     $foo = new foo;
                     call_user_func_array(array($foo, "bar"), array("three", "four"));
-                    
+
                     //$value = call_user_func('attribute_' . $dbEventAttribute['event_log_attributes_id']);
 
                     $value = call_user_func_array(array($thisObject,'attribute_' . $dbEventAttribute['event_log_attributes_id']),array());
@@ -205,7 +205,7 @@ class GP_GPEventLog
     public function attribute_1()
     {
         // IP Remote : client's IP address, which is accesing the system
-        
+
         $ipAddress = $this->getIPAddress();
 
         return $ipAddress;
@@ -251,6 +251,11 @@ class GP_GPEventLog
     public function getUserAgent()
     {
         return  $_SERVER['HTTP_USER_AGENT'];
-    } // end of getUserAgent    
+    } // end of getUserAgent
+
+
+
+
+
 }
 ?>

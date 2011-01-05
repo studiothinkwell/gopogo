@@ -1,14 +1,23 @@
- var divId;   
-$(document).ready(function(){    
 
-    $("#sign-in").click(function(){
+var divId;
+var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
+$(document).ready(function(){
+   $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
-        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 1 );
+        $(".errorMsg").text('');        
+        $().enableLoginBox();        
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );      
+        $().setdefaultval();
+        $("#email").focus();                
     });
 
     $("#sign-up").click(function(){
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
+
+        $().setdefaultval();
+        $(".clsSignUpEmail").focus();        
+
     });
 
     $(".create-ac-close").click(function(){
@@ -177,4 +186,22 @@ $.fn.getPageSize = function() {
     var jqueryPageSize = new Array($(document).width(),$(document).height(), $(window).width(), $(window).height());
     return jqueryPageSize;
 };
+
+$.fn.setdefaultval = function() {
+    for(i=0;i<5;i++) {
+            $(arrAccount[i]).val("");
+        }
+    $(".clsSignInEmail").val("Email Address");
+    $(".clsSignUpEmail").val("Email Address");
+    $(".clsForgotEmail").val("Email Address");
+    $(".clsSignInPwdOld").removeAttr('style');
+    $(".clsSignInPwdOld").val('Password');
+    $(".clsSignInPwd").attr('style','display:none');
+    $(".clsSignUpPwdOld").removeAttr('style');
+    $(".clsSignUpPwdOld").val('Password');
+    $(".clsSignUpPwd").attr('style','display:none');
+    $(".clsSignUpRePwdOld").removeAttr('style');
+    $(".clsSignUpRePwdOld").val('Password');
+    $(".clsSignUpRePwd").attr('style','display:none');
+}
 
