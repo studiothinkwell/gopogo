@@ -1,6 +1,6 @@
 <!--Create an account START-->
             <div id="signupBox" >
-                <form action=""  id="signupBoxForm" name="signupBoxForm" method="post">
+                <form id="signupBoxForm" name="signupBoxForm" method="post">
                 <div class="create-ac-head">
                     <div class="create-ac-leftbg"></div>
                     <div class="create-ac-middlebg">
@@ -14,6 +14,7 @@
                         <img src="/themes/default/images/create-account-img.jpg"  alt=""/>
                     </div>
                     <div class="create-ac-right">
+
                         <span id="signup_error_msg" class="errorMsg1" ></span>
                         <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignUpEmail"/></div>
                         <div class="create-ac-input2">
@@ -25,6 +26,7 @@
                             <input type="text" value="Re-Type Password" onfocus="$('.clsSignUpRePwdOld').attr('style','display:none');$('.clsSignUpRePwd').removeAttr('style');$('.clsSignUpRePwd').focus()" name="retype_passwdOld" id="retype_passwdOld" class="clsSignUpRePwdOld"/>
                             <input type="password" value="" onblur="if(this.value=='') { $('.clsSignUpRePwdOld').removeAttr('style');$('.clsSignUpRePwd').attr('style','display:none');}" name="retype_passwd" id="retype_passwd" class="clsSignUpRePwd" style="display: none"/>
                         </div>
+
                         <div class="create-ac-input3">
 
                             <span class="create-ac-txt">Already have an account&nbsp;</span>

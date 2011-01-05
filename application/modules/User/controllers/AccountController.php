@@ -65,7 +65,7 @@ class User_AccountController extends Zend_Controller_Action
      */
 
     public function loginAction()
-    {        
+    {
         $data = array();
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
@@ -75,13 +75,14 @@ class User_AccountController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
+
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
 
             // checking for valid email
             //*
-            if (Zend_Validate::is($email, 'EmailAddress')) { $lang_msg = $this->translate->_("Valid !");
+            if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
             } else {
                 //$msg .= "Enter valid email!";
@@ -111,8 +112,8 @@ class User_AccountController extends Zend_Controller_Action
             // end checking for valid email
 
             $passwd = $formData['passwd'];
+
             
-            /*
             // check length of passowrd */
             $chkLength = Zend_Validate::is( strlen($passwd), 'Between', array('min' => 6, 'max' => 16));
             if ($validFlag && $chkLength) {
@@ -120,12 +121,15 @@ class User_AccountController extends Zend_Controller_Action
             } else if($validFlag) {
                 $lang_msg = $this->translate->_($chkLength."Passowrd lenght must be between 6-16!");
                 $msg .= $lang_msg;
+
                 $validFlag = false;
             }
-            //*/
-            //echo $validFlag;exit;
+            
+
             if($validFlag){
+
                 try {
+
                     // create user model object
                     $user = new Application_Model_DbTable_User();
 
@@ -134,6 +138,7 @@ class User_AccountController extends Zend_Controller_Action
 
                     if($userData)
                     {
+
                         $status = 1;
 
                         // set user info in session
@@ -142,7 +147,7 @@ class User_AccountController extends Zend_Controller_Action
 
                         // other data
 
-                        $lang_msg = $this->translate->_('Welcome! You have Signed in Successfully!');
+                        $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
@@ -161,11 +166,11 @@ class User_AccountController extends Zend_Controller_Action
                     }
                     else
                     {
-                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet using this email!');
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
-                        $msg.= $lang_msg;
+                        $msg = $lang_msg;
                     }
 
                 } catch (Some_Component_Exception $e) {
@@ -190,7 +195,6 @@ class User_AccountController extends Zend_Controller_Action
                 $this->view->msg = $msg;
 
             }else{
-                //$this->_helper->flashMessenger->addMessage($msg);
                 $this->view->msg = $msg;
             }
         } // end of es post
@@ -203,7 +207,7 @@ class User_AccountController extends Zend_Controller_Action
         // log error if not success
 
         if($status != 1)
-        {            
+        {
             $logger = Zend_Registry::get('log');
             $logger->log($msg,Zend_Log::DEBUG);
 
@@ -224,19 +228,23 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function logoutAction() {       
+    public function logoutAction()
+    {
+
         $user = new Application_Model_DbTable_User();
+
         // distroy loggedin user's session data from session
         $user->destroySession();
 
         $lang_msg = $this->translate->_("You have successfully logged out from system!");
 
         $data['msg'] =  $lang_msg;
-
         $data['status'] =  1;
 
         // return json response
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+
     } // end logoutAction
 
     /**
@@ -266,7 +274,9 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function forgotpasswordAction() {
+    public function forgotpasswordAction()
+    {
+
         $data = array();
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
@@ -284,7 +294,7 @@ class User_AccountController extends Zend_Controller_Action
             //*
             if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
-            } else {                
+            } else {
                 $lang_msg = $this->translate->_("Enter Valid Email!");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
                 $msg .= $lang_msg;
@@ -292,13 +302,15 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
-            if($validFlag) {
+            if($validFlag){
+
                 try {
+
                     $user = new Application_Model_DbTable_User();
 
                     // reset temporary password
                     $temp_password = $user->getUserFogotPassword($email);
-                    
+
                     $status = 1;
 
                     // send email to user for reset the new password
@@ -315,24 +327,26 @@ class User_AccountController extends Zend_Controller_Action
 
                 } catch (Some_Component_Exception $e) {
                     if (strstr($e->getMessage(), 'unknown')) {
-                        // handle one type of exception                       
+                        // handle one type of exception
                         $lang_msg = $this->translate->_('Unknown Error!');
                         $msg .= $lang_msg;
                     } elseif (strstr($e->getMessage(), 'not found')) {
-                        // handle another type of exception                        
+                        // handle another type of exception
                         $lang_msg = $this->translate->_('Not found Error!');
                         $msg .= $lang_msg;
-                    } else {                        
+                    } else {
                         $lang_msg = $this->translate->_($e->getMessage());
-                        $msg .= $lang_msg;                        
+                        $msg .= $lang_msg;
                     }
                 }
 
                 $this->view->msg = $msg;
 
-            }else{               
+            }else{
                 $this->view->msg = $msg;
             }
+
+
         } // end of es post
         else
         {
@@ -343,25 +357,27 @@ class User_AccountController extends Zend_Controller_Action
         // log error if not success
 
         if($status != 1)
-        {           
+        {
             $logger = Zend_Registry::get('log');
-            $logger->log($msg,Zend_Log::DEBUG);            
+            $logger->log($msg,Zend_Log::DEBUG);
         }
 
         $data['msg'] =  $msg;
         $data['status'] =  $status;
-        
+
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
-        
+
 
     } // end of forgot password
 
     /**
      * User Profile
-     * 
+     *
      */
 
-    public function profileAction() {       
+    public function profileAction()
+    {
+
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $user = new Application_Model_DbTable_User();
@@ -387,7 +403,9 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function signupAction() {
+    public function signupAction()
+    {
+
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $data = array();
@@ -398,7 +416,7 @@ class User_AccountController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-            
+
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
@@ -407,7 +425,7 @@ class User_AccountController extends Zend_Controller_Action
             //*
             if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
-            } else {                
+            } else {
                 //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
                 $lang_msg = $this->translate->_("Enter Valid Email!");
@@ -434,9 +452,10 @@ class User_AccountController extends Zend_Controller_Action
 
             $passwd = $formData['passwd']; //$form->getValue('passwd');
             $retype_passwd = $formData['retype_passwd'];  //$form->getValue('retype_passwd');
-            
-            
+
+            /*
             // check length of passowrd
+
             
             if ($validFlag && Zend_Validate::is(strlen($passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
@@ -446,6 +465,7 @@ class User_AccountController extends Zend_Controller_Action
             }
 
             // check length of passowrd
+
             
             if ($validFlag && Zend_Validate::is(strlen($retype_passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
@@ -453,6 +473,8 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $br . "Retype passowrd lenght must be between 6-16!";
                 $validFlag = false;
             }
+
+
             //*/
 
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
@@ -467,22 +489,22 @@ class User_AccountController extends Zend_Controller_Action
 
             // check this email user exist or not
             $userFlag = $user->checkUserByEmail($email);
-            
-            if($userFlag){                
+
+            if($userFlag){
                 $lang_msg = $this->translate->_("User already signedup by this email : '%value%'");
                 $msg .= str_replace('%value%', $email, $lang_msg);
                 $validFlag = FALSE;
                 $this->view->msg = $msg;
             } else {
-               
+
                 if($validFlag){
                     //echo $msg;
                     $udata = array();
-                    
+
 
                     $udata['user_emailid'] = $email;
                     $udata['user_password'] = $passwd;
-                    
+
                     try {
 
                         // add data to database
@@ -493,30 +515,30 @@ class User_AccountController extends Zend_Controller_Action
                         $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
-                        
+
                         $msg .= $lang_msg;
-                        
+
                         // send the welcome email
-                        GP_GPAuth::sendEmailSignupWelcome($email,$passwd);                        
+                        GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
 
                         //$this->_helper->redirector('login');
 
                     } catch (Some_Component_Exception $e) {
                         if (strstr($e->getMessage(), 'unknown')) {
-                            // handle one type of exception                            
+                            // handle one type of exception
                             $lang_msg = $this->translate->_("Unknown Error!");
                             $msg .= $lang_msg;
                         } elseif (strstr($e->getMessage(), 'not found')) {
-                            // handle another type of exception                            
+                            // handle another type of exception
                             $lang_msg = $this->translate->_("Not Found Error!");
                             $msg .= $lang_msg;
-                        } else {                            
+                        } else {
                             $lang_msg = $this->translate->_($e->getMessage());
-                            $msg .= $lang_msg;                            
+                            $msg .= $lang_msg;
                         }
                     }
                     $this->view->msg = $msg;
-                }else{                   
+                }else{
                     $this->view->msg = $msg;
                 }
             }
@@ -531,9 +553,9 @@ class User_AccountController extends Zend_Controller_Action
         // log error if not success
 
         if($status != 1)
-        {            
+        {
             $logger = Zend_Registry::get('log');
-            $logger->log($msg,Zend_Log::DEBUG);            
+            $logger->log($msg,Zend_Log::DEBUG);
         }
 
         $data['msg'] =  $msg;
@@ -544,7 +566,7 @@ class User_AccountController extends Zend_Controller_Action
     } // end of signupAction
 
 
-    
+
 }
 
 ?>

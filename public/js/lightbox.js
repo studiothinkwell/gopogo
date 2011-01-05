@@ -1,3 +1,4 @@
+
 var divId;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
@@ -10,23 +11,21 @@ $(document).ready(function(){
         $("#email").focus();                
     });
 
-    $(".clsSignUp").click(function(){
+    $("#sign-up").click(function(){
         divId = "#signupBox";
-        $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
+
         $().setdefaultval();
         $(".clsSignUpEmail").focus();        
+
     });
 
     $(".create-ac-close").click(function(){
-        $(".errorMsg").text('');
         $().finish();
     });
 
      $(".login-close").click(function(){
-        $(".errorMsg").text('');        
         $().finish();
-        //$().empty(); alert(1);
     });
     
     $().addResize();
@@ -53,11 +52,9 @@ $.fn.addResize = function() {
     });
 }
 
-$.fn.addScroll = function() { 
+$.fn.addScroll = function() {
 
-     $(window).scroll(function() {                  
-//            window.innerHeight="1500";
-//            window.innerWidth="100";
+     $(window).scroll(function() {
             var arrPageSizes = $().getPageSize();
 
             $('#overlay').css({
@@ -81,13 +78,13 @@ $.fn.addScroll = function() {
 
 $.fn.addModalWindow = function(objId, createOverlay) {
 
-    $().debugLog('addModalWindow');
+    $().debugLog('___addModalWindow');
     $().debugLog(objId);
 
     divId = objId;    
 
  if(createOverlay) {
-    $('embed, object, select').css({'visibility' : 'hidden'});
+    $('embed, object, select').css({ 'visibility' : 'hidden' });
     $('body').append('<div id="overlay"></div>');
  }
     $(objId).css({display:''});
@@ -142,14 +139,6 @@ $.fn.enableKeyboardNavigation = function() {
     });
 }
 
-$.fn.enableLoginBox = function() {
-
-     if($("#toggleForgot").css('display')== 'block'){
-           $("#toggleForgot").css({display:'none'});
-           $("#toggleLogin").css({display:''});
-        }
-}
-
 
 $.fn.keyboardAction = function(objEvent) {
     var escapeKey = 27;
@@ -169,13 +158,12 @@ $.fn.keyboardAction = function(objEvent) {
 }
 
 
-$.fn.finish = function() { 
+$.fn.finish = function() {
     
     $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() {$('#overlay').remove();});
-
+    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-    $('embed, object, select').css({'visibility' : 'visible'});
+    $('embed, object, select').css({ 'visibility' : 'visible' });
 }
 
 $.fn.getPageScroll = function() {

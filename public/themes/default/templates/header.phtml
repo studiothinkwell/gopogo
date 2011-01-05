@@ -12,12 +12,25 @@ $this->headTitle('GOPOGO');
 
 <?php echo $this->headTitle(); ?>
 
+<?php
+/*
+$Asset::add_css('/themes/default/css/skin.css');
+$Asset::add_css('/themes/default/css/lightbox.css');
+$Asset::load_css();
+
+$Asset::add_js('/js/jquery-1.4.2.js');
+$Asset::add_js('/js/jquery.ui.core.js');
+$Asset::load_js();
+*/
+?>
+
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
  $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
- $basePath = $config->gopogo->url->base;
+ $base_url = $config->gopogo->url->base;
+
 ?>
 <body >
     <?php
@@ -44,6 +57,7 @@ $this->headTitle('GOPOGO');
     <div id="master" align="center">
 	<div id="submaster">
             <!-- Header START-->
+
         <div class="header">
             <div class="head-mainbg">
             	<div class="headrow1">
@@ -55,10 +69,10 @@ $this->headTitle('GOPOGO');
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
-                            <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
+                            <a href="javascript:void(0)" class='CLS_sign-in' >Sign in</a> or
+                            <a href="javascript:void(0)" class='CLS_sign-up' >Create an Account</a> |
                             <?php } ?>
-                            <a href="/index/howitworks">How it works</a>
+                            <a href="/index/comingsoon/module/1">How it works</a>
 
                      </div>
                 </div>

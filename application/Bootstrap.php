@@ -1,11 +1,11 @@
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{    
+{
     /**
      *  Initialize View
      * @return Zend_View
      */
-    
+
     protected function _initView() {
         $theme = 'default';
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'themes');
@@ -123,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
       * Defines CDN_PREFIX a string constant, if both hasCdn and cdnPrefix are set in application.ini
       * <p>
       * Defines AMOZON_S3_URL a string constant, if both hasCdn and amazonS3Url are set in application.ini
-      * 
+      *
       * @return void
       */
      protected function _initHasCdn() {
@@ -132,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $cdnPrefix   = $config->cdnPrefix;
                 $bucket      = $config->bucket;
                 $amazonS3Url = $config->amazonS3Url;
-		
+
                 define('HAS_CDN', $hasCdn);
                 if( ''!= $cdnPrefix) define('CDN_PREFIX', $cdnPrefix);
                 if( ''!= $amazonS3Url) define('AMAZON_S3_URL', $amazonS3Url);
@@ -154,7 +154,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $lang = $request->getParam('lang');
 
         $lang_session = new Zend_Session_Namespace('lang_session');
-        
+
         if(empty($lang)) // if not then ge from config
         {
             // get session lang option form session
@@ -231,7 +231,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //2.) SMTP
 
         //$options = $this->getOption('mail');
-        //Zend_Debug::dump($options);        
+        //Zend_Debug::dump($options);
         /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
@@ -280,6 +280,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // set db in registry
         Zend_Registry::set('db', $db);
-    } // end _initDb    
+    } // end _initDb
+
+
+    public function _initRoutes()
+    {
+        
+        $indexController  = Zend_Controller_Front::getInstance();
+
+        $route = new Zend_Controller_Router_Route(
+                                    'coming-soon/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'comingsoon'
+                                                   ));
+        $indexController->getRouter()->addRoute('coming-soon',$route);
+    
+
+    }
+
+
 }
 
