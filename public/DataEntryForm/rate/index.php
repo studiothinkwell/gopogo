@@ -80,10 +80,10 @@ function selectAllCheckboxBestTimeToGo(frmObj, chk_state)
 }
 
 function valid(f) {
-!(/^[A-zÑñ0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zÑñ0-9]/ig,' '):null;
+!(/^[A-zï¿½ï¿½0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zï¿½ï¿½0-9]/ig,' '):null;
 }
 function validtxtnbh(f) {
-!(/^[A-zÑñ0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zÑñ0-9]/ig,' '):null;
+!(/^[A-zï¿½ï¿½0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zï¿½ï¿½0-9]/ig,' '):null;
 }
 function check_lengthtxtnbh(my_form)
 {
@@ -685,6 +685,7 @@ body {
           <option value="Business">Business</option>
           <option value="Business Casual">Business Casual</option>
           <option value="Upscale">Upscale</option>
+          <option value="Night Out">Night Out</option>
         </select>
       </div>
     </div>

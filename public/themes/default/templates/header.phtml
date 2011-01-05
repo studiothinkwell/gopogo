@@ -27,8 +27,12 @@ $Asset::load_js();
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
+<?php
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+ $base_url = $config->gopogo->url->base;
 
-<body>
+?>
+<body >
     <?php
 
         $session = GP_GPAuth::getSession();
@@ -56,7 +60,7 @@ $Asset::load_js();
             <div class="header">
                 <div class="head-mainbg">
                     <div>
-                    <a class="logo" href="<?php echo $baseurl; ?>" title="gopogo" ></a>
+                    <a class="logo" href="<?php echo $base_url; ?>" title="gopogo" ></a>
                     </div>
                         <div class="menu">
                             <div class="menu1"><a href="#"></a></div>
@@ -71,10 +75,10 @@ $Asset::load_js();
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="#" id='sign-in' >Sign in</a> or
-                            <a href="#" id='sign-up' >Create an Account</a> |
+                            <a href="javascript:void(0)" class='CLS_sign-in' >Sign in</a> or
+                            <a href="javascript:void(0)" class='CLS_sign-up' >Create an Account</a> |
                             <?php } ?>
-                            <a href="#">How it works</a>                            
+                            <a href="/index/comingsoon/module/1">How it works</a>
 
                         </div>
                         <div class="search"><input type="text" value="" style="width:205px;"/></div>

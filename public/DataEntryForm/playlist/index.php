@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 <script src="js/jquery.watermarkinput.js" type="text/javascript"></script>
 <?php
-    
+
 	//session_start() ;
 	$varn = session_id() ;
-   
+
 	require_once( "commonclass.php" ) ;
 	///////////// creating object for the commonclass
 	$classObj = new commonClass( '' , 'Home Page' ) ;
-	
+
 	//$link = mysql_connect("dbase.thinkwellgroup.com" , "twrateform" , "wastedtime1") ;
 	//$link = mysql_connect("localhost" , "root" , "") ;
 	//$db = mysql_select_db("dev_rateform") ;
@@ -34,12 +34,12 @@ function createInfoMarker(point, address) {
 { //alert( 'in selectAllCheckbox');
 	totalElem = document.myForm.length; // txtrange
 	//alert('totalElem= '+ totalElem);
-	
+
 	for (i=0;i<totalElem;i++)
 	{
 		var e = frmObj.elements[i];
 	  // alert(e.name);
-	
+
 		type = document.myForm.elements[i].type;
 		//alert("type=" + type);
 		if ( (e.name == 'txtrange[]') && (type == "checkbox" ) ) //
@@ -50,7 +50,7 @@ function createInfoMarker(point, address) {
 	}
 }*/
 
-function selectAllCheckbox(frmObj, chk_state) { 
+function selectAllCheckbox(frmObj, chk_state) {
 	totalElem = document.myForm.length; // txtrange
 	for (i=0;i<totalElem;i++) {
 		var e = frmObj.elements[i];
@@ -70,12 +70,12 @@ function selectAllCheckboxBestTimeToGo(frmObj, chk_state)
 { //alert( 'in selectAllCheckbox');
 	totalElem = document.myForm.length; // txtrange
 	//alert('totalElem= '+ totalElem);
-	
+
 	for (i=0;i<totalElem;i++)
 	{
 		var e = frmObj.elements[i];
 	  // alert(e.name);
-	
+
 		type = document.myForm.elements[i].type;
 		//alert("type=" + type);
 		if ( (e.name == 'txtbtg[]') && (type == "checkbox" ) ) //
@@ -90,14 +90,14 @@ window.onload=function(){
 	var defaultText1 = 'This is a play list for everyone that has had a hard time figuring out what to do on a first date. Enjoy!';
 	foo.value = defaultText1;
 	foo.style.color = '#888';
-	
+
 	foo.onfocus = function(){
 		foo.style.color = '#000'; //'grey';
 		if ( foo.value == defaultText1 ) {
 			foo.value = '';
 		}
 	};
-	
+
 	foo.onblur = function(){
 		foo.style.color = '#000'; //grey';
 		if ( foo.value == '' ) {
@@ -109,14 +109,14 @@ var foo1 = document.getElementById('entry_4');
 	var defaultText = 'Easy First Date';
 	foo1.value = defaultText;
 	foo1.style.color = '#888';
-	
+
 	foo1.onfocus = function(){
 		foo1.style.color = '#000'; //'grey';
 		if ( foo1.value == defaultText ) {
 			foo1.value = '';
 		}
 	};
-	
+
 	foo1.onblur = function(){
 		foo1.style.color = '#000'; //'grey';
 		if ( foo1.value == '' ) {
@@ -125,14 +125,14 @@ var foo1 = document.getElementById('entry_4');
 	};
 }
 
-function valid(f) 
+function valid(f)
 {
-!(/^[A-zÑñ0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zÑñ0-9]/ig,' '):null;
+!(/^[A-zÃ‘Ã±0-9]*$/i).test(f.value)?f.value = f.value.replace(/[^A-zÃ‘Ã±0-9]/ig,' '):null;
 }
 
 function check_lengthtxtname(my_form)
 {
-	
+
 	//txtname
 maxLen = 45; // max number of characters allowed
 if (my_form.txtname.value.length >= maxLen) {
@@ -150,10 +150,10 @@ else{ // Maximum length not reached so update the value of my_text counter
 
 function check_length(my_form)
 {
-	maxLen = 250; 
-	if (my_form.txtbd.value.length >= maxLen) 
+	maxLen = 325;
+	if (my_form.txtbd.value.length >= maxLen)
 	{
-		var msg = "You have reached your maximum limit of characters allowed(which is 250)!";
+		var msg = "You have reached your maximum limit of characters allowed(which is 325)!";
 		my_form.txtbd.value = my_form.txtbd.value.substring(0, maxLen);
 	}
 	else
@@ -164,7 +164,7 @@ function check_length(my_form)
 }
 
 function trim(inputString) {
-	
+
    // Removes leading and trailing spaces from the passed string. Also removes
    // consecutive spaces and replaces it with one space. If something besides
    // a string is passed in (null, custom object, etc.) then return the input.
@@ -223,17 +223,17 @@ function trim(inputString) {
     google.load('search', '1');
 	var clips = new Array();
 	var gSearchForm ;
-    
+
     function OnLoad() {
-		
+
       // Create a search control
       var searchControl = new google.search.SearchControl();
 
       // Add in a full set of searchers
       var localSearch = new google.search.LocalSearch();
-	  
+
       //searchControl.addSearcher(localSearch);
-	  
+
 	options = new google.search.SearcherOptions();
 	//options.setExpandMode(google.search.SearchControl.EXPAND_MODE_CLOSED);
 	options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
@@ -243,7 +243,7 @@ function trim(inputString) {
       gSearchForm.setOnSubmitCallback(null, CaptureForm);
       gSearchForm.input.focus();
 	  gSearchForm.input.id = "hello" ;
-	  
+
       searchControl.addSearcher(new google.search.WebSearch());
       searchControl.addSearcher(new google.search.VideoSearch());
       searchControl.addSearcher(new google.search.BlogSearch());
@@ -251,10 +251,10 @@ function trim(inputString) {
       searchControl.addSearcher(new google.search.ImageSearch());
       searchControl.addSearcher(new google.search.BookSearch());
       searchControl.addSearcher(new google.search.PatentSearch());*/
-	  
+
 	  // establish a keep callback
 	  searchControl.setOnKeepCallback(this, MyKeepHandler , "<input type='button' value='Select'>");
-	  
+
 	  searchControl.setSearchCompleteCallback(this, OnSearchComplete);
 
       // Set the Local Search center point
@@ -268,13 +268,13 @@ function trim(inputString) {
 
     }
     google.setOnLoadCallback(OnLoad);
-	
+
 	 // Cancel the form submission, executing an AJAX Search API search.
     /*function CaptureForm(searchForm) {
       gLocalSearch.execute(searchForm.input.value);
       return false;
     }*/
-	
+
 	function OnSearchComplete()
 	{
 		//$("#searchcontrol").find(".gsc-twiddle .gsc-title").css("display","none");
@@ -284,45 +284,45 @@ function trim(inputString) {
 
 	function MyKeepHandler(result)
 	{
-		
+
 		// clone the result html node
 		var node = result.html.cloneNode(true);
 		// attach it
-		
+
 		var savedResults = document.getElementById("saved_results");
-		
+
 		savedResults.appendChild(node);
 		clips.push(result);
-		
-		//document.getElementById("post-button").disabled=false; 
+
+		//document.getElementById("post-button").disabled=false;
 		//document.getElementById("post-button").style.display='';
-		
+
 		var text = document.getElementById('saved_results').innerHTML ;
 	    runAjax(text) ;
-	  
+
 	}
-	
-	
-	/*function postResults() 
-	{ 
+
+
+	/*function postResults()
+	{
 	  var text = document.getElementById('saved_results').innerHTML ;
 	  runAjax(text) ;
 	  return false ;
 	}*/
-	
+
 	var request;
 	function runAjax(text)
 	{
 		// function returns "AJAX" object, depending on web browser
 		// this is not native JS function!
 		//request = getHTTPObject();
-		
+
 		request = new XMLHttpRequest() ;
 		request.onreadystatechange = sendData ;
 		request.open("POST", "process.php?sessid=<?=$varn?>&data="+encodeURIComponent(text) , true) ;
 		request.send(null) ;
 	}
-	
+
 	var req ;
 	function delet(id)
 	{
@@ -334,7 +334,7 @@ function trim(inputString) {
 			req.send(null) ;
 		}
 	}
-	
+
 	function  updateBySequence(id,upDowm,sequenceVal,b)
 	{
 		if(b == "allow")
@@ -346,10 +346,10 @@ function trim(inputString) {
 		}
 		else
 		{
-			//alert("no seq") ;	
+			//alert("no seq") ;
 		}
 	}
-	
+
 	function del()
 	{
 		if(request.readyState == 4)
@@ -371,7 +371,7 @@ function trim(inputString) {
 			}
 		}
 	}
-	
+
 	// function is executed when var request state changes
 	function sendData()
 	{
@@ -387,7 +387,7 @@ function trim(inputString) {
 			document.getElementById('resultshow').innerHTML = returnedData ;
 		}
 	}
-	
+
 	function resetDom()
 	{
 		var x=document.getElementsByName("search");
@@ -395,14 +395,14 @@ function trim(inputString) {
 		//alert(x.name);
 		//alert(x.value);
 		//x.value='';
-		
+
 		document.getElementById('saved_results').style.display = 'none' ;
 		document.getElementById('resulthide').style.display = '' ;
 		document.getElementById('parentId').style.display = '' ;
 		document.getElementsByName('search').value='';
 		//document.getElementById('search').value='';
 	}
-	
+
     //]]>
 </script>
 
@@ -447,7 +447,7 @@ function trim(inputString) {
 
 
 <style type="text/css">
-INPUT.hintTextbox { color: #888; } 
+INPUT.hintTextbox { color: #888; }
 INPUT.hintTextboxActive { color: #000; }
 body {
 	margin:0px;
@@ -519,7 +519,7 @@ input.gsc-input {
 }
 .gsc-clear-button
 {
-	display:none;	
+	display:none;
 }
 .gsc-title
 {
@@ -616,7 +616,7 @@ body {
 			   	  .tab {  color:black;}
 				  .tab2 { color:blue;font-weight:bold;}
 			   </style>
-			 " ;	
+			 " ;
 	}
 ?>
 
@@ -626,12 +626,12 @@ body {
 
 <form action="someplace.html" method="post" name="myForm">
   <div id="formResponse">
-  
+
   <div id="navigation">
 	<ul>
 		<li><a href="/rate"><span class="tab">Review a place</span></a></li>
 		<li><a href="/playlist"><span class="tab2">Create a playlist</span></a></li>
-		
+
 	</ul>
 </div>
 
@@ -640,7 +640,7 @@ body {
 <div>
 <h2>Playlist</h2>
 </div>
-  
+
   <div class="errorbox-good">
     <div class="ss-item ss-item-required ss-text">
       <div>
@@ -658,7 +658,7 @@ body {
         <label class="ss-q-title" for="entry_3">Playlist Description <span class="ss-required-asterisk">*</span></label>
       </div>
       <div class="errorbox-good">
-        <div id="cnt">250</div><!--<input name="text_num" value="250" size="1" readonly>-->
+        <div id="cnt">325</div><!--<input name="text_num" value="325" size="1" readonly>-->
         <span class="ss-form-entry">
         <textarea name="txtbd"  rows="8" cols="75" class="ss-q-long" id="entry_3"  onKeyPress="check_length(this.form);" onKeyDown="check_length(this.form);"  > </textarea>
         </span></div>
@@ -669,7 +669,7 @@ body {
     <div id="resultshow"> </div>
     <div style="height:20px;"> </div>
     <div style="color:#006; text-align:left; padding-top:10px;padding-bottom:10px; text-decoration:underline;" onClick="resetDom();" ><a href="javascript:;">Add Another Stop</a></div>  <!--class="gsc-clear-button" -->
-     
+
   </div>
   <div id="resulthide">
     <div class="errorbox-good">
@@ -686,7 +686,7 @@ body {
           </tr>
         </table>
         <!--<div id="searchcontrol"></div>-->
-        
+
       </div>
     </div>
   </div>
@@ -780,6 +780,7 @@ body {
           <option value="Business">Business</option>
           <option value="Business Casual">Business Casual</option>
           <option value="Upscale">Upscale</option>
+          <option value="Night Out">Night Out</option>
         </select>
       </div>
     </div>
@@ -933,7 +934,7 @@ body {
               <td class="ss-gridrow" style="width: 6%;"></td>
             </tr>
           </tbody>
-        </table> 
+        </table>
       </div>-->
     </div>
   </div>
@@ -1059,7 +1060,7 @@ Anytime</label>
 </div>
 
 <script type="text/javascript">
-	
+
 	var formObj = new DHTMLSuite.form({ formRef:'myForm',action:'formSubmit.php',responseEl:'formResponse'});
 </script>
 </body>

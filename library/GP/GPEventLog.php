@@ -251,11 +251,6 @@ class GP_GPEventLog
     public function getUserAgent()
     {
         return  $_SERVER['HTTP_USER_AGENT'];
-    } // end of getUserAgent
-    
-    
-
-    
-
+    } // end of getUserAgent    
 }
 ?>

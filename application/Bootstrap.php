@@ -1,26 +1,19 @@
 <?php
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{    
-
+{
     /**
      *  Initialize View
      * @return Zend_View
      */
-    
-    protected function _initView()
-    {
 
+    protected function _initView() {
         $theme = 'default';
-
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'themes');
-
         if (isset($this->config->theme->name)) {
             $themePath = $this->config->theme->path;
             $themeName = $this->config->theme->name;
         }
         $layoutPath = $themePath.$themeName.'/templates';
-
         $layout = Zend_Layout::startMvc()
             ->setLayout('layout')
             ->setLayoutPath($layoutPath)
@@ -34,19 +27,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->addHelperPath("ZendX/JQuery/View/Helper/", "ZendX_JQuery_View_Helper");
         $viewRenderer->setView($view);
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-
         return $view;
-
     } // end _initView
-
 
     /*
      * Initialize logging
      *
      */
-    protected function _initLog()
-    {
-
+    protected function _initLog() {
         /*
         // for starting log in file
         if($this->hasPluginResource('Log'))
@@ -57,14 +45,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Zend_Registry::set('Log',$log);
         }
         //*/
-
-
         // start DB session save handler
         // get configs
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'Error-Log');
-
         //get your database connection ready
-
         $params = array (	'host'     => $config->resources->log->db->writerParams->host,
                                 'username' => $config->resources->log->db->writerParams->username,
                                 'password' => $config->resources->log->db->writerParams->password,
@@ -85,8 +69,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // register logger
         Zend_Registry::set('log', $logger);
-
-
     } // end _initLog
 
     /*
@@ -94,13 +76,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * Loads configuration from application.ini
      * Start Database Sssion
      */
-    protected function _initSession()
-    {
 
+    protected function _initSession() {
         // start DB session save handler
-
         $sessionConfig = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'session_db');
-
         //get your database connection ready
         $db = Zend_Db::factory($sessionConfig->session->db->adapter, array(
             'host'        => $sessionConfig->session->db->params->host,
@@ -123,11 +102,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //create your Zend_Session_SaveHandler_DbTable and
         //set the save handler for Zend_Session
         Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config));
-
         //start your session!
         Zend_Session::start();
-
-
     } // end _initSession
 
     /**
@@ -147,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
       * Defines CDN_PREFIX a string constant, if both hasCdn and cdnPrefix are set in application.ini
       * <p>
       * Defines AMOZON_S3_URL a string constant, if both hasCdn and amazonS3Url are set in application.ini
-      * 
+      *
       * @return void
       */
      protected function _initHasCdn() {
@@ -156,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $cdnPrefix   = $config->cdnPrefix;
                 $bucket      = $config->bucket;
                 $amazonS3Url = $config->amazonS3Url;
-		
+
                 define('HAS_CDN', $hasCdn);
                 if( ''!= $cdnPrefix) define('CDN_PREFIX', $cdnPrefix);
                 if( ''!= $amazonS3Url) define('AMAZON_S3_URL', $amazonS3Url);
@@ -168,8 +144,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      *
      * @return void
      */
-    protected function _initLocale()
-    {
+    protected function _initLocale() {
         $this->bootstrap('frontController');
         $front = $this->getResource('frontController');
         $front->setRequest(new Zend_Controller_Request_Http());
@@ -179,7 +154,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $lang = $request->getParam('lang');
 
         $lang_session = new Zend_Session_Namespace('lang_session');
-        
+
         if(empty($lang)) // if not then ge from config
         {
             // get session lang option form session
@@ -256,7 +231,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //2.) SMTP
 
         //$options = $this->getOption('mail');
-        //Zend_Debug::dump($options);        
+        //Zend_Debug::dump($options);
         /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
@@ -305,12 +280,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // set db in registry
         Zend_Registry::set('db', $db);
-
     } // end _initDb
 
 
+    public function _initRoutes()
+    {
+        
+        $indexController  = Zend_Controller_Front::getInstance();
 
-
+        $route = new Zend_Controller_Router_Route(
+                                    'coming-soon/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'comingsoon'
+                                                   ));
+        $indexController->getRouter()->addRoute('coming-soon',$route);
     
+
+    }
+
+
 }
 

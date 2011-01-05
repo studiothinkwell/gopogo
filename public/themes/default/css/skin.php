@@ -1,3 +1,31 @@
+<?php header("Content-type: text/css"); 
+/**
+ * take control of your colors in CSS using PHP
+ */
+
+// absolute path
+//require '/home/pirs/gopogo//library/GP/ToolKit.php';
+
+//$objtoolkit = new GP_ToolKit();//::getBasePath();
+//echo $baseUrl = GP_ToolKit::getConfigOptions();
+define('THEME_URL', "/themes/" );
+define('THEME_NAME', "/default/" );
+define('THEME_CSS', 'css' );
+define('THEME_IMAGES', 'images' );
+
+//require_once ('../../../../../../gopogo/library/GP_ToolKit.php');
+//$config = Zend_Registry::get('config');
+//echo '<pre>';
+//print_r($config);
+//echo '<br>themePath from skin.php=' . $path  = $this->baseUrl();
+//$path  = GP_ToolKit::getBasePath();
+// echo '<br>themePath from skin.php=' . $themePath = THEME_URL;
+ //$finalImageUrl ='';
+ //$finalCssUrl ='';
+
+//die();
+?>
+
 body
 {
     margin:0px;
@@ -30,7 +58,7 @@ body
     top:0px;
     margin:0 auto;
     z-index: 1;
-    
+
 }
 .head-mainbg
 {
@@ -554,7 +582,7 @@ body
     height:25px;
     font-size:11px;
     border: 0px solid red;
-    
+
 }
 .head-txt
 {
@@ -1001,7 +1029,7 @@ body
 {
     position:absolute;
     z-index: 999;
-    overflow: auto;       
+    overflow: auto;
     float:left;
     width:601px;
     height:352px;
@@ -1009,7 +1037,7 @@ body
     display: none;
     top: 0px;
     left: 0px;
-} 
+}
 
 .create-ac-head
 {
@@ -1110,7 +1138,7 @@ body
     font-size:12px;
     font-weight:600;
     color:#757575;
-    width: 100%; 
+    width: 100%;
 }
 .create-ac-input4
 {
@@ -1155,7 +1183,7 @@ body
 {
     position:absolute;
     z-index: 999;
-    overflow: auto;       
+    overflow: auto;
     float:left;
     width:346px;
     height:302px;
@@ -1163,7 +1191,7 @@ body
     display: none;
     top:0px;
     left:0px
-}                                                
+}
 .sign-in-leftbg
 {
     position:relative;
@@ -1180,7 +1208,7 @@ body
 }
 
 .sign-in-create-account
-{  
+{
     font-size:12px;
     color:#538ea3;
     text-decoration:underline;
@@ -1257,7 +1285,7 @@ body
     float:left;
     width:162px;
     height:29px;
-    border:0px solid red;    
+    border:0px solid red;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent;
     clear: both;
 }
@@ -1358,3 +1386,4 @@ border:1px solid red;
 }
 
 /***************** For Chrome End*********************/
+

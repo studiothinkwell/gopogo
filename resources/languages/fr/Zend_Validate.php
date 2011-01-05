@@ -132,41 +132,4 @@ return array (
     "Unknown country within the IBAN '%value%'" => "Pays inconnu pour l'IBAN '%value%'",
     "Unknown error while uploading file '%value%'" => "Erreur inconnue lors de l'envoi du fichier '%value%'",
     "Value is required and can't be empty" => "Cette valeur est obligatoire et ne peut être vide",
-
-
-
-    // Start GOPOGO messages ---------------------------------------
-
-    // signin
-    "Enter Valid Email!" => "Fr-Enter Valid Email-2!",
-    "Passowrd lenght must be between 6-16!" => "Passowrd lenght must be between 6-16!",
-    "Welcome! You have Signedin Successfully!"=>"Welcome! You have Signedin Successfully!",
-    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Your email and password does not match! Or You have not signedup yet usimng this email!",
-
-    // logout
-    "You have successfully logged out from system!" => "You have successfully logged out from system!",
-
-    // forgot password
-    "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
-    "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
-
-    // signup
-    "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
-    "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
-    "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
-    "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
-
-    // general----
-
-    // Unknown Error!
-    "Unknown Error!" => "Unknown Error!",
-    // Not Found Error!
-    "Not Found Error!" => "Not Found Error!",
-    // post data not found
-    "Post data not available!"=>"Post data not available!",
-
-
-
-
-    // End GOPOGO messages -----------------------------------------
 );
