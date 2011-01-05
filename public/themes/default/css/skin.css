@@ -346,7 +346,8 @@ body
     background-color:#FFF;
     width:59%;
     min-height:100%;
-    border-left:1px solid #bab9b8;
+    border-left:1px solid grey;
+
 }
 .con-right
 {
@@ -355,8 +356,8 @@ body
     background-color:#FFF;
     width:39%;
     height:100%;
-    border-right:1px solid #bab9b8;
-    border-left:1px solid #bab9b8;
+    border-right:1px solid grey;
+    border-left:1px solid grey;
 
 }
 .con-left-row1
@@ -460,7 +461,7 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 1px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
@@ -470,13 +471,13 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px -3px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 0px -2px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
 .rg-thum-img-cel3
 {
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -139px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -95px 0px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -486,7 +487,7 @@ body
 }
 .rg-thum-img-cel33
 {
-	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -96px -2px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -140px -2px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -514,7 +515,7 @@ body
     height:auto;
     width:230px;
     border:0px solid red;
-    font-size:11px;
+    font-size:12px;
     text-align:left;
     left:10px;
 }
@@ -713,12 +714,11 @@ body
 
 .link-txt
 {
-    width:75%;
+    width:120px;
     font-size:10px;
     font-weight:600;
     text-align:left;
     color:#535353;
-    margin-left: 16px;
 }
 .link-txt a
 {
@@ -1054,7 +1054,8 @@ body
     width:30px;
     height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
-    cursor: pointer;    
+    cursor: pointer;
+    cursor: hand;
 }
 .create-ac-centerbg
 {
@@ -1156,7 +1157,7 @@ body
     z-index: 999;
     overflow: auto;       
     float:left;
-    width:363px;
+    width:346px;
     height:302px;
     border:0px solid red;
     display: none;
@@ -1235,10 +1236,10 @@ body
 {
     position:relative;
     float:left;
-/*    width:93%;*/
+    width:93%;
     height:auto;
     border:0px solid red;
-    top:8px;
+    top:20px;
     left:12px;
 }
 .sign-in-button
@@ -1268,7 +1269,8 @@ body
     width:30px;
     height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
-    cursor: pointer;    
+    cursor: pointer;
+    cursor: hand;
 }
 
                                                 /************************************** Sign in END **************************************/
@@ -1305,6 +1307,7 @@ body
                                                 /**************************************TEXT Styles END**************************************/
 
 #your-personal-button{
+cursor: hand;
 cursor: pointer;
 border:1px solid red;
 }
@@ -1329,19 +1332,13 @@ border:1px solid red;
     height:302px;
     border:0px solid red;
 }
-.errorMsg {
+.errorMsg
+{
     color: #FF0000;
-    float: left;
     font-size: 12px;
-    font-weight: 600;
-    margin-left: 12px;
+    padding-left: 10px;
     padding-top: 5px;
-    position: relative;
 }
-
-
-
-
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
@@ -1350,7 +1347,7 @@ border:1px solid red;
     @font-face
     {
         font-family: Arial;
-        src: url('/themes/default/images/arial.ttf');
+        src: url('/font/arial.ttf');
         font-weight:600;
     }
     .thum-txt
@@ -1361,30 +1358,3 @@ border:1px solid red;
 }
 
 /***************** For Chrome End*********************/
-/***************** For Coming SOON *********************/
-.coming-soon {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    width:1000px;
-    height:345px;
-}
-.coming-soon * {
-    vertical-align: middle;
-}
-/*\*//*/
-.coming-soon {
-    display: block;
-}
-.coming-soon span {
-    display: inline-block;
-    height: 100%;
-    width: 1px;
-}
-/**/
-
-.coming-soon span
-{
-    display: inline-block;
-    height: 100%;
-}

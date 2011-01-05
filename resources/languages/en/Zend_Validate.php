@@ -262,41 +262,4 @@ return array(
     "Invalid type given. String expected" => "Invalid type given. String expected",
     "'%value%' is less than %min% characters long" => "'%value%' is less than %min% characters long",
     "'%value%' is more than %max% characters long" => "'%value%' is more than %max% characters long",
-
-
-    // Start GOPOGO messages ---------------------------------------
-
-    // signin
-    "Enter Valid Email!" => "Enter Valid Email!",
-    "Passowrd lenght must be between 6-16!" => "Passowrd lenght must be between 6-16!",
-    "Welcome! You have Signedin Successfully!"=>"Welcome! You have Signedin Successfully!",
-    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Your email and password does not match! Or You have not signedup yet usimng this email!",
-
-    // logout
-    "You have successfully logged out from system!" => "You have successfully logged out from system!",
-
-    // forgot password
-    "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
-    "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",    
-
-    // signup
-    "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
-    "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
-    "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
-    "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
-
-    // general----
-
-    // Unknown Error!
-    "Unknown Error!" => "Unknown Error!",
-    // Not Found Error!
-    "Not Found Error!" => "Not Found Error!",
-    // post data not found
-    "Post data not available!"=>"Post data not available!",
-
-
-
-
-    // End GOPOGO messages -----------------------------------------
-
 );
