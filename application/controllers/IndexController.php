@@ -32,6 +32,11 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+
+        //code to get baseurl and assign to view
+        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $baseurl = $config->gopogo->url->base;
+        $this->view->baseurl = $baseurl;
     }
 
     public function indexAction()
@@ -94,19 +99,4 @@ class IndexController extends Zend_Controller_Action
         // action body
 
     }
-
-    /**
-     * Login using facebook email id and password-
-     * @access public
-     * @param String email :
-     * @param String passwd :
-     * @return json object - :
-     * @author Mujaffar Sanadi <mujaffar@techdharma.com>
-     */
-    public function facebookloginAction(){
-
-    }
 }
-
-
-

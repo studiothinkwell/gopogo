@@ -30,7 +30,7 @@ $Asset::load_js();
 <?php
  $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
  $base_url = $config->gopogo->url->base;
- 
+
 ?>
 <body >
     <?php
@@ -40,7 +40,7 @@ $Asset::load_js();
         // user_name
         //print_r($session->user_emailid);
 
-        $loginFlag  = false;
+        $loginFlag = false;
         $user_name = '';
         if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
         {
