@@ -558,6 +558,21 @@ body
     line-height:28px;
     margin-left:5px;
 }
+.offer-icon
+{
+	position:absolute;
+	float:left;
+	left:75px;
+	top:160px;
+	height: 56px;
+	width:60px;
+	border:opx solid red;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -194px -188px transparent;
+	font-size:14px;
+	font-weight:bold;
+	line-height:40px;
+        text-align: center;
+	}
 
 .heading-txt
 {

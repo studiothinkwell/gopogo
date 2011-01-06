@@ -2,7 +2,8 @@
 var divId;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
-   $(".clsSignIn").click(function(){ 
+
+  $(".clsSignIn").click(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');        
         $().enableLoginBox();        
@@ -11,13 +12,11 @@ $(document).ready(function(){
         $("#email").focus();                
     });
 
-    $("#sign-up").click(function(){
+    $(".clsSignUp").click(function(){
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
-
         $().setdefaultval();
         $(".clsSignUpEmail").focus();        
-
     });
 
     $(".create-ac-close").click(function(){
@@ -139,6 +138,13 @@ $.fn.enableKeyboardNavigation = function() {
     });
 }
 
+$.fn.enableLoginBox = function() {
+
+     if($("#toggleForgot").css('display')== 'block'){
+           $("#toggleForgot").css({display:'none'});
+           $("#toggleLogin").css({display:''});
+        }
+}
 
 $.fn.keyboardAction = function(objEvent) {
     var escapeKey = 27;

@@ -70,7 +70,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
     
     // add create account event
-    $(".createAccount").click(function(){                  
+    $(".clsSignUp").click(function(){
         $("#loginBox").css({display:'none'});        
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 0 );
         $().setdefaultval();
