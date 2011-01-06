@@ -35,7 +35,7 @@ body
 {
 	position:relative;
 	float:left;
-	background-image:url(../images/topbg01.png);
+	background-image:url(/themes/default/images/topbg01.png);
 	background-repeat:no-repeat;
 	width:1024px;
 	height:154px;
@@ -143,7 +143,7 @@ body
 	left:27px;
 	width:358px;
 	height:40px;
-	background:url(../images/icons.png) no-repeat scroll 0px -243px transparent;
+	background:url("/themes/default/images/icons.png") no-repeat scroll 0px -243px transparent;
 }
 .menu
 {
@@ -164,7 +164,7 @@ body
 	width:118px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu1_over.png);
+	background-image:url(/themes/default/images/menu1_over.png);
 	background-repeat:no-repeat;
 }
 .menu1 a
@@ -183,7 +183,7 @@ body
 	width:118px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu1.png);
+	background-image:url(/themes/default/images/menu1.png);
 	background-repeat:no-repeat;
 }
 
@@ -194,7 +194,7 @@ body
 	width:85px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu2_over.png);
+	background-image:url(/themes/default/images/menu2_over.png);
 	background-repeat:no-repeat;
 }
 .menu2 a
@@ -212,7 +212,7 @@ body
 	width:85px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu2.png);
+	background-image:url(/themes/default/images/menu2.png);
 	background-repeat:no-repeat;
 }
 
@@ -223,7 +223,7 @@ body
 	height:61px;
 	padding-right:5px;
 	top: 4px;
-	background-image:url(../images/menu3_over.png);
+	background-image:url(/themes/default/images/menu3_over.png);
 	background-repeat:no-repeat;
 }
 .menu3 a
@@ -239,7 +239,7 @@ body
 	width:99px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu3.png);
+	background-image:url(/themes/default/images/menu3.png);
 	background-repeat:no-repeat;
 }
 
@@ -250,7 +250,7 @@ body
 	height:61px;
 	padding-right:5px;
 	top:5px;
-	background-image:url(../images/menu4_over.png);
+	background-image:url(/themes/default/images/menu4_over.png);
 	background-repeat:no-repeat;
 }
 .menu4 a
@@ -266,7 +266,7 @@ body
 	width:125px;
 	height:61px;
 	padding-right:5px;
-	background-image:url(../images/menu4.png);
+	background-image:url(/themes/default/images/menu4.png);
 	background-repeat:no-repeat;
 }
 
