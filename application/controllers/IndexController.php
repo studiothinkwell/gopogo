@@ -94,6 +94,18 @@ class IndexController extends Zend_Controller_Action
         // action body
 
     }
+
+    /**
+     * Login using facebook email id and password-
+     * @access public
+     * @param String email :
+     * @param String passwd :
+     * @return json object - :
+     * @author Mujaffar Sanadi <mujaffar@techdharma.com>
+     */
+    public function facebookloginAction(){
+
+    }
 }
 
 
