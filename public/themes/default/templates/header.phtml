@@ -16,9 +16,8 @@ $this->headTitle('GOPOGO');
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
- $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
- $base_url = $config->gopogo->url->base;
-
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');  
+ $basePath = $config->gopogo->url->base;            
 ?>
 <body >
     <?php
@@ -44,23 +43,28 @@ $this->headTitle('GOPOGO');
     ?>
     <div id="master" align="center">
 	<div id="submaster">
-            <!-- Header START-->
-
-        <div class="header">
-            <div class="head-mainbg">
-            	<div class="headrow1">
-                    <div class="logo"></div>
-                    <div class="topmenu">
-
+            <!-- Header START-->     
+            <div class="header">
+                <div class="head-mainbg">
+                    <div>
+                    <a class="logo" href="<?php echo $basePath; ?>" title="gopogo" ></a>
+                    </div>
+                        <div class="menu">
+                            <div class="menu1"><a href="#"></a></div>
+                            <div class="menu2"><a href="#"></a></div>
+                            <div class="menu3"><a href="#"></a></div>
+                            <div class="menu4"><a href="#"></a></div>
+                        </div>
+                        <div class="topmenu">      
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="javascript:void(0)" class='CLS_sign-in' >Sign in</a> or
-                            <a href="javascript:void(0)" class='CLS_sign-up' >Create an Account</a> |
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
+                            <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <?php } ?>
-                            <a href="/index/comingsoon/module/1">How it works</a>
+                            <a href="/index/howitworks">How it works</a>
 
                      </div>
                 </div>

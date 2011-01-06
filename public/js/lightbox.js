@@ -2,6 +2,7 @@
 var divId;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
+
    $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
         $(".errorMsg").text('');        
@@ -11,7 +12,7 @@ $(document).ready(function(){
         $("#email").focus();                
     });
 
-    $("#sign-up").click(function(){
+    $(".clsSignUp").click(function(){  
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
 
@@ -204,4 +205,3 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpRePwdOld").val('Password');
     $(".clsSignUpRePwd").attr('style','display:none');
 }
-

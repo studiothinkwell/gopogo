@@ -206,19 +206,18 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
     public function isValid($value)
     {
         $this->_setValue($value);
-
+        $value = strlen($value);
         if ($this->_inclusive) {
             if ($this->_min > $value || $value > $this->_max) {
                 $this->_error(self::NOT_BETWEEN);
-                return false;
+                return '0';
             }
         } else {
             if ($this->_min >= $value || $value >= $this->_max) {
                 $this->_error(self::NOT_BETWEEN_STRICT);
-                return false;
+                return '0';
             }
         }
-        return true;
+        return '1';
     }
-
 }
