@@ -12,12 +12,28 @@ $this->headTitle('GOPOGO');
 
 <?php echo $this->headTitle(); ?>
 
+<?php
+/*
+$Asset::add_css('/themes/default/css/skin.css');
+$Asset::add_css('/themes/default/css/lightbox.css');
+$Asset::load_css();
+
+$Asset::add_js('/js/jquery-1.4.2.js');
+$Asset::add_js('/js/jquery.ui.core.js');
+$Asset::load_js();
+*/
+?>
+<?php
+    // GP_Asset::addCss('/themes/default/css/skin.css');
+    // GP_Asset::combieAndLoadCss();
+?>
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
- $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');  
- $basePath = $config->gopogo->url->base;            
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+ $base_url = $config->gopogo->url->base;
+
 ?>
 <body >
     <?php
@@ -43,19 +59,14 @@ $this->headTitle('GOPOGO');
     ?>
     <div id="master" align="center">
 	<div id="submaster">
-            <!-- Header START-->     
-            <div class="header">
-                <div class="head-mainbg">
-                    <div>
-                    <a class="logo" href="<?php echo $basePath; ?>" title="gopogo" ></a>
-                    </div>
-                        <div class="menu">
-                            <div class="menu1"><a href="#"></a></div>
-                            <div class="menu2"><a href="#"></a></div>
-                            <div class="menu3"><a href="#"></a></div>
-                            <div class="menu4"><a href="#"></a></div>
-                        </div>
-                        <div class="topmenu">      
+            <!-- Header START-->
+
+        <div class="header">
+            <div class="head-mainbg">
+            	<div class="headrow1">
+                    <div class="logo"></div>
+                    <div class="topmenu">
+
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
                             <a href="#" id='logout' >Logout</a> |
@@ -66,7 +77,7 @@ $this->headTitle('GOPOGO');
                             <?php } ?>
                             <a href="/index/howitworks">How it works</a>
 
-                     </div>
+                        </div>
                 </div>
                 <div class="headrow2">
                     <div class="menu">
