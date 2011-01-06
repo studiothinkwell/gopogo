@@ -1,34 +1,32 @@
-var divId; 
-$(document).ready(function(){
-   $(".clsSignIn").click(function(){
-        divId = "#loginBox";
-        $(".errorMsg").text('');
-        
-        $().enableLoginBox();
 
-        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );
-        $("#email").attr("value","Email Address");
-        $("#email").focus();
-        $("#passwd").attr("type","text");
-        $("#passwd").attr("value","Password");
+var divId;
+var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
+$(document).ready(function(){
+
+   $(".clsSignIn").click(function(){ 
+        divId = "#loginBox";
+        $(".errorMsg").text('');        
+        $().enableLoginBox();        
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );      
+        $().setdefaultval();
+        $("#email").focus();                
     });
 
-    $(".clsSignUp").click(function(){
+    $(".clsSignUp").click(function(){  
         divId = "#signupBox";
-        $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
-        $("#email1").focus();
+
+        $().setdefaultval();
+        $(".clsSignUpEmail").focus();        
+
     });
 
     $(".create-ac-close").click(function(){
-        $(".errorMsg").text('');
         $().finish();
     });
 
      $(".login-close").click(function(){
-        $(".errorMsg").text('');        
         $().finish();
-        //$().empty(); alert(1);
     });
     
     $().addResize();
@@ -55,11 +53,9 @@ $.fn.addResize = function() {
     });
 }
 
-$.fn.addScroll = function() { 
+$.fn.addScroll = function() {
 
-     $(window).scroll(function() {                  
-//            window.innerHeight="1500";
-//            window.innerWidth="100";
+     $(window).scroll(function() {
             var arrPageSizes = $().getPageSize();
 
             $('#overlay').css({
@@ -83,13 +79,13 @@ $.fn.addScroll = function() {
 
 $.fn.addModalWindow = function(objId, createOverlay) {
 
-    $().debugLog('addModalWindow');
+    $().debugLog('___addModalWindow');
     $().debugLog(objId);
 
     divId = objId;    
 
  if(createOverlay) {
-    $('embed, object, select').css({'visibility' : 'hidden'});
+    $('embed, object, select').css({ 'visibility' : 'hidden' });
     $('body').append('<div id="overlay"></div>');
  }
     $(objId).css({display:''});
@@ -144,14 +140,6 @@ $.fn.enableKeyboardNavigation = function() {
     });
 }
 
-$.fn.enableLoginBox = function() {
-
-     if($("#toggleForgot").css('display')== 'block'){
-           $("#toggleForgot").css({display:'none'});
-           $("#toggleLogin").css({display:''});
-        }
-}
-
 
 $.fn.keyboardAction = function(objEvent) {
     var escapeKey = 27;
@@ -171,13 +159,12 @@ $.fn.keyboardAction = function(objEvent) {
 }
 
 
-$.fn.finish = function() { 
+$.fn.finish = function() {
     
     $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() {$('#overlay').remove();});
-
+    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-    $('embed, object, select').css({'visibility' : 'visible'});
+    $('embed, object, select').css({ 'visibility' : 'visible' });
 }
 
 $.fn.getPageScroll = function() {
@@ -201,3 +188,20 @@ $.fn.getPageSize = function() {
     return jqueryPageSize;
 };
 
+$.fn.setdefaultval = function() {
+    for(i=0;i<5;i++) {
+            $(arrAccount[i]).val("");
+        }
+    $(".clsSignInEmail").val("Email Address");
+    $(".clsSignUpEmail").val("Email Address");
+    $(".clsForgotEmail").val("Email Address");
+    $(".clsSignInPwdOld").removeAttr('style');
+    $(".clsSignInPwdOld").val('Password');
+    $(".clsSignInPwd").attr('style','display:none');
+    $(".clsSignUpPwdOld").removeAttr('style');
+    $(".clsSignUpPwdOld").val('Password');
+    $(".clsSignUpPwd").attr('style','display:none');
+    $(".clsSignUpRePwdOld").removeAttr('style');
+    $(".clsSignUpRePwdOld").val('Password');
+    $(".clsSignUpRePwd").attr('style','display:none');
+}

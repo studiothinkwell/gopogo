@@ -55,7 +55,7 @@ Class GP_GPAuth
      */
 
     protected static $zendMailTransport = null;
-    
+
     /**
      * @var Zend_View
      */
@@ -147,7 +147,7 @@ Class GP_GPAuth
 
     /**
      * constructor
-     * 
+     *
      */
 
     public function  __construct()
@@ -158,7 +158,7 @@ Class GP_GPAuth
 
     /**
      * Get user session data
-     * 
+     *
      * @return Array user's session data
      */
 
@@ -187,12 +187,13 @@ Class GP_GPAuth
     } // end of getFronIntance
 
     /**
-     * Initialize the configuration
+     * Get GOPOGO configuration
+     * @return object GOPOGO configuration object
      */
     protected function getConfig()
     {
         /**
-         * Load application configurations         
+         * Load application configurations
          */
         if(self::$appConfigs===null)
         {
@@ -228,7 +229,7 @@ Class GP_GPAuth
         $view->email = $email;
         $view->temp_password = $temp_password;
         $view->link = $baseurl;
-        
+
         $text = $view->render('mails/forgot_password.phtml');
 
         $lang_msg = self::getIntance()->translate->_('You have requested Gopogo - forgot password!');

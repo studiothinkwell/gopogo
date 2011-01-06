@@ -264,6 +264,9 @@ return array(
     "'%value%' is more than %max% characters long" => "'%value%' is more than %max% characters long",
 
 
+
+
+
     // Start GOPOGO messages ---------------------------------------
 
     // signin
@@ -277,7 +280,7 @@ return array(
 
     // forgot password
     "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
-    "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",    
+    "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
 
     // signup
     "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
@@ -298,5 +301,7 @@ return array(
 
 
     // End GOPOGO messages -----------------------------------------
+
+
 
 );

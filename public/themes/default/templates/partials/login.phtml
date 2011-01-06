@@ -12,33 +12,56 @@
                 <div class="sign-in-centerbg" id="sign-in-centerbg">
                     <span class="errorMsg" id="errorMsg" ></span>
                     <div id="toggleLogin">
+
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
                         <div class="sign-in-right">                            
-                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" name="email" id="email"/></div>
-                            <div class="create-ac-input2"><input type="text" onfocus="if(this.value=='Password') {this.value = '';this.type='password'}" onblur="if(this.value=='') {this.value = 'Password';this.type='text'}" value="Password"  name="passwd" id="passwd"/></div>
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignInEmail"/></div>
+                            <div class="create-ac-input2">
+                                <input type="text" onfocus="$('.clsSignInPwdOld').attr('style','display:none');$('.clsSignInPwd').removeAttr('style');$('.clsSignInPwd').focus()" value="Password" name="passwdOld" id="passwdOld" class="clsSignInPwdOld"/>
+                                <input type="password" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
+                            </div>
+
 
                             <div class="sign-in-input3">
                                     <span class="sign-in-txt">Forgot your&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
                                     <span>&nbsp;or&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
-                            </div>
+                            </div>  
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
-                            <div class="sign-in-input4"></div>
+                            <div class="sign-in-input4">
+                                  <div id="fb-root"></div>
+                                  <script src="http://connect.facebook.net/en_US/all.js"></script>
+                                  <script>
+                                     FB.init({
+                                        appId:'189229851094111', cookie:true,
+                                        status: true, xfbml:true
+                                     });
+                                  </script>
+                                  <fb:login-button perms="email,user_checkins">
+                                    Login with Facebook
+                                  </fb:login-button>
+                             </div>   
                         </div>
                        </form>
                     </div>
                     <div id="toggleForgot" style="display:none">
+
                         <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
                         <div class="sign-in-right">                           
-                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" name="email" /></div>
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" class="clsForgotEmail"/></div>
+
                             <div class="sign-in-input3">                                    
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
                                     <span>&nbsp;or&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
-                            <div class="sign-in-input4"></div>
+                            <div class="sign-in-input4">
+                                <fb:login-button perms="email,user_checkins">
+                                    Login with Facebook
+                                  </fb:login-button>
+                            </div> 
                         </div>
                        </form>
                     </div>

@@ -12,12 +12,24 @@ $this->headTitle('GOPOGO');
 
 <?php echo $this->headTitle(); ?>
 
+<?php
+/*
+$Asset::add_css('/themes/default/css/skin.css');
+$Asset::add_css('/themes/default/css/lightbox.css');
+$Asset::load_css();
+
+$Asset::add_js('/js/jquery-1.4.2.js');
+$Asset::add_js('/js/jquery.ui.core.js');
+$Asset::load_js();
+*/
+?>
+
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
- $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
- $basePath = $config->gopogo->url->base;
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');  
+ $basePath = $config->gopogo->url->base;            
 ?>
 <body >
     <?php
@@ -43,7 +55,7 @@ $this->headTitle('GOPOGO');
     ?>
     <div id="master" align="center">
 	<div id="submaster">
-            <!-- Header START-->
+            <!-- Header START-->     
             <div class="header">
                 <div class="head-mainbg">
                     <div>
@@ -55,8 +67,7 @@ $this->headTitle('GOPOGO');
                             <div class="menu3"><a href="#"></a></div>
                             <div class="menu4"><a href="#"></a></div>
                         </div>
-                        <div class="topmenu">
-
+                        <div class="topmenu">      
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
                             <a href="#" id='logout' >Logout</a> |
@@ -67,32 +78,32 @@ $this->headTitle('GOPOGO');
                             <?php } ?>
                             <a href="/index/howitworks">How it works</a>
 
-                        </div>
-                        <div class="search"><input type="text" value="" style="width:205px;"/></div>
-                        <div class="submenu">
+                     </div>
+                </div>
+                <div class="headrow2">
+                    <div class="menu">
+                        <div class="menu1"><a href="#"></a></div>
+                        <div class="menu2"><a href="#"></a></div>
+                        <div class="menu3"><a href="#"></a></div>
+                        <div class="menu4"><a href="#"></a></div>
+                    </div>
+                    <div class="search"><input type="text" value="Search for..."/></div>
+                    <div class="search_01"><input type="text" value="City, State, and Zip"/></div>
+                    <div class="submenu">
                         <div class="submenu-box">
                             <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">Featured</a></div>
+                            <div class="submenu-middle"><a href="#">My Profile</a></div>
                             <div class="submenu-right"></div>
                         </div>
                         <div class="submenu-box">
                             <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">Recommendations</a></div>
-                            <div class="submenu-right"></div>
-                        </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">All Playlists</a></div>
-                            <div class="submenu-right"></div>
-                        </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">All Places</a></div>
+                            <div class="submenu-middle"><a href="#">My Preferences</a></div>
                             <div class="submenu-right"></div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- Header END-->
 
 
