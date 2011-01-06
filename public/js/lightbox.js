@@ -1,6 +1,6 @@
 var divId; 
 $(document).ready(function(){
-   $(".CLS_sign-in").click(function(){
+   $(".clsSignIn").click(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');
         
@@ -13,7 +13,7 @@ $(document).ready(function(){
         $("#passwd").attr("value","Password");
     });
 
-    $(".CLS_sign-up").click(function(){
+    $(".clsSignUp").click(function(){
         divId = "#signupBox";
         $(".errorMsg").text('');
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
