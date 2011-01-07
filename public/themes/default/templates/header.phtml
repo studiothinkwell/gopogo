@@ -24,6 +24,11 @@ $Asset::load_js();
 */
 ?>
 
+<?php
+    // GP_Asset::addCss('/themes/default/css/skin.css');
+    // GP_Asset::combieAndLoadCss();
+?>
+
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
 </head>
@@ -69,12 +74,12 @@ $Asset::load_js();
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="javascript:void(0)" class='CLS_sign-in' >Sign in</a> or
-                            <a href="javascript:void(0)" class='CLS_sign-up' >Create an Account</a> |
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
+                            <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <?php } ?>
-                            <a href="/index/comingsoon/module/1">How it works</a>
+                            <a href="/index/howitworks">How it works</a>
 
-                     </div>
+                        </div>
                 </div>
                 <div class="headrow2">
                     <div class="menu">
