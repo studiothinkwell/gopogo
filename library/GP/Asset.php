@@ -72,8 +72,10 @@ class GP_Asset {
     public static function addCss($filePath)
     {
         // store added css file into $_cssArray
+
         array_push(self::$_cssArray, $filePath);
-	//return self::$_cssArray;
+		//print_r( self::$_cssArray ); //die;
+        return self::$_cssArray;
     }
 
     /**
@@ -93,20 +95,21 @@ class GP_Asset {
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
         $baseurl = $config->gopogo->url->base;
         for( $i = 0; $i< count($relPathArray); $i++ )
-        {
-            // set file to read
-            try {
-            // read file into string
-            $cssFileData = $cssFileData. file_get_contents(PUBLIC_PATH.$relPathArray[$i]);
+		{
+		// set file to read
+        try {
+        // read file into string
+            $cssFileData = $cssFileData. file_get_contents(PUBLIC_PATH.$relPathArray[$i]); //or die('Could not read file!');
+            //$cssFileData = file_get_contents(PUBLIC_PATH."/themes/default/css/skin.css") or die('Could not read file!');
 
-            } catch(Exception $e) {
+			} catch(Exception $e) {
 
-                    $logger = Zend_Registry::get('log');
-                    $logger->log($e->getMessage(),Zend_Log::DEBUG);
-                    // $this->translate->
-            }
+				$logger = Zend_Registry::get('log');
+				$logger->log($e->getMessage(),Zend_Log::DEBUG);
+				// $this->translate->
+			}
 
-        }
+		}
         $themePath  = new Zend_Config_Ini( APPLICATION_PATH . "/configs/application.ini",'themes');
         // @import url(...)
         // @import url('...')

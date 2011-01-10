@@ -16,6 +16,10 @@ defined('APPLICATION_ENV')
 defined('PUBLIC_PATH')
     || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
+// Define path to application directory
+defined('DOMAIN_PATH')
+    || define('DOMAIN_PATH', $_SERVER['HTTP_HOST']);
+
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),

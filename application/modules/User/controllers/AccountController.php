@@ -119,7 +119,7 @@ class User_AccountController extends Zend_Controller_Action
             if ($validFlag && $chkLength) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
-                $lang_msg = $this->translate->_($chkLength."Passowrd lenght must be between 6-16!");
+                $lang_msg = $this->translate->_("Passowrd lenght must be between 6-16!");
                 $msg .= $lang_msg;
 
                 $validFlag = false;
@@ -135,10 +135,9 @@ class User_AccountController extends Zend_Controller_Action
 
                     // check and get user data if email and password match
                     $userData = $user->getUserByEmailAndPassword($email,$passwd);
-
+                    
                     if($userData)
                     {
-
                         $status = 1;
 
                         // set user info in session
@@ -565,9 +564,71 @@ class User_AccountController extends Zend_Controller_Action
 
     } // end of signupAction
 
+    /**
+     * User signup or sign in using Facebook login id
+     * @access public
+     * @param String email : email address in post
+     * @return json object - :msg, :status
+     */
+    public function fbsigninAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $user = new Application_Model_DbTable_User();
+        // create facebook object
+        $facebook = Facebook_FbClass::getConfig();
+        $userData = $facebook->FBLogin();
+        
+        // check this email user exist or not
+        $userFlag = $user->checkUserByEmail($userData['Email']);
+        $udata['user_emailid'] = $userData['Email'];
+        $udata['FacebookId'] = $userData['UserID'];
+        $udata['UserName'] = $userData['Name'];
+        $status = 0;
+        $msg = "";
+        // create user model object        
+        if ($userFlag) {
 
+        }else { 
+            $user->fbsignup($udata);
+            $status = 1;
+            try {
+                    $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
-}
+                    $this->_helper->flashMessenger->addMessage($lang_msg);      
+
+                    $msg = $lang_msg;
+
+                    // send the welcome email
+                    // GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
+             } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+                        $lang_msg = $this->translate->_("Unknown Error!");
+                        $msg .= $lang_msg;
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_("Not Found Error!");
+                        $msg .= $lang_msg;
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
+              }
+              $this->view->msg = $msg;
+        }
+        // log error if not success
+
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        //$this->_helper->json($data, array('enableJsonExprFinder' => true));
+    }
+}  
 
 ?>
 
