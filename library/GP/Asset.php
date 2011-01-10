@@ -47,22 +47,11 @@ class GP_Asset {
     }
 
     /**
-     * @var $cssArray
+     * @var $_cssArray
      *
      */
+
     public static $_cssArray = array();
-
-
-        // will call this in footer.phtml
-        /*
-        $Asset::add_css('/themes/default/css/skin.css');
-        $Asset::add_css('/themes/default/css/lightbox.css');
-        $Asset::load_css();
-
-        $Asset::add_js('/js/jquery-1.4.2.js');
-        $Asset::add_js('/js/jquery.ui.core.js');
-        $Asset::load_js();
-        */
 
     /**
      * @param String $filePath Name of a css file with path to add e.g.( '/themes/default/css/skin.css'
@@ -72,10 +61,7 @@ class GP_Asset {
     public static function addCss($filePath)
     {
         // store added css file into $_cssArray
-
         array_push(self::$_cssArray, $filePath);
-		//print_r( self::$_cssArray ); //die;
-        return self::$_cssArray;
     }
 
     /**
@@ -118,7 +104,7 @@ class GP_Asset {
         $modifiedCssFileData = preg_replace_callback($pattern, fixCssUrls, $cssFileData);
 
         // write new compredessed css in compresseed foder
-        $filename = PUBLIC_PATH .'/compressed/style.css';
+        $filename = PUBLIC_PATH .'/css/style.css';
 
         try {
         $handle = fopen($filename, 'w');
@@ -130,16 +116,16 @@ class GP_Asset {
 
         }
         if ( fwrite($handle, $modifiedCssFileData) === false) {
-            //throw new Zend_Log_Exception("Unable to write to stream");
+           
             $msg = "Unable to write to stream";
             $logger = Zend_Registry::get('log');
             $logger->log($msg,Zend_Log::DEBUG);
          }
-        //print "<br>Data Written to $filename";
+        
         fclose($handle);
 
         // generate css link url
-        echo "<link href=" .rtrim( $baseurl.'/compressed/style.css') .' rel="stylesheet" type="text/css" />';
+        echo "<link href=" .rtrim( $baseurl.'/css/style.css') .' rel="stylesheet" type="text/css" />';
 
     }
 }
