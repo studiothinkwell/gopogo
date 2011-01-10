@@ -22,13 +22,11 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                                 <input type="text" onfocus="$('.clsSignInPwdOld').attr('style','display:none');$('.clsSignInPwd').removeAttr('style');$('.clsSignInPwd').focus()" value="Password" name="passwdOld" id="passwdOld" class="clsSignInPwdOld"/>
                                 <input type="password" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
                             </div>
-
-
                             <div class="sign-in-input3">
-                                    <span class="sign-in-txt"><?php echo $this->mess;?> Forgot your&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
-                                    <span>&nbsp;or&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp"  >create account</a>
+                                <span class="sign-in-txt"><?php echo $this->mess;?>Forgot your</span>
+                                <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
+                                <span>&nbsp;or&nbsp;</span>
+                                <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp" >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
                             <div class="sign-in-input4">                                 

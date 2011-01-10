@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL ^ E_NOTICE);
 // Define path to root directory
 defined('ROOT_PATH') || define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
 

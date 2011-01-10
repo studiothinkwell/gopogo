@@ -90,7 +90,7 @@ class GP_Asset {
 		$cssFileData = '';
 		//echo '<br>count(self::_cssArray)'. count(self::$_cssArray );
 		$relPathArray = self::$_cssArray;
-        print_r( $relPathArray ); // die;
+       
         //get baseurl
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
         $baseurl = $config->gopogo->url->base;
