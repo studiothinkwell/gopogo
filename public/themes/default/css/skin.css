@@ -447,13 +447,13 @@ body
 .thum-txt * {
     vertical-align: middle;
 }
-<!--[if lt IE 8]>
+
 .thum-txt span
 {
     display: inline-block;
     height: 100%;
 }
--->
+
 
 .thum-img
 {
@@ -551,13 +551,13 @@ body
 .link-txt * {
     vertical-align: middle;
 }
-<!--[if lt IE 8]>
+
 .link-txt span
 {
     display: inline-block;
     height: 100%;
 }
--->
+
 .link-txt a
 {
     color:#3e718c;
@@ -928,6 +928,12 @@ body
     top: 4px;
     width: 108px;
 }
+
+.footer-input12 input {
+    float: left;
+    width: 50px;
+}
+
 .footer-input13
 {
     background:url(/themes/default/images/footer-icons.png) no-repeat scroll 20px -1px transparent;
@@ -937,6 +943,13 @@ body
     top: 4px;
     width:137px;
 }
+
+.footer-input13 input {
+    float: left;
+    width: 90px;
+    height: 15px;
+}
+
 .footer-input-option
 {
     position:relative;
@@ -1387,23 +1400,23 @@ border:1px solid red;
     border:0px solid red;
 }
 .errorMsg {
-    color: #FF0000;
+/*    color: #FF0000;
     float: left;
     font-size: 12px;
     font-weight: 600;
     margin-left: 12px;
     padding-top: 5px;
-    position: relative;
+    position: relative;*/
 }
 .errorMsg1 {
-    color: #FF0000;
+/*    color: #FF0000;
     float: left;
     font-size: 12px;
     font-weight: 600;
     margin-left: 0px;
     padding-top: 0px;
     padding-bottom: 2px;
-    position: relative;
+    position: relative;*/
 }
 
 
@@ -1469,3 +1482,14 @@ border:1px solid red;
     line-height:40px;
     text-align: center;
     }
+
+.dropdown-bg {
+    background: url("/themes/default/images/icons.png") no-repeat scroll -6px -172px transparent;
+    float: left;
+    height: 22px;
+    margin: 5px 0 0 242px;
+    position: relative;
+    right: 230px;
+    width: 108px;
+}
+
