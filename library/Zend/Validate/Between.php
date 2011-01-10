@@ -220,4 +220,5 @@ class Zend_Validate_Between extends Zend_Validate_Abstract
         }
         return true;
     }
+
 }

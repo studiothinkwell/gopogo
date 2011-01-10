@@ -9,7 +9,8 @@ $(document).ready(function(){
         $().enableLoginBox();        
         $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );      
         $().setdefaultval();
-        $("#email").focus();                
+        $("#email").focus();
+        $(".fb_button_text").text('');
     });
 
     $(".clsSignUp").click(function(){
@@ -71,9 +72,6 @@ $.fn.addScroll = function() {
     
 
 }
-
-
-
 
 $.fn.addModalWindow = function(objId, createOverlay) {
 
@@ -210,4 +208,39 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpRePwdOld").val('Password');
     $(".clsSignUpRePwd").attr('style','display:none');
 }
+
+$(".create-ac-head").mousemove(function(){
+
+	$("#signupBox").draggable({
+			containment: 'document',
+			start: function(event, ui) {
+
+			},
+			drag: function(event, ui) {
+
+			},
+			stop: function(event, ui) {
+
+			}
+		});
+
+});
+
+$(".create-ac-head").mousemove(function(){
+
+	$("#loginBox").draggable({
+			containment: 'document',
+			start: function(event, ui) {
+
+			},
+			drag: function(event, ui) {
+
+			},
+			stop: function(event, ui) {
+
+			}
+		});
+
+});
+
 

@@ -82,7 +82,7 @@ class User_AccountController extends Zend_Controller_Action
 
             // checking for valid email
             //*
-            if (Zend_Validate::is($email, 'EmailAddress')) { $lang_msg = $this->translate->_("Valid !");
+            if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
             } else {
                 //$msg .= "Enter valid email!";
@@ -113,6 +113,7 @@ class User_AccountController extends Zend_Controller_Action
 
             $passwd = $formData['passwd'];
 
+            
             // check length of passowrd */
             $chkLength = Zend_Validate::is( strlen($passwd), 'Between', array('min' => 6, 'max' => 16));
             if ($validFlag && $chkLength) {
@@ -123,6 +124,7 @@ class User_AccountController extends Zend_Controller_Action
 
                 $validFlag = false;
             }
+            
 
             if($validFlag){
 
@@ -144,7 +146,7 @@ class User_AccountController extends Zend_Controller_Action
 
                         // other data
 
-                        $lang_msg = $this->translate->_('Welcome! You have Signed in Successfully!');
+                        $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
@@ -167,7 +169,7 @@ class User_AccountController extends Zend_Controller_Action
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
-                        $msg.= $lang_msg;
+                        $msg = $lang_msg;
                     }
 
                 } catch (Some_Component_Exception $e) {
@@ -192,7 +194,6 @@ class User_AccountController extends Zend_Controller_Action
                 $this->view->msg = $msg;
 
             }else{
-                //$this->_helper->flashMessenger->addMessage($msg);
                 $this->view->msg = $msg;
             }
         } // end of es post
@@ -451,9 +452,9 @@ class User_AccountController extends Zend_Controller_Action
             $passwd = $formData['passwd']; //$form->getValue('passwd');
             $retype_passwd = $formData['retype_passwd'];  //$form->getValue('retype_passwd');
 
+            /*
+            // check length of passowrd
 
-            /*  
-            // check length of passowrd  
             
             if ($validFlag && Zend_Validate::is(strlen($passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
@@ -471,6 +472,8 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $br . "Retype passowrd lenght must be between 6-16!";
                 $validFlag = false;
             }
+
+
             //*/
 
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
@@ -628,3 +631,4 @@ class User_AccountController extends Zend_Controller_Action
 }  
 
 ?>
+
