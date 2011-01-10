@@ -43,8 +43,10 @@ class IndexController extends Zend_Controller_Action
     }
 
     public function indexAction()
-    {
-        // action body
+    { 
+
+        //GP_GPAuth::sendEmailSignupWelcome('mahesh@techdharma.com','12345','mahesh');
+
     }
 
     /**
@@ -100,7 +102,6 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
 
-    }
-
+    }      
     
 }

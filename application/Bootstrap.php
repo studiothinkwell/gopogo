@@ -226,13 +226,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
 
         //1.) normal
-        $zendMailTransport = new Zend_Mail_Transport_Sendmail();
+        //$zendMailTransport = new Zend_Mail_Transport_Sendmail();
 
         //2.) SMTP
 
         //$options = $this->getOption('mail');
         //Zend_Debug::dump($options);
-        /*
+        //*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
             'auth'      =>$mailConfigs->mail->params->login,

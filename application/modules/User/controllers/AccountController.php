@@ -590,7 +590,7 @@ class User_AccountController extends Zend_Controller_Action
             try {
                     $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
-                    $this->_helper->flashMessenger->addMessage($lang_msg);
+                    $this->_helper->flashMessenger->addMessage($lang_msg);      
 
                     $msg = $lang_msg;
 
@@ -625,5 +625,6 @@ class User_AccountController extends Zend_Controller_Action
 
         //$this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
-}
+}  
+
 ?>

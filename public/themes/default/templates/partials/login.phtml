@@ -28,8 +28,8 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                                     <span class="sign-in-txt"><?php echo $this->mess;?> Forgot your&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
                                     <span>&nbsp;or&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp"  >create account</a>
-                            </div>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
+                            </div>  
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
                             <div class="sign-in-input4">                                 
                                   <?php  echo $facebook->FBLogin();?>
@@ -46,7 +46,7 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                             <div class="sign-in-input3">                                    
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
                                     <span>&nbsp;or&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp"  >create account</a>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account createAccount"  >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
                             <div class="sign-in-input4">

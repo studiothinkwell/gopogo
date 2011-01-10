@@ -214,7 +214,8 @@ Class GP_GPAuth
 
     public static function sendEmailForgotPassword($email,$temp_password,$name='')
     {
-        $configs = self::getIntance()->getConfig();
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
 
         $baseurl = $configs->gopogo->url->base;
 
@@ -242,16 +243,16 @@ Class GP_GPAuth
         $reply_to = $configs->gopogo->mail->params->reply_to;
         $return_path = $configs->gopogo->mail->params->return_path;
 
-        self::getIntance()->getMailIntance()->setBodyText($subject)
+        $obj->getMailIntance()->setBodyText($subject)
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->addTo($to, $this->gpName)
-                                            ->setFrom($from, $this->gpName)
-                                            ->addCc($cc, $this->gpName)
-                                            ->addBcc($bcc, $this->gpName)
-                                            ->setReplyTo($reply_to, $this->gpName)
-                                            ->setReturnPath($return_path, $this->gpName)
+                                            ->addTo($to, $obj->gpName)
+                                            ->setFrom($from, $obj->gpName)
+                                            ->addCc($cc, $obj->gpName)
+                                            ->addBcc($bcc, $obj->gpName)
+                                            ->setReplyTo($reply_to, $obj->gpName)
+                                            ->setReturnPath($return_path, $obj->gpName)
                                             ->send(); // self::getIntance()->getMailTransport()
     } // end of sendEmailForgotPassword
 
@@ -264,7 +265,8 @@ Class GP_GPAuth
      */
     public static function sendEmailSignupWelcome($email,$passwd,$name='')
     {
-        $configs = self::getIntance()->getConfig();
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
 
         $baseurl = $configs->gopogo->url->base;
 
@@ -294,16 +296,16 @@ Class GP_GPAuth
         $reply_to = $configs->gopogo->mail->params->reply_to;
         $return_path = $configs->gopogo->mail->params->return_path;
 
-        self::getIntance()->getMailIntance()->setBodyText($subject)
+        $obj->getMailIntance()->setBodyText($subject)
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
                                             ->addTo($email, $name)
-                                            ->addTo($to, $this->gpName)
-                                            ->setFrom($from, $this->gpName)
-                                            ->addCc($cc, $this->gpName)
-                                            ->addBcc($bcc, $this->gpName)
-                                            ->setReplyTo($reply_to, $this->gpName)
-                                            ->setReturnPath($return_path, $this->gpName)
+                                            ->addTo($to, $obj->gpName)
+                                            ->setFrom($from, $obj->gpName)
+                                            ->addCc($cc, $obj->gpName)
+                                            ->addBcc($bcc, $obj->gpName)
+                                            ->setReplyTo($reply_to, $obj->gpName)
+                                            ->setReturnPath($return_path, $obj->gpName)
                                             ->send();
     } // end of sendEmailSignupWelcome
 
