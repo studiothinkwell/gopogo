@@ -1,14 +1,14 @@
 <!-- Footer START-->
 <div class="footer">
 	<div class="footer-topbg">
-        <div class="your-personal-button" style="cursor:hand"><img src="themes/default/images/your-personal-guide.png" alt="" style="border:0px;" id="your-personal-button" /></div>
+        <div class="your-personal-button" style="cursor:hand"><img src="<?php echo $this->baseurl; ?>/themes/default/images/your-personal-guide.png" alt="" style="border:0px;" id="your-personal-button" /></div>
     </div>
 <!-- Footer Middle START-->
 <?php echo $this->partial('partials/advance_search.phtml'); ?>
 <!-- Footer Middle END-->
 	<div class="footer-bottombg">
-        <div class="footerlink">
-            Copyright &copy; 2010 GoPogo LLC<a href="#">About Us </a>|<a href="#">Contact Us</a>|<a href="#">Legal</a>
+        <div class="footerlink">  
+            Copyright &copy; 2010 GoPogo LLC<a href="/index/aboutus">About Us </a>|<a href="/index/contactus">Contact Us</a>|<a href="/index/legal">Legal</a> 
         </div>
     </div>
 </div>
@@ -19,7 +19,6 @@
 echo $this->partial('partials/login.phtml'); 
 echo $this->partial('partials/signup.phtml');
 echo $this->partial('partials/message.phtml');
-echo $this->partial('partials/forgotpassword.phtml');
 ?>
 <!-- Footer Middle END-->
 <script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery-1.4.2.js"></script>

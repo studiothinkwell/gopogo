@@ -1,4 +1,6 @@
-
+<?php
+// create facebook object
+$facebook = Facebook_FbClass::getConfig(); ?>
 <!--Sign in START-->
             <div  id="loginBox" >                
                 <div class="create-ac-head" >
@@ -23,24 +25,14 @@
 
 
                             <div class="sign-in-input3">
-                                    <span class="sign-in-txt">Forgot your&nbsp;</span>
+                                    <span class="sign-in-txt"><?php echo $this->mess;?> Forgot your&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
                                     <span>&nbsp;or&nbsp;</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp"  >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
-                            <div class="sign-in-input4">
-                                  <div id="fb-root"></div>
-                                  <script src="http://connect.facebook.net/en_US/all.js"></script>
-                                  <script>
-                                     FB.init({
-                                        appId:'189229851094111', cookie:true,
-                                        status: true, xfbml:true
-                                     });
-                                  </script>
-                                  <fb:login-button perms="email,user_checkins">
-                                    Login with Facebook
-                                  </fb:login-button>
+                            <div class="sign-in-input4">                                 
+                                  <?php  echo $facebook->FBLogin();?>
                              </div>   
                         </div>
                        </form>
@@ -58,9 +50,7 @@
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
                             <div class="sign-in-input4">
-                                <fb:login-button perms="email,user_checkins">
-                                    Login with Facebook
-                                  </fb:login-button>
+                                <?php  echo $facebook->FBLogin();?>
                             </div> 
                         </div>
                        </form>

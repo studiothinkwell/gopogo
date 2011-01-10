@@ -5,11 +5,11 @@ body
 	padding:0px;
 	font-family:Arial, Helvetica, sans-serif;
 	background-color:#dedede;
-	background-image:url(../images/bg-left.png);
+	background-image:url(/themes/default/images/bg-left.png);
 	background-repeat:repeat-x;
 	background-attachment:fixed;
 }
-												/************************************** NEW Content ******************************************/												
+												/************************************** NEW Content ******************************************/
 #master
 {
 	margin:0px;
@@ -31,13 +31,13 @@ body
 	height:113px;
 	top:0px;
 	margin:0 auto;
-	z-index:99999;
+	z-index:1;
 }
 .head-mainbg
 {
 	position:relative;
 	float:left;
-	background-image:url(../images/topbg01.png);
+	background-image:url(/themes/default/images/topbg01.png);
 	background-repeat:no-repeat;
 	width:1024px;
 	height:154px;
@@ -93,7 +93,7 @@ body
 	left:30px;
 	font-size:15px;
 }
-.search input  
+.search input
 {
 	width:230px;
 	height:20px;
@@ -114,7 +114,7 @@ body
 	font-size:15px;
 }
 
-.search_01 input  
+.search_01 input
 {
 	width:230px;
 	height:20px;
@@ -145,7 +145,7 @@ body
 	left:27px;
 	width:358px;
 	height:40px;
-	background:url(../images/icons.png) no-repeat scroll 0px -243px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll 0px -243px transparent;
 }
 .menu
 {
@@ -166,7 +166,7 @@ body
 	width:118px;
 	height:61px;
 	padding-right:11px;
-	background-image:url(../images/menu1_over.png);
+	background-image:url(/themes/default/images/menu1_over.png);
 	background-repeat:no-repeat;
 }
 .menu1 a
@@ -185,7 +185,7 @@ body
 	width:118px;
 	height:61px;
 	padding-right:11px;
-	background-image:url(../images/menu1.png);
+	background-image:url(/themes/default/images/menu1.png);
 	background-repeat:no-repeat;
 }
 
@@ -196,7 +196,7 @@ body
 	width:85px;
 	height:61px;
 	padding-right:11px;
-	background-image:url(../images/menu2_over.png);
+	background-image:url(/themes/default/images/menu2_over.png);
 	background-repeat:no-repeat;
 }
 .menu2 a
@@ -214,7 +214,7 @@ body
 	width:85px;
 	height:61px;
 	padding-right:11px;
-	background-image:url(../images/menu2.png);
+	background-image:url(/themes/default/images/menu2.png);
 	background-repeat:no-repeat;
 }
 
@@ -225,7 +225,7 @@ body
 	height:61px;
 	padding-right:11px;
 	top: 4px;
-	background-image:url(../images/menu3_over.png);
+	background-image:url(/themes/default/images/menu3_over.png);
 	background-repeat:no-repeat;
 }
 .menu3 a
@@ -241,7 +241,7 @@ body
 	width:99px;
 	height:61px;
 	padding-right:11px;
-	background-image:url(../images/menu3.png);
+	background-image:url(/themes/default/images/menu3.png);
 	background-repeat:no-repeat;
 }
 
@@ -252,7 +252,7 @@ body
 	height:61px;
 	padding-right:0px;
 	top:5px;
-	background-image:url(../images/menu4_over.png);
+	background-image:url(/themes/default/images/menu4_over.png);
 	background-repeat:no-repeat;
 }
 .menu4 a
@@ -268,10 +268,9 @@ body
 	width:125px;
 	height:61px;
 	padding-right:0px;
-	background-image:url(../images/menu4.png);
+	background-image:url(/themes/default/images/menu4.png);
 	background-repeat:no-repeat;
 }
-
 .topmenu
 {
 	position:relative;
@@ -321,7 +320,7 @@ body
 	width:100%;
 	height:auto;
 	margin:0 auto;
-	background-image:url(../images/main-bg.jpg);
+	background-image:url(/themes/default/images/main-bg.jpg);
 	background-repeat:repeat-y;
 }
 .con-left
@@ -333,7 +332,7 @@ body
 	height:auto;
 	border:0px solid red;
 }
-.con-left-bg 
+.con-left-bg
 {
 	float:left;
 	background-color:#cacaca;
@@ -401,7 +400,7 @@ body
 	width:18px;
 	height:28px;
 	margin: 125px 0 0 10px;
-	background:url(../images/icons.png) no-repeat scroll -7px -101px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -7px -101px transparent;
 }
 .arrow-buton1
 {
@@ -410,9 +409,9 @@ body
 	float:left;
 	width:18px;
 	height:30px;
-	background:url(../images/icons.png) no-repeat scroll -35px -101px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -35px -101px transparent;
 }
-.con-right-bg 
+.con-right-bg
 {
     background-color: #CACACA;
     float: left;
@@ -449,7 +448,7 @@ body
     vertical-align: middle;
 }
 <!--[if lt IE 8]>
-.thum-txt span 
+.thum-txt span
 {
 	display: inline-block;
 	height: 100%;
@@ -468,7 +467,7 @@ body
 	width:111px;
 	height:26px;
 	margin-top:5px;
-	background:url(../images/icons.png) no-repeat scroll -6px -202px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;
 }
 .interest-button
 {
@@ -478,7 +477,7 @@ body
 	height:25px;
 	left: 10px;
 	margin-top:5px;
-	background:url(../images/icons.png) no-repeat scroll -2px -73px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -73px transparent;
 }
 .interest-button a
 {
@@ -493,7 +492,7 @@ body
 	float:left;
 	width:96px;
 	height:25px;
-	background:url(../images/icons.png) no-repeat scroll -2px -49px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -49px transparent;
 }
 
 .interest-button-over
@@ -504,7 +503,7 @@ body
 	height:25px;
 	left: 10px;
 	margin-top:5px;
-	background:url(../images/icons.png) no-repeat scroll -2px -49px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -2px -49px transparent;
 }
 
 .star-button
@@ -519,7 +518,7 @@ body
 	width:20px;
 	height:20px;
 	padding-left:2px;
-	background:url(../images/icons.png) no-repeat scroll -55px -23px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -55px -23px transparent;
 }
 .star-button-grey
 {
@@ -528,7 +527,7 @@ body
 	width:20px;
 	height:20px;
 	padding-left:2px;
-	background:url(../images/icons.png) no-repeat scroll -3px -23px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -3px -23px transparent;
 }
 .star-button-blue
 {
@@ -537,7 +536,7 @@ body
 	width:20px;
 	height:20px;
 	padding-left:2px;
-	background:url(../images/icons.png) no-repeat scroll -30px -23px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -30px -23px transparent;
 }
 .link-txt {
     display: table-cell;
@@ -553,7 +552,7 @@ body
     vertical-align: middle;
 }
 <!--[if lt IE 8]>
-.link-txt span 
+.link-txt span
 {
 	display: inline-block;
 	height: 100%;
@@ -568,14 +567,6 @@ body
 {
 	color:#3e718c;
 	text-decoration:underline;
-}
-
-.footer
-{
-	position:fixed;
-	width:100%;
-	height:auto;
-	bottom:0px;
 }
 /*Right side Start*/
 .con-right-ro1
@@ -620,7 +611,7 @@ body
 	float:left;
 	width:58px;
 	height:60px;
-	background:transparent url(../images/icon-right.png) no-repeat scroll -7px -6px;
+	background:transparent url(/themes/default/images/icon-right.png) no-repeat scroll -7px -6px;
 }
 .rg-thum-img-cel12
 {
@@ -628,7 +619,7 @@ body
 	float:left;
 	width:67px;
 	height:60px;
-	background:transparent url(../images/icon-right.png) no-repeat scroll -78px -4px;
+	background:transparent url(/themes/default/images/icon-right.png) no-repeat scroll -78px -4px;
 }
 .rg-thum-iconbox
 {
@@ -644,7 +635,7 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(../images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
@@ -654,13 +645,13 @@ body
 	float:left;
 	width:40px;
 	height:30px;
-	background:url(../images/thumb-icon.png) no-repeat scroll 0px -2px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll 0px -2px transparent;
 	margin-left:-11px;
 	margin-top:10px;
 }
-.rg-thum-img-cel3 
+.rg-thum-img-cel3
 {
-	background:url(../images/thumb-icon.png) no-repeat scroll -95px 0px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -95px 0px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -668,9 +659,9 @@ body
 	position:relative;
 	width:50px;
 }
-.rg-thum-img-cel33  
+.rg-thum-img-cel33
 {
-	background:url(../images/thumb-icon.png) no-repeat scroll -140px -2px transparent;
+	background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -140px -2px transparent;
 	float:left;
 	height:30px;
 	margin-left:-11px;
@@ -725,7 +716,7 @@ body
 	height:25px;
 	font-size:11px;
 	color:#363231;
-	background:url(../images/icons.png) no-repeat scroll 27px -140px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll 27px -140px transparent;
 }
 .skip-txt
 {
@@ -824,105 +815,113 @@ body
 	text-decoration:underline;
 }
 /*Right Side End*/
+.footer
+{
+    position:fixed;
+    width:100%;
+    height:auto;
+    bottom:0px;
+    left: 0px;
+}
 .footer-topbg
 {
-	position:relative;
-	background-image:url(../images/fotter-top-bg.png);
-	background-repeat:repeat-x;
-	width:100%;
-	height:34px;
-	bottom:0px;
+    position:relative;
+    background-image:url(/themes/default/images/fotter-top-bg.png);
+    background-repeat:repeat-x;
+    width:100%;
+    height:34px;
+    bottom:0px;
 }
 .footer-middle
 {
-	position:relative;
-	background-image:url(../images/footer-middle-bg.jpg);
-	background-repeat:repeat-x;
-	width:100%;
-	height:132px;
+    position:relative;
+    background-image:url(/themes/default/images/footer-middle-bg.jpg);
+    background-repeat:repeat-x;
+    width:100%;
+    height:132px;
 }
 .footer-control
 {
-	margin:auto;
-	width:530px;
+    margin:auto;
+    width:530px;
 }
 
 .footer-cel1
 {
-	position:relative;
-	float:left;
-	width:140px;
-	height:120px;
-	border-right:1px solid #FFFFFF;
+    position:relative;
+    float:left;
+    width:140px;
+    height:120px;
+    border-right:1px solid #FFFFFF;
 }
 .footer-cel2
 {
-	position:relative;
-	float:left;
-	width:160px;
-	height:120px;
-	left:20px;
-	border-right:1px solid #FFFFFF;
+    position:relative;
+    float:left;
+    width:160px;
+    height:120px;
+    left:20px;
+    border-right:1px solid #FFFFFF;
 }
 .footer-cel3
 {
-	position:relative;
-	float:left;
-	width:160px;
-	height:120px;
-	left:40px;
-	border-right:0px solid #FFFFFF;
+    position:relative;
+    float:left;
+    width:160px;
+    height:120px;
+    left:40px;
+    border-right:0px solid #FFFFFF;
 }
 
 .footer-header-txt
 {
-	position:relative;
-	float:left;
-	font-size:14px;
-	color:#FFF;
-	font-weight:600;
-	width:100%;
+    position:relative;
+    float:left;
+    font-size:14px;
+    color:#FFF;
+    font-weight:600;
+    width:100%;
 }
 .footer-lefticon1
 {
-	position:relative;
-	float:left;
-	width:30px;
-	height:100px;
-	top:8px;
-	left:20px;
-	background:url(../images/footer-icons.png) no-repeat scroll 0px -2px transparent;
+    position:relative;
+    float:left;
+    width:30px;
+    height:100px;
+    top:8px;
+    left:20px;
+    background:url(/themes/default/images/footer-icons.png) no-repeat scroll 0px -2px transparent;
 }
 .footer-lefticon2
 {
-	position:relative;
-	float:left;
-	width:30px;
-	height:100px;
-	top:8px;
-	left:20px;
-	background:url(../images/footer-icons.png) no-repeat scroll -40px -2px transparent;
+    position:relative;
+    float:left;
+    width:30px;
+    height:100px;
+    top:8px;
+    left:20px;
+    background:url(/themes/default/images/footer-icons.png) no-repeat scroll -40px -2px transparent;
 }
 
 .footer-input-box
 {
-	position:relative;
-	float:left;
-	width:110px;
-	left:22px;
-	top:4px;
+    position:relative;
+    float:left;
+    width:110px;
+    left:22px;
+    top:4px;
 }
 .footer-input1
 {
-	position:relative;
-	float:left;
-	width:70px; 
-	height:15px;
-	top:4px;
+    position:relative;
+    float:left;
+    width:70px;
+    height:15px;
+    top:4px;
 }
 .footer-input12
 {
-	background:url(../images/footer-icons.png) no-repeat scroll -23px -104px transparent;
+    background:url(/themes/default/images/footer-icons.png) no-repeat scroll -23px -104px transparent;
     float: left;
     height:33px;
     position: relative;
@@ -931,7 +930,7 @@ body
 }
 .footer-input13
 {
-	background:url(../images/footer-icons.png) no-repeat scroll 20px -1px transparent;
+    background:url(/themes/default/images/footer-icons.png) no-repeat scroll 20px -1px transparent;
     float: left;
     height:25px;
     position: relative;
@@ -940,84 +939,70 @@ body
 }
 .footer-input-option
 {
-	position:relative;
-	float:left;
-	width:25px; 
-	height:15px;
-	background:url(../images/footer-icons.png) no-repeat scroll -85px -37px transparent;
+    position:relative;
+    float:left;
+    width:25px;
+    height:15px;
+    background:url(/themes/default/images/footer-icons.png) no-repeat scroll -85px -37px transparent;
 }
 .footer-menu
 {
-	position:relative;
-	float:left;
-	padding-top:5px;
+    position:relative;
+    float:left;
+    padding-top:5px;
 }
 .footer-white-txt
 {
-	position:relative;
-	width:60px;
-	float:left;
-	font-size:12px;
-	color:#FFF;
-	font-weight:600;
+    position:relative;
+    width:60px;
+    float:left;
+    font-size:12px;
+    color:#FFF;
+    font-weight:600;
 }
 .footer-input2
 {
-	position:relative;
-	float:left;
-	width:70px; 
-	height:15px;
-	top:22px;
+    position:relative;
+    float:left;
+    width:70px;
+    height:15px;
+    top:22px;
 }
 .footer-input3
 {
-	position:relative;
-	float:left;
-	width:70px; 
-	height:15px;
-	top:40px;
+    position:relative;
+    float:left;
+    width:70px;
+    height:15px;
+    top:40px;
 }
 .footer-bottombg
 {
-	position:relative;
-	width:100%;
-	height:34px;
-	background-color:#5ea6bf
+    position:relative;
+    width:100%;
+    height:34px;
+    background-color:#5ea6bf
 }
 .your-personal-button
 {
-/*	
-	float:left;
-	top:-20px;
-	left:35%;*/
-	width:350px;
-	height:43px;
-	margin:0px auto;
-	z-index:999999;
-	top:-20px;
-	position:relative;
-	
-}
-.arrow-up
-{
-   background: url("../images/icons.png") no-repeat scroll -81px -23px transparent;
-    border: 0 solid red;
-    float: left;
-    height: 24px;
-    left: 282px;
-    position: absolute;
-    top: 10px;
-    width: 20px;
-    z-index: 999999;
+/*
+    float:left;
+    top:-20px;
+    left:35%;*/
+    width:350px;
+    height:43px;
+    margin:0px auto;
+    top:-20px;
+    position:relative;
+
 }
 .your-personal-button a
 {
-	position:relative;
-	float:left;
-	width:350px;
-	height:43px;
-	z-index:999999;
-	outline:none;
+    position:relative;
+    float:left;
+    width:350px;
+    height:43px;
+    outline:none;
 }
 .footerlink
 {
@@ -1030,6 +1015,7 @@ body
 	width:100%;
 	padding-left:10px;
 	padding-right:10px;
+        padding-top: 10px;
 	text-decoration:none;
 }
 .footerlink a
@@ -1052,278 +1038,422 @@ body
 }
 .blankdiv
 {
-	position:relative;
-	float:left;
-	width:100%;
-	height:75px;
+    position:relative;
+    float:left;
+    width:100%;
+    height:75px;
 }
-												/*************************************Create Account START**************************************/
+
+                                                /*************************************Create Account START**************************************/
 .create-ac-box
 {
-	position:relative;
-	float:left;
-	width:588px;
-	height:341px;
-	border:0px solid red;
+    position:relative;
+    float:left;
+    width:588px;
+    height:341px;
+    border:1px solid red;
 }
+
+#signupBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:601px;
+    height:352px;
+    border:0px solid red;
+    display: none;
+    top: 0px;
+    left: 0px;
+}
+
 .create-ac-head
 {
-	position:relative;
-	float:left;
-	width:100%;
-	height:53px;
+    position:relative;
+    float:left;
+    width:100%;
+    height:53px;
+    cursor: move;
 }
 .create-ac-leftbg
 {
-	position:relative;
-	float:left;
-	width:23px;
-	height:53px;
-	background:url(../images/Create-account.png) no-repeat scroll 2px 2px transparent;
+    position:relative;
+    float:left;
+    width:21px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
 .create-ac-middlebg
 {
-	position:relative;
-	float:left;
-	width:520px;
-	height:51px;
-	top:2px;
-	background-image:url(../images/Create-account-tbg.png);
-	background-repeat:repeat-x;
+    position:relative;
+    float:left;
+    width:522px;
+    height:51px;
+    top:2px;
+    background-image:url(/themes/default/images/Create-account-tbg.png);
+    background-repeat:repeat-x;
 }
 .create-ac-rightbg
 {
-	position:relative;
-	float:left;
-	width:45px;
-	height:53px;
-	background:url(../images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    position:relative;
+    float:left;
+    width:45px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    cursor: move;
 }
 .create-ac-close
 {
-	position:relative;
-	float:left;
-	width:30px;
-	height:53px;
-	background:url(../images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    position:absolute;
+    float:left;
+    left: 545px;
+    width:30px;
+    height:31px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
 }
 .create-ac-centerbg
 {
-	position:relative;
-	float:left;
-	width:584px;
-	min-height:250px;
-	background-image:url(../images/Create-account-centerbg.png);
-	background-repeat:repeat-y;
+    position:relative;
+    float:left;
+    width:584px;
+    min-height:243px;
+    background-image:url(/themes/default/images/Create-account-centerbg.png);
+    background-repeat:repeat-y;
 }
 .create-ac-bottombg
 {
-	position:relative;
-	float:left;
-	width:584px;
-	min-height:250px;
-	background:url(../images/Create-account.png) no-repeat scroll -301px -12px transparent;
+    position:relative;
+    float:left;
+    width:583px;
+    min-height:50px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -302px -10px transparent;
 }
 .create-ac-left
 {
-	position:relative;
-	float:left;
-	width:39%;
-	height:auto;
-	margin:20px;
+    position:relative;
+    float:left;
+    width:39%;
+    height:auto;
+    margin:20px;
 }
 .create-ac-right
 {
-	position:relative;
-	float:left;
-	width:50%;
-	height:auto;
-	border:0px solid red;
-	top:20px;
+    position:relative;
+    float:left;
+    width:50%;
+    height:auto;
+    border:0px solid red;
+    top:20px;
 }
 .create-ac-input1
 {
-	position:relative;
-	float:left;
+    position:relative;
+    float:left;
 }
 .create-ac-input2
 {
-	position:relative;
-	float:left;
-	top:20px;
+    position:relative;
+    float:left;
+    top:20px;
 }
 .create-ac-input3
 {
-	position:relative;
-	float:left;
-	top:30px;
-	font-size:12px;
-	font-weight:600;
-	color:#757575;
+    position:relative;
+    float:left;
+    top:30px;
+    font-size:12px;
+    font-weight:600;
+    color:#757575;
+    width: 100%;
 }
 .create-ac-input4
 {
-	position:relative;
-	float:left;
-	width:162px;
-	height:29px;
-	border:0px solid red;
-	top:38px;
-	background:url(../images/Create-account.png) no-repeat scroll -130px -29px transparent;
+    position:relative;
+    float:left;
+    width:162px;
+    height:29px;
+    border:0px solid red;
+    top:38px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent;
 }
 .create-ac-txt
 {
-	position:relative;
-	float:left;
-	font-size:12px;
-	color:#6c6c6c;
+    position:relative;
+    float:left;
+    font-size:12px;
+    color:#6c6c6c;
 }
 .create-ac-login
 {
-	position:relative;
-	float:left;
-	font-size:12px;
-	color:#538ea3;
-	text-decoration:underline;
+     position:relative;
+     float:left;
+    font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
 }
 .create-ac-create-but
 {
-	position:relative;
-	float:left;
-	width:112px;
-	height:23px;
-	left:4px;
-	background:url(../images/Create-account.png) no-repeat scroll -134px -4px transparent;
+    position:relative;
+    float:left;
+    width:112px;
+    height:23px;
+    left:4px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -134px -4px transparent;
 }
 
 
-												/**************************************Create Account END**************************************/
-												/************************************** Sign in START **************************************/
+
+                                                /**************************************Create Account END**************************************/
+                                                /************************************** Sign in START **************************************/
+
+#loginBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:363px;
+    height:302px;
+    border:0px solid red;
+    display: none;
+    top:0px;
+    left:0px
+}
+.sign-in-leftbg
+{
+    position:relative;
+    float:left;
+    width:21px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
+}
+
+.create-ac-txt
+{
+    font-size:12px;
+    color:#6c6c6c;
+}
+
+.sign-in-create-account
+{
+    font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
+}
+
+.sign-in-input3
+{
+    position:relative;
+    float:left;
+    top:30px;
+    font-size:12px;
+    font-weight:600;
+    color:#757575;
+    width: 100%;
+}
 .sign-in-centerbg
 {
-	position:relative;
-	float:left;
-	width:350px;
-	min-height:185px;
-	background-image:url(../images/sign-in-bg-rep.png);
-	background-repeat:repeat-y;
+    position:relative;
+    float:left;
+    width:346px;
+    min-height:185px;
+    background-image:url(/themes/default/images/sign-in-bg-rep.png);
+    background-repeat:repeat-y;
 }
 .sign-in-middlebg
 {
-	position:relative;
-	float:left;
-	width:283px;
-	height:51px;
-	top:2px;
-	background-image:url(../images/Create-account-tbg.png);
-	background-repeat:repeat-x;
+    position:relative;
+    float:left;
+    width:285px;
+    height:51px;
+    top:2px;
+    background-image:url(/themes/default/images/Create-account-tbg.png);
+    background-repeat:repeat-x;
+}
+.sign-in-rightbg
+{
+    position:relative;
+    float:left;
+    width:38px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    cursor: move;
 }
 .sign-in-bottombg
 {
-	position:relative;
-	float:left;
-	width:346px;
-	height:57px;
-	background:url(../images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
+    position:relative;
+    float:left;
+    width:346px;
+    height:57px;
+    background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
 }
 .sign-in-right
 {
-	position:relative;
-	float:left;
-	width:100%;
-	height:auto;
-	border:0px solid red;
-	top:20px;
-	left:23px;
+    position:relative;
+    float:left;
+/*    width:93%;*/
+    height:auto;
+    border:0px solid red;
+    top:8px;
+    left:12px;
 }
-
-
-												/************************************** Sign in END **************************************/
-												
-												/**************************************Input styles START**************************************/
-.create-ac-right input 
+.sign-in-button
 {
-	width:290px;
-	height:28px;
-	font-size:15px;
-	font-weight:600;
-	color:#a9a9a9;
-	border:1px solid #a9a9a9;
+    position:relative;
+    float: left;
+    padding-top: 12px;
+    left: 240px;
+
+
 }
-.sign-in-right input 
+.sign-in-input4
 {
-	width:290px;
-	height:28px;
-	font-size:15px;
-	font-weight:600;
-	color:#a9a9a9;
-	border:1px solid #a9a9a9;
+    position:relative;
+    float:left;
+    width:162px;
+    height:29px;
+    border:0px solid red;    
+    clear: both;
+}
+.login-close
+{
+    position:absolute;
+    float:left;
+    left: 306px;
+    width:30px;
+    height:31px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
 }
 
-												/**************************************Input styles END**************************************/
-												/**************************************TEXT Styles START**************************************/
+                                                /************************************** Sign in END **************************************/
+
+                                                /**************************************Input styles START**************************************/
+.create-ac-right input
+{
+    width:290px;
+    height:28px;
+    font-size:15px;
+    font-weight:600;
+    color:#a9a9a9;
+    border:1px solid #a9a9a9;
+}
+.sign-in-right input
+{
+    width:290px;
+    height:28px;
+    font-size:15px;
+    font-weight:600;
+    color:#a9a9a9;
+    border:1px solid #a9a9a9;
+}
+
+                                                /**************************************Input styles END**************************************/
+                                                /**************************************TEXT Styles START**************************************/
 .create-ac-head-txt
 {
-	font-size:26px;
-	line-height:50px;
-	color:#FFF;
-	text-align:left;
+    font-size:26px;
+    line-height:50px;
+    color:#FFF;
+    text-align:left;
 }
-												/**************************************TEXT Styles END**************************************/
+                                                /**************************************TEXT Styles END**************************************/
 
-@media screen and (-webkit-min-device-pixel-ratio:0)
-{
-@font-face 
-{
-font-family: Arial;
-src: url('../images/arial.ttf');
-font-weight:600;
+#your-personal-button{
+cursor: pointer;
+border:1px solid red;
 }
-.thum-txt {
+
+
+.h15{
+    height: 15px;
+}
+
+.clear{
+    clear:both;
+}
+
+/************** Message in START *********************/
+#messageBox
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:346px;
+    height:302px;
+    border:0px solid red;
+}
+.errorMsg {
+    color: #FF0000;
+    float: left;
     font-size: 12px;
     font-weight: 600;
+    margin-left: 12px;
+    padding-top: 5px;
+    position: relative;
 }
+.errorMsg1 {
+    color: #FF0000;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 2px;
+    position: relative;
 }
-												/**************************************Error Message START**************************************/
 
-.info, .success, .warning, .error, .validation {
-border: 1px solid;
-margin: 10px 0px;
-padding:15px 10px 15px 50px;
-background-repeat: no-repeat;
-background-position: 10px center;
-text-align:left;
-font-size:12px;
+
+
+
+/************** Message in END *********************/
+/***************** For Chrome  Start*********************/
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+    @font-face
+    {
+        font-family: Arial;
+        src: url('/themes/default/images/arial.ttf');
+        font-weight:600;
+    }
+    .thum-txt
+    {
+        font-size: 12px;
+        font-weight: 600;
+    }
 }
 
-.info {
-color: #00529B;
-background:url(../images/icons.png) no-repeat scroll -143px -10px transparent;
-background-color: #BDE5F8;
-height:6px;
-line-height:9px;
+/***************** For Chrome End*********************/
+/***************** For Coming SOON *********************/
+.coming-soon {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width:1000px;
+    height:345px;
+}
+.coming-soon * {
+    vertical-align: middle;
+}
+/*\*//*/
+.coming-soon {
+    display: block;
+}
+.coming-soon span {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+/**/
 
+.coming-soon span
+{
+    display: inline-block;
+    height: 100%;
 }
-.success {
-color: #4F8A10;
-background:url(../images/icons.png) no-repeat scroll -143px -59px transparent;
-background-color: #DFF2BF;
-line-height:9px;
-}
-.warning {
-color: #9F6000;
-background:url(../images/icons.png) no-repeat scroll -143px -109px transparent;
-background-color: #FEEFB3;
-line-height:9px;
-}
-.error {
-color: #D8000C;
-background:url(../images/icons.png) no-repeat scroll -143px -162px transparent;
-background-color: #FFBABA;
-line-height:9px;
-}
-												/**************************************Error Message END**************************************/
-
 .offer-icon
 {
 	position:absolute;
@@ -1333,20 +1463,9 @@ line-height:9px;
 	height: 56px;
 	width:60px;
 	border:opx solid red;
-	background:url(../images/icons.png) no-repeat scroll -194px -188px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -194px -188px transparent;
 	font-size:14px;
 	font-weight:bold;
 	line-height:40px;
-	text-shadow:#FFF;
-}
-.dropdown-bg
-{
-	position:relative;
-	float:left;
-	right:230px;
-	background:url(../images/icons.png) no-repeat scroll -6px -172px transparent;
-	background-repeat:no-repeat;
-	width:108px;
-	height:22px;
-	margin: 5px 0 0 242px;
-}
+        text-align: center;
+	}

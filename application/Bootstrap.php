@@ -287,15 +287,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         
         $indexController  = Zend_Controller_Front::getInstance();
-
-        $route = new Zend_Controller_Router_Route(
-                                    'coming-soon/:module',array(
-                                                    'controller' => 'index',
-                                                    'module' => 'default' ,
-                                                    'action' => 'comingsoon'
-                                                   ));
-        $indexController->getRouter()->addRoute('coming-soon',$route);
-    
+        $route = new Zend_Controller_Router_Route('about-us',array('controller' => 'index', 'module' => 'default', 'action' => 'aboutus'));
+        $indexController->getRouter()->addRoute('about-us',$route);    
 
     }
 
