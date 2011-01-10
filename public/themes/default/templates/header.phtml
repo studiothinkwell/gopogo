@@ -4,7 +4,10 @@ $this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
 $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle('GOPOGO');
-//echo $this->doctype(); ?>
+//echo $this->doctype();
+// create facebook object
+$facebook = Facebook_FbClass::getConfig();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,6 +16,7 @@ $this->headTitle('GOPOGO');
 <?php echo $this->headTitle(); ?>
 
 <?php
+
 /*
 $Asset::add_css('/themes/default/css/skin.css');
 $Asset::add_css('/themes/default/css/lightbox.css');
@@ -25,12 +29,13 @@ $Asset::load_js();
 ?>
 
 <?php
-    // GP_Asset::addCss('/themes/default/css/skin.css');
-    // GP_Asset::combieAndLoadCss();
+     GP_Asset::addCss('/themes/default/css/skin.css');
+     GP_Asset::addCss('/themes/default/css/lightbox.css');
+     GP_Asset::combieAndLoadCss();
 ?>
 
-<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/skin.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" />
+
+<!-- <link href="<?php //echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" /> -->
 </head>
 <?php
  $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
@@ -74,7 +79,15 @@ $Asset::load_js();
                             <a href="#" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
+                            <?php
+                            $fbArray = $facebook->FBLogin();
+                            
+                            if(is_array($facebook->FBLogin())) { ?>
+                            Welcome <?php echo $fbArray['Email'];                            
+                            $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . $this->url(array('module'=>'default','controller'=>'facebook','action'=>'logout'));
+                            echo '<a href="'.$facebook->getLogoutUrl($logout).'">Logout</a>';
+                            } else { ?>
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php } ?>
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <?php } ?>
                             <a href="/index/howitworks">How it works</a>

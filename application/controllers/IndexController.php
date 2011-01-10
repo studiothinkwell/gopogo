@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Index Controller for Default Actions
  *
@@ -37,14 +38,14 @@ class IndexController extends Zend_Controller_Action
         $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
         $baseurl = $config->gopogo->url->base;
         $this->view->baseurl = $baseurl;
+
+        
     }
 
     public function indexAction()
-    {
-        // action body
+    { 
 
-
-        GP_GPAuth::sendEmailSignupWelcome('mahesh@techdharma.com','12345','mahesh');
+        //GP_GPAuth::sendEmailSignupWelcome('mahesh@techdharma.com','12345','mahesh');
 
     }
 
@@ -101,5 +102,6 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
 
-    }
+    }      
+    
 }

@@ -3,7 +3,7 @@ var divId;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
 
-  $(".clsSignIn").click(function(){
+  $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
         $(".errorMsg").text('');        
         $().enableLoginBox();        

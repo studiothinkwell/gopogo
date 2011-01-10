@@ -203,6 +203,51 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
     } // end of signup
 
     /**
+     * User signup new user
+     * @access public
+     * @param String email : email address
+     * @param String passwd : password
+     */
+
+    public function fbsignup($udata)
+    {
+        $data = $udata;
+
+        $username = substr($data['user_emailid'], 0, strpos($data['user_emailid'],'@'));
+
+        $udata = array(
+                        1
+                        ,   0
+                        ,   ''
+                        ,   $data['user_emailid']
+                        ,   $username
+                        ,   ''
+                        ,   ''
+                        ,   ''
+                    );
+        try {   
+                $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+    } // end of signup
+
+    /**
      * User : check user exists by email or not
      * @access public
      * @param String email : email address
