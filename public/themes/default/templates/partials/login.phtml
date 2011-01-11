@@ -13,7 +13,7 @@ if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
     }
 ?>
 <!--Sign in START-->
-            <div  id="loginBox" >                
+            <div  id="loginBox" >
                 <div class="create-ac-head" >
                     <div class="sign-in-leftbg"></div>
                     <div class="sign-in-middlebg">
@@ -27,7 +27,7 @@ if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
                     <div id="toggleLogin">
 
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
-                        <div class="sign-in-right">                            
+                        <div class="sign-in-right">
                             <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignInEmail"/></div>
                             <div class="create-ac-input2">
                                 <input type="text" onfocus="$('.clsSignInPwdOld').attr('style','display:none');$('.clsSignInPwd').removeAttr('style');$('.clsSignInPwd').focus()" value="Password" name="passwdOld" id="passwdOld" class="clsSignInPwdOld"/>
@@ -35,7 +35,7 @@ if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
                             </div>
                             <div class="sign-in-input3">
                                     <span class="sign-in-txt"><?php echo $this->mess; ?> Forgot your&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
                                     <span>&nbsp;or&nbsp;</span>
                                     <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount"  >create account</a>
                             </div>  
@@ -57,16 +57,15 @@ if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
                                     <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
                                     <span>&nbsp;or&nbsp;</span>
                                     <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount"  >create account</a>
-
                             </div>
-                            <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
+                            <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
                             <div class="sign-in-input4">
                                 <?php if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
                             </div> 
                         </div>
                        </form>
-                    </div>
+                    </div>                    
                 </div>
-                <div class="sign-in-bottombg"></div>                
+                <div class="sign-in-bottombg"></div>
             </div>
 <!--Sign in END-->

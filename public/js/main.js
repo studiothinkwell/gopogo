@@ -20,25 +20,14 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $(".footer-middle").slideToggle("show");
     });
 
-/**
- * This will apply toggle effect to forgot password functionality of login modal window
- */
-    $("#forgotPassword").click(function(){
-            $("#errorMsg").text('');
-            $("#toggleLogin").slideToggle("hide");
-            $("#toggleForgot").slideToggle("show");
-            //==== CALL FUNCTION TO SET DEFAULT VALUES ====//
-            $().setdefaultval();
-            $(".clsForgotEmail").focus();
-    });
-    
+
 /**
  * This will apply toggle effect to login functionality of login modal window
  */
      $("#loginPassword").click(function(){
             $("#errorMsg").text('');
-            $("#toggleForgot").slideToggle("hide");
-            $("#toggleLogin").slideToggle("show");
+           // $("#toggleForgot").slideToggle("hide");
+           // $("#toggleLogin").slideToggle("show");
             $().setdefaultval();
             $(".clsSignInEmail").focus();
     });
@@ -53,24 +42,12 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
            function(){
                        $(this).removeClass('selected');
                      }
-       );
-
-
-    /*
-    // add forgot your password event
-    $(".Forgot-Your-Password").click(function(){
-        $().debugLog('Forgot-Your-Password');
-        $().finish();        
-        $().addModalWindow('forgotBox');
-    });
-    
-    */
-
+       );    
     
     // add create account event
     $(".clsSignUp").click(function(){
         $("#loginBox").css({display:'none'});        
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 0 );
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
         $().setdefaultval();
         $(".clsSignUpEmail").focus();
     });
@@ -78,7 +55,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
     // add signin  event
     $(".login").click(function(){       
         $("#signupBox").css({display:'none'});        
-        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg", 0 );
+        $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg");
         $().setdefaultval();
         $(".clsSignInEmail").focus();
     });
@@ -153,9 +130,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().finish();
 
             // redirect to profile
-            $().redirect(app.gopogo.profile_url);    
-            
-           
+            $().redirect(app.gopogo.profile_url);                       
         };
 
         // login welcome
@@ -204,8 +179,6 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 window.location = url;
         }
 
-
-
 // functions to handle the signup
         // do signup
         $.fn.doSignup = function(){
@@ -230,8 +203,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().signupSuccess(resp);
                     }
                     else
-                    {
-                       
+                    {                       
                         $().signupFail(resp);
                     }                   
                 },
@@ -411,10 +383,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             {
                 $().errorMessage(resp.msg,'errorMsg');
             }
-        };
-
-
-        
+        };        
 
 // some utilities
 

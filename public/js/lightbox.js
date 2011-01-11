@@ -7,15 +7,26 @@ $(document).ready(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');        
         $().enableLoginBox();        
-        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );      
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
     });
 
+  $(".clsForgot").click(function(){
+        divId = "#forgotBox";
+        $("#loginBox").css({display:'none'}); 
+        $("#toggleForgot").css({display:''});
+        $(".errorMsg").text('');
+        $().enableLoginBox();
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
+        $().setdefaultval();
+        $("#email").focus();       
+    });
+
     $(".clsSignUp").click(function(){
         divId = "#signupBox";
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
         $(".clsSignUpEmail").focus();
         $(".fb_button_text").text('');
@@ -74,17 +85,18 @@ $.fn.addScroll = function() {
 
 }
 
-$.fn.addModalWindow = function(objId, createOverlay) {
+$.fn.addModalWindow = function(objId) {
 
-    $().debugLog('___addModalWindow');
+    $().debugLog('addModalWindow');
     $().debugLog(objId);
 
-    divId = objId;    
+    divId = objId;   
 
- if(createOverlay) {
-    $('embed, object, select').css({ 'visibility' : 'hidden' });
-    $('body').append('<div id="overlay"></div>');
- }
+     if( $("#overlay").length <= 0 )
+     {
+        $('embed, object, select').css({ 'visibility' : 'hidden' });
+        $('body').append('<div id="overlay"></div>');
+     }
     $(objId).css({display:''});
 
     var arrPageSizes = $().getPageSize();
@@ -109,12 +121,10 @@ $.fn.addModalWindow = function(objId, createOverlay) {
         $().finish();
     });
 
-    $().enableKeyboardNavigation();
-
-    
+    $().enableKeyboardNavigation();    
 }
 
-$.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
+$.fn.displayModalBox = function(mainBox, titleBox, container ) {
        
         $(mainBox).draggable();
 
@@ -126,7 +136,7 @@ $.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
                 $(mainBox).draggable('disable');
             });
 
-        $().addModalWindow(mainBox, createOverlay);
+        $().addModalWindow(mainBox);
 }
 
 
@@ -139,8 +149,7 @@ $.fn.enableKeyboardNavigation = function() {
 
 $.fn.enableLoginBox = function() {
 
-     if($("#toggleForgot").css('display')== 'block'){
-           $("#toggleForgot").css({display:'none'});
+     if($("#toggleForgot").css('display')== 'block'){           
            $("#toggleLogin").css({display:''});
         }
 }
@@ -243,5 +252,3 @@ $(".create-ac-head").mousemove(function(){
 		});
 
 });
-
-

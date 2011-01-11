@@ -343,7 +343,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
             $stmt->bindParam('passwd', $encpasswd);
             $stmt->execute();
             $rowArray = $stmt->fetch();
-
+//print_r($rowArray);exit;
             $stmt->closeCursor();
 
         } catch (Some_Component_Exception $e) {
