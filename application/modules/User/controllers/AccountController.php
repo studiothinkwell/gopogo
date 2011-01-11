@@ -582,39 +582,101 @@ class User_AccountController extends Zend_Controller_Action
         $udata['user_emailid'] = $userData['Email'];
         $udata['FacebookId'] = $userData['UserID'];
         $udata['UserName'] = $userData['Name'];
+        // create random password
+        $temp_password = $user->createRandomKey(6);
+        $enctemp_password = $user->encryptPassword($temp_password);
+        $udata['TempPass'] = $enctemp_password;
         $status = 0;
         $msg = "";
         // create user model object        
-        if ($userFlag) {
-
+        if ($userFlag == 20) {
+                echo "here";exit;
         }else { 
-            $user->fbsignup($udata);
-            $status = 1;
+            $status = $user->fbsignup($udata);
+
             try {
                     $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
-                    $this->_helper->flashMessenger->addMessage($lang_msg);      
+                    // create user model object
+                    $user = new Application_Model_DbTable_User();
 
-                    $msg = $lang_msg;
+                    // check and get user data if email and password match
+                    $userData = $user->getUserByEmailAndPassword($userData['Email'],$temp_password);
 
-                    // send the welcome email
-                    // GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
-             } catch (Some_Component_Exception $e) {
+                    if($userData)
+                    {
+                        $status = 1;
+
+                        // set user info in session
+
+                        $user->logSession($userData);
+
+                        // other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                        //$this->_helper->redirector('profile');
+
+                        // log event signin
+                        $eventId = 1;
+                        $userId = $userData['user_id'];
+                        $eventDescription = "signin-login";
+
+                        $eventAttributes = array();
+
+                        //GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+
+                    }
+                    else
+                    {
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                    }
+
+                } catch (Some_Component_Exception $e) {
                     if (strstr($e->getMessage(), 'unknown')) {
                         // handle one type of exception
-                        $lang_msg = $this->translate->_("Unknown Error!");
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
                         $msg .= $lang_msg;
+
                     } elseif (strstr($e->getMessage(), 'not found')) {
                         // handle another type of exception
-                        $lang_msg = $this->translate->_("Not Found Error!");
+                        $lang_msg = $this->translate->_('Not Found Error!');
                         $msg .= $lang_msg;
+
                     } else {
                         $lang_msg = $this->translate->_($e->getMessage());
                         $msg .= $lang_msg;
                     }
-              }
-              $this->view->msg = $msg;
+                }
+
+                $this->view->msg = $msg;
+
+            }
+        // log error if not success
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
         }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+       // $this->_helper->json($data, array('enableJsonExprFinder' => true));
+              $this->view->msg = $msg;
+        
         // log error if not success
 
         if($status != 1)

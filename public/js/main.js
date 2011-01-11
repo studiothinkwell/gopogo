@@ -17,7 +17,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
  * This will apply toggle effect to bottom of page for advance search
  */
     $(".your-personal-button").click(function() {
-            $(".footer-middle").slideToggle("show");
+        $(".footer-middle").slideToggle("show");
     });
 
 /**
@@ -93,7 +93,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $(".clsSignUpEmail").focus();
     });
     // add logout event
-    $("#logout").click(function(){
+    $("#logout").click(function(){ 
         $().doLogout();
     });
     // add forgot password event
@@ -105,7 +105,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // functions to handle the login / signin
 
         // do login
-        $.fn.doLogin = function(){
+        $.fn.doLogin = function(){ 
 
              // get serialized form data of login form
              var fdata = $("#loginBoxForm").serialize();
@@ -117,10 +117,10 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 dataType: 'json',
                 data:fdata,
                 timeout: 1000,
-                error: function(resp){
+                error: function(resp){ 
                     $().loginFail(resp);
                 },
-                success: function(resp){
+                success: function(resp){ 
                     // do something with resp
                     if(resp.status == 1) // show error message
                     {
@@ -131,7 +131,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().loginFail(resp);
                     }
                 },
-                complete: function(resp){
+                complete: function(resp){ 
                     $().loginWelcome(resp);
                 }
 
@@ -141,8 +141,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // login success
 
-        $.fn.loginSuccess = function(resp){
-
+        $.fn.loginSuccess = function(resp){ alert(1);
+            $().showSuccessTooltip(resp);
             $().debugLog('loginSuccess');
             $().debugLog(resp);
 
@@ -160,9 +160,10 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // login welcome
 
-        $.fn.loginWelcome = function(){
+        $.fn.loginWelcome = function() {
+            //$().showSuccessTooltip();
             $().debugLog('loginWelcome');
-            $().debugLog(resp);
+            //$().debugLog(resp);
         };
 
 
@@ -173,14 +174,14 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().debugLog(resp);
            
             if(resp.status == 0) // show error message
-            {
+            { 
                 $().errorMessage(resp.msg,'errorMsg');
             }
         };
 
         // show error message
         $.fn.errorMessage = function(msg,msgid){
-
+            $().showErrorTooltip(msg);
             $().debugLog('errorMessage');
             $().debugLog(msg);
             $().debugLog(msgid);
@@ -381,9 +382,10 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         // forgot success
 
         $.fn.forgotSuccess = function(resp){
-            $().debugLog('forgotSuccess');
+            $().debugLog('forgotSuccess');  
             $().debugLog(resp);
             // show message
+           
             $().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
@@ -443,6 +445,35 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 alert(msg);
             }                
         }
+
+        //function to show tooltip for error messages
+        $.fn.showErrorTooltip = function (msg) {
+            $().finish();
+            $(".clsErrorMsg").removeAttr('style');
+            var body=document.getElementsByTagName('body')[0];
+            body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
+            $(".clsBlankDiv").attr('style','height:208px');
+            $(".clsErrorText").text(msg);
+        }
+
+        //function to show tooltip for success messages
+        $.fn.showSuccessTooltip = function (msg) { 
+            $().finish();
+            $(".clsSuccessMsg").removeAttr('style');
+            var body=document.getElementsByTagName('body')[0];
+            body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
+            $(".clsBlankDiv").attr('style','height:208px');
+            $(".clsErrorText").text(msg);
+        }
+
+        //function to hide tooltip for error messages
+        $(".clsCloseError").click(function(){
+            $(".clsErrorMsg").attr('style','display:none');
+            var body=document.getElementsByTagName('body')[0];
+            body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
+            $(".clsBlankDiv").attr('style','height:150px');
+            $(".clsErrorText").text('');
+        });
 });
 
 $.fn.hideShow = function() {

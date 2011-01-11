@@ -53,12 +53,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
     /**
      * User : Encript Password
-     * @access private
+     * @access public
      * @param String  plain passsword
      * @return String  encrypted string
      */
 
-    private function encryptPassword($str)
+    public function encryptPassword($str)
     {
         return sha1($str, true);
     } // end of encryptPassword
@@ -71,7 +71,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
      * @return String  token string n chars
      */
 
-    private function createRandomKey($amount)
+    public function createRandomKey($amount)
     {
         $keyset  = "abcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $randkey = "";
@@ -210,24 +210,25 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
      */
 
     public function fbsignup($udata)
-    {
+    { 
         $data = $udata;
-
+           $status = 0;
         $username = substr($data['user_emailid'], 0, strpos($data['user_emailid'],'@'));
 
         $udata = array(
                         1
-                        ,   0
-                        ,   ''
+                        ,   1
+                        ,   $data['FacebookId']
                         ,   $data['user_emailid']
                         ,   $username
-                        ,   ''
-                        ,   ''
+                        ,   $data['TempPass']
+                        ,   $data['TempPass']
                         ,   ''
                     );
         try {   
                 $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
-        } catch (Some_Component_Exception $e) {
+                $status = 1;  
+        } catch (Some_Component_Exception $e) { 
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";
@@ -240,11 +241,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
-        catch(Exception $e){
+        catch(Exception $e){ 
             $lang_msg = $e->getMessage();
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
+        return $status;
     } // end of signup
 
     /**
@@ -416,15 +418,13 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
      */
 
     public function logSession($udaya)
-    {
-       
+    {       
         $userSession = new Zend_Session_Namespace('user-session');
-
+        
         foreach($udaya as $ukey=>$uvalue)
         {
              $userSession->$ukey = $uvalue;
         }
-
     } // end of logSession
 
 
