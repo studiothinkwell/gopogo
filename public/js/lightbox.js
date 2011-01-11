@@ -7,7 +7,7 @@ $(document).ready(function(){
         divId = "#loginBox";
         $(".errorMsg").text('');        
         $().enableLoginBox();        
-        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );      
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
@@ -19,14 +19,14 @@ $(document).ready(function(){
         $("#toggleForgot").css({display:''});
         $(".errorMsg").text('');
         $().enableLoginBox();
-        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();       
     });
 
     $(".clsSignUp").click(function(){
         divId = "#signupBox";
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
+        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
         $(".clsSignUpEmail").focus();        
     });
@@ -84,17 +84,18 @@ $.fn.addScroll = function() {
 
 }
 
-$.fn.addModalWindow = function(objId, createOverlay) {
+$.fn.addModalWindow = function(objId) {
 
     $().debugLog('addModalWindow');
     $().debugLog(objId);
 
-    divId = objId;    
+    divId = objId;   
 
- if(createOverlay) {
-    $('embed, object, select').css({ 'visibility' : 'hidden' });
-    $('body').append('<div id="overlay"></div>');
- }
+     if( $("#overlay").length <= 0 )
+     {
+        $('embed, object, select').css({ 'visibility' : 'hidden' });
+        $('body').append('<div id="overlay"></div>');
+     }
     $(objId).css({display:''});
 
     var arrPageSizes = $().getPageSize();
@@ -119,12 +120,10 @@ $.fn.addModalWindow = function(objId, createOverlay) {
         $().finish();
     });
 
-    $().enableKeyboardNavigation();
-
-    
+    $().enableKeyboardNavigation();    
 }
 
-$.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
+$.fn.displayModalBox = function(mainBox, titleBox, container ) {
        
         $(mainBox).draggable();
 
@@ -136,7 +135,7 @@ $.fn.displayModalBox = function(mainBox, titleBox, container, createOverlay ) {
                 $(mainBox).draggable('disable');
             });
 
-        $().addModalWindow(mainBox, createOverlay);
+        $().addModalWindow(mainBox);
 }
 
 
@@ -252,5 +251,3 @@ $(".create-ac-head").mousemove(function(){
 		});
 
 });
-
-
