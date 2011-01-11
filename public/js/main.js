@@ -16,10 +16,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 /**
  * This will apply toggle effect to bottom of page for advance search
  */
-    $(".your-personal-button").click(function(){
-
+    $(".your-personal-button").click(function() {
             $(".footer-middle").slideToggle("show");
-
     });
 
 

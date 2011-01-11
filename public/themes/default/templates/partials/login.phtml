@@ -1,6 +1,7 @@
 <?php
 // create facebook object
-$facebook = Facebook_FbClass::getConfig(); ?>
+$facebook = Facebook_FbClass::getConfig();
+?>
 <!--Sign in START-->
             <div  id="loginBox" >                
                 <div class="create-ac-head" >
@@ -27,13 +28,10 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                                 <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp" >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
-                            <div class="sign-in-input4">                                 
-                                  <?php  echo $facebook->FBLogin();?>
-                             </div>   
+                            <div class="sign-in-input4"><?php  echo $facebook->FBLogin();?></div>   
                         </div>
-                       </form>
-                                       
-                </div>
+                       </form>                                                     
                 <div class="sign-in-bottombg"></div>                
             </div>
+          </div>
 <!--Sign in END-->

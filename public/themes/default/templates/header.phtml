@@ -101,8 +101,8 @@ $Asset::load_js();
                         <div class="menu3"><a href="#"></a></div>
                         <div class="menu4"><a href="#"></a></div>
                     </div>
-                    <div class="search"><input type="text" value="Search for..."/></div>
-                    <div class="search_01"><input type="text" value="City, State, and Zip"/></div>
+                    <div class="search"><input type="text" value="Search for..." onclick="if(this.value=='Search for...'){this.value='';}" onblur="if(this.value==''){this.value='Search for...'}"/></div>
+                    <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value='';}" onblur="if(this.value==''){this.value='City, State, and Zip'}"/></div>
                     <div class="submenu">
                         <div class="submenu-box">
                             <div class="submenu-left"></div>
