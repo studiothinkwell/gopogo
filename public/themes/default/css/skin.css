@@ -3,7 +3,7 @@ body
 {
     margin:0px;
     padding:0px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Helvetica,Arial,sans-serif;
     background-color:#dedede;
     background-image:url(/themes/default/images/bg-left.png);
     background-repeat:repeat-x;
@@ -427,39 +427,58 @@ body
     border-right:1px solid grey;
     border:0px solid red;
 }
+.mthumb-box
+{   
+    border:0px solid red;
+    width:555px;
+    float:left;
+}
+.mthum-row {
+    display:table-row;
+    border:0px solid red;
+    float:left;
+}
+.mthum-row div {
+    display:table-cell;
+    border:0px solid red;
+    text-align:center !important;
+}
+.mthum-two{
+background-color:#00FF33;
+vertical-align:bottom;
+}
 .thum-img-box
 {
     position:relative;
     float:left;
-    margin:0px 10px;
-    width:120px;
+    margin:0px 0px;
+    width:138px;
     height:280px;
 }
 .thum-txt {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    width:120px;
+    vertical-align: bottom;
+    width:140px;
     height:36px;
     font-size:12px;
     font-weight:600;
+    text-align:center;
+    color:#686565;
 }
 .thum-txt * {
     vertical-align: middle;
+    color:#686565;
 }
-<!--[if lt IE 8]>
 .thum-txt span
 {
     display: inline-block;
     height: 100%;
+    color:#686565;
 }
--->
-
 .thum-img
 {
     position:relative;
-    width:110px;
-    height:150px;
+    width:150px;
+    height:158px;
 }
 .doit-button
 {
@@ -473,9 +492,9 @@ body
 {
     position:relative;
     float:left;
-    width:96px;
+    width:105px;
     height:25px;
-    left: 10px;
+    left: 20px;
     margin-top:5px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -2px -73px transparent;
 }
@@ -483,14 +502,14 @@ body
 {
     position:relative;
     float:left;
-    width:96px;
+    width:105px;
     height:25px;
 }
 .interest-button a:hover
 {
     position:relative;
     float:left;
-    width:96px;
+    width:105px;
     height:25px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -2px -49px transparent;
 }
@@ -508,8 +527,10 @@ body
 
 .star-button
 {
-    position:relative;
-    width:110px;
+    float: left;
+    left: 15px;
+    position: relative;
+    width: 120px;
 }
 .star-button-yellow
 {
@@ -538,26 +559,24 @@ body
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -30px -23px transparent;
 }
-.link-txt {
+.link-txt span{
     display: table-cell;
-    text-align: center;
+    text-align: left !important;
     vertical-align: middle;
     width:120px;
     font-size:10px;
     font-weight:600;
-    text-align:center;
     color:#535353;
 }
-.link-txt * {
+.link-txt{
     vertical-align: middle;
+    width:120px;
+    font-size:10px;
+    font-weight:600;
+    color:#535353;
+    padding-left: 25px;
 }
-<!--[if lt IE 8]>
-.link-txt span
-{
-    display: inline-block;
-    height: 100%;
-}
--->
+
 .link-txt a
 {
     color:#3e718c;
@@ -943,6 +962,14 @@ body
     top: 4px;
     width: 108px;
 }
+
+.footer-input12 input
+{
+    float: left;
+    width: 50px;
+}
+
+
 .footer-input13
 {
     background:url(/themes/default/images/footer-icons.png) no-repeat scroll 20px -1px transparent;
@@ -952,6 +979,14 @@ body
     top: 4px;
     width:137px;
 }
+
+.footer-input13 input
+{
+    float: left;
+    width: 90px;
+    height: 15px;
+}
+
 .footer-input-option
 {
     position:relative;
@@ -1223,7 +1258,7 @@ body
                                                 /**************************************Create Account END**************************************/
                                                 /************************************** Sign in START **************************************/
 
-#loginBox
+#loginBox, #forgotBox
 {
     position:absolute;
     z-index: 999;
@@ -1269,6 +1304,19 @@ body
     width: 100%;
     text-align: left;
 }
+
+.forgot-input2
+{
+    position:relative;
+    float:left;
+    top:9px;
+    font-size:12px;
+    font-weight:600;
+    color:#757575;
+    width: 100%;
+    text-align: left;
+}
+
 .sign-in-centerbg
 {
     position:relative;
@@ -1484,7 +1532,25 @@ border:1px solid red;
     font-weight:bold;
     line-height:40px;
     text-align: center;
-    }
+}
+
+.dropdown-bg
+{
+    position:relative;
+    float:left;
+    right:230px;
+    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -172px transparent;
+    background-repeat:no-repeat;
+    width:108px;
+    height:22px;
+    margin: 5px 0 0 242px;
+    color:#FFF;
+    font-size:14px;
+    font-weight:600;
+    text-align:left;
+    line-height: 18px;
+}
+
 .fb_button, .fb_button_rtl  {
 background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent !important;
  

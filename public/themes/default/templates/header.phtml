@@ -121,7 +121,9 @@ $Asset::load_js();
             <!-- Header END-->
 
 
-                <?php if (count($this->messages)) : ?>
+                <?php
+                print_r($this->msg);
+                if (count($this->messages)) : ?>
                 <ul id="messages">
                 <?php foreach ($this->messages as $message) : ?>
                     <li><?php echo $this->escape($message); ?></li>

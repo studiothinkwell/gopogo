@@ -13,6 +13,17 @@ $(document).ready(function(){
         $(".fb_button_text").text('');
     });
 
+  $(".clsForgot").click(function(){
+        divId = "#forgotBox";
+        $("#loginBox").css({display:'none'}); 
+        $("#toggleForgot").css({display:''});
+        $(".errorMsg").text('');
+        $().enableLoginBox();
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg", 1 );
+        $().setdefaultval();
+        $("#email").focus();       
+    });
+
     $(".clsSignUp").click(function(){
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg", 1 );
@@ -75,7 +86,7 @@ $.fn.addScroll = function() {
 
 $.fn.addModalWindow = function(objId, createOverlay) {
 
-    $().debugLog('___addModalWindow');
+    $().debugLog('addModalWindow');
     $().debugLog(objId);
 
     divId = objId;    
@@ -138,8 +149,7 @@ $.fn.enableKeyboardNavigation = function() {
 
 $.fn.enableLoginBox = function() {
 
-     if($("#toggleForgot").css('display')== 'block'){
-           $("#toggleForgot").css({display:'none'});
+     if($("#toggleForgot").css('display')== 'block'){           
            $("#toggleLogin").css({display:''});
         }
 }

@@ -12,9 +12,7 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                     <div class="login-close"></div>
                 </div>
                 <div class="sign-in-centerbg" id="sign-in-centerbg">
-                    <span class="errorMsg" id="errorMsg" ></span>
-                    <div id="toggleLogin">
-
+                    <span class="errorMsg" id="errorMsg" ></span>                  
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
                         <div class="sign-in-right">                            
                             <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignInEmail"/></div>
@@ -24,7 +22,7 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                             </div>
                             <div class="sign-in-input3">
                                 <span class="sign-in-txt"><?php echo $this->mess;?>Forgot your</span>
-                                <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="forgotPassword" >password</a>
+                                <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
                                 <span>&nbsp;or&nbsp;</span>
                                 <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp" >create account</a>
                             </div>
@@ -34,25 +32,7 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                              </div>   
                         </div>
                        </form>
-                    </div>
-                    <div id="toggleForgot" style="display:none">
-
-                        <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
-                        <div class="sign-in-right">                           
-                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" class="clsForgotEmail"/></div>
-
-                            <div class="sign-in-input3">                                    
-                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
-                                    <span>&nbsp;or&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp"  >create account</a>
-                            </div>
-                            <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
-                            <div class="sign-in-input4">
-                                <?php  echo $facebook->FBLogin();?>
-                            </div> 
-                        </div>
-                       </form>
-                    </div>
+                                       
                 </div>
                 <div class="sign-in-bottombg"></div>                
             </div>

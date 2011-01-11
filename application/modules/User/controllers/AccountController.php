@@ -626,7 +626,7 @@ class User_AccountController extends Zend_Controller_Action
         $data['msg'] =  $msg;
         $data['status'] =  $status;
 
-        //$this->_helper->json($data, array('enableJsonExprFinder' => true));
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
 }  
 

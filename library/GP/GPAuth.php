@@ -309,10 +309,6 @@ Class GP_GPAuth
                                             ->send();
     } // end of sendEmailSignupWelcome
 
-
-
-
 }
-
 
 ?>

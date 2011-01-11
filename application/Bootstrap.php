@@ -226,7 +226,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
 
         //1.) normal
-        //$zendMailTransport = new Zend_Mail_Transport_Sendmail();
+        $zendMailTransport = new Zend_Mail_Transport_Sendmail();
 
         //2.) SMTP
 
@@ -241,7 +241,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'ssl'       =>$mailConfigs->mail->params->ssl,
             'port'      =>$mailConfigs->mail->params->port
         );
-        $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
+       // $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
         //*/
 
         // set default transport

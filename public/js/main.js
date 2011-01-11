@@ -22,25 +22,14 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
     });
 
-/**
- * This will apply toggle effect to forgot password functionality of login modal window
- */
-    $("#forgotPassword").click(function(){
-            $("#errorMsg").text('');
-            $("#toggleLogin").slideToggle("hide");
-            $("#toggleForgot").slideToggle("show");
-            //==== CALL FUNCTION TO SET DEFAULT VALUES ====//
-            $().setdefaultval();
-            $(".clsForgotEmail").focus();
-    });
-    
+
 /**
  * This will apply toggle effect to login functionality of login modal window
  */
      $("#loginPassword").click(function(){
             $("#errorMsg").text('');
-            $("#toggleForgot").slideToggle("hide");
-            $("#toggleLogin").slideToggle("show");
+           // $("#toggleForgot").slideToggle("hide");
+           // $("#toggleLogin").slideToggle("show");
             $().setdefaultval();
             $(".clsSignInEmail").focus();
     });
@@ -55,19 +44,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
            function(){
                        $(this).removeClass('selected');
                      }
-       );
-
-
-    /*
-    // add forgot your password event
-    $(".Forgot-Your-Password").click(function(){
-        $().debugLog('Forgot-Your-Password');
-        $().finish();        
-        $().addModalWindow('forgotBox');
-    });
-    
-    */
-
+       );    
     
     // add create account event
     $(".clsSignUp").click(function(){
@@ -162,7 +139,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // login welcome
 
-        $.fn.loginWelcome = function(){
+        $.fn.loginWelcome = function(resp){
             $().debugLog('loginWelcome');
             $().debugLog(resp);
         };
@@ -231,8 +208,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().signupSuccess(resp);
                     }
                     else
-                    {
-                       
+                    {                       
                         $().signupFail(resp);
                     }                   
                 },
