@@ -283,6 +283,7 @@ return array(
     "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
 
     // signup
+    "SignUp Enter Valid Email!" => "Enter valid email for Create Account.",
     "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
     "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
     "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",

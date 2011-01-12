@@ -52,7 +52,7 @@ $Asset::load_js();
         $fbLogin = "false";
         $user_name = '';
         if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
-        {
+        {  //echo "here";exit;
             $loginFlag = true;
             $user_name = $session->user_name;
             $fbLogin = "true";
@@ -79,7 +79,11 @@ $Asset::load_js();
                       <span class="top-Msg-window-txt">
                            <div class="clsErrorText"><br/></div>
                            <div class="top-Msg-window-s">
-                           Please try <span class="top-mg-link"><a href="javascript:void(0)" class="clsSignIn">again.</a></span></div>
+                           Please try <span class="top-mg-link">
+                               <a href="javascript:void(0)" class="clsSignIn toolSignIn">again.</a>
+                               <a href="javascript:void(0)" class="clsSignUp toolSignUp">again.</a>
+                           </span>
+                           </div>
                       </span>
                   <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError"></a>
                 </div>
@@ -89,9 +93,9 @@ $Asset::load_js();
                 <div class="top-Msg-window " >
                     <span class="top-Msg-window-icon"></span>
                     <span class="top-Msg-window-txt">
-                        <div>Thanks for joining our team!<br></div>
+                        <div>HURRAY! You have joined the GoPogo community. <br></div>
                         <div class="top-Msg-window-s">
-                        Confirmation message is sent to your Email address, Please confirm your Email address.</div>
+                        Next Step: Play! Book a playlist and start having fun. The more you rate and play they will get better recommendations.</div>
                     </span>
                     <a href="javascript:void(0)" class="top-Msg-window-close clsCloseSuccess"></a>
                 </div>

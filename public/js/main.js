@@ -43,9 +43,21 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                        $(this).removeClass('selected');
                      }
        );    
-    
+
+    /**
+     * This will show success message when profile page loads
+     */
+    var url = window.location;
+    if(url == "http://mujaffar.mygopogo.com/User/Account/profile/") {
+        $(".clsSuccessMsg").removeAttr('style');
+        var body=document.getElementsByTagName('body')[0];
+        body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
+        $(".clsBlankDiv").attr('style','height:208px');
+        $(".clsErrorText").text();
+    }
+
     // add create account event
-    $(".clsSignUp").click(function(){
+    $(".clsSignUp").click(function(){ 
         $("#loginBox").css({display:'none'});        
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
         $().setdefaultval();
@@ -155,8 +167,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         };
 
         // show error message
-        $.fn.errorMessage = function(msg,msgid){
-            $().showErrorTooltip(msg);
+        $.fn.errorMessage = function(msg,msgid){ 
+            $().showErrorTooltip(msg,msgid);
             $().debugLog('errorMessage');
             $().debugLog(msg);
             $().debugLog(msgid);
@@ -193,10 +205,11 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 dataType: 'json',
                 data:fdata,
                 timeout: 1000,
-                error: function(resp){ alert("in error");
-                    $().signupFail(resp);
+                error: function(resp){ 
+                    if(resp.status != 1) {
+                        $().signupFail(resp); }
                 },
-                success: function(resp){
+                success: function(resp){ 
                     // do something with resp
                     if(resp.status == 1) // show error message
                     {
@@ -204,16 +217,16 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().showSuccessTooltip();
                     }
                     else
-                    {   alert("in status fail");
-                        $().signupFail(resp);
+                    {   
+                        if(resp.status != 1)
+                            $().signupFail(resp);
                     }                   
                 },
                 complete: function(resp){
-                    $().signupWelcome(resp);
+                    if(resp.status == 1)
+                        $().signupWelcome(resp);
                 }
-
             });
-
         }; // end of do signup
         
         // signup success
@@ -240,7 +253,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // signup fail
 
-        $.fn.signupFail = function(resp){ alert(100);
+        $.fn.signupFail = function(resp){ 
             $().debugLog('signupFail');
             $().debugLog(resp);
             if(resp.status == 0) // show error message
@@ -417,13 +430,21 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         }
 
         //function to show tooltip for error messages
-        $.fn.showErrorTooltip = function (msg) {
+        $.fn.showErrorTooltip = function (msg,msgid) {
             $().finish();
             $(".clsErrorMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
             $(".clsBlankDiv").attr('style','height:208px');
             $(".clsErrorText").text(msg);
+            if(msgid=="signup_error_msg") {
+                $(".toolSignIn").hide();
+                $(".toolSignUp").show();
+            }
+            else {
+                $(".toolSignIn").show();
+                $(".toolSignUp").hide();
+            }
         }
 
         //function to show tooltip for success messages
@@ -438,21 +459,31 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         //function to hide tooltip for error messages
         $(".clsCloseError").click(function(){
-            $(".clsErrorMsg").attr('style','display:none');
-            var body=document.getElementsByTagName('body')[0];
-            body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
-            $(".clsBlankDiv").attr('style','height:150px');
-            $(".clsErrorText").text('');
+            $().closeErrorTooltip();
         });
 
         //function to hide tooltip for error messages
-        $(".clsCloseSuccess").click(function(){
+        $(".clsCloseSuccess").click(function(){ 
             $(".clsSuccessMsg").attr('style','display:none');
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         });
+        $(".toolSignIn").click(function(){
+            $().closeErrorTooltip();
+        })
+        $(".toolSignUp").click(function(){
+            $().closeErrorTooltip();
+        })
+        //function to close tooltip for error messages
+        $.fn.closeErrorTooltip = function () {
+            $(".clsErrorMsg").attr('style','display:none');
+            var body=document.getElementsByTagName('body')[0];
+            body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
+            $(".clsBlankDiv").attr('style','height:150px');
+            $(".clsErrorText").text('');
+        };
 });
 
 $.fn.hideShow = function() {

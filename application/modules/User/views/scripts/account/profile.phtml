@@ -1,5 +1,4 @@
 <?php
-
     $session = GP_GPAuth::getSession();
     // user_id
     // user_name
@@ -36,8 +35,6 @@
     <!--  Body START-->
         <div class="container" >
             <div class="con-box" >
-
-
                 <?php if (count($this->messages)) : ?>
                 <ul id="messages">
                 <?php foreach ($this->messages as $message) : ?>
@@ -45,8 +42,6 @@
                 <?php endforeach; ?>
                 </ul>
                 <?php endif; ?>
-
-
              </div>
              <div class="blankdiv"></div>
         </div>

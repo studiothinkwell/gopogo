@@ -423,7 +423,7 @@ class User_AccountController extends Zend_Controller_Action
             } else {
                 //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
-                $lang_msg = $this->translate->_("Enter Valid Email!");
+                $lang_msg = $this->translate->_("SignUp Enter Valid Email!");
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
