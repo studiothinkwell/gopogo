@@ -69,7 +69,7 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function aboutusAction() {
+    public function aboutAction() {
         
     }
 
@@ -81,7 +81,7 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function contactusAction() {
+    public function contactAction() {
         
     }
 
