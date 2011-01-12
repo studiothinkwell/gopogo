@@ -305,6 +305,18 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
+              // validate capcha
+            //*
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                $lang_msg = $this->translate->_("Invalid captcha");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+
             if($validFlag){
 
                 try {

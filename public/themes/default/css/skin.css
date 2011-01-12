@@ -83,6 +83,52 @@ body
     height:auto;
     padding:4px;
 }
+.s1menu1, .s1menu2, .s1menu3, .s1menu4
+{
+	position:relative;
+	float:left;
+	width:80px;
+	height:25px;
+	border:0px  solid red;
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll 0px 0px transparent;
+       /* cursor: hand; */
+        cursor: pointer;
+
+}
+.s1menu1-selected
+{
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll 0px -42px transparent;
+}
+.s1menu2
+{
+	width:160px;
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -92px 0px transparent;
+
+}
+.s1menu2-selected
+{
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -92px -42px transparent;
+}
+.s1menu3
+{
+	width:100px;
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -265px 0px transparent;
+
+}
+.s1menu3-selected
+{
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -265px -42px transparent;
+}
+.s1menu4
+{
+	width:90px;
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -378px 0px transparent;
+
+}
+.s1menu4-selected
+{
+	background:url(/themes/default/images/smenu1.png) no-repeat scroll -378px -42px transparent;
+}
 .search
 {
     position:relative;
@@ -178,7 +224,7 @@ body
     width:118px;
     height:61px;
     padding-right:11px;
-    background-image:url(/themes/default/images/menu1_over.png);
+    background-image:url(/themes/default/images/menu1.png);
     background-repeat:no-repeat;
 }
 .menu1 a
@@ -1124,7 +1170,7 @@ vertical-align:bottom;
     float:left;
     width:588px;
     height:341px;
-    border:1px solid red;
+    border:0px solid red;
 }
 
 #signupBox
@@ -1272,18 +1318,80 @@ vertical-align:bottom;
 {
     outline:none;
 }
-.create-ac-txt
+.create-ac-txt,.forgot-txt
 {
     position:relative;
     float:left;
-    font-size:12px;
+    font-size:11px;
     color:#6c6c6c;
+}
+.forgot-txt
+{
+	line-height:25px;
+}
+.forgot-row-mid
+{
+	width:330px;
+}
+.forgot-row-m1
+{
+	width:203px;
+	height:71px;
+	border:1px solid #aeadad;
+	margin-left: -10px;
+	float:left;
+}
+.forgot-row-m2
+{
+	float: left;
+    margin-left: -11px;
+    margin-top: 9px;
+	width:150px;
+}
+.forgot-row-m3
+{
+    background:url(/themes/default/images/icons.png) no-repeat scroll -263px -64px transparent;
+    float: left;
+    height: 29px;
+    margin-left: 57px;
+    margin-top: 10px;
+    width: 79px;
+}
+.forgot-row-m2 input
+{
+	width:150px;
+}
+.forgot-box
+{
+	top:10px !important;
+}
+.forgot-row-m2 input
+{
+	width:203px !important;
+}
+.forgot-close-but
+{
+    position:absolute;
+    float:left;
+    left: 0px;
+    width:30px;
+    height:31px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
+
+}
+
+.create-forgot-box
+{
+    position:relative;
+    float:left;    
+    border:0px solid red;
 }
 .create-ac-login
 {
      position:relative;
      float:left;
-    font-size:12px;
+    font-size:11px;
     color:#538ea3;
     text-decoration:underline;
 }
@@ -1333,6 +1441,13 @@ vertical-align:bottom;
 .sign-in-create-account
 {
     font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
+}
+
+body:nth-of-type(1) .sign-in-create-account
+{
+    font-size:11px;
     color:#538ea3;
     text-decoration:underline;
 }
@@ -1397,7 +1512,7 @@ vertical-align:bottom;
     height:57px;
     background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
 }
-.sign-in-right
+.sign-in-right, .forgot-box 
 {
     position:relative;
     float:left;
@@ -1456,6 +1571,15 @@ vertical-align:bottom;
     font-weight:600;
     color:#a9a9a9;
     border:1px solid #a9a9a9;
+}
+.forgot-box input
+{
+	width:290px;
+	height:28px;
+	font-size:15px;
+	font-weight:600;
+	color:#a9a9a9;
+	border:1px solid #a9a9a9;
 }
 
                                                 /**************************************Input styles END**************************************/
@@ -1668,11 +1792,11 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 }
 .top-Msg-window-icon-r
 {
-	background:url("/themes/default/images/icons.png") no-repeat scroll -254px -3px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -254px -3px transparent;
 }
 .top-Msg-window-close-r
 {
-	background:url("/themes/default/images/icons.png") no-repeat scroll -196px -115px transparent;
+	background:url(/themes/default/images/icons.png) no-repeat scroll -196px -115px transparent;
 }
 .top-mg-link
 {
@@ -1691,4 +1815,25 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	float:left;
 	width:100%;
 	height:58px;
+}
+
+.arrow-down, .arrow-up
+{
+    background: url(/themes/default/images/icons.png) no-repeat scroll -81px -23px transparent;
+    border: 0 solid red;
+    float: left;
+    height: 24px;
+    left: 282px;
+    position: absolute;
+    top: 10px;
+    width: 20px;
+    z-index: 9999;
+}
+.arrow-up
+{
+    background: url(/themes/default/images/icons.png) no-repeat scroll -106px -23px transparent;
+}
+
+.sign-in-txt {
+    font-size: 11px;
 }
