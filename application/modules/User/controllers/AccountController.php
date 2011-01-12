@@ -41,6 +41,7 @@ class User_AccountController extends Zend_Controller_Action
      * $var Zend_Translate
      */
     protected $translate = null;
+    public    $config = '';
 
     public function init()
     {
@@ -48,6 +49,9 @@ class User_AccountController extends Zend_Controller_Action
 
         // Zend_Translate object for langhuage translator
         $this->translate = Zend_Registry::get('Zend_Translate');
+
+        //code to get baseurl and assign to view
+        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
 
     } // end init
 
@@ -375,21 +379,14 @@ class User_AccountController extends Zend_Controller_Action
      */
 
     public function profileAction()
-    {
-
-        $this->view->messages = $this->_helper->flashMessenger->getMessages();
-
-        $user = new Application_Model_DbTable_User();
-
+    {      
+        $user = new Application_Model_DbTable_User();        
         $session = $user->getSession();
 
-
-        // set header information
-        /*
-        $this->view->headTitle('mpd');
-        $this->view->headMeta()->appendName('keywords', 'Profile');
-        $this->view->headMeta()->appendName('description', 'Profile');
-        */
+        if(!empty($session->user_name))        
+            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;        
+        else        
+            $this->_redirect('/');
 
     } // end of profileAction
 

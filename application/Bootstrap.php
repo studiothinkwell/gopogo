@@ -319,6 +319,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                                     'action' => 'legal'
                                                    ));
         $indexController->getRouter()->addRoute('legal',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'profile/:module',array(
+                                                    'controller' => 'Account',
+                                                    'module' => 'User' ,
+                                                    'action' => 'profile'
+                                                   ));
+        $indexController->getRouter()->addRoute('profile',$route);
     
 
     }

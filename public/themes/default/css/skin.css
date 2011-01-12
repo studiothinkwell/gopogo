@@ -602,7 +602,8 @@ vertical-align:bottom;
 .link-txt a
 {
     color:#3e718c;
-    text-decoration:underline;
+    text-decoration:underline;       
+    font-family: Helvetica, Arial, Chaparral Pro, lucida grande, verdana, sans-serif;
 }
 .link-txt a:hover
 {
