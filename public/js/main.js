@@ -204,10 +204,11 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
-                error: function(resp){ 
-                    if(resp.status != 1) {
-                        $().signupFail(resp); }
+                timeout: 99999,
+                error: function(resp){
+                    if(resp.readyState == 4) {
+                        $().signupFail(resp);
+                    }
                 },
                 success: function(resp){ 
                     // do something with resp
@@ -223,7 +224,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                     }                   
                 },
                 complete: function(resp){
-                    if(resp.status == 1)
+                    if(resp.readyState == 4)
                         $().signupWelcome(resp);
                 }
             });
