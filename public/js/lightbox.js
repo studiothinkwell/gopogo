@@ -28,7 +28,8 @@ $(document).ready(function(){
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
-        $(".clsSignUpEmail").focus();        
+        $(".clsSignUpEmail").focus();
+        $(".fb_button_text").text('');
     });
 
     $(".create-ac-close").click(function(){

@@ -270,7 +270,7 @@ return array(
     // Start GOPOGO messages ---------------------------------------
 
     // signin
-    "Enter Valid Email!" => "Enter Valid Email!",
+    "Enter Valid Email!" => "Sorry! Your account email does not match your login.",
     "Passowrd lenght must be between 6-16!" => "Passowrd lenght must be between 6-16!",
     "Welcome! You have Signedin Successfully!"=>"Welcome! You have Signedin Successfully!",
     "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Your email and password does not match! Or You have not signedup yet usimng this email!",

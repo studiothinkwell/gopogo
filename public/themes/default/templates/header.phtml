@@ -5,8 +5,7 @@ $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle('GOPOGO');
 //echo $this->doctype();
-// create facebook object
-$facebook = Facebook_FbClass::getConfig();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -49,13 +48,19 @@ $Asset::load_js();
         // user_id
         // user_name
         //print_r($session->user_emailid);
-
         $loginFlag = false;
         $user_name = '';
         if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
         {
             $loginFlag = true;
             $user_name = $session->user_name;
+        }
+        if($loginFlag == false) {
+            // create facebook object
+            $facebook = Facebook_FbClass::getConfig();
+        } 
+        if($loginFlag) {
+            $fbLogedIn = "true";
         }
       $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
 
@@ -65,31 +70,53 @@ $Asset::load_js();
 
     ?>
     <div id="master" align="center">
-	<div id="submaster">
+    	<div id="submaster">
             <!-- Header START-->
-
+    
         <div class="header">
+            <div class="headrow clsErrorMsg" style="display: none">
+               <div class="top-Msg-window-r " >
+                  <span class="top-Msg-window-icon-r"></span>
+                      <span class="top-Msg-window-txt">
+                           <div class="clsErrorText"><br/></div>
+                           <div class="top-Msg-window-s">
+                           Please try <span class="top-mg-link"><a href="javascript:void(0)" class="clsSignIn">again.</a></span></div>
+                      </span>
+                  <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError" onclick="hideErrorTooltip();"></a>
+                </div>
+            </div>
+
+            <div class="top-Msg-window clsSuccessMsg" style="display: none">
+                <span class="top-Msg-window-icon"></span>
+                <span class="top-Msg-window-txt">
+                    <div>HURRAY!  You have joined the GoPogo community.<br></div>
+                    <div class="top-Msg-window-s">
+                    Next Step:  Play!  Book a playlist and start having fun.  The more  you rate and play the wil get better recommendations.</div>
+                </span>
+                <span class="top-Msg-window-close"></span>
+            </div>
+
             <div class="head-mainbg">
             	<div class="headrow1">
-                    <div class="logo"></div>
+                    <a class="logo" href="<?php echo $base_url;?>"></a>
                     <div class="topmenu">
 
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
-                            <a href="#" id='logout' >Logout</a> |
+                            <a href="javascript:void(0)" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
                             <?php
-                            $fbArray = $facebook->FBLogin();
+                            /*$fbArray = $facebook->FBLogin();
                             
                             if(is_array($facebook->FBLogin())) { ?>
                             Welcome <?php echo $fbArray['Email'];                            
                             $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . $this->url(array('module'=>'default','controller'=>'facebook','action'=>'logout'));
                             echo '<a href="'.$facebook->getLogoutUrl($logout).'">Logout</a>';
-                            } else { ?>
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php } ?>
+                            } else {*/ ?>
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php //} ?>
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
-                            <?php } ?>
+                            <?php } //exit;?>
                             <a href="/index/howitworks">How it works</a>
 
                         </div>
@@ -114,7 +141,7 @@ $Asset::load_js();
                             <div class="submenu-middle"><a href="#">My Preferences</a></div>
                             <div class="submenu-right"></div>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>

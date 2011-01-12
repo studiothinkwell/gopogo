@@ -1227,8 +1227,7 @@ vertical-align:bottom;
     width:162px;
     height:29px;
     border:0px solid red;
-    top:38px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent;
+    top:38px;    
 }
 .create-ac-txt
 {
@@ -1576,4 +1575,77 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
     margin: 0px !important;
     padding: 0px !important;
     text-shadow: none !important;
+}
+
+/******* css code for error messages    Dated - 11 jan 2011 *******/
+.top-Msg-window,.top-Msg-window-r
+{
+	position:absolute;
+	width:1024px;
+	height:58px;
+	background-image:url(/themes/default/images/topmsg-bg.jpg);
+	background-repeat:repeat-x;
+}
+.top-Msg-window-icon,.top-Msg-window-icon-r
+{
+	float:left;
+	width:50px;
+	height:50px;
+	margin-left:10px;
+	background:url("/themes/default/images/icons.png") no-repeat scroll -198px -3px transparent;
+}
+.top-Msg-window-txt,.top-Msg-window-txt-r
+{
+	width:700px;
+	font-size:18px;
+	font-weight:800;
+	text-align:left;
+	line-height: 27px;
+}
+
+.top-Msg-window-close,.top-Msg-window-close-r
+{
+	float:right;
+	width:50px;
+	height:27px;
+	margin-top: -49px;
+	background:url("/themes/default/images/icons.png") no-repeat scroll -196px -62px transparent;
+}
+
+.top-Msg-window-s
+{
+	font-size:12px;
+	font-weight:600;
+	color:#596038;
+}
+
+.top-Msg-window-r
+{
+	background-image:url(/themes/default/images/topmsg-bg1.jpg);
+}
+.top-Msg-window-icon-r
+{
+	background:url("/themes/default/images/icons.png") no-repeat scroll -254px -3px transparent;
+}
+.top-Msg-window-close-r
+{
+	background:url("/themes/default/images/icons.png") no-repeat scroll -196px -115px transparent;
+}
+.top-mg-link
+{
+	color:#c16464;
+	text-decoration:underline;
+}
+.top-mg-link a
+{
+	color:#c16464;
+	text-decoration:underline;
+}
+
+.headrow
+{
+	position:relative;
+	float:left;
+	width:100%;
+	height:58px;
 }

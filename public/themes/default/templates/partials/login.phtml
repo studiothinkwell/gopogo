@@ -1,6 +1,17 @@
 <?php
-// create facebook object
-$facebook = Facebook_FbClass::getConfig(); ?>
+$loginFlag = false;
+$fbLogin = "false";
+$session = GP_GPAuth::getSession();
+if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
+    {
+        $loginFlag = true;
+        $user_name = $session->user_name;
+    }
+    if($fbLogin == "false") {
+        // create facebook object
+        $facebook = Facebook_FbClass::getConfig();
+    }
+?>
 <!--Sign in START-->
             <div  id="loginBox" >
                 <div class="create-ac-head" >
@@ -12,7 +23,7 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                     <div class="login-close"></div>
                 </div>
                 <div class="sign-in-centerbg" id="sign-in-centerbg">
-                    <span class="errorMsg" id="errorMsg" ></span>
+                    <!-- <span class="errorMsg" id="errorMsg" onchange="alert(1)"></span> -->
                     <div id="toggleLogin">
 
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
@@ -23,15 +34,34 @@ $facebook = Facebook_FbClass::getConfig(); ?>
                                 <input type="password" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
                             </div>
                             <div class="sign-in-input3">
-                                <span class="sign-in-txt"><?php echo $this->mess;?>Forgot your</span>
-                                <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
-                                <span>&nbsp;or&nbsp;</span>
-                                <a href="#" onclick="return false;" class="sign-in-create-account clsSignUp" >create account</a>
+                                    <span class="sign-in-txt"><?php echo $this->mess; ?> Forgot your&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
+                                    <span>&nbsp;or&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount"  >create account</a>
+                            </div>  
+
+                            <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
+                            <div class="sign-in-input4">                                 
+                                  <?php  if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
+                             </div>   
+                        </div>
+                       </form>
+                    </div>
+                    <div id="toggleForgot" style="display:none">
+
+                        <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
+                        <div class="sign-in-right">                           
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" class="clsForgotEmail"/></div>
+
+                            <div class="sign-in-input3">                                    
+                                    <a href="#" onclick="return false;" class="sign-in-create-account Forgot-Your-Password" id="loginPassword" >&nbsp;Login</a>
+                                    <span>&nbsp;or&nbsp;</span>
+                                    <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount"  >create account</a>
                             </div>
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
                             <div class="sign-in-input4">
-                                  <?php  echo $facebook->FBLogin();?>
-                             </div>
+                                <?php if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
+                            </div> 
                         </div>
                        </form>
                     </div>                    
