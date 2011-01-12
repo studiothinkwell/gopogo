@@ -182,5 +182,19 @@ class GP_ToolKit {
 
         return( $xmlArray );
     }
+
+    /**
+     * Converts url in a SEO url
+     * @param url $strUrl
+     * @access   public
+     * @return string SEO URL
+     */
+
+   public function getSeoUrl($strUrl)
+    {
+        return $strUrl;
+
+    }
+
 }
 ?>
