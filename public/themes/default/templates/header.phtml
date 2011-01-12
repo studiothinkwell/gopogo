@@ -3,7 +3,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
 $this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
 $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
 $this->headTitle()->setSeparator(' - ');
-$this->headTitle('GOPOGO');
+$this->headTitle($this->title);
 //echo $this->doctype();
 
 ?>
@@ -61,10 +61,9 @@ $Asset::load_js();
             // create facebook object
             $facebook = Facebook_FbClass::getConfig();
         } 
-      $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
-
-      if(empty($baseurl)) {
-          $baseurl = "#";
+      
+      if(empty($baseUrl)) {
+          $baseUrl = "#";
       }
 
     ?>
@@ -99,7 +98,7 @@ $Asset::load_js();
 
             <div class="head-mainbg">
             	<div class="headrow1">
-                    <a class="logo" href="<?php echo $base_url;?>"></a>
+                    <a class="logo" href="<?php echo $baseUrl;?>"></a>
                     <div class="topmenu">
 
                             <?php if($loginFlag){ ?>
@@ -118,7 +117,7 @@ $Asset::load_js();
                             <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php //} ?>
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <?php } //exit;?>
-                            <a href="/index/howitworks">How it works</a>
+                            <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
 
                         </div>
                 </div>

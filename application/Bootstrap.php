@@ -289,16 +289,38 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $indexController  = Zend_Controller_Front::getInstance();
 
         $route = new Zend_Controller_Router_Route(
-                                    'coming-soon/:module',array(
+                                    'how-it-works/:module',array(
                                                     'controller' => 'index',
                                                     'module' => 'default' ,
-                                                    'action' => 'comingsoon'
+                                                    'action' => 'howitworks'
                                                    ));
-        $indexController->getRouter()->addRoute('coming-soon',$route);
+        $indexController->getRouter()->addRoute('how-it-works',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'about/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'about'
+                                                   ));
+        $indexController->getRouter()->addRoute('about',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'contact/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'contact'
+                                                   ));
+        $indexController->getRouter()->addRoute('contact',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'legal/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'legal'
+                                                   ));
+        $indexController->getRouter()->addRoute('legal',$route);
     
 
     }
 
-
 }
-

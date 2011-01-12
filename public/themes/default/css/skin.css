@@ -1518,16 +1518,16 @@ border:1px solid red;
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
+
 @media screen and (-webkit-min-device-pixel-ratio:0)
 {
     @font-face
     {
         font-family: Arial;
-        src: url('/themes/default/images/arial.ttf');
+        src: url('themes/default/images/arial.ttf');
         font-weight:600;
     }
-    .thum-txt
-    {
+    .thum-txt {
         font-size: 12px;
         font-weight: 600;
     }

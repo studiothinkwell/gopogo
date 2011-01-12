@@ -29,24 +29,24 @@
 
 class IndexController extends Zend_Controller_Action
 {
-
+    public $config = '';
+    
     public function init()
     {
         /* Initialize action controller here */
 
         //code to get baseurl and assign to view
-        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
-        $baseurl = $config->gopogo->url->base;
+        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $baseurl = $this->config->gopogo->url->base;
         $this->view->baseurl = $baseurl;
+
 
         
     }
 
     public function indexAction()
     { 
-
-        //GP_GPAuth::sendEmailSignupWelcome('mahesh@techdharma.com','12345','mahesh');
-
+       $this->view->title = "Welcome to ".$this->config->gopogo->name;
     }
 
     /**
@@ -57,8 +57,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function howitworksAction() {
-        
+    public function howitworksAction()
+    {
+        $this->view->title = "How it works | ".$this->config->gopogo->name;
     }
 
     /**
@@ -69,8 +70,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function aboutAction() {
-        
+    public function aboutAction()
+    {
+         $this->view->title = "About Us | ".$this->config->gopogo->name;
     }
 
     /**
@@ -81,8 +83,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function contactAction() {
-        
+    public function contactAction()
+    {
+         $this->view->title = "Contact Us | ".$this->config->gopogo->name;
     }
 
     /**
@@ -93,9 +96,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function legalAction() {
-        
-
+    public function legalAction()
+    {
+         $this->view->title = "Legal | ".$this->config->gopogo->name;
     }
     
     public function cssAction()
