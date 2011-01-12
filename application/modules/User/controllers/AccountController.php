@@ -583,7 +583,6 @@ class User_AccountController extends Zend_Controller_Action
 
         $data['msg'] =  $msg;
         $data['status'] =  $status;
-
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     } // end of signupAction
@@ -596,6 +595,20 @@ class User_AccountController extends Zend_Controller_Action
      */
     public function fbsigninAction() {
         $this->_helper->viewRenderer->setNoRender(true);
+        $session = GP_GPAuth::getSession();
+        // user_id
+        // user_name
+        //print_r($session->user_emailid);
+        $loginFlag = false;
+        $fbLogin = "false";
+        $user_name = '';
+        if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
+        {  //echo "here";exit;
+            $loginFlag = true;
+            $user_name = $session->user_name;
+            $fbLogin = "true";
+        }
+        else {
         $user = new Application_Model_DbTable_User();
         // create facebook object
         $facebook = Facebook_FbClass::getConfig();
@@ -713,6 +726,7 @@ class User_AccountController extends Zend_Controller_Action
         $data['status'] =  $status;
 
        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
+    }
     }
 }  
 

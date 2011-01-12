@@ -205,10 +205,6 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 dataType: 'json',
                 data:fdata,
                 timeout: 1000,
-                error: function(resp){ 
-                    if(resp.status != 1) {
-                        $().signupFail(resp); }
-                },
                 success: function(resp){ 
                     // do something with resp
                     if(resp.status == 1) // show error message

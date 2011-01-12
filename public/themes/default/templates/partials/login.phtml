@@ -35,10 +35,10 @@ else {
                                 <input type="password" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
                             </div>
                             <div class="sign-in-input3">
-                                    <span class="sign-in-txt"><?php echo $this->mess; ?> Forgot your&nbsp;</span>
+                                    <span class="sign-in-txt"><?php echo $this->mess; ?>Forgot your</span>
                                     <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
-                                    <span>&nbsp;or&nbsp;</span>
-                                    <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount"  >create account</a>
+                                    <span>or</span>
+                                    <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount">create account</a>
                             </div>  
 
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
