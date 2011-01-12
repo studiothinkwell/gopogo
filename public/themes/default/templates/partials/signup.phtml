@@ -6,8 +6,9 @@ if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
     {
         $loginFlag = true;
         $user_name = $session->user_name;
+        $fbLogin = "true";
     }
-    if($fbLogin == "false") {
+ else {
         // create facebook object
         $facebook = Facebook_FbClass::getConfig();
     }

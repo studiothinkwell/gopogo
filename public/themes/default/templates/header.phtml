@@ -49,19 +49,18 @@ $Asset::load_js();
         // user_name
         //print_r($session->user_emailid);
         $loginFlag = false;
+        $fbLogin = "false";
         $user_name = '';
         if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
         {
             $loginFlag = true;
             $user_name = $session->user_name;
+            $fbLogin = "true";
         }
-        if($loginFlag == false) {
+        else {
             // create facebook object
             $facebook = Facebook_FbClass::getConfig();
         } 
-        if($loginFlag) {
-            $fbLogedIn = "true";
-        }
       $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
 
       if(empty($baseurl)) {
@@ -82,18 +81,20 @@ $Asset::load_js();
                            <div class="top-Msg-window-s">
                            Please try <span class="top-mg-link"><a href="javascript:void(0)" class="clsSignIn">again.</a></span></div>
                       </span>
-                  <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError" onclick="hideErrorTooltip();"></a>
+                  <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError"></a>
                 </div>
             </div>
 
-            <div class="top-Msg-window clsSuccessMsg" style="display: none">
-                <span class="top-Msg-window-icon"></span>
-                <span class="top-Msg-window-txt">
-                    <div>HURRAY!  You have joined the GoPogo community.<br></div>
-                    <div class="top-Msg-window-s">
-                    Next Step:  Play!  Book a playlist and start having fun.  The more  you rate and play the wil get better recommendations.</div>
-                </span>
-                <span class="top-Msg-window-close"></span>
+            <div class="headrow clsSuccessMsg" style="display: none">
+                <div class="top-Msg-window " >
+                    <span class="top-Msg-window-icon"></span>
+                    <span class="top-Msg-window-txt">
+                        <div>Thanks for joining our team!<br></div>
+                        <div class="top-Msg-window-s">
+                        Confirmation message is sent to your Email address, Please confirm your Email address.</div>
+                    </span>
+                    <a href="javascript:void(0)" class="top-Msg-window-close clsCloseSuccess"></a>
+                </div>
             </div>
 
             <div class="head-mainbg">

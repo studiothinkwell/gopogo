@@ -404,14 +404,10 @@ class User_AccountController extends Zend_Controller_Action
 
     public function signupAction()
     {
-
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
-
         $data = array();
-
         $msg = '';
         $status = 0;
-
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -521,6 +517,37 @@ class User_AccountController extends Zend_Controller_Action
                         GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
 
                         //$this->_helper->redirector('login');
+                        //autologin to the system
+                        // create user model object
+                        $user = new Application_Model_DbTable_User();
+
+                        // check and get user data if email and password match
+                        $userData = $user->getUserByEmailAndPassword($email,$passwd);
+
+                        if($userData)
+                        {
+                            $status = 1;
+
+                            // set user info in session
+
+                            $user->logSession($userData);
+
+                            // other data
+
+                            $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
+
+                            $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                            $msg = $lang_msg;
+                            //$this->_helper->redirector('profile');
+
+                            // log event signin
+                            $eventId = 1;
+                            $userId = $userData['user_id'];
+                            $eventDescription = "signin-login";
+                            $eventAttributes = array();
+                            GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+                        }
 
                     } catch (Some_Component_Exception $e) {
                         if (strstr($e->getMessage(), 'unknown')) {
@@ -688,7 +715,7 @@ class User_AccountController extends Zend_Controller_Action
         $data['msg'] =  $msg;
         $data['status'] =  $status;
 
-        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+       // $this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
 }  
 
