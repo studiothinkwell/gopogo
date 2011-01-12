@@ -642,7 +642,7 @@ class User_AccountController extends Zend_Controller_Action
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
                         $msg = $lang_msg;
-                        //$this->_helper->redirector('profile');
+                        $this->_redirect($this->config->url->base.'/profile');
 
                         // log event signin
                         $eventId = 1;
