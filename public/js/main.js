@@ -106,7 +106,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
+                timeout: 99999,
                 error: function(resp){
                     if(resp.readyState == 4) {
                         $().loginFail(resp);
@@ -347,7 +347,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
+                timeout: 99999,
                 error: function(resp){
                     if(resp.readyState == 4) {
                         $().forgotFail(resp);
@@ -381,13 +381,15 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().debugLog('forgotSuccess');  
             $().debugLog(resp);
             // show message
-           
-            $().errorMessage(resp.msg,'errorMsg');
+            $(".clsMSuccess").text(resp.msg);
+            $(".clsSubSuccess").text('');
+           $().showSuccessTooltip();
+            //$().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
 
             // redirect to home
-            $().redirect(app.gopogo.baseurl);
+            //$().redirect(app.gopogo.baseurl);
 
         };
 
