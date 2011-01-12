@@ -1,47 +1,19 @@
 <?php
-    $session = GP_GPAuth::getSession();
-    // user_id
-    // user_name
-    //print_r($session->user_emailid);
-
+    $session = GP_GPAuth::getSession();    
     $loginFlag = false;
     $user_name = '';
     if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
     {
         $loginFlag = true;
         $user_name = $session->user_name;
-
     }
-    if(!empty($user_name))
-    {
-        $this->title = ucfirst($user_name) . " - Profile";
-    }
-    else
-    {
-        $this->title = "Profile";
-    }
-
-    //$this->title = "Profile";
-    $this->headTitle($this->title);
-    //echo $this->form ;
-    //echo $this->msg;
-
-    //$this->headMeta()->appendName('keywords', 'Profile');
-    //$this->headMeta()->appendName('description', 'Profile');
+    
 ?>
 
-
-    <div style="height:110px;"></div>
-    <!--  Body START-->
-        <div class="container" >
-            <div class="con-box" >
-                <?php if (count($this->messages)) : ?>
-                <ul id="messages">
-                <?php foreach ($this->messages as $message) : ?>
-                    <li><?php echo $this->escape($message); ?></li>
-                <?php endforeach; ?>
-                </ul>
-                <?php endif; ?>
-             </div>
-             <div class="blankdiv"></div>
-        </div>
+<div style="height:130px;"></div>    
+    <div class="container" >
+    <div class="con-box1" ><br/><br/><br/>
+       Hi <?php echo ucfirst($user_name) ?>, Welcome to GoPogo!
+    </div>
+    <div class="blankdiv"></div>
+</div>

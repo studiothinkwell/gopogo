@@ -93,6 +93,12 @@ body
     left:30px;
     font-size:15px;
 }
+
+.search input:focus
+{
+    outline:none;
+}
+
 .search input
 {
     width:230px;
@@ -103,6 +109,12 @@ body
     text-align:left;
     border:0px;
 }
+
+.search_01 input:focus
+{
+    outline:none;
+}
+
 .search_01
 {
     position:relative;
@@ -313,7 +325,7 @@ body
     border:0px solid red;
     margin:0 auto;
 }
-.con-box
+.con-box,.con-box1
 {
     position:relative;
     float:left;
@@ -323,6 +335,13 @@ body
     background-image:url(/themes/default/images/main-bg.jpg);
     background-repeat:repeat-y;
 }
+
+.con-box1
+{
+    background-image:url(/themes/default/images/main-bg1.jpg);
+    min-height: 710px;
+}
+
 .con-left
 {
     position:relative;
@@ -484,11 +503,12 @@ vertical-align:bottom;
 }
 .doit-button
 {
-    position:relative;
-    width:111px;
-    height:26px;
-    margin-top:5px;
-    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;
+    float: left;
+    height: 26px;
+    margin-left:12px;
+    position: relative;
+    width: 111px;
+    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;    
 }
 .interest-button
 {
@@ -582,7 +602,8 @@ vertical-align:bottom;
 .link-txt a
 {
     color:#3e718c;
-    text-decoration:underline;
+    text-decoration:underline;       
+    font-family: Helvetica, Arial, Chaparral Pro, lucida grande, verdana, sans-serif;
 }
 .link-txt a:hover
 {
@@ -1204,12 +1225,24 @@ vertical-align:bottom;
     position:relative;
     float:left;
 }
+
+.create-ac-input1 input:focus
+{
+    outline:none;
+}
+
 .create-ac-input2
 {
     position:relative;
     float:left;
     top:20px;
 }
+
+.create-ac-input2 input:focus
+{
+    outline:none;
+}
+
 .create-ac-input3
 {
     position:relative;
@@ -1220,6 +1253,11 @@ vertical-align:bottom;
     color:#757575;
     width: 100%;
 }
+
+.create-ac-input3 input:focus
+{
+    outline:none;
+}
 .create-ac-input4
 {
     position:relative;
@@ -1228,6 +1266,11 @@ vertical-align:bottom;
     height:29px;
     border:0px solid red;
     top:38px;    
+}
+
+.create-ac-input4 input:focus
+{
+    outline:none;
 }
 .create-ac-txt
 {
@@ -1476,16 +1519,16 @@ border:1px solid red;
 
 /************** Message in END *********************/
 /***************** For Chrome  Start*********************/
+
 @media screen and (-webkit-min-device-pixel-ratio:0)
 {
     @font-face
     {
         font-family: Arial;
-        src: url('/themes/default/images/arial.ttf');
+        src: url('themes/default/images/arial.ttf');
         font-weight:600;
     }
-    .thum-txt
-    {
+    .thum-txt {
         font-size: 12px;
         font-weight: 600;
     }
