@@ -466,6 +466,7 @@ body
     height:28px;
     margin: 125px 0 0 10px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -7px -101px transparent;
+    cursor: pointer;
 }
 .arrow-buton1
 {
@@ -475,13 +476,15 @@ body
     width:18px;
     height:30px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -35px -101px transparent;
+    cursor: pointer;
 }
 .con-right-bg
 {
     background-color: #CACACA;
     float: left;
     height: 30px;
-    width: 365px;}
+    width: 365px;
+}
 .con-right
 {
     position:relative;
@@ -490,7 +493,7 @@ body
 */    width:387px;
     height:auto;
     border-right:1px solid grey;
-    border:0px solid red;
+    border:0px solid red;    
 }
 .mthumb-box
 {   
@@ -608,6 +611,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -55px -23px transparent;
+    cursor: pointer;
 }
 .star-button-grey
 {
@@ -617,6 +621,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -3px -23px transparent;
+    cursor: pointer;
 }
 .star-button-blue
 {
@@ -626,6 +631,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -30px -23px transparent;
+    cursor: pointer;
 }
 .link-txt span{
     display: table-cell;
@@ -726,6 +732,7 @@ vertical-align:bottom;
     background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
     margin-left:-11px;
     margin-top:10px;
+    cursor: pointer;
 }
 .rg-thum-img-cel22
 {
@@ -746,6 +753,7 @@ vertical-align:bottom;
     margin-top:10px;
     position:relative;
     width:50px;
+    cursor: pointer;
 }
 .rg-thum-img-cel33
 {
@@ -805,6 +813,7 @@ vertical-align:bottom;
     font-size:11px;
     color:#363231;
     background:url(/themes/default/images/icons.png) no-repeat scroll 27px -140px transparent;
+    cursor: pointer;
 }
 .skip-txt
 {
@@ -1828,6 +1837,7 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
     top: 10px;
     width: 20px;
     z-index: 9999;
+    cursor: pointer;
 }
 .arrow-up
 {
