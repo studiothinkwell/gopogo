@@ -457,7 +457,7 @@ class User_AccountController extends Zend_Controller_Action
             $passwd = $formData['passwd']; //$form->getValue('passwd');
             $retype_passwd = $formData['retype_passwd'];  //$form->getValue('retype_passwd');
 
-            /*
+            
             // check length of passowrd
 
             
@@ -479,7 +479,7 @@ class User_AccountController extends Zend_Controller_Action
             }
 
 
-            //*/
+            //
 
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
 
