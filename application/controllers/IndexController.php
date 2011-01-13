@@ -46,7 +46,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     { 
-       $this->view->title = "Welcome to ".$this->config->gopogo->name;
+        $this->view->title = "Welcome to ".$this->config->gopogo->name;
     }
 
     /**

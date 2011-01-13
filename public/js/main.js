@@ -47,8 +47,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
     /**
      * This will show success message when profile page loads
      */
-    var url = window.location;
-    if(url == "http://mujaffar.mygopogo.com/User/Account/profile/") {
+    if($("#msgInput").val() == 'fbSignUp') {
         $(".clsSuccessMsg").removeAttr('style');
         var body=document.getElementsByTagName('body')[0];
         body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
@@ -131,13 +130,13 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         // login success
 
         $.fn.loginSuccess = function(resp){ 
-            $().showSuccessTooltip(resp);
+            //$().showSuccessTooltip(resp);
             $().debugLog('loginSuccess');
             $().debugLog(resp);
 
             // show message
             
-            $().errorMessage(resp.msg,'errorMsg');
+            //$().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
 
@@ -204,13 +203,17 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
+                timeout: 99999,
+                error: function(resp){
+                    if(resp.readyState == 4) {
+                        $().signupFail(resp);
+                    }
+                },
                 success: function(resp){ 
                     // do something with resp
                     if(resp.status == 1) // show error message
                     {
-                        $().signupSuccess(resp);
-                        $().showSuccessTooltip();
+                        $().signupSuccess(resp);                        
                     }
                     else
                     {   
@@ -219,7 +222,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                     }                   
                 },
                 complete: function(resp){
-                    if(resp.status == 1)
+                    if(resp.readyState == 4)
                         $().signupWelcome(resp);
                 }
             });

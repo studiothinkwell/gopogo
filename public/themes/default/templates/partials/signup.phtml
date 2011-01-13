@@ -2,6 +2,7 @@
 $loginFlag = false;
 $fbLogin = "false";
 $session = GP_GPAuth::getSession();
+
 if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
     {
         $loginFlag = true;

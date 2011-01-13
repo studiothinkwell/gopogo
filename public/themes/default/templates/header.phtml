@@ -56,6 +56,7 @@ $Asset::load_js();
             $loginFlag = true;
             $user_name = $session->user_name;
             $fbLogin = "true";
+            $facebook = Facebook_FbClass::getConfig();
         }
         else {
             // create facebook object
@@ -105,22 +106,23 @@ $Asset::load_js();
                     <a class="logo" href="<?php echo $baseUrl;?>"></a>
                     <div class="topmenu">
 
-                            <?php if($loginFlag){ ?>
-                            Welcome, <?php echo ucfirst($user_name); ?> |
-                            <a href="javascript:void(0)" id='logout' >Logout</a> |
-                            <?php } else { ?>
-                            <!--Welcome, Guest | -->
-                            <?php
-                            /*$fbArray = $facebook->FBLogin();
-                            
-                            if(is_array($facebook->FBLogin())) { ?>
-                            Welcome <?php echo $fbArray['Email'];                            
-                            $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . $this->url(array('module'=>'default','controller'=>'facebook','action'=>'logout'));
-                            echo '<a href="'.$facebook->getLogoutUrl($logout).'">Logout</a>';
-                            } else {*/ ?>
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php //} ?>
-                            <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
-                            <?php } //exit;?>
+                            <?php if(!isset($session->fbLogoutUrl)){
+                                    $facebook = Facebook_FbClass::getConfig();
+                                    $fbArray = $facebook->FBLogin();                            
+                                    if(is_array($facebook->FBLogin())) {                          
+                                        $session->fbLogoutUrl = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . $this->url(array('module'=>'default','controller'=>'index','action'=>'index'));
+                                    }
+                                }
+                                if(!isset($session->fbLogoutUrl)){$session->fbLogoutUrl = "#"; };
+                                if($loginFlag) {
+                            ?>
+                                Welcome, <?php echo ucfirst($user_name); ?> |
+                                <a href="<?php echo $session->fbLogoutUrl;?>" id='logout' >Logout</a> |
+                            <?php }else { ?>
+                                <!--Welcome, Guest | -->
+                                <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
+                                <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
+                            <?php } ?>
                             <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
 
                         </div>
