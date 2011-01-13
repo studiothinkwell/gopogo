@@ -5,9 +5,9 @@ $(document).ready(function(){
 
   $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
-        $(".errorMsg").text('');        
-        $().enableLoginBox();
-        //$(".clsForgotClass").hide();
+        $(".errorMsg").text(''); 
+        $().enableLoginBox(); 
+        $(".clsForgotDiv").hide();
         $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
         $().setdefaultval();
         $("#email").focus();
@@ -43,6 +43,10 @@ $(document).ready(function(){
     });
 
      $(".login-close").click(function(){
+        $().finish();
+    });
+
+    $(".clsForgotClose").click(function(){
         $().finish();
     });
     

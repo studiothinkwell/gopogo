@@ -314,6 +314,18 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
+              // validate capcha
+            //*
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                $lang_msg = $this->translate->_("Invalid captcha");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+
             if($validFlag){
 
                 try {
@@ -455,6 +467,7 @@ class User_AccountController extends Zend_Controller_Action
 
             $passwd = $formData['passwd']; //$form->getValue('passwd');
             $retype_passwd = $formData['retype_passwd'];  //$form->getValue('retype_passwd');
+
             if(strlen($passwd) == 0) {
                 if($validFlag) {
                     $lang_msg = $this->translate->_("Please enter password!");
@@ -490,7 +503,7 @@ class User_AccountController extends Zend_Controller_Action
             }
 
 
-            //*/
+            //
 
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
 

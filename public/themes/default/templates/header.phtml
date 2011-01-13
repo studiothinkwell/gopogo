@@ -1,77 +1,54 @@
 <?php
-$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
-$this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
-$this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
-$this->headTitle()->setSeparator(' - ');
-$this->headTitle($this->title);
-//echo $this->doctype();
-
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+    $this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
+    $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
+    $this->headTitle()->setSeparator(' - ');
+    $this->headTitle($this->title);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<?php echo $this->headMeta(); ?>
-
-<?php echo $this->headTitle(); ?>
-
-<?php
-
-/*
-$Asset::add_css('/themes/default/css/skin.css');
-$Asset::add_css('/themes/default/css/lightbox.css');
-$Asset::load_css();
-
-$Asset::add_js('/js/jquery-1.4.2.js');
-$Asset::add_js('/js/jquery.ui.core.js');
-$Asset::load_js();
-*/
+<?php 
+    echo $this->headMeta();
+    echo $this->headTitle();
+    GP_Asset::addCss('/themes/default/css/skin.css');
+    GP_Asset::addCss('/themes/default/css/lightbox.css');
+    GP_Asset::combieAndLoadCss();
 ?>
-
-<?php
-     GP_Asset::addCss('/themes/default/css/skin.css');
-     GP_Asset::addCss('/themes/default/css/lightbox.css');
-     GP_Asset::combieAndLoadCss();
-?>
-
-
-<!-- <link href="<?php //echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/themes/default/css/lightbox.css" rel="stylesheet" type="text/css" /> -->
 </head>
 <?php
- $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
- $baseUrl = $config->gopogo->url->base;
+    $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+    $baseUrl = $config->gopogo->url->base;
+
+    $session = GP_GPAuth::getSession();
+    $loginFlag = false;
+    $fbLogin = false;
+    $userEmailId = '';
+    $user_name = '';
+
+    if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
+        $loginFlag = true;
+        $userName = $session->user_name;
+        $userEmailId = $session->user_emailid;
+        $fbLogin = "true";
+        session_register("sessionFlg");
+        $_SESSION['sessionFlg'] = $loginFlag;
+    }
+    else {
+    // create facebook object
+        $facebook = Facebook_FbClass::getConfig();
+    }
+
+    if(empty($baseUrl)) {
+        $baseUrl = "#";
+    }
 
 ?>
 <body >
-    <?php
 
-        $session = GP_GPAuth::getSession();
-        // user_id
-        // user_name
-        //print_r($session->user_emailid);
-        $loginFlag = false;
-        $fbLogin = "false";
-        $user_name = '';
-        if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
-        {  //echo "here";exit;
-            $loginFlag = true;
-            $user_name = $session->user_name;
-            $fbLogin = "true";
-            $facebook = Facebook_FbClass::getConfig();
-        }
-        else {
-            // create facebook object
-            $facebook = Facebook_FbClass::getConfig();
-        } 
-      
-      if(empty($baseUrl)) {
-          $baseUrl = "#";
-      }
-
-    ?>
     <div id="master" align="center">
     	<div id="submaster">
-            <!-- Header START-->
-    
+            <!-- Header START-->    
         <div class="header">
             <div class="headrow clsErrorMsg" style="display: none">
                <div class="top-Msg-window-r " >
@@ -93,8 +70,8 @@ $Asset::load_js();
                 <div class="top-Msg-window " >
                     <span class="top-Msg-window-icon"></span>
                     <span class="top-Msg-window-txt">
-                        <div>HURRAY! You have joined the GoPogo community. <br></div>
-                        <div class="top-Msg-window-s">
+                        <div class="clsMSuccess">HURRAY! You have joined the GoPogo community. <br/></div>
+                        <div class="top-Msg-window-s clsSubSuccess">
                         Next Step: Play! Book a playlist and start having fun. The more you rate and play they will get better recommendations.</div>
                     </span>
                     <a href="javascript:void(0)" class="top-Msg-window-close clsCloseSuccess"></a>
@@ -114,18 +91,20 @@ $Asset::load_js();
                                     }
                                 }
                                 if(!isset($session->fbLogoutUrl)){$session->fbLogoutUrl = "#"; };
-                                if($loginFlag) {
+                                
+                                if($loginFlag){
+                                    echo $userEmailId;
                             ?>
-                                Welcome, <?php echo ucfirst($user_name); ?> |
-                                <a href="<?php echo $session->fbLogoutUrl;?>" id='logout' >Logout</a> |
-                            <?php }else { ?>
-                                <!--Welcome, Guest | -->
-                                <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
-                                <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
-                            <?php } ?>
+                            | <a href="#" onclick="return false" >Account</a>
+                            | <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
+                            | <a href="javascript:void(0)" id='logout' >Sign out</a>
+                            <?php } else { ?>                                                        
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or 
+                            <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
+                            <?php } ?>
 
-                        </div>
+                     </div>
                 </div>
                 <div class="headrow2">
                     <div class="menu">
@@ -137,25 +116,18 @@ $Asset::load_js();
                     <div class="search"><input type="text" value="Search for..." onclick="if(this.value=='Search for...'){this.value='';}" onblur="if(this.value==''){this.value='Search for...'}"/></div>
                     <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value='';}" onblur="if(this.value==''){this.value='City, State, and Zip'}"/></div>
                     <div class="submenu">
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">My Profile</a></div>
-                            <div class="submenu-right"></div>
-                        </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">My Preferences</a></div>
-                            <div class="submenu-right"></div>
+                         <div class="submenu-box">
+                        	<div id="s1menu1" class="s1menu1 submenu-div"></div>
+                        	<div id="s1menu2" class="s1menu2 submenu-div"></div>
+                        	<div id="s1menu3" class="s1menu3 submenu-div"></div>
+                        	<div id="s1menu4" class="s1menu4 submenu-div"></div>
                         </div>
                     </div>                    
                 </div>
             </div>
         </div>
             <!-- Header END-->
-
-
-                <?php
-                print_r($this->msg);
+                <?php                
                 if (count($this->messages)) : ?>
                 <ul id="messages">
                 <?php foreach ($this->messages as $message) : ?>

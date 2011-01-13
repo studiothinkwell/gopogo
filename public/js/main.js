@@ -5,7 +5,7 @@ app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
 app.gopogo.signup_url = app.gopogo.baseurl + 'User/Account/signup/';
 // profile url
-app.gopogo.profile_url = app.gopogo.baseurl + 'User/Account/profile/';
+app.gopogo.profile_url = app.gopogo.baseurl + 'profile';
 // logout url
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
@@ -18,6 +18,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
  */
     $(".your-personal-button").click(function() {
         $(".footer-middle").slideToggle("show");
+        $("#personalArrow").toggleClass('arrow-up');        
     });
 
 
@@ -104,9 +105,11 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
-                error: function(resp){ 
-                    $().loginFail(resp);
+                timeout: 99999,
+                error: function(resp){
+                    if(resp.readyState == 4) {
+                        $().loginFail(resp);
+                    }
                 },
                 success: function(resp){ 
                     // do something with resp
@@ -119,8 +122,10 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().loginFail(resp);
                     }
                 },
-                complete: function(resp){ 
-                    $().loginWelcome(resp);
+                complete: function(resp){
+                    if(resp.readyState == 4) {
+                        $().loginWelcome(resp);
+                    }
                 }
 
             });
@@ -340,9 +345,11 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 type: 'POST',
                 dataType: 'json',
                 data:fdata,
-                timeout: 1000,
+                timeout: 99999,
                 error: function(resp){
-                    $().forgotFail(resp);
+                    if(resp.readyState == 4) {
+                        $().forgotFail(resp);
+                    }
                 },
                 success: function(resp){
                     // do something with resp
@@ -357,7 +364,9 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                     }
                 },
                 complete: function(resp){
-                    $().forgotWelcome(resp);
+                    if(resp.readyState == 4) {
+                        $().forgotWelcome(resp);
+                    }
                 }
 
             });
@@ -370,13 +379,15 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $().debugLog('forgotSuccess');  
             $().debugLog(resp);
             // show message
-           
-            $().errorMessage(resp.msg,'errorMsg');
+            $(".clsMSuccess").text(resp.msg);
+            $(".clsSubSuccess").text('');
+           $().showSuccessTooltip();
+            //$().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
 
             // redirect to home
-            $().redirect(app.gopogo.baseurl);
+            //$().redirect(app.gopogo.baseurl);
 
         };
 
@@ -483,6 +494,20 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         };
+
+    $('.submenu-box .submenu-div').hover
+          (
+                   function()
+                                {
+                                        var id = $(this).attr("id");
+                                        $(this).addClass(id+'-selected');
+                            },
+                   function()
+                                {
+                                        var id = $(this).attr("id");
+                                        $(this).removeClass(id+'-selected');
+                                }
+           ); 
 });
 
 $.fn.hideShow = function() {

@@ -283,9 +283,9 @@ return array(
     // forgot password
     "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
     "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
+    "Invalid captcha" =>"Invalid captcha",
 
     // signup
-    "SignUp Enter Valid Email!" => "Enter valid email for Create Account.",
     "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
     "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
     "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
