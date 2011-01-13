@@ -150,10 +150,11 @@
                 </div>
  <!--Left Part END--> 
  <!-- Right part Start  -->
+            <?php $sessionFlg = $_SESSION['sessionFlg']; ?>
             	<div class="con-right">
                 	<div class="con-right-bg"><span class="con-left-head-txt1">Places You’ll Love</span></div>
-                    <div class="con-right-ro1">
-                    <?php $sessionFlg = $_SESSION['sessionFlg']; ?>
+                        <div class="con-right-ro1" <?php if($sessionFlg) { echo("style='height:250px'"); } ?> >
+                    
                     <?php if(empty($sessionFlg)) { ?>
                     	<div class="heading-txt">How Well We Know Youecho </div>
                         <div><img src="/themes/default/images/bar.jpg" alt=""/></div>
@@ -161,7 +162,23 @@
                         <?php } else { ?>
                             <div class="heading-txt">YOUR PROFILE </div>
                             <div><img src="/themes/default/images/bar.jpg" alt=""/></div>
+
+                               <div class="heading-txt">
+                                <div style="height:15px;text-align:top;padding: 0px;margin: 0px"><div style="float:left" ><img alt="" src="/themes/default/images/face-icon.jpg"></div><div style="float:left;font-size:13px;padding-bottom:20px">&nbsp;&nbsp;Connect with Facebook.</div> </div>
+                                <br clear="all" />
+                                <span style="clear:both;font-size:11px">Join your Facebook account to GoPogo and invite friends to your playlists.</span>
+                                <br clear="all" />
+                                <input type="text" value="Facebook id" style="margin-top:10px">
+                                <br/>
+                                <input type="text" value="Password" style="margin-top:5px"><br/>
+                                <input type="image" src="/themes/default/images/addfacebook.png" style="margin-top:5px">
+                           </div>
+                            <br clear="all" ><br/>
+                            <div class="skip-txt" style="padding-top:110px;padding-left:80px" ><a href="#">Skip</a>&nbsp;</div>
+
+
                         <?php }  ?>
+                    
                     </div>
                     <?php if(empty($sessionFlg)) { ?>
                     <div class="con-right-ro2">
@@ -176,16 +193,7 @@
                             <div class="radio-button-right"></div>
                     </div>
                     <?php } else { ?>
-                            <div class="con-right-ro2">
-                            <div class="heading-txt"><img alt="" src="/themes/default/images/face-icon.jpg"> &nbsp;&nbsp;Connect with Facebook.
-                                <br>Join your Facebook account to GoPogo and invite
-                            friends to your playlists.</div>
-                            <div class="radio-button">
-
-                            </div>
-                            <div class="skip-txt"><a href="#">Skip</a>&nbsp;</div>
-                            <div class="radio-button-right"></div>
-                            </div>
+                            
                         <?php }  ?>
                     <div class="con-right-row4">
                   <!--  Thumb Box START-->
