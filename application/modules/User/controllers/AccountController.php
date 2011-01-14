@@ -290,7 +290,6 @@ class User_AccountController extends Zend_Controller_Action
     {
 
         $data = array();
-
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $msg = '';
@@ -301,6 +300,7 @@ class User_AccountController extends Zend_Controller_Action
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
+           // $captchaObj = new GP_Captcha();
 
             // checking for valid email
             //*
@@ -308,6 +308,17 @@ class User_AccountController extends Zend_Controller_Action
                 // Yes, email appears to be valid
             } else {
                 $lang_msg = $this->translate->_("Enter Valid Email!");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+              // validate capcha
+            //*
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                 $lang_msg = $this->translate->_("Invalid captcha");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
                 $msg .= $lang_msg;
                 $validFlag = false;
@@ -406,9 +417,9 @@ class User_AccountController extends Zend_Controller_Action
             unset($session->isSignedUp);
             $this->view->newUser = 'fbSignUp';
         }
-        if(!empty($session->user_name))        
-            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;        
-        else        
+        if(!empty($session->user_name))
+            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;
+        else
             $this->_redirect('/');
 
     } // end of profileAction
@@ -632,7 +643,7 @@ class User_AccountController extends Zend_Controller_Action
      * @param String email : email address in post
      * @return json object - :msg, :status
      */
-    public function fbsigninAction() {
+     public function fbsigninAction() {
         $this->_helper->viewRenderer->setNoRender(true);
         $session = GP_GPAuth::getSession();
         // user_id
@@ -649,7 +660,7 @@ class User_AccountController extends Zend_Controller_Action
             $fbLogin = "true";
         }
         else {
-        
+
         // create facebook object
         $facebook = Facebook_FbClass::getConfig();
         $userData = $facebook->FBLogin();
@@ -664,10 +675,10 @@ class User_AccountController extends Zend_Controller_Action
         $udata['TempPass'] = $enctemp_password;
         $status = 0;
         $msg = "";
-        // create user model object        
+        // create user model object
         if ($userFlag) {
             $userData = $user->getUserByEmail($userData['Email']);
-        }else { 
+        }else {
             $status = $user->fbsignup($udata);
 
             // check and get user data if email and password match
@@ -686,7 +697,7 @@ class User_AccountController extends Zend_Controller_Action
 
                         // set user info in session
                         $user->logSession($userData);
-                        
+
                         $ukey = "fbLogoutUrl";
                         $logout = 'http://' . $_SERVER['HTTP_HOST'];
                         $user->$ukey = $facebook->getLogoutUrl($logout);
@@ -697,7 +708,7 @@ class User_AccountController extends Zend_Controller_Action
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
                         $msg = $lang_msg;
-                        
+
                         $this->_redirect($this->config->url->base.'/profile');
 
                         // log event signin
@@ -753,7 +764,7 @@ class User_AccountController extends Zend_Controller_Action
         // return json response
         // $this->_helper->json($data, array('enableJsonExprFinder' => true));
         $this->view->msg = $msg;
-        
+
         // log error if not success
 
         if($status != 1)

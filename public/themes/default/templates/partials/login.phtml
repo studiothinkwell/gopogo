@@ -23,7 +23,7 @@ else {
                     <div class="sign-in-rightbg"></div>
                     <div class="login-close"></div>
                 </div>
-                <div class="sign-in-centerbg" id="sign-in-centerbg">                                   
+                <div class="sign-in-centerbg" id="sign-in-centerbg">
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
                         <div class="sign-in-right">
                             <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignInEmail"/></div>
@@ -36,14 +36,14 @@ else {
                                     <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
                                     <span>or</span>
                                     <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount">create account</a>
-                            </div>  
+                            </div>
 
                             <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
-                            <div class="sign-in-input4">                                 
+                            <div class="sign-in-input4">
                                   <?php  if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
-                             </div>   
+                             </div>
                         </div>
-                       </form>                   
+                       </form>
                 </div>
                 <div class="sign-in-bottombg"></div>
             </div>

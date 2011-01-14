@@ -5,12 +5,12 @@ var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','
 $(document).ready(function()
 {
 
-  $(".clsSignIn").click(function(){ 
+  $(".clsSignIn").click(function(){
         divId = "#loginBox";
-        $(".errorMsg").text(''); 
-        $().enableLoginBox(); 
+        $(".errorMsg").text('');
+        $().enableLoginBox();
         $(".clsForgotDiv").hide();
-        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
@@ -23,7 +23,7 @@ $(document).ready(function()
         var timestamp = new Date().getTime();
         //alert($(location).attr('href'));
         var sBaseUrl = $(location).attr('href');
-        baseUrl = $.fn.explode('.com',sBaseUrl); 
+        baseUrl = $.fn.explode('.com',sBaseUrl);
         $('#imageCaptcha').attr('src',baseUrl[0]+'.com/index/code?time=' + timestamp);
         divId = "#forgotBox";
         $("#loginBox").css({display:'none'});
@@ -34,16 +34,16 @@ $(document).ready(function()
         $().setdefaultval();
         $("#email").focus();
     });
-    
+
   $(".clsForgot").click(function(){
         divId = "#forgotBox";
-        $("#loginBox").css({display:'none'}); 
+        $("#loginBox").css({display:'none'});
         $("#toggleForgot").css({display:''});
         $(".errorMsg").text('');
         $().enableLoginBox();
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
-        $("#email").focus();       
+        $("#email").focus();
     });
 
     $(".clsSignUp").click(function(){
@@ -68,15 +68,34 @@ $(document).ready(function()
     $(".clsForgotClose").click(function(){
         $().finish();
     });
-    
+
     $().addResize();
     $().addScroll();
 
+    $(".clsEditProfile").click(function(){ alert(1);
+       var txtEdtUsrName = $("<input type='text' name='editPUserName' id='editPUserName' class='clsPUserName' value='"+$(".clsPUserName").text()+"'/>");
+       var txtEdtUsrDesc = $("<input type='text' name='editPUserDesc' id='editPUserDesc' class='clsPUserDesc' value='"+$(".clsPUserDesc").text()+"'/>");
+       $(".clsPUserName").html(txtEdtUsrName);
+       $(".clsPUserDesc").html(txtEdtUsrDesc);
+       $(".clsProAction").html("<input type='button' class='clsSaveProfile' name='' value='Save'/>");
+    });
+
+    $(".clsSaveProfile").click(function() {
+       var txtEdtUsrName = $("<div class='heading-txt clsPUserName'>'"+$(".clsPUserName").val()+"'</div>");
+       var txtEdtUsrDesc = $("<div class='clsPUserDesc'>'"+y+"'</div>");
+       $(".clsPUserName").html(txtEdtUsrName);
+       $(".clsPUserDesc").html(txtEdtUsrDesc);
+       $(".clsProAction").html("<input type='button' class='clsSaveProfile' name='' value='Save'/>");
+    });
     $.fn.blockModalBox(".create-ac-head", "#signupBox");
     $.fn.blockModalBox(".create-ac-head", "#loginBox");
     $.fn.blockModalBox(".create-ac-head", "#forgotBox");
-    
+
 });
+
+$.fn.inplaceEditor = function() {
+
+}
 
 $.fn.addResize = function() {
     $(window).resize(function() {
@@ -113,7 +132,7 @@ $.fn.addScroll = function() {
             top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
             left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
             });
-        });  
+        });
 }
 
 $.fn.addModalWindow = function(objId) {
@@ -121,7 +140,7 @@ $.fn.addModalWindow = function(objId) {
     $().debugLog('addModalWindow');
     $().debugLog(objId);
 
-    divId = objId;   
+    divId = objId;
 
      if( $("#overlay").length <= 0 )
      {
@@ -140,7 +159,7 @@ $.fn.addModalWindow = function(objId) {
         height:              arrPageSizes[1]
     }).fadeIn();
 
-   
+
     // Calculate top and left offset for the jquery-lightbox div object and show it
     $(objId).css({
         top:    parseInt((arrPageSizes[3]/2) - (($(objId).height()) / 2)),
@@ -148,15 +167,15 @@ $.fn.addModalWindow = function(objId) {
     }).show();
 
     // Assigning click events in elements to close overlay
-    $('#overlay').click(function() {         
+    $('#overlay').click(function() {
         $().finish();
     });
 
-    $().enableKeyboardNavigation();    
+    $().enableKeyboardNavigation();
 }
 
 $.fn.displayModalBox = function(mainBox, titleBox, container ) {
-       
+
         $(mainBox).draggable();
 
         $(titleBox).mouseover(function(){
@@ -178,7 +197,7 @@ $.fn.enableKeyboardNavigation = function() {
 
 $.fn.enableLoginBox = function() {
 
-     if($("#toggleForgot").css('display')== 'block'){           
+     if($("#toggleForgot").css('display')== 'block'){
            $("#toggleLogin").css({display:''});
         }
 }
@@ -195,13 +214,13 @@ $.fn.keyboardAction = function(objEvent) {
         key = String.fromCharCode(keycode).toLowerCase();
 
         // Verify the keys to close the ligthBox
-        if ( ( keycode == escapeKey ) ) {            
-            $().finish();            
+        if ( ( keycode == escapeKey ) ) {
+            $().finish();
         }
 }
 
 $.fn.finish = function() {
-    
+
     $(divId).css({display:'none'});
     $('#overlay').fadeOut(function() {$('#overlay').remove();});
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
