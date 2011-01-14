@@ -2,7 +2,8 @@
 var divId;
 var baseUrl;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
-$(document).ready(function(){
+$(document).ready(function()
+{
 
   $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
@@ -69,7 +70,11 @@ $(document).ready(function(){
     });
     
     $().addResize();
-    $().addScroll();    
+    $().addScroll();
+
+    $.fn.blockModalBox(".create-ac-head", "#signupBox");
+    $.fn.blockModalBox(".create-ac-head", "#loginBox");
+    $.fn.blockModalBox(".create-ac-head", "#forgotBox");
     
 });
 
@@ -108,9 +113,7 @@ $.fn.addScroll = function() {
             top:	Math.round(((arrPageScroll[1]) + (arrPageSizes[3]/2) - (($(divId).height()) / 2))),
             left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
             });
-        });
-    
-
+        });  
 }
 
 $.fn.addModalWindow = function(objId) {
@@ -167,8 +170,6 @@ $.fn.displayModalBox = function(mainBox, titleBox, container ) {
         $().addModalWindow(mainBox);
 }
 
-
-
 $.fn.enableKeyboardNavigation = function() {
     $(document).keydown(function(objEvent) {
         $().keyboardAction(objEvent);
@@ -198,7 +199,6 @@ $.fn.keyboardAction = function(objEvent) {
             $().finish();            
         }
 }
-
 
 $.fn.finish = function() {
     
@@ -247,36 +247,18 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpRePwd").attr('style','display:none');
 }
 
-$(".create-ac-head").mousemove(function(){
 
-	$("#signupBox").draggable({
+$.fn.blockModalBox = function(title, modalBox) {
+    $(title).mousemove(function(){
+
+	$(modalBox).draggable({
 			containment: 'document',
 			start: function(event, ui) {
-
 			},
 			drag: function(event, ui) {
-
 			},
 			stop: function(event, ui) {
-
 			}
 		});
-
-});
-
-$(".create-ac-head").mousemove(function(){
-
-	$("#loginBox").draggable({
-			containment: 'document',
-			start: function(event, ui) {
-
-			},
-			drag: function(event, ui) {
-
-			},
-			stop: function(event, ui) {
-
-			}
-		});
-
-});
+    });
+}
