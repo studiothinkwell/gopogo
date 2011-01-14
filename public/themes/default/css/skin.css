@@ -333,14 +333,13 @@ body
 {
     position:relative;
     float:right;
-    width:365px;
+    width:600px;
     font-size:11px;
     text-align:right;
     left:-20px;
     color:#FFF;
     font-weight:600;
-    text-decoration:none;
-    margin-left:260px;
+    text-decoration:none;    
     margin-top:10px;
 }
 .topmenu a
