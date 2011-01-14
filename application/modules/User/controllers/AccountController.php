@@ -766,5 +766,11 @@ class User_AccountController extends Zend_Controller_Action
         $data['status'] =  $status;
 
        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
-    }    
+    }
+
+    public function captchAction()
+    {
+       $captcha = new GP_Captcha();
+       $captcha->CreateImage();
+    }
 }  

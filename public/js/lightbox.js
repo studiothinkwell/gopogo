@@ -1,5 +1,6 @@
 
 var divId;
+var baseUrl;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
 
@@ -16,6 +17,23 @@ $(document).ready(function(){
         $().closeSuccessTooltip();
     });
 
+    $(".clsForgot").click(function(){
+          //var img_src = $('#imageCaptcha').attr('src');
+        var timestamp = new Date().getTime();
+        //alert($(location).attr('href'));
+        var sBaseUrl = $(location).attr('href');
+        baseUrl = $.fn.explode('.com',sBaseUrl); 
+        $('#imageCaptcha').attr('src',baseUrl[0]+'.com/index/code?time=' + timestamp);
+        divId = "#forgotBox";
+        $("#loginBox").css({display:'none'});
+        //$("#toggleForgot").css({display:''});
+        $(".errorMsg").text('');
+       // $().enableLoginBox();
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
+        $().setdefaultval();
+        $("#email").focus();
+    });
+    
   $(".clsForgot").click(function(){
         divId = "#forgotBox";
         $("#loginBox").css({display:'none'}); 
