@@ -69,9 +69,28 @@ $(document).ready(function(){
     });
     
     $().addResize();
-    $().addScroll();    
-    
+    $().addScroll();
+
+    $(".clsEditProfile").click(function(){ alert(1);
+       var txtEdtUsrName = $("<input type='text' name='editPUserName' id='editPUserName' class='clsPUserName' value='"+$(".clsPUserName").text()+"'/>");
+       var txtEdtUsrDesc = $("<input type='text' name='editPUserDesc' id='editPUserDesc' class='clsPUserDesc' value='"+$(".clsPUserDesc").text()+"'/>");
+       $(".clsPUserName").html(txtEdtUsrName);
+       $(".clsPUserDesc").html(txtEdtUsrDesc);
+       $(".clsProAction").html("<input type='button' class='clsSaveProfile' name='' value='Save'/>");
+    });
+
+    $(".clsSaveProfile").click(function() {
+       var txtEdtUsrName = $("<div class='heading-txt clsPUserName'>'"+$(".clsPUserName").val()+"'</div>");
+       var txtEdtUsrDesc = $("<div class='clsPUserDesc'>'"+y+"'</div>");
+       $(".clsPUserName").html(txtEdtUsrName);
+       $(".clsPUserDesc").html(txtEdtUsrDesc);
+       $(".clsProAction").html("<input type='button' class='clsSaveProfile' name='' value='Save'/>");
+    });
 });
+
+$.fn.inplaceEditor = function() {
+
+}
 
 $.fn.addResize = function() {
     $(window).resize(function() {
