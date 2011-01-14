@@ -1,24 +1,30 @@
 
 var divId;
+var baseUrl;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
-$(document).ready(function(){
+$(document).ready(function()
+{
 
-  $(".clsSignIn").click(function(){ 
+  $(".clsSignIn").click(function(){
         divId = "#loginBox";
-        $(".errorMsg").text('');        
-        $().enableLoginBox(); 
+        $(".errorMsg").text('');
+        $().enableLoginBox();
         $(".clsForgotDiv").hide();
-        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
+        $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
+        $().closeErrorTooltip();
+        $().closeSuccessTooltip();
     });
 
     $(".clsForgot").click(function(){
           //var img_src = $('#imageCaptcha').attr('src');
         var timestamp = new Date().getTime();
-        $('#imageCaptcha').attr('src','http://ashish.mygopogo.com/index/code?time=' + timestamp);
-       
+        //alert($(location).attr('href'));
+        var sBaseUrl = $(location).attr('href');
+        baseUrl = $.fn.explode('.com',sBaseUrl);
+        $('#imageCaptcha').attr('src',baseUrl[0]+'.com/index/code?time=' + timestamp);
         divId = "#forgotBox";
         $("#loginBox").css({display:'none'});
         //$("#toggleForgot").css({display:''});
@@ -26,15 +32,29 @@ $(document).ready(function(){
        // $().enableLoginBox();
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
-        $("#email").focus();                   
-    }); 
+        $("#email").focus();
+    });
+
+  $(".clsForgot").click(function(){
+        divId = "#forgotBox";
+        $("#loginBox").css({display:'none'});
+        $("#toggleForgot").css({display:''});
+        $(".errorMsg").text('');
+        $().enableLoginBox();
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
+        $().setdefaultval();
+        $("#email").focus();
+    });
 
     $(".clsSignUp").click(function(){
+        $("#loginBox").hide();
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
         $(".clsSignUpEmail").focus();
         $(".fb_button_text").text('');
+        $().closeErrorTooltip();
+        $().closeSuccessTooltip();
     });
 
     $(".create-ac-close").click(function(){
@@ -46,13 +66,16 @@ $(document).ready(function(){
     });
 
     $(".clsForgotClose").click(function(){
-        $('#imageCaptcha').attr('src','');
         $().finish();
     });
-    
+
     $().addResize();
-    $().addScroll();    
-    
+    $().addScroll();
+
+    $.fn.blockModalBox(".create-ac-head", "#signupBox");
+    $.fn.blockModalBox(".create-ac-head", "#loginBox");
+    $.fn.blockModalBox(".create-ac-head", "#forgotBox");
+
 });
 
 $.fn.addResize = function() {
@@ -91,8 +114,6 @@ $.fn.addScroll = function() {
             left:	Math.round(((arrPageScroll[0]) + (arrPageSizes[2]/2) - (($(divId).width()) / 2)))
             });
         });
-    
-
 }
 
 $.fn.addModalWindow = function(objId) {
@@ -100,11 +121,11 @@ $.fn.addModalWindow = function(objId) {
     $().debugLog('addModalWindow');
     $().debugLog(objId);
 
-    divId = objId;   
+    divId = objId;
 
      if( $("#overlay").length <= 0 )
      {
-        $('embed, object, select').css({ 'visibility' : 'hidden' });
+        $('embed, object, select').css({'visibility' : 'hidden'});
         $('body').append('<div id="overlay"></div>');
      }
     $(objId).css({display:''});
@@ -119,7 +140,7 @@ $.fn.addModalWindow = function(objId) {
         height:              arrPageSizes[1]
     }).fadeIn();
 
-   
+
     // Calculate top and left offset for the jquery-lightbox div object and show it
     $(objId).css({
         top:    parseInt((arrPageSizes[3]/2) - (($(objId).height()) / 2)),
@@ -127,15 +148,15 @@ $.fn.addModalWindow = function(objId) {
     }).show();
 
     // Assigning click events in elements to close overlay
-    $('#overlay').click(function() {         
+    $('#overlay').click(function() {
         $().finish();
     });
 
-    $().enableKeyboardNavigation();    
+    $().enableKeyboardNavigation();
 }
 
 $.fn.displayModalBox = function(mainBox, titleBox, container ) {
-       
+
         $(mainBox).draggable();
 
         $(titleBox).mouseover(function(){
@@ -149,8 +170,6 @@ $.fn.displayModalBox = function(mainBox, titleBox, container ) {
         $().addModalWindow(mainBox);
 }
 
-
-
 $.fn.enableKeyboardNavigation = function() {
     $(document).keydown(function(objEvent) {
         $().keyboardAction(objEvent);
@@ -159,7 +178,7 @@ $.fn.enableKeyboardNavigation = function() {
 
 $.fn.enableLoginBox = function() {
 
-     if($("#toggleForgot").css('display')== 'block'){           
+     if($("#toggleForgot").css('display')== 'block'){
            $("#toggleLogin").css({display:''});
         }
 }
@@ -176,18 +195,17 @@ $.fn.keyboardAction = function(objEvent) {
         key = String.fromCharCode(keycode).toLowerCase();
 
         // Verify the keys to close the ligthBox
-        if ( ( keycode == escapeKey ) ) {            
-            $().finish();            
+        if ( ( keycode == escapeKey ) ) {
+            $().finish();
         }
 }
 
-
 $.fn.finish = function() {
-    
+
     $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
+    $('#overlay').fadeOut(function() {$('#overlay').remove();});
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-    $('embed, object, select').css({ 'visibility' : 'visible' });
+    $('embed, object, select').css({'visibility' : 'visible'});
 }
 
 $.fn.getPageScroll = function() {
@@ -229,36 +247,18 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpRePwd").attr('style','display:none');
 }
 
-$(".create-ac-head").mousemove(function(){
 
-	$("#signupBox").draggable({
+$.fn.blockModalBox = function(title, modalBox) {
+    $(title).mousemove(function(){
+
+	$(modalBox).draggable({
 			containment: 'document',
 			start: function(event, ui) {
-
 			},
 			drag: function(event, ui) {
-
 			},
 			stop: function(event, ui) {
-
 			}
 		});
-
-});
-
-$(".create-ac-head").mousemove(function(){
-
-	$("#loginBox").draggable({
-			containment: 'document',
-			start: function(event, ui) {
-
-			},
-			drag: function(event, ui) {
-
-			},
-			stop: function(event, ui) {
-
-			}
-		});
-
-});
+    });
+}

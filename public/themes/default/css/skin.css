@@ -333,14 +333,13 @@ body
 {
     position:relative;
     float:right;
-    width:365px;
+    width:600px;
     font-size:11px;
     text-align:right;
     left:-20px;
     color:#FFF;
     font-weight:600;
     text-decoration:none;
-    margin-left:260px;
     margin-top:10px;
 }
 .topmenu a
@@ -466,6 +465,7 @@ body
     height:28px;
     margin: 125px 0 0 10px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -7px -101px transparent;
+    cursor: pointer;
 }
 .arrow-buton1
 {
@@ -475,13 +475,15 @@ body
     width:18px;
     height:30px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -35px -101px transparent;
+    cursor: pointer;
 }
 .con-right-bg
 {
     background-color: #CACACA;
     float: left;
     height: 30px;
-    width: 365px;}
+    width: 365px;
+}
 .con-right
 {
     position:relative;
@@ -493,7 +495,7 @@ body
     border:0px solid red;
 }
 .mthumb-box
-{   
+{
     border:0px solid red;
     width:555px;
     float:left;
@@ -554,7 +556,7 @@ vertical-align:bottom;
     margin-left:12px;
     position: relative;
     width: 111px;
-    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;    
+    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;
 }
 .interest-button
 {
@@ -608,6 +610,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -55px -23px transparent;
+    cursor: pointer;
 }
 .star-button-grey
 {
@@ -617,6 +620,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -3px -23px transparent;
+    cursor: pointer;
 }
 .star-button-blue
 {
@@ -626,6 +630,7 @@ vertical-align:bottom;
     height:20px;
     padding-left:2px;
     background:url(/themes/default/images/icons.png) no-repeat scroll -30px -23px transparent;
+    cursor: pointer;
 }
 .link-txt span{
     display: table-cell;
@@ -648,7 +653,7 @@ vertical-align:bottom;
 .link-txt a
 {
     color:#3e718c;
-    text-decoration:underline;       
+    text-decoration:underline;
     font-family: Helvetica, Arial, Chaparral Pro, lucida grande, verdana, sans-serif;
 }
 .link-txt a:hover
@@ -726,6 +731,7 @@ vertical-align:bottom;
     background:url(/themes/default/images/thumb-icon.png) no-repeat scroll -47px 0px transparent;
     margin-left:-11px;
     margin-top:10px;
+    cursor: pointer;
 }
 .rg-thum-img-cel22
 {
@@ -746,6 +752,7 @@ vertical-align:bottom;
     margin-top:10px;
     position:relative;
     width:50px;
+    cursor: pointer;
 }
 .rg-thum-img-cel33
 {
@@ -805,6 +812,7 @@ vertical-align:bottom;
     font-size:11px;
     color:#363231;
     background:url(/themes/default/images/icons.png) no-repeat scroll 27px -140px transparent;
+    cursor: pointer;
 }
 .skip-txt
 {
@@ -1199,7 +1207,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:21px;
+    width:20px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
@@ -1207,7 +1215,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:522px;
+    width:523px;
     height:51px;
     top:2px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
@@ -1311,7 +1319,7 @@ vertical-align:bottom;
     width:162px;
     height:29px;
     border:0px solid red;
-    top:38px;    
+    top:38px;
 }
 
 .create-ac-input4 input:focus
@@ -1325,6 +1333,10 @@ vertical-align:bottom;
     font-size:11px;
     color:#6c6c6c;
 }
+.heading-txt input:focus
+{
+    outline:none;
+}
 .forgot-txt
 {
 	line-height:25px;
@@ -1335,18 +1347,16 @@ vertical-align:bottom;
 }
 .forgot-row-m1
 {
-	width:203px;
-	height:71px;
-	border:1px solid #aeadad;
-	margin-left: -10px;
-	float:left;
+    width:203px;
+    height:71px;
+    border:1px solid #aeadad;
+    float:left;
 }
 .forgot-row-m2
 {
-	float: left;
-    margin-left: -11px;
+    float: left;
     margin-top: 9px;
-	width:150px;
+    width:150px;
 }
 .forgot-row-m3
 {
@@ -1384,7 +1394,7 @@ vertical-align:bottom;
 .create-forgot-box
 {
     position:relative;
-    float:left;    
+    float:left;
     border:0px solid red;
 }
 .create-ac-login
@@ -1399,10 +1409,10 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:112px;
+    width:105px;
     height:23px;
     left:4px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -134px -4px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
 }
 
 
@@ -1416,7 +1426,7 @@ vertical-align:bottom;
     z-index: 999;
     overflow: auto;
     float:left;
-    width:363px;
+    width:351px;
     height:302px;
     border:0px solid red;
     display: none;
@@ -1427,20 +1437,21 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:21px;
+    width:20px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
-}
-
-.create-ac-txt
-{
-    font-size:12px;
-    color:#6c6c6c;
 }
 
 .sign-in-create-account
 {
     font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
+}
+
+body:nth-of-type(1) .sign-in-create-account
+{
+    font-size:11px;
     color:#538ea3;
     text-decoration:underline;
 }
@@ -1499,7 +1510,7 @@ body:nth-of-type(1) .sign-in-create-account
 {
     position:relative;
     float:left;
-    width:38px;
+    width:40px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
     cursor: move;
@@ -1512,7 +1523,7 @@ body:nth-of-type(1) .sign-in-create-account
     height:57px;
     background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
 }
-.sign-in-right, .forgot-box 
+.sign-in-right, .forgot-box
 {
     position:relative;
     float:left;
@@ -1521,6 +1532,7 @@ body:nth-of-type(1) .sign-in-create-account
     border:0px solid red;
     top:8px;
     left:12px;
+    width:330px;
 }
 .sign-in-button
 {
@@ -1537,7 +1549,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:162px;
     height:29px;
-    border:0px solid red;    
+    border:0px solid red;
     clear: both;
 }
 .login-close
@@ -1722,14 +1734,14 @@ border:1px solid red;
 
 .fb_button, .fb_button_rtl  {
 background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent !important;
- 
+
     border: 0 solid red;
     float: left;
     height: 29px;
     position: relative;
     top: 20px;
     width: 162px;
-        
+
 }
 
 .fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
@@ -1828,6 +1840,7 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
     top: 10px;
     width: 20px;
     z-index: 9999;
+    cursor: pointer;
 }
 .arrow-up
 {

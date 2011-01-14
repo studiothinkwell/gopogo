@@ -79,24 +79,27 @@ class User_AccountController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
-
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
 
             // checking for valid email
             //*
+            if(strlen($email) == 0 || $email == "Email Address") {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
             if (Zend_Validate::is($email, 'EmailAddress')) {
                 // Yes, email appears to be valid
             } else {
-                //$msg .= "Enter valid email!";
-                //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
-                //$msg .= str_replace('%value%', $email, $lang_msg);
-                //$msg .= $this->view->translate("'%value%' is no valid email address in the basic format local-part@hostname",$email);
-
-                $lang_msg = $this->translate->_("Enter Valid Email!");
-                $msg .= $lang_msg;
-                $validFlag = false;
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Enter Valid Email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
             }
             //*/
             /*
@@ -117,18 +120,24 @@ class User_AccountController extends Zend_Controller_Action
 
             $passwd = $formData['passwd'];
 
-            
-            // check length of passowrd */
-            $chkLength = Zend_Validate::is( strlen($passwd), 'Between', array('min' => 6, 'max' => 16));
-            if ($validFlag && $chkLength) {
-                // Yes, $value is between 1 and 12
-            } else if($validFlag) {
-                $lang_msg = $this->translate->_("Passowrd lenght must be between 6-16!");
-                $msg .= $lang_msg;
-
-                $validFlag = false;
+            if(strlen($passwd) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
             }
-            
+            else {
+                // check length of passowrd */
+                $chkLength = Zend_Validate::is( strlen($passwd), 'Between', array('min' => 6, 'max' => 16));
+                if ($validFlag && $chkLength) {
+                    // Yes, $value is between 1 and 12
+                } else if($validFlag) {
+                    $lang_msg = $this->translate->_("Password length must be between 6-16!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
 
             if($validFlag){
 
@@ -316,6 +325,18 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
+              // validate capcha
+            //*
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                $lang_msg = $this->translate->_("Invalid captcha");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+
             if($validFlag){
 
                 try {
@@ -389,14 +410,16 @@ class User_AccountController extends Zend_Controller_Action
      *
      */
 
-    public function profileAction()
-    {      
+    public function profileAction() {      
         $user = new Application_Model_DbTable_User();        
         $session = $user->getSession();
-
-        if(!empty($session->user_name))        
-            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;        
-        else        
+        if(isset($session->isSignedUp)) {
+            unset($session->isSignedUp);
+            $this->view->newUser = 'fbSignUp';
+        }
+        if(!empty($session->user_name))
+            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;
+        else
             $this->_redirect('/');
 
     } // end of profileAction
@@ -456,29 +479,42 @@ class User_AccountController extends Zend_Controller_Action
             $passwd = $formData['passwd']; //$form->getValue('passwd');
             $retype_passwd = $formData['retype_passwd'];  //$form->getValue('retype_passwd');
 
-            /*
+            if(strlen($passwd) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }            
+            
             // check length of passowrd
 
             
             if ($validFlag && Zend_Validate::is(strlen($passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
-                $msg .= $br . "Passowrd lenght must be between 6-16!";
+                $msg .="Password length must be between 6-16!";
                 $validFlag = false;
+            }
+
+            if(strlen($retype_passwd) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter retype password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
             }
 
             // check length of passowrd
-
-            
             if ($validFlag && Zend_Validate::is(strlen($retype_passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
             } else if($validFlag) {
-                $msg .= $br . "Retype passowrd lenght must be between 6-16!";
+                $msg .= "Retype Password length must be between 6-16!";
                 $validFlag = false;
             }
 
 
-            //*/
+            //
 
             if($validFlag && !empty ($passwd) && !empty ($retype_passwd) && trim($passwd)==trim($retype_passwd)) {
 
@@ -494,10 +530,12 @@ class User_AccountController extends Zend_Controller_Action
             $userFlag = $user->checkUserByEmail($email);
 
             if($userFlag){
-                $lang_msg = $this->translate->_("User already signedup by this email : '%value%'");
-                $msg .= str_replace('%value%', $email, $lang_msg);
-                $validFlag = FALSE;
-                $this->view->msg = $msg;
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("User already signedup by this email : '%value%'");
+                    $msg .= str_replace('%value%', $email, $lang_msg);
+                    $validFlag = FALSE;
+                    $this->view->msg = $msg;
+                }
             } else {
 
                 if($validFlag){
@@ -539,7 +577,8 @@ class User_AccountController extends Zend_Controller_Action
                             // set user info in session
 
                             $user->logSession($userData);
-
+                            $session = $user->getSession();
+                            $session->isSignedUp = "signUp"; 
                             // other data
 
                             $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
@@ -594,7 +633,6 @@ class User_AccountController extends Zend_Controller_Action
 
         $data['msg'] =  $msg;
         $data['status'] =  $status;
-
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
 
     } // end of signupAction
@@ -605,13 +643,27 @@ class User_AccountController extends Zend_Controller_Action
      * @param String email : email address in post
      * @return json object - :msg, :status
      */
-    public function fbsigninAction() {
+     public function fbsigninAction() {
         $this->_helper->viewRenderer->setNoRender(true);
+        $session = GP_GPAuth::getSession();
+        // user_id
+        // user_name
+        //print_r($session->user_emailid);
+        $loginFlag = false;
+        $fbLogin = "false";
+        $user_name = '';
         $user = new Application_Model_DbTable_User();
+        if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
+        {  //echo "here";exit;
+            $loginFlag = true;
+            $user_name = $session->user_name;
+            $fbLogin = "true";
+        }
+        else {
+
         // create facebook object
         $facebook = Facebook_FbClass::getConfig();
         $userData = $facebook->FBLogin();
-        
         // check this email user exist or not
         $userFlag = $user->checkUserByEmail($userData['Email']);
         $udata['user_emailid'] = $userData['Email'];
@@ -623,29 +675,32 @@ class User_AccountController extends Zend_Controller_Action
         $udata['TempPass'] = $enctemp_password;
         $status = 0;
         $msg = "";
-        // create user model object        
-        if ($userFlag == 20) {
-                echo "here";exit;
-        }else { 
+        // create user model object
+        if ($userFlag) {
+            $userData = $user->getUserByEmail($userData['Email']);
+        }else {
             $status = $user->fbsignup($udata);
 
+            // check and get user data if email and password match
+            $userData = $user->getUserByEmailAndPassword($userData['Email'],$temp_password);
+            $session = GP_GPAuth::getSession();
+            $session->isSignedUp = "fbSignUp";
+            // send the welcome email
+            GP_GPAuth::sendEmailSignupWelcome($userData['Email'],$temp_password);
+        }
             try {
                     $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
-
-                    // create user model object
-                    $user = new Application_Model_DbTable_User();
-
-                    // check and get user data if email and password match
-                    $userData = $user->getUserByEmailAndPassword($userData['Email'],$temp_password);
 
                     if($userData)
                     {
                         $status = 1;
 
                         // set user info in session
-
                         $user->logSession($userData);
 
+                        $ukey = "fbLogoutUrl";
+                        $logout = 'http://' . $_SERVER['HTTP_HOST'];
+                        $user->$ukey = $facebook->getLogoutUrl($logout);
                         // other data
 
                         $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
@@ -653,6 +708,7 @@ class User_AccountController extends Zend_Controller_Action
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 
                         $msg = $lang_msg;
+
                         $this->_redirect($this->config->url->base.'/profile');
 
                         // log event signin
@@ -705,13 +761,10 @@ class User_AccountController extends Zend_Controller_Action
             //throw new Exception($msg,Zend_Log::DEBUG);
         }
 
-        $data['msg'] =  $msg;
-        $data['status'] =  $status;
-
         // return json response
-       // $this->_helper->json($data, array('enableJsonExprFinder' => true));
-              $this->view->msg = $msg;
-        
+        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
+        $this->view->msg = $msg;
+
         // log error if not success
 
         if($status != 1)
@@ -726,12 +779,9 @@ class User_AccountController extends Zend_Controller_Action
        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
 
-     public function captchAction()
+    public function captchAction()
     {
        $captcha = new GP_Captcha();
        $captcha->CreateImage();
     }
 }  
-
-?>
-
