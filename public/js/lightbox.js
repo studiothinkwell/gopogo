@@ -6,29 +6,35 @@ $(document).ready(function(){
   $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
         $(".errorMsg").text('');        
-        $().enableLoginBox();        
+        $().enableLoginBox(); 
+        $(".clsForgotDiv").hide();
         $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
     });
 
-  $(".clsForgot").click(function(){
+    $(".clsForgot").click(function(){
+          //var img_src = $('#imageCaptcha').attr('src');
+        var timestamp = new Date().getTime();
+        $('#imageCaptcha').attr('src','http://ashish.mygopogo.com/index/code?time=' + timestamp);
+       
         divId = "#forgotBox";
-        $("#loginBox").css({display:'none'}); 
-        $("#toggleForgot").css({display:''});
+        $("#loginBox").css({display:'none'});
+        //$("#toggleForgot").css({display:''});
         $(".errorMsg").text('');
-        $().enableLoginBox();
+       // $().enableLoginBox();
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
-        $("#email").focus();       
-    });
+        $("#email").focus();                   
+    }); 
 
     $(".clsSignUp").click(function(){
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
-        $(".clsSignUpEmail").focus();        
+        $(".clsSignUpEmail").focus();
+        $(".fb_button_text").text('');
     });
 
     $(".create-ac-close").click(function(){
@@ -36,6 +42,11 @@ $(document).ready(function(){
     });
 
      $(".login-close").click(function(){
+        $().finish();
+    });
+
+    $(".clsForgotClose").click(function(){
+        $('#imageCaptcha').attr('src','');
         $().finish();
     });
     

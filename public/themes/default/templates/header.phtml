@@ -3,10 +3,9 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
 $this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
 $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
 $this->headTitle()->setSeparator(' - ');
-$this->headTitle('GOPOGO');
+$this->headTitle($this->title);
 //echo $this->doctype();
-// create facebook object
-$facebook = Facebook_FbClass::getConfig();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,7 +38,7 @@ $Asset::load_js();
 </head>
 <?php
  $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
- $base_url = $config->gopogo->url->base;
+ $baseUrl = $config->gopogo->url->base;
 
 ?>
 <body >
@@ -49,48 +48,80 @@ $Asset::load_js();
         // user_id
         // user_name
         //print_r($session->user_emailid);
-
         $loginFlag = false;
+        $fbLogin = "false";
         $user_name = '';
         if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
-        {
+        {  //echo "here";exit;
             $loginFlag = true;
             $user_name = $session->user_name;
+            $fbLogin = "true";
         }
-      $baseurl = rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/');
-
-      if(empty($baseurl)) {
-          $baseurl = "#";
+        else {
+            // create facebook object
+            $facebook = Facebook_FbClass::getConfig();
+        } 
+      
+      if(empty($baseUrl)) {
+          $baseUrl = "#";
       }
 
     ?>
     <div id="master" align="center">
-	<div id="submaster">
+    	<div id="submaster">
             <!-- Header START-->
-
+    
         <div class="header">
+            <div class="headrow clsErrorMsg" style="display: none">
+               <div class="top-Msg-window-r " >
+                  <span class="top-Msg-window-icon-r"></span>
+                      <span class="top-Msg-window-txt">
+                           <div class="clsErrorText"><br/></div>
+                           <div class="top-Msg-window-s">
+                           Please try <span class="top-mg-link">
+                               <a href="javascript:void(0)" class="clsSignIn toolSignIn">again.</a>
+                               <a href="javascript:void(0)" class="clsSignUp toolSignUp">again.</a>
+                           </span>
+                           </div>
+                      </span>
+                  <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError"></a>
+                </div>
+            </div>
+
+            <div class="headrow clsSuccessMsg" style="display: none">
+                <div class="top-Msg-window " >
+                    <span class="top-Msg-window-icon"></span>
+                    <span class="top-Msg-window-txt">
+                        <div class="clsMSuccess">HURRAY! You have joined the GoPogo community. <br></div>
+                        <div class="top-Msg-window-s clsSubSuccess">
+                        Next Step: Play! Book a playlist and start having fun. The more you rate and play they will get better recommendations.</div>
+                    </span>
+                    <a href="javascript:void(0)" class="top-Msg-window-close clsCloseSuccess"></a>
+                </div>
+            </div>
+
             <div class="head-mainbg">
             	<div class="headrow1">
-                    <div class="logo"></div>
+                    <a class="logo" href="<?php echo $baseUrl;?>"></a>
                     <div class="topmenu">
 
                             <?php if($loginFlag){ ?>
                             Welcome, <?php echo ucfirst($user_name); ?> |
-                            <a href="#" id='logout' >Logout</a> |
+                            <a href="javascript:void(0)" id='logout' >Logout</a> |
                             <?php } else { ?>
                             <!--Welcome, Guest | -->
                             <?php
-                            $fbArray = $facebook->FBLogin();
+                            /*$fbArray = $facebook->FBLogin();
                             
                             if(is_array($facebook->FBLogin())) { ?>
                             Welcome <?php echo $fbArray['Email'];                            
                             $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . $this->url(array('module'=>'default','controller'=>'facebook','action'=>'logout'));
                             echo '<a href="'.$facebook->getLogoutUrl($logout).'">Logout</a>';
-                            } else { ?>
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php } ?>
+                            } else {*/ ?>
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or <?php //} ?>
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
-                            <?php } ?>
-                            <a href="/index/howitworks">How it works</a>
+                            <?php } //exit;?>
+                            <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
 
                         </div>
                 </div>
@@ -104,17 +135,13 @@ $Asset::load_js();
                     <div class="search"><input type="text" value="Search for..." onclick="if(this.value=='Search for...'){this.value='';}" onblur="if(this.value==''){this.value='Search for...'}"/></div>
                     <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value='';}" onblur="if(this.value==''){this.value='City, State, and Zip'}"/></div>
                     <div class="submenu">
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">My Profile</a></div>
-                            <div class="submenu-right"></div>
+                         <div class="submenu-box">
+                        	<div id="s1menu1" class="s1menu1 submenu-div"></div>
+                        	<div id="s1menu2" class="s1menu2 submenu-div"></div>
+                        	<div id="s1menu3" class="s1menu3 submenu-div"></div>
+                        	<div id="s1menu4" class="s1menu4 submenu-div"></div>
                         </div>
-                        <div class="submenu-box">
-                            <div class="submenu-left"></div>
-                            <div class="submenu-middle"><a href="#">My Preferences</a></div>
-                            <div class="submenu-right"></div>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>

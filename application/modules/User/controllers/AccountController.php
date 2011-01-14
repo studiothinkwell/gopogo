@@ -41,6 +41,7 @@ class User_AccountController extends Zend_Controller_Action
      * $var Zend_Translate
      */
     protected $translate = null;
+    public    $config = '';
 
     public function init()
     {
@@ -48,6 +49,9 @@ class User_AccountController extends Zend_Controller_Action
 
         // Zend_Translate object for langhuage translator
         $this->translate = Zend_Registry::get('Zend_Translate');
+
+        //code to get baseurl and assign to view
+        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
 
     } // end init
 
@@ -277,7 +281,6 @@ class User_AccountController extends Zend_Controller_Action
     {
 
         $data = array();
-
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $msg = '';
@@ -288,6 +291,7 @@ class User_AccountController extends Zend_Controller_Action
             $br = "<br>";
             $validFlag = true;
             $email = $formData['email'];
+           // $captchaObj = new GP_Captcha();
 
             // checking for valid email
             //*
@@ -295,6 +299,17 @@ class User_AccountController extends Zend_Controller_Action
                 // Yes, email appears to be valid
             } else {
                 $lang_msg = $this->translate->_("Enter Valid Email!");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+            //*/
+              // validate capcha
+            //*
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                 $lang_msg = $this->translate->_("Invalid captcha");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
                 $msg .= $lang_msg;
                 $validFlag = false;
@@ -375,21 +390,14 @@ class User_AccountController extends Zend_Controller_Action
      */
 
     public function profileAction()
-    {
-
-        $this->view->messages = $this->_helper->flashMessenger->getMessages();
-
-        $user = new Application_Model_DbTable_User();
-
+    {      
+        $user = new Application_Model_DbTable_User();        
         $session = $user->getSession();
 
-
-        // set header information
-        /*
-        $this->view->headTitle('mpd');
-        $this->view->headMeta()->appendName('keywords', 'Profile');
-        $this->view->headMeta()->appendName('description', 'Profile');
-        */
+        if(!empty($session->user_name))        
+            $this->view->title = ucfirst($session->user_name) ."'s Profile | ".$this->config->gopogo->name;        
+        else        
+            $this->_redirect('/');
 
     } // end of profileAction
 
@@ -404,14 +412,10 @@ class User_AccountController extends Zend_Controller_Action
 
     public function signupAction()
     {
-
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
-
         $data = array();
-
         $msg = '';
         $status = 0;
-
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -427,7 +431,7 @@ class User_AccountController extends Zend_Controller_Action
             } else {
                 //$lang_msg = $this->translate->_("'%value%' is no valid email address in the basic format local-part@hostname");
                 //$msg .= str_replace('%value%', $email, $lang_msg);
-                $lang_msg = $this->translate->_("Enter Valid Email!");
+                $lang_msg = $this->translate->_("SignUp Enter Valid Email!");
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
@@ -521,6 +525,37 @@ class User_AccountController extends Zend_Controller_Action
                         GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
 
                         //$this->_helper->redirector('login');
+                        //autologin to the system
+                        // create user model object
+                        $user = new Application_Model_DbTable_User();
+
+                        // check and get user data if email and password match
+                        $userData = $user->getUserByEmailAndPassword($email,$passwd);
+
+                        if($userData)
+                        {
+                            $status = 1;
+
+                            // set user info in session
+
+                            $user->logSession($userData);
+
+                            // other data
+
+                            $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
+
+                            $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                            $msg = $lang_msg;
+                            //$this->_helper->redirector('profile');
+
+                            // log event signin
+                            $eventId = 1;
+                            $userId = $userData['user_id'];
+                            $eventDescription = "signin-login";
+                            $eventAttributes = array();
+                            GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+                        }
 
                     } catch (Some_Component_Exception $e) {
                         if (strstr($e->getMessage(), 'unknown')) {
@@ -582,39 +617,101 @@ class User_AccountController extends Zend_Controller_Action
         $udata['user_emailid'] = $userData['Email'];
         $udata['FacebookId'] = $userData['UserID'];
         $udata['UserName'] = $userData['Name'];
+        // create random password
+        $temp_password = $user->createRandomKey(6);
+        $enctemp_password = $user->encryptPassword($temp_password);
+        $udata['TempPass'] = $enctemp_password;
         $status = 0;
         $msg = "";
         // create user model object        
-        if ($userFlag) {
-
+        if ($userFlag == 20) {
+                echo "here";exit;
         }else { 
-            $user->fbsignup($udata);
-            $status = 1;
+            $status = $user->fbsignup($udata);
+
             try {
                     $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
-                    $this->_helper->flashMessenger->addMessage($lang_msg);      
+                    // create user model object
+                    $user = new Application_Model_DbTable_User();
 
-                    $msg = $lang_msg;
+                    // check and get user data if email and password match
+                    $userData = $user->getUserByEmailAndPassword($userData['Email'],$temp_password);
 
-                    // send the welcome email
-                    // GP_GPAuth::sendEmailSignupWelcome($email,$passwd);
-             } catch (Some_Component_Exception $e) {
+                    if($userData)
+                    {
+                        $status = 1;
+
+                        // set user info in session
+
+                        $user->logSession($userData);
+
+                        // other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have Signedin Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                        $this->_redirect($this->config->url->base.'/profile');
+
+                        // log event signin
+                        $eventId = 1;
+                        $userId = $userData['user_id'];
+                        $eventDescription = "signin-login";
+
+                        $eventAttributes = array();
+
+                        //GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+
+                    }
+                    else
+                    {
+                        $lang_msg = $this->translate->_('Your email and password does not match! Or You have not signedup yet usimng this email!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                    }
+
+                } catch (Some_Component_Exception $e) {
                     if (strstr($e->getMessage(), 'unknown')) {
                         // handle one type of exception
-                        $lang_msg = $this->translate->_("Unknown Error!");
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
                         $msg .= $lang_msg;
+
                     } elseif (strstr($e->getMessage(), 'not found')) {
                         // handle another type of exception
-                        $lang_msg = $this->translate->_("Not Found Error!");
+                        $lang_msg = $this->translate->_('Not Found Error!');
                         $msg .= $lang_msg;
+
                     } else {
                         $lang_msg = $this->translate->_($e->getMessage());
                         $msg .= $lang_msg;
                     }
-              }
-              $this->view->msg = $msg;
+                }
+
+                $this->view->msg = $msg;
+
+            }
+        // log error if not success
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
         }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+       // $this->_helper->json($data, array('enableJsonExprFinder' => true));
+              $this->view->msg = $msg;
+        
         // log error if not success
 
         if($status != 1)
@@ -626,7 +723,13 @@ class User_AccountController extends Zend_Controller_Action
         $data['msg'] =  $msg;
         $data['status'] =  $status;
 
-        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+       // $this->_helper->json($data, array('enableJsonExprFinder' => true));
+    }
+
+     public function captchAction()
+    {
+       $captcha = new GP_Captcha();
+       $captcha->CreateImage();
     }
 }  
 

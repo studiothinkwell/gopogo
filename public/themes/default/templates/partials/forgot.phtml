@@ -1,29 +1,33 @@
-<!--Forgot password start-->
-            <div  id="forgotBox" >
-                <div class="create-ac-head" >
-                    <div class="sign-in-leftbg"></div>
+<!--Forgot Password START-->
+<?php
+    $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+    $baseUrl = $config->gopogo->url->base;
+?>
+<div  id="forgotBox" >
+<div class="create-forgot-box" >
+                <div class="create-ac-head">
+                    <div class="create-ac-leftbg"></div>
                     <div class="sign-in-middlebg">
-                    	<div class="create-ac-head-txt">Forgot <b>Password</b></div>
+                    	<div class="create-ac-head-txt">Forgot <b>Password?</b></div>
                     </div>
-                    <div class="sign-in-rightbg"></div>
-                    <div class="login-close"></div>
+                    <div class="create-ac-rightbg">
+                        <div class="forgot-close-but clsForgotClose"></div>
+                    </div>
                 </div>
-                <div class="sign-in-centerbg" id="sign-in-centerbg">
-                    <span class="errorMsg" id="errorMsg" ></span>                    
-                    <div id="toggleForgot" > 
-                        <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
-                        <div class="sign-in-right">
-                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" class="clsForgotEmail"/></div>
-                            <div class="forgot-input2">Type the characters you seen in the picture below.</div>
-                            <br clear="all" /><br/>
-                            <div class="create-ac-input1"><input type="image" src="" /></div>
-                            <br clear="all" /><br/>
-                            <div class="create-ac-input1"><input type="text" value="Characters" onclick="if(this.value=='Characters') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Characters'}" onkeypress="if(this.value=='Characters') {this.value = ''}" name="characters" class="clsForgotEmail"/></div>
-                            <div class="sign-in-button">&nbsp;<img alt=""  id="forgotSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/submit.jpg"/></div>
-                        </div>
-                       </form>
+                <div class="sign-in-centerbg">                      
+                    <div class="forgot-box">
+                         <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
+                    	<div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" class="clsForgotEmail"/></div>
+                    	<div class="forgot-txt">Type the characters you see in the picture below.. </div>                       
+                        <div class="forgot-row-mid" >
+                            <div class="forgot-row-m1"><img id="imageCaptcha"  /> </div>
+                            <div class="forgot-row-m2"><input type="text" name="captcha" id="captcha-form" /></div>
+                            <div class="forgot-row-m3" id="forgotSubmitBox"></div>
+                       </div>
+                         </form>
                     </div>
                 </div>
                 <div class="sign-in-bottombg"></div>
             </div>
-<!--Forgot password end-->
+   </div>
+<!--Forgot Password END-->
