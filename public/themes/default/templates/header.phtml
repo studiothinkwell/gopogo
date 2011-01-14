@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<?php 
+<?php
     echo $this->headMeta();
     echo $this->headTitle();
     GP_Asset::addCss('/themes/default/css/skin.css');
@@ -48,7 +48,7 @@
 
     <div id="master" align="center">
     	<div id="submaster">
-            <!-- Header START-->    
+            <!-- Header START-->
         <div class="header">
             <div class="headrow clsErrorMsg" style="display: none">
                <div class="top-Msg-window-r " >
@@ -85,22 +85,22 @@
 
                             <?php if(!isset($session->fbLogoutUrl) || $session->fbLogoutUrl == "#"){
                                     $facebook = Facebook_FbClass::getConfig();
-                                    $fbArray = $facebook->FBLogin();                            
-                                    if(is_array($facebook->FBLogin())) {  
+                                    $fbArray = $facebook->FBLogin();
+                                    if(is_array($facebook->FBLogin())) {
                                         $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl();
                                         $session->fbLogoutUrl = $facebook->getLogoutUrl($logout);
                                     }
                                 } //echo '<pre>'; print_r($_SESSION);exit;
                                 if(!isset($session->fbLogoutUrl)){$session->fbLogoutUrl = "#"; };
-                                
+
                                 if($loginFlag){
                                     echo $userEmailId;
                             ?>
                             | <a href="#" onclick="return false" >Account</a>
                             | <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
                             | <a href="<?php echo $session->fbLogoutUrl;?>" id='logout' >Sign out</a>
-                            <?php } else { ?>                                                        
-                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or 
+                            <?php } else { ?>
+                            <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
                             <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
                             <?php } ?>
@@ -123,12 +123,12 @@
                         	<div id="s1menu3" class="s1menu3 submenu-div"></div>
                         	<div id="s1menu4" class="s1menu4 submenu-div"></div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
             <!-- Header END-->
-                <?php                
+                <?php
                 if (count($this->messages)) : ?>
                 <ul id="messages">
                 <?php foreach ($this->messages as $message) : ?>

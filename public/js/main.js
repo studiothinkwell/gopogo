@@ -18,7 +18,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
  */
     $(".your-personal-button").click(function() {
         $(".footer-middle").slideToggle("show");
-        $("#personalArrow").toggleClass('arrow-up');        
+        $("#personalArrow").toggleClass('arrow-up');
     });
 
 
@@ -43,7 +43,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
            function(){
                        $(this).removeClass('selected');
                      }
-       );    
+       );
 
     /**
      * This will show success message when profile page loads
@@ -57,16 +57,16 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
     }
 
     // add create account event
-    $(".clsSignUp").click(function(){ 
-        $("#loginBox").css({display:'none'});        
+    $(".clsSignUp").click(function(){
+        $("#loginBox").css({display:'none'});
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
         $().setdefaultval();
         $(".clsSignUpEmail").focus();
     });
 
     // add signin  event
-    $(".login").click(function(){       
-        $("#signupBox").css({display:'none'});        
+    $(".login").click(function(){
+        $("#signupBox").css({display:'none'});
         $().displayModalBox("#loginBox", ".create-ac-head", ".sign-in-centerbg");
         $().setdefaultval();
         $(".clsSignInEmail").focus();
@@ -74,7 +74,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
     // add login event
     $("#loginSubmitBox").click(function(){
-        $().doLogin(); 
+        $().doLogin();
     });
     // add signup event
     $("#signupSubmitBox").click(function(){
@@ -82,7 +82,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $(".clsSignUpEmail").focus();
     });
     // add logout event
-    $("#logout").click(function(){ 
+    $("#logout").click(function(){
         $().doLogout();
     });
     // add forgot password event
@@ -94,7 +94,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // functions to handle the login / signin
 
         // do login
-        $.fn.doLogin = function(){ 
+        $.fn.doLogin = function(){
 
              // get serialized form data of login form
              var fdata = $("#loginBoxForm").serialize();
@@ -111,14 +111,14 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().loginFail(resp);
                     }
                 },
-                success: function(resp){ 
+                success: function(resp){
                     // do something with resp
                     if(resp.status == 1) // show error message
                     {
                         $().loginSuccess(resp);
                     }
                     else
-                    {                       
+                    {
                         $().loginFail(resp);
                     }
                 },
@@ -134,19 +134,19 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // login success
 
-        $.fn.loginSuccess = function(resp){ 
+        $.fn.loginSuccess = function(resp){
             //$().showSuccessTooltip(resp);
             $().debugLog('loginSuccess');
             $().debugLog(resp);
 
             // show message
-            
+
             //$().errorMessage(resp.msg,'errorMsg');
 
             $().finish();
 
             // redirect to profile
-            $().redirect(app.gopogo.profile_url);                       
+            $().redirect(app.gopogo.profile_url);
         };
 
         // login welcome
@@ -163,15 +163,15 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $.fn.loginFail = function(resp){
             $().debugLog('loginFail');
             $().debugLog(resp);
-           
+
             if(resp.status == 0) // show error message
-            { 
+            {
                 $().errorMessage(resp.msg,'errorMsg');
             }
         };
 
         // show error message
-        $.fn.errorMessage = function(msg,msgid){ 
+        $.fn.errorMessage = function(msg,msgid){
             $().showErrorTooltip(msg,msgid);
             $().debugLog('errorMessage');
             $().debugLog(msg);
@@ -214,17 +214,17 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                         $().signupFail(resp);
                     }
                 },
-                success: function(resp){ 
+                success: function(resp){
                     // do something with resp
                     if(resp.status == 1) // show error message
                     {
-                        $().signupSuccess(resp);                        
+                        $().signupSuccess(resp);
                     }
                     else
-                    {   
+                    {
                         if(resp.status != 1)
                             $().signupFail(resp);
-                    }                   
+                    }
                 },
                 complete: function(resp){
                     if(resp.readyState == 4)
@@ -232,20 +232,20 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                 }
             });
         }; // end of do signup
-        
+
         // signup success
 
-        $.fn.signupSuccess = function(resp){ 
+        $.fn.signupSuccess = function(resp){
             $().debugLog('signupSuccess');
             $().debugLog(resp);
             // show message
             //$().errorMessage(resp.msg,'signup_error_msg');
-           
+
             $().finish();
 
             // redirect to home
             $().redirect(app.gopogo.profile_url);
-           
+
         };
 
         // signup welcome
@@ -257,7 +257,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // signup fail
 
-        $.fn.signupFail = function(resp){ 
+        $.fn.signupFail = function(resp){
             $().debugLog('signupFail');
             $().debugLog(resp);
             if(resp.status == 0) // show error message
@@ -277,7 +277,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
              // make ajax request for logout
              $.ajax({
                 url: app.gopogo.logout_url,
-                dataType: 'json',                
+                dataType: 'json',
                 timeout: 1000,
                 error: function(resp){
                     $().logoutFail(resp);
@@ -291,7 +291,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                     else
                     {
                         // show message box popup
-                        $().addModalWindow('messageBox');                       
+                        $().addModalWindow('messageBox');
                         $().logoutFail(resp);
                     }
                 },
@@ -308,7 +308,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         $.fn.logoutSuccess = function(resp){
             $().debugLog('logoutSuccess');
             $().debugLog(resp);
-            // redirect to home 
+            // redirect to home
             $().redirect(app.gopogo.baseurl);
         };
 
@@ -376,7 +376,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         // forgot success
 
         $.fn.forgotSuccess = function(resp){
-            $().debugLog('forgotSuccess');  
+            $().debugLog('forgotSuccess');
             $().debugLog(resp);
             // show message
             $(".clsMSuccess").text(resp.msg);
@@ -407,7 +407,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             {
                 $().errorMessage(resp.msg,'errorMsg');
             }
-        };        
+        };
 
 // some utilities
 
@@ -424,7 +424,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // log message if console is available else not
         // if force then alert if console is not available
-        $.fn.debugLog = function (msg,force){ 
+        $.fn.debugLog = function (msg,force){
             var debugFlag = true;
             // console is defined
             if(app.gopogo.debug==1 && typeof console !== 'undefined' )
@@ -436,7 +436,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             if(app.gopogo.debug==1 && debugFlag && ( force || force==1) )
             {
                 alert(msg);
-            }                
+            }
         }
 
         //function to show tooltip for error messages
@@ -458,7 +458,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         }
 
         //function to show tooltip for success messages
-        $.fn.showSuccessTooltip = function (msg) { 
+        $.fn.showSuccessTooltip = function (msg) {
             $().finish();
             $(".clsSuccessMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
@@ -473,7 +473,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
         });
 
         //function to hide tooltip for error messages
-        $(".clsCloseSuccess").click(function(){ 
+        $(".clsCloseSuccess").click(function(){
             $(".clsSuccessMsg").attr('style','display:none');
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
@@ -507,11 +507,11 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
                                         var id = $(this).attr("id");
                                         $(this).removeClass(id+'-selected');
                                 }
-           ); 
+           );
 
 
 // functions to explode string works same as php explode function
-$.fn.explode = function (delimiter, string, limit) {    
+$.fn.explode = function (delimiter, string, limit) {
      var emptyArray = { 0: '' };
 
     // third argument is not required
