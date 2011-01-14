@@ -103,7 +103,7 @@ class Facebook_Api {
                 });
                 FB.Event.subscribe('auth.login', function()
                 {
-                    window.location.reload();
+                    
                 });
             };
 

@@ -333,14 +333,13 @@ body
 {
     position:relative;
     float:right;
-    width:365px;
+    width:600px;
     font-size:11px;
     text-align:right;
     left:-20px;
     color:#FFF;
     font-weight:600;
-    text-decoration:none;
-    margin-left:260px;
+    text-decoration:none;    
     margin-top:10px;
 }
 .topmenu a
@@ -1334,6 +1333,10 @@ vertical-align:bottom;
     font-size:11px;
     color:#6c6c6c;
 }
+.heading-txt input:focus
+{
+    outline:none;
+}
 .forgot-txt
 {
 	line-height:25px;
@@ -1408,7 +1411,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:112px;
+    width:105px;
     height:23px;
     left:4px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -134px -4px transparent;
@@ -1441,15 +1444,16 @@ vertical-align:bottom;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
 
-.create-ac-txt
-{
-    font-size:12px;
-    color:#6c6c6c;
-}
-
 .sign-in-create-account
 {
     font-size:12px;
+    color:#538ea3;
+    text-decoration:underline;
+}
+
+body:nth-of-type(1) .sign-in-create-account
+{
+    font-size:11px;
     color:#538ea3;
     text-decoration:underline;
 }

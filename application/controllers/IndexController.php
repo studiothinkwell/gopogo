@@ -46,7 +46,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     { 
-       $this->view->title = "Welcome to ".$this->config->gopogo->name;
+        $this->view->title = "Welcome to ".$this->config->gopogo->name;
     }
 
     /**
@@ -109,12 +109,8 @@ class IndexController extends Zend_Controller_Action
 
     public function codeAction()
     {
-
          $this->_helper->viewRenderer->setNoRender(true);
-
          $captcha = new GP_Captcha();
-         $captcha->CreateImage();
-
-    }
-    
+         $captcha->CreateImage(); die;
+    } 
 }

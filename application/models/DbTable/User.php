@@ -412,6 +412,96 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         }
     } // end of getUserByEmailAndPassword
 
+
+    /**
+     * User : get user detail by email
+     * @access public
+     * @param String email : email address
+     *
+     * @return Array | bool : user's master data if not user match then it will return false
+     *
+     */
+
+    public function getUserByEmail($email)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_detail_by_email_id(:email)');
+            $stmt->bindParam('email', $email, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowArray = $stmt->fetch();
+            $stmt->closeCursor();
+
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+
+
+        if (!($rowArray) || empty ($rowArray)) {
+            return FALSE;
+        }else {
+
+            if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+                    // update main password from temporary password if present
+                    if(!empty($rowArray['temporary_user_password']))
+                    {
+
+                        try {
+
+                            $stmt = $db->prepare('CALL sp_update_user_password_by_email_id(:email)');
+                            $stmt->bindParam('email', $rowArray['user_emailid'], PDO::PARAM_INT);
+                            $stmt->execute();
+                            $stmt->closeCursor();
+
+                        } catch (Some_Component_Exception $e) {
+                            if (strstr($e->getMessage(), 'unknown')) {
+                                // handle one type of exception
+                                $lang_msg = "Unknown Error!";
+                            } elseif (strstr($e->getMessage(), 'not found')) {
+                                // handle another type of exception
+                                $lang_msg = "Not Found Error!";
+                            } else {
+                                $lang_msg = $e->getMessage();
+                            }
+                            $logger = Zend_Registry::get('log');
+                            $logger->log($lang_msg,Zend_Log::ERR);
+                        }
+                        catch(Exception $e){
+                            $lang_msg = $e->getMessage();
+                            $logger = Zend_Registry::get('log');
+                            $logger->log($lang_msg,Zend_Log::ERR);
+                        }
+                    }
+                    return $rowArray;
+                }
+                else
+                {
+                    return FALSE;
+                }
+        }
+    } // end of getUserByEmailAndPassword
+
+
     /**
      * Set Loggedin User data in session
      * 

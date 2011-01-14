@@ -270,10 +270,12 @@ return array(
     // Start GOPOGO messages ---------------------------------------
 
     // signin
-    "Enter Valid Email!" => "Enter Valid Email!",
-    "Passowrd lenght must be between 6-16!" => "Passowrd lenght must be between 6-16!",
+    "Please enter email!" => "Please enter Email Address",
+    "Enter Valid Email!" => "Please enter valid Email Address.",
+    "Password length must be between 6-16!" => "Password length must be between 6-16!",
+    "Please enter password!" => "Please enter Password.",
     "Welcome! You have Signedin Successfully!"=>"Welcome! You have Signedin Successfully!",
-    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Your email and password does not match! Or You have not signedup yet usimng this email!",
+    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Sorry! Your account Email and Password does not match your login!",
 
     // logout
     "You have successfully logged out from system!" => "You have successfully logged out from system!",
@@ -288,7 +290,8 @@ return array(
     "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
     "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
     "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
-
+    "Please enter password!"=>"Please enter Password",
+    "Please enter retype password!"=>"Please enter Retype Password",
     // general----
 
     // Unknown Error!

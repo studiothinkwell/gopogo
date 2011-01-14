@@ -1,19 +1,39 @@
 
 var divId;
+var baseUrl;
 var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
 $(document).ready(function(){
 
   $(".clsSignIn").click(function(){ 
         divId = "#loginBox";
-        $(".errorMsg").text('');        
+        $(".errorMsg").text(''); 
         $().enableLoginBox(); 
         $(".clsForgotDiv").hide();
         $().displayModalBox("#loginBox", ".create-ac-head", ".CLS_sign-in-centerbg" );      
         $().setdefaultval();
         $("#email").focus();
         $(".fb_button_text").text('');
+        $().closeErrorTooltip();
+        $().closeSuccessTooltip();
     });
 
+    $(".clsForgot").click(function(){
+          //var img_src = $('#imageCaptcha').attr('src');
+        var timestamp = new Date().getTime();
+        //alert($(location).attr('href'));
+        var sBaseUrl = $(location).attr('href');
+        baseUrl = $.fn.explode('.com',sBaseUrl); 
+        $('#imageCaptcha').attr('src',baseUrl[0]+'.com/index/code?time=' + timestamp);
+        divId = "#forgotBox";
+        $("#loginBox").css({display:'none'});
+        //$("#toggleForgot").css({display:''});
+        $(".errorMsg").text('');
+       // $().enableLoginBox();
+        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
+        $().setdefaultval();
+        $("#email").focus();
+    });
+    
   $(".clsForgot").click(function(){
         divId = "#forgotBox";
         $("#loginBox").css({display:'none'}); 
@@ -26,11 +46,14 @@ $(document).ready(function(){
     });
 
     $(".clsSignUp").click(function(){
+        $("#loginBox").hide();
         divId = "#signupBox";
         $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg" );
         $().setdefaultval();
         $(".clsSignUpEmail").focus();
         $(".fb_button_text").text('');
+        $().closeErrorTooltip();
+        $().closeSuccessTooltip();
     });
 
     $(".create-ac-close").click(function(){
@@ -99,7 +122,7 @@ $.fn.addModalWindow = function(objId) {
 
      if( $("#overlay").length <= 0 )
      {
-        $('embed, object, select').css({ 'visibility' : 'hidden' });
+        $('embed, object, select').css({'visibility' : 'hidden'});
         $('body').append('<div id="overlay"></div>');
      }
     $(objId).css({display:''});
@@ -180,9 +203,9 @@ $.fn.keyboardAction = function(objEvent) {
 $.fn.finish = function() {
     
     $(divId).css({display:'none'});
-    $('#overlay').fadeOut(function() { $('#overlay').remove(); });
+    $('#overlay').fadeOut(function() {$('#overlay').remove();});
     // Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
-    $('embed, object, select').css({ 'visibility' : 'visible' });
+    $('embed, object, select').css({'visibility' : 'visible'});
 }
 
 $.fn.getPageScroll = function() {

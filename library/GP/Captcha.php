@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Captcha class
  *
@@ -97,12 +98,12 @@ class GP_Captcha {
     /** Image format: jpeg or png */
     public $imageFormat = 'jpeg';
 
-
     /** GD image */
     public $im;
 
     public function __construct($config = array()) {
     }
+
  public function CreateImage() {
 
         $ini = microtime(true);
@@ -111,14 +112,14 @@ class GP_Captcha {
         $this->ImageAllocate();
 
         /** Text insertion */
-        $text = $this->GetCaptchaText(); 
+        $text = $this->GetCaptchaText();
         $fontcfg  = $this->fonts[array_rand($this->fonts)];
         $this->WriteText($text, $fontcfg);
        // $this->session_var =$text;
         $_SESSION['captcha'] = $text;
 
         $this->WaveImage();
-       
+
         if ($this->blur && function_exists('imagefilter')) {
             imagefilter($this->im, IMG_FILTER_GAUSSIAN_BLUR);
         }
@@ -132,9 +133,8 @@ class GP_Captcha {
             );
         }
 
-
         /** Output */
-        $this->WriteImage();die;
+        $this->WriteImage();
         $this->Cleanup();
     }
 
@@ -177,8 +177,8 @@ class GP_Captcha {
      * @return string Text
      */
     protected function GetCaptchaText() {
-        $text = $this->GetDictionaryCaptchaText();
-        if (!$text) {
+        //$text = $this->GetDictionaryCaptchaText();
+        if (!$text || 1) {
             $text = $this->GetRandomCaptchaText();
         }
         return $text;
@@ -321,7 +321,7 @@ class GP_Captcha {
      * Reduce the image to the final size
      */
     protected function ReduceImage() {
-        // Reduzco el tamaño de la imagen
+        // Reduzco el tamaÃ±o de la imagen
         $imResampled = imagecreatetruecolor($this->width, $this->height);
         imagecopyresampled($imResampled, $this->im,
             0, 0, 0, 0,
@@ -349,7 +349,7 @@ class GP_Captcha {
      * Cleanup
      */
     protected function Cleanup() {
-        imagedestroy($this->im);
+       $imagedestroy($this->im);
     }
 }
 
