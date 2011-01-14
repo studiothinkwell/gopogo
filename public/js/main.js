@@ -474,11 +474,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         //function to hide tooltip for error messages
         $(".clsCloseSuccess").click(function(){
-            $(".clsSuccessMsg").attr('style','display:none');
-            var body=document.getElementsByTagName('body')[0];
-            body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
-            $(".clsBlankDiv").attr('style','height:150px');
-            $(".clsErrorText").text('');
+            $().closeSuccessTooltip();
         });
         $(".toolSignIn").click(function(){
             $().closeErrorTooltip();
@@ -495,6 +491,15 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
             $(".clsErrorText").text('');
         };
 
+        //function to close tooltip for success messages
+        $.fn.closeSuccessTooltip = function () {
+            $(".clsSuccessMsg").attr('style','display:none');
+            var body=document.getElementsByTagName('body')[0];
+            body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
+            $(".clsBlankDiv").attr('style','height:150px');
+            $(".clsErrorText").text('');
+        }
+        
     $('.submenu-box .submenu-div').hover
           (
                    function()
@@ -543,4 +548,4 @@ $.fn.explode = function (delimiter, string, limit) {
         return partA;    }
 }
 
-});
+}); 
