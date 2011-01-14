@@ -1333,6 +1333,10 @@ vertical-align:bottom;
     font-size:11px;
     color:#6c6c6c;
 }
+.heading-txt input:focus
+{
+    outline:none;
+}
 .forgot-txt
 {
 	line-height:25px;
