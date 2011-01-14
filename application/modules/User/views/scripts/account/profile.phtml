@@ -1,5 +1,5 @@
 <?php
-    $session = GP_GPAuth::getSession();    
+    $session = GP_GPAuth::getSession();
     $loginFlag = false;
     $user_name = '';
     if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
@@ -7,10 +7,10 @@
         $loginFlag = true;
         $user_name = $session->user_name;
     }
-    
+
 ?>
 
-<div style="height:130px;"></div>    
+<div style="height:130px;"></div>
     <div class="container" >
     <div class="con-box1" ><br/><br/><br/>
         <input type="hidden" name="msgInput" id="msgInput" value="<?php echo $this->newUser;?>"/>

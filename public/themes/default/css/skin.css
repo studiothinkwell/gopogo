@@ -339,7 +339,7 @@ body
     left:-20px;
     color:#FFF;
     font-weight:600;
-    text-decoration:none;    
+    text-decoration:none;
     margin-top:10px;
 }
 .topmenu a
@@ -492,10 +492,10 @@ body
 */    width:387px;
     height:auto;
     border-right:1px solid grey;
-    border:0px solid red;    
+    border:0px solid red;
 }
 .mthumb-box
-{   
+{
     border:0px solid red;
     width:555px;
     float:left;
@@ -556,7 +556,7 @@ vertical-align:bottom;
     margin-left:12px;
     position: relative;
     width: 111px;
-    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;    
+    background:url(/themes/default/images/icons.png) no-repeat scroll -6px -202px transparent;
 }
 .interest-button
 {
@@ -653,7 +653,7 @@ vertical-align:bottom;
 .link-txt a
 {
     color:#3e718c;
-    text-decoration:underline;       
+    text-decoration:underline;
     font-family: Helvetica, Arial, Chaparral Pro, lucida grande, verdana, sans-serif;
 }
 .link-txt a:hover
@@ -1207,7 +1207,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:21px;
+    width:20px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
@@ -1215,7 +1215,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:522px;
+    width:523px;
     height:51px;
     top:2px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
@@ -1319,7 +1319,7 @@ vertical-align:bottom;
     width:162px;
     height:29px;
     border:0px solid red;
-    top:38px;    
+    top:38px;
 }
 
 .create-ac-input4 input:focus
@@ -1347,18 +1347,16 @@ vertical-align:bottom;
 }
 .forgot-row-m1
 {
-	width:203px;
-	height:71px;
-	border:1px solid #aeadad;
-	margin-left: -10px;
-	float:left;
+    width:203px;
+    height:71px;
+    border:1px solid #aeadad;
+    float:left;
 }
 .forgot-row-m2
 {
-	float: left;
-    margin-left: -11px;
+    float: left;
     margin-top: 9px;
-	width:150px;
+    width:150px;
 }
 .forgot-row-m3
 {
@@ -1396,7 +1394,7 @@ vertical-align:bottom;
 .create-forgot-box
 {
     position:relative;
-    float:left;    
+    float:left;
     border:0px solid red;
 }
 .create-ac-login
@@ -1414,7 +1412,7 @@ vertical-align:bottom;
     width:105px;
     height:23px;
     left:4px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -134px -4px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
 }
 
 
@@ -1428,7 +1426,7 @@ vertical-align:bottom;
     z-index: 999;
     overflow: auto;
     float:left;
-    width:363px;
+    width:351px;
     height:302px;
     border:0px solid red;
     display: none;
@@ -1439,7 +1437,7 @@ vertical-align:bottom;
 {
     position:relative;
     float:left;
-    width:21px;
+    width:20px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
 }
@@ -1512,7 +1510,7 @@ body:nth-of-type(1) .sign-in-create-account
 {
     position:relative;
     float:left;
-    width:38px;
+    width:40px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
     cursor: move;
@@ -1525,7 +1523,7 @@ body:nth-of-type(1) .sign-in-create-account
     height:57px;
     background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
 }
-.sign-in-right, .forgot-box 
+.sign-in-right, .forgot-box
 {
     position:relative;
     float:left;
@@ -1534,6 +1532,7 @@ body:nth-of-type(1) .sign-in-create-account
     border:0px solid red;
     top:8px;
     left:12px;
+    width:330px;
 }
 .sign-in-button
 {
@@ -1550,7 +1549,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:162px;
     height:29px;
-    border:0px solid red;    
+    border:0px solid red;
     clear: both;
 }
 .login-close
@@ -1735,14 +1734,14 @@ border:1px solid red;
 
 .fb_button, .fb_button_rtl  {
 background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent !important;
- 
+
     border: 0 solid red;
     float: left;
     height: 29px;
     position: relative;
     top: 20px;
     width: 162px;
-        
+
 }
 
 .fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
