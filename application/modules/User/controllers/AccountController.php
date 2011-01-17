@@ -57,15 +57,44 @@ class User_AccountController extends Zend_Controller_Action
 
     public function indexAction()
     {
+      //$this->_helper->viewRenderer->setNoRender(true);
+
       $user = new Application_Model_DbTable_User();
 
      // collect username and password on the basis of user id
       $userData = $user->getUserById($_SESSION['user-session']['user_id']);
-      $email    = $userData['user_emailid'];
-      $password =$userData['user_password'];
-      $this->view->email    =$email;;
-      $this->view->password = $password;
-        
+      $email    = $userData['user_emailid']; 
+      $password =$userData['user_password']; 
+    
+      $userPartnerData = $user->getUserPartnerById($_SESSION['user-session']['user_id']);
+      $
+      $fullName ='';
+      $fbAccountUserName='';
+      $twitterAccountUserName ='';
+      foreach($userPartnerData as $k => $v)
+      {
+          //print_r($v);
+             if($v['account_type_id'] == 1)
+             {
+                 $fbAccountUserName = $v['account_username'];
+                // echo $value;
+             }
+             if($v['account_type_id'] == 2)
+             {
+                 $twitterAccountUserName = $v['account_username'];
+                // echo $value;
+             }
+
+             $fullName = $v['Name'];
+         }
+
+      //print_r($userPartnerData);die;
+      $this->view->email                  =$email;;
+      $this->view->password               = $password;
+      $this->view->fullName               =$fullName;;
+      $this->view->fbUserName             =$fbAccountUserName;;
+      $this->view->twitterUserName        =$twitterAccountUserName;
+
     } // end indexAction
 
     /**
