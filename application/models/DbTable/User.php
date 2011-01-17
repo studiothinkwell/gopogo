@@ -596,7 +596,35 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
     } // end of getUserFogotPassword
     
 
+ /**
+     * User : get user detail by user id
+     * @access public
+     * @param id  : user id
+     *
+     * @return Array | bool : user's master data
+     *
+     */
 
+    public function getUserById($id)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_email_password_by_user_id(:id)');
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowArray = $stmt->fetch();
+            $stmt->closeCursor();
+            return $rowArray;
+
+    } // end of getUserById
 
 }
+
+
+
 

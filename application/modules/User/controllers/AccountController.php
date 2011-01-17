@@ -57,9 +57,16 @@ class User_AccountController extends Zend_Controller_Action
 
     public function indexAction()
     {
+      $user = new Application_Model_DbTable_User();
+
+     // collect username and password on the basis of user id
+      $userData = $user->getUserById($_SESSION['user-session']['user_id']);
+      $email    = $userData['user_emailid'];
+      $password =$userData['user_password'];
+      $this->view->email    =$email;;
+      $this->view->password = $password;
         
-        // action body
-    } // end loginAction
+    } // end indexAction
 
     /**
      * User login
