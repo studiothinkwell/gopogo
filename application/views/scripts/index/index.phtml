@@ -153,7 +153,7 @@
  <!-- Right part Start  -->
             <?php $sessionFlg = $_SESSION['sessionFlg']; ?>
             	<div class="con-right">
-                	<div class="con-right-bg"><span class="con-left-head-txt1">Places You’ll Love</span></div>
+                	<!-- <div class="con-right-bg"><span class="con-left-head-txt1">Places You’ll Love</span></div> -->
                         <div class="con-right-ro1" <?php if($sessionFlg) { echo("style='height:250px'"); } ?> >
                     
                     <?php if(empty($sessionFlg)) { ?>
@@ -173,14 +173,14 @@
                                 <br/>
                                 <input type="text" value="Password" style="margin-top:5px"><br/>
                                 <input type="image" src="/themes/default/images/addfacebook.png" style="margin-top:5px">
-                           </div>
+                           
+                               </div>
                             <br clear="all" ><br/>
+
                             <div class="skip-txt" style="padding-top:110px;padding-left:80px" ><a href="#">Skip</a>&nbsp;</div>
-
-
-                        <?php }  ?>
-                    
+                            <?php }  ?>
                     </div>
+                                       	<div class="con-right-bg"><span class="con-left-head-txt1">Places You’ll Love</span></div>
                     <?php if(empty($sessionFlg)) { ?>
                     <div class="con-right-ro2">
                             <div class="heading-txt">What is your favorite movie genre?</div>

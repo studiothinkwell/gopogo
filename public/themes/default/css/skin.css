@@ -1850,3 +1850,115 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 .sign-in-txt {
     font-size: 11px;
 }
+
+												/************************************** My Account START **************************************/
+
+.my_acc_head,.my_acc_right_head{
+	font-size:18px;
+	color:#000000;
+	outline:none;
+	padding:18px 0px 20px 32px;
+	float:left;
+	width:603px;
+	text-align:left;
+	font-weight:600;
+}
+.my_acc_right_head{
+	padding:18px 0px 20px 10px;
+	float:left;
+	width:300px;
+}
+.my_acc_left_col{
+	background-color:#e8e8e8;
+	padding:10px 20px 10px 20px;
+	float:left;
+	width:565px;
+	text-align:left;
+	margin-left:22px;
+}
+.my_acc_sub_head{
+	font-size:14px;
+	color:#000000;
+	outline:none;
+	padding:0px 0px 14px 0px;
+	float:left;
+	width:100%;
+	text-align:left;
+	font-weight:bold;
+}
+.my_acc_sub_text,.my_acc_sub_fill{
+	font-size:12px;
+	color:#000000;
+	float:left;
+	width:156px;
+	text-align:left;
+	font-weight:bold;
+}
+.my_acc_sub_fill{
+	width:400px;
+	text-align:left;
+	font-weight:normal;
+	outline:none;
+
+}
+.my_acc_link_text{
+	font-size:12px;
+	color:#000000;
+	float:Right;
+	outline:none;
+	text-decoration: none;
+}
+
+.my_acc_link_text a{
+	font-size:12px;
+	color:#2591b7;
+	text-decoration: underline;
+}
+.my_acc_link_text a:hover{
+	font-size:12px;
+	color:#2591b7;
+	text-decoration: underline;
+}
+.my_acc_section_space{
+	float:left;
+	height:10px;
+	width:100%;
+}
+.my_acc_section_sep{
+	float:left;
+	border-bottom:1px solid #cdcccc;
+	width:600px;
+	margin:10px 0px;
+	margin-left:-13px;}
+
+.my_acc_right_bold_sub,.my_acc_right_sub_fill{
+	font-size:12px;
+	color:#000000;
+	float:left;
+	width:140px;
+	text-align:left;
+	font-weight:bold;
+	padding-left:23px;
+}
+.my_acc_right_sub_fill{
+	width:200px;
+	font-weight:normal;
+	outline:none;
+}
+.my_acc_right_sep{
+	float:left;
+	border-bottom:1px solid #cdcccc;
+	width:365px;
+	margin:10px 0px;}
+
+.my_acc_purches_history{
+	float:left;
+	width:154px;
+	margin:20px 0px 20px 180px;
+	text-align:right;}
+
+
+
+
+
+												/************************************** My Account END **************************************/
