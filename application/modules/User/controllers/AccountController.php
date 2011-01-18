@@ -816,6 +816,18 @@ class User_AccountController extends Zend_Controller_Action
        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
 
+        /**
+     * User login
+     * @access public
+     * @param String email : email address in post
+     * @param String passwd : password in post
+     * @return json object - :msg, :status
+     */
+    public function updateEmailPassAction($email,$pass)
+    {
+
+    }
+
     public function captchAction()
     {
        $captcha = new GP_Captcha();
