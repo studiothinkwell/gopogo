@@ -596,7 +596,115 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
     } // end of getUserFogotPassword
     
 
+ /**
+     * User : get user detail by user id
+     * @access public
+     * @param id  : user id
+     *
+     * @return Array | bool : user's master data
+     *
+     */
+
+    public function getUserById($id)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
 
 
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_email_password_by_user_id(:id)');
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowArray = $stmt->fetch();
+            $stmt->closeCursor();
+            return $rowArray;
+
+    } // end of getUserById
+
+    /**
+     * User : get user partner detail by user id
+     * @access public
+     * @param id  : user id
+     *
+     * @return Array | bool : user partner data
+     *
+     */
+    public function getUserPartnerById($id)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_other_account_details_by_user_id(:id)');
+        
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);   
+            $stmt->execute();
+          
+            $rowArray = $stmt->fetchAll();
+           
+            if(isset($rowArray) && !empty($rowArray))
+            {
+                return $rowArray;
+            }
+    } // end of getUserById
+
+      /**
+      * Update Email and Password and return it
+      * @param String email
+      * @return String temporary password
+      */
+
+     public function updateEmailPass($email,$pass)
+    {
+        $temp_password = $this->createRandomKey(6);
+
+        $enctemp_password = $this->encryptPassword($temp_password);
+
+        // now update this info on table means update temporary password on table
+
+        // get Db instance
+        $db = $this->getDbInstance();
+
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+
+        try {
+
+            $stmt = $db->prepare('CALL sp_set_temporary_password_by_email_id(:email, :passwd)');
+            $stmt->bindParam('email', $email, PDO::PARAM_INT);
+            $stmt->bindParam('passwd', $enctemp_password);
+            $stmt->execute();
+            $stmt->closeCursor();
+
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+
+        // return temporary password
+        return $temp_password;
+
+    } // end of getUserFogotPassword
 }
+
+
+
 
