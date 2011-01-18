@@ -284,7 +284,7 @@ Class GP_GPAuth
 
         $text = $view->render('mails/signup_welcome.phtml');
 
-        $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');
+        $lang_msg = self::getIntance()->translate->_('Welcome! you have successfully signedup!');
 
         $subject = str_replace('%value%', $name, $lang_msg);
 
