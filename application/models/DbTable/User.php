@@ -502,14 +502,22 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      * 
      */
 
-    public function logSession($udaya)
-    {       
+    public function logSession($udata) { 
+        // get Db instance
+        $db = $this->getDbInstance();
         $userSession = new Zend_Session_Namespace('user-session');
         
-        foreach($udaya as $ukey=>$uvalue)
-        {
+        foreach($udata as $ukey=>$uvalue) {
              $userSession->$ukey = $uvalue;
         }
+        //add profile information into user session
+        //
+        // Stored procedure returns a single row
+        $stmt = $db->prepare('CALL sp_select_user_profile_by_user_id(:userid)');
+        $stmt->bindParam('userid', $udata['user_id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $rowArray = $stmt->fetch();
+       // print_r($rowArray);exit;
     } // end of logSession
 
 
@@ -602,8 +610,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $db = $this->getDbInstance();
         if(!is_object($db))
             throw new Exception("",Zend_Log::CRIT);
-        try { $stmt = $this->_db->query("CALL sp_update_user_status_by_user_email_id(?)", "hg34505@gmail.com");
-
+        try {
+            $stmt = $this->_db->query("CALL sp_update_user_status_by_user_email_id(?)", $email);
         } catch (Some_Component_Exception $e) { 
             
             if (strstr($e->getMessage(), 'unknown')) {
@@ -623,7 +631,6 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
-
     }
 
  /**

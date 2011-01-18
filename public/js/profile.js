@@ -1,12 +1,15 @@
 
 $(document).ready(function(){
-
     $(".clsEUPro").click(function(){
-       var inpArr = new Array(2);
-           inpArr[0] = new Array("clsDivUN","clsDivUN","text");
-           inpArr[1] = new Array("clsDivUD","clsDivUD","text");
-           inpArr[2] = new Array("clsEUPro","clsProAction","button");
-       $().inplaceEditor(inpArr);
+       if($(".clsEUPro").hasClass('save') ) {
+           $().updateProfile("myinfo");
+       } else {
+           var inpArr = new Array(2);
+               inpArr[0] = new Array("clsDivUN","clsDivUN","text");
+               inpArr[1] = new Array("clsDivUD","clsDivUD","text");
+               inpArr[2] = new Array("clsEUPro","clsProAction","href");
+           $().inplaceEditor(inpArr);
+       }
     });
 
     $.fn.inplaceEditor = function(inpArr) {  //alert(inpArr[0][1]); alert(inpArr[0][2]); alert(inpArr[0][3]);
@@ -20,25 +23,23 @@ $(document).ready(function(){
             case "button":
                 $("."+inpArr[arrLen-1][1]).html("<input type='button' class='inplace"+inpArr[arrLen-1][0]+"save' name='' value='Save'/>");
             case "href":
-                $("."+inpArr[arrLen-1][1]).html("<a href='#' onclick='updateProfile()' class='inplace"+inpArr[arrLen-1][0]+"save'>Save</a>");
+              //  $("."+inpArr[arrLen-1][0]).removeClass("edit");
+                $("."+inpArr[arrLen-1][0]).addClass("save");
         }
     }
 
-    
-});
-
-$(".inplaceclsEUProsave").click(function(){
+    $(".inplaceclsEUProsave").click(function(){
         $().updateProfile('myinfo');
     })
     //call ajax for update profile
-    $.fn.updateProfile = function () { alert(1);
+    $.fn.updateProfile = function (area) {
         switch(area) {
-        default :
+        default : alert(2);
         $.ajax({
               url: app.gopogo.profilemyinfo_url,
               type: 'POST',
               dataType: 'json',
-              data:fdata,
+              //data:fdata,
               timeout: 99999,
               success: function(resp){
                   // do something with resp
@@ -52,3 +53,5 @@ $(".inplaceclsEUProsave").click(function(){
          });
         }
     }
+});
+

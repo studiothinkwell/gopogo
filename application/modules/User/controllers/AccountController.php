@@ -179,7 +179,6 @@ class User_AccountController extends Zend_Controller_Action
             if($validFlag){
 
                 try {
-
                     // create user model object
                     $user = new Application_Model_DbTable_User();
 
@@ -352,32 +351,19 @@ class User_AccountController extends Zend_Controller_Action
             //*/
               // validate capcha
             //*
-            if ($_SESSION['captcha'] == $_POST['captcha']) {
-                // Yes, captcha is valid
-            } else {
-                 $lang_msg = $this->translate->_("Invalid captcha");
-                //$msg .= str_replace('%value%', $email, $lang_msg);
-                $msg .= $lang_msg;
-                $validFlag = false;
+            if($validFlag) {
+                if ($_SESSION['captcha'] == $_POST['captcha']) {
+                    // Yes, captcha is valid
+                } else {
+                     $lang_msg = $this->translate->_("Invalid captcha");
+                    //$msg .= str_replace('%value%', $email, $lang_msg);
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
             }
-            //*/
-
-              // validate capcha
-            //*
-            if ($_SESSION['captcha'] == $_POST['captcha']) {
-                // Yes, captcha is valid
-            } else {
-                $lang_msg = $this->translate->_("Invalid captcha");
-                //$msg .= str_replace('%value%', $email, $lang_msg);
-                $msg .= $lang_msg;
-                $validFlag = false;
-            }
-            //*/
-
+            
             if($validFlag){
-
                 try {
-
                     $user = new Application_Model_DbTable_User();
 
                     // reset temporary password
@@ -581,7 +567,7 @@ class User_AccountController extends Zend_Controller_Action
                         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'cdn');
                         $confirmLink = $this->config->baseHttp."/User/Account/confirmemail/verify/".$confirmKey;
                         $username = substr($email, 0, strpos($email,'@'));
-                        GP_GPAuth::sendEmailSignupConfirm($email,$username,$confirmLink);
+                        GP_GPAuth::sendEmailSignupConfirm($email,$passwd,$confirmLink,$username);
 
                         $user = new Application_Model_DbTable_User();
                         //generate confirmation message by using translater
@@ -668,9 +654,9 @@ class User_AccountController extends Zend_Controller_Action
                 else
                     $session->emailVerify = "";
                 $this->view->emailVerify = $session->emailVerify;
-                GP_GPAuth::sendEmailSignupWelcome($userData['Email'],"");
                 //update status of user account isactive to 1
-               $user->activateuser($userData['Email']);
+                $user->activateuser($userData['user_emailid']);
+                GP_GPAuth::sendEmailSignupWelcome($userData['Email'],"");
             } else {
                 $session->tooltipMsg1 = $this->translate->_("Invalid verification key");
                 $session->tooltipMsg2 = $this->translate->_("Verifiction key expired");

@@ -13,8 +13,12 @@ class Profile_IndexController extends Zend_Controller_Action
         // action body
     }
 
-    public function ajaxupdatemyinfo() {
+    public function ajaxupdatemyinfoAction() {
         //call sp to update data
+        $this->_helper->viewRenderer->setNoRender(true);
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+       // $user->
     }
 }
 

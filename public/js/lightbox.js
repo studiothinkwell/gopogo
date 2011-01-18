@@ -1,7 +1,7 @@
 
 var divId;
 var baseUrl;
-var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail');
+var arrAccount = new Array('.clsSignInEmail','.clsSignInPwd','.clsSignUpEmail','.clsSignUpPwd','.clsSignUpRePwd','.clsForgotEmail','clsForgotPass');
 $(document).ready(function()
 {
 
@@ -240,7 +240,7 @@ $.fn.getPageSize = function() {
 };
 
 $.fn.setdefaultval = function() {
-    for(i=0;i<5;i++) {
+    for(i=0;i<7;i++) {
             $(arrAccount[i]).val("");
         }
     $(".clsSignInEmail").val("Email Address");
