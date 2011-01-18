@@ -101,8 +101,19 @@ class GP_Asset {
         // @import url('...')
         // @import url("...")
         $pattern = "/url\((?P<urls>.*?)\)/is";
-        $modifiedCssFileData = preg_replace_callback($pattern, fixCssUrls, $cssFileData);
-
+        //  $modifiedCssFileData = preg_replace_callback($pattern, fixCssUrls, $cssFileData);
+        $modifiedCssFileData = preg_replace_callback($pattern,
+                                create_function(
+                                                '$matches',
+                                                '
+                                                global $baseurl;
+                                                $str = $matches[1];
+                                                if(substr($str,0,1)=="\'" || substr($str,0,1)==\'"\')
+                                                    $str = substr($str,1,(strlen($str)-2));
+                                                return "url($baseurl" .trim($str) .")";
+                                                '
+                                                ),
+                                                $cssFileData);
         // write new compredessed css in compresseed foder
         $filename = PUBLIC_PATH .'/css/style.css';
 

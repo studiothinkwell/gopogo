@@ -45,7 +45,7 @@ class WebService_RestController extends Zend_Controller_Action
         
     }
 
-    public function loginAction()
+    public function apiAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);
  

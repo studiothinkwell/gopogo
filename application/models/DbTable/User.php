@@ -180,7 +180,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         try {
 
             $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
-
+            //return TRUE;
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
@@ -199,7 +199,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }   
-        
+        return TRUE;
     } // end of signup
 
     /**
