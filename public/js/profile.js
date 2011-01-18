@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$(document).ready(function() {
     $(".clsEUPro").click(function(){
        if($(".clsEUPro").hasClass('save') ) {
            $().updateProfile("myinfo");
@@ -30,18 +30,20 @@ $(document).ready(function(){
 
     $(".inplaceclsEUProsave").click(function(){
         $().updateProfile('myinfo');
+        
     })
     //call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
-        default : alert(2);
+        case 'myinfo':
         $.ajax({
               url: app.gopogo.profilemyinfo_url,
               type: 'POST',
               dataType: 'json',
               //data:fdata,
               timeout: 99999,
-              success: function(resp){
+              success: function(resp) {
+
                   // do something with resp
                   if(resp.status == 1) { // show error message
 
