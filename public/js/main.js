@@ -10,7 +10,8 @@ app.gopogo.profile_url = app.gopogo.baseurl + 'profile';
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
-
+// profile update url's
+app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyinfo/';
 // add events on load
 
 /**
@@ -48,7 +49,7 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
     /**
      * This will show success message when profile page loads
      */
-    if($("#msgInput").val() == 'fbSignUp') {
+    if($("#msgInput").val() == 'show') {
         $(".clsSuccessMsg").removeAttr('style');
         var body=document.getElementsByTagName('body')[0];
         body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
@@ -95,41 +96,36 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 
         // do login
         $.fn.doLogin = function(){
+            // get serialized form data of login form
+            var fdata = $("#loginBoxForm").serialize();
 
-             // get serialized form data of login form
-             var fdata = $("#loginBoxForm").serialize();
-
-             // make ajax request for login
-             $.ajax({
-                url: app.gopogo.signin_url,
-                type: 'POST',
-                dataType: 'json',
-                data:fdata,
-                timeout: 99999,
-                error: function(resp){
-                    if(resp.readyState == 4) {
-                        $().loginFail(resp);
+            // make ajax request for login
+            $.ajax({
+               url: app.gopogo.signin_url,
+               type: 'POST',
+               dataType: 'json',
+               data:fdata,
+               timeout: 99999,
+               error: function(resp){
+                   if(resp.readyState == 4) {
+                       $().loginFail(resp);
+                   }
+               },
+               success: function(resp){
+                   // do something with resp
+                   if(resp.status == 1) { // show error message
+                       $().loginSuccess(resp);
+                   }
+                   else {
+                       $().loginFail(resp);
                     }
                 },
-                success: function(resp){
-                    // do something with resp
-                    if(resp.status == 1) // show error message
-                    {
-                        $().loginSuccess(resp);
-                    }
-                    else
-                    {
-                        $().loginFail(resp);
-                    }
-                },
-                complete: function(resp){
+                complete: function(resp) {
                     if(resp.readyState == 4) {
                         $().loginWelcome(resp);
                     }
                 }
-
             });
-
         }; // end of do signin
 
         // login success

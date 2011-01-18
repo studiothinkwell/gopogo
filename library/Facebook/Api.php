@@ -166,9 +166,9 @@ class Facebook_Api {
      * @return mixed
      */
     function FBLogin() {
-        $session = $this->_facebook->getSession();
+        $session = $this->_facebook->getSession();   
         $me = null;
-        if ($session) {
+        if ($session) { 
             try {
                 $uid = $this->_facebook->getUser();
                 $me = $this->_facebook->api('/me');
@@ -179,7 +179,7 @@ class Facebook_Api {
         }
         if ($me) {
             return $this->InformationInfo();
-        } else {
+        } else { 
             return $this->connection();
         }
     }

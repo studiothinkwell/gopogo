@@ -292,6 +292,13 @@ return array(
     "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
     "Please enter password!"=>"Please enter Password",
     "Please enter retype password!"=>"Please enter Retype Password",
+    "Confirm your GoPogo account"=>"Confirm your GoPogo account",
+    "Confirm your email address_msg1"=>"An activation link is sent to your email address, ",
+    "Confirm your email address_msg2"=>"Please confirm your account",
+    "Congratulations! Your email verified_msg1"=>"Congratulations! Your email address is verified",
+    "Congratulations! Your email verified_msg2"=>"Login details are sent to your email address, Please login to access gopogo",
+    "Invalid verification key"=>"The combination of verification key is invalid!",
+    "Verifiction key expired"=>"or Your verification key is expired",
     // general----
 
     // Unknown Error!

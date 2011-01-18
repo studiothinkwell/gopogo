@@ -70,9 +70,10 @@
                 <div class="top-Msg-window " >
                     <span class="top-Msg-window-icon"></span>
                     <span class="top-Msg-window-txt">
-                        <div class="clsMSuccess">HURRAY! You have joined the GoPogo community. <br/></div>
+                        <div class="clsMSuccess"><?php echo $session->tooltipMsg1;?><br/></div>
                         <div class="top-Msg-window-s clsSubSuccess">
-                        Next Step: Play! Book a playlist and start having fun. The more you rate and play they will get better recommendations.</div>
+                            <?php echo $session->tooltipMsg2; ?>
+                        </div>
                     </span>
                     <a href="javascript:void(0)" class="top-Msg-window-close clsCloseSuccess"></a>
                 </div>

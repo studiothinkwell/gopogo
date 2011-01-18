@@ -13,6 +13,8 @@ class Profile_IndexController extends Zend_Controller_Action
         // action body
     }
 
-
+    public function ajaxupdatemyinfo() {
+        //call sp to update data
+    }
 }
 
