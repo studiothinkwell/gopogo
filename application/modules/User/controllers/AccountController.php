@@ -105,8 +105,7 @@ class User_AccountController extends Zend_Controller_Action
      * @return json object - :msg, :status
      */
 
-    public function loginAction()
-    {
+    public function loginAction() {
         $data = array();
 
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
@@ -419,15 +418,9 @@ class User_AccountController extends Zend_Controller_Action
             $logger = Zend_Registry::get('log');
             $logger->log($msg,Zend_Log::DEBUG);
         }
-        
-        throw  new Exception("hi");
-
         $data['msg'] =  $msg;
         $data['status'] =  $status;
-
         $this->_helper->json($data, array('enableJsonExprFinder' => true));
-
-
     } // end of forgot password
 
     /**
