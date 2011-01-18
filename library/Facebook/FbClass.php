@@ -18,9 +18,9 @@ Class Facebook_FbClass {
      */    
     public static function getConfig() {
        $fbIds = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'facebook');
-        //echo "<pre>";
+        //echo "printing";
         $Application_Id = $fbIds->facebook->appid;
-        $Application_Security = $fbIds->facebook->appsecurity; 
+        $Application_Security = $fbIds->facebook->appsecurity;
         $Permissions = $fbIds->facebook->permissions;
         $CallBack = 'window.location="/User/Account/fbsignin"';
         return $facebook = new Facebook_Api($Application_Id,$Application_Security,$Permissions,$CallBack);

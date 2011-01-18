@@ -38,15 +38,24 @@ class IndexController extends Zend_Controller_Action
         //code to get baseurl and assign to view
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
         $baseurl = $this->config->gopogo->url->base;
-        $this->view->baseurl = $baseurl;
-
-
-        
+        $this->view->baseurl = $baseurl;       
     }
 
     public function indexAction()
     { 
         $this->view->title = "Welcome to ".$this->config->gopogo->name;
+        $user = new Application_Model_DbTable_User();
+        //generate confirmation message by using translater
+        $session = $user->getSession();
+        //assign to view the tooltip messages
+        if ($session->tooltipDsp == "show") {
+            $session->tooltipMsg1 = "";
+            $session->tooltipMsg2 = "";
+        }
+        if(!empty($session->tooltipMsg1)) { 
+            $session->tooltipDsp = "show";
+            $this->view->showTooltip = "show";
+        }
     }
 
     /**
