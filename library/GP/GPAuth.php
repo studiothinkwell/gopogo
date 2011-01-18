@@ -214,6 +214,7 @@ Class GP_GPAuth
 
     public static function sendEmailForgotPassword($email,$temp_password,$name='')
     {
+        
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -254,6 +255,7 @@ Class GP_GPAuth
                                             ->setReplyTo($reply_to, $obj->gpName)
                                             ->setReturnPath($return_path, $obj->gpName)
                                             ->send(); // self::getIntance()->getMailTransport()
+        
     } // end of sendEmailForgotPassword
 
 

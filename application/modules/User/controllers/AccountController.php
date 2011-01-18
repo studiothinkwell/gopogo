@@ -350,7 +350,7 @@ class User_AccountController extends Zend_Controller_Action
                 $validFlag = false;
             }
             //*/
-              // validate capcha
+            // validate capcha
             //*
             if ($_SESSION['captcha'] == $_POST['captcha']) {
                 // Yes, captcha is valid
@@ -362,8 +362,8 @@ class User_AccountController extends Zend_Controller_Action
             }
             //*/
 
-              // validate capcha
-            //*
+            // validate capcha
+            /*
             if ($_SESSION['captcha'] == $_POST['captcha']) {
                 // Yes, captcha is valid
             } else {
@@ -433,8 +433,6 @@ class User_AccountController extends Zend_Controller_Action
             $logger = Zend_Registry::get('log');
             $logger->log($msg,Zend_Log::DEBUG);
         }
-        
-        throw  new Exception("hi");
 
         $data['msg'] =  $msg;
         $data['status'] =  $status;
