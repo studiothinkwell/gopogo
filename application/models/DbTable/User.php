@@ -28,8 +28,7 @@
  */
 
 
-class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
-{
+class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
     /**
      *
      * @var String DB table name
@@ -53,12 +52,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
     /**
      * User : Encript Password
-     * @access private
+     * @access public
      * @param String  plain passsword
      * @return String  encrypted string
      */
 
-    private function encryptPassword($str)
+    public function encryptPassword($str)
     {
         return sha1($str, true);
     } // end of encryptPassword
@@ -71,7 +70,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
      * @return String  token string n chars
      */
 
-    private function createRandomKey($amount)
+    public function createRandomKey($amount)
     {
         $keyset  = "abcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $randkey = "";
@@ -157,8 +156,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
      * @param String passwd : password     
      */
 
-    public function signup($udata)
-    {
+    public function signup($udata) {
         $data = $udata;
 
         // encript plain password
@@ -178,9 +176,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
                         ,   ''
                     );
         try {
-
             $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
-
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
@@ -199,7 +195,54 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }   
-        
+        return TRUE;
+    } // end of signup
+
+    /**
+     * User signup new user
+     * @access public
+     * @param String email : email address
+     * @param String passwd : password
+     */
+
+    public function fbsignup($udata)
+    { 
+        $data = $udata;
+        $status = 0;
+        $username = substr($data['user_emailid'], 0, strpos($data['user_emailid'],'@'));
+
+        $udata = array(
+                        1
+                        ,   1
+                        ,   $data['FacebookId']
+                        ,   $data['user_emailid']
+                        ,   $username
+                        ,   $data['TempPass']
+                        ,   $data['TempPass']
+                        ,   ''
+                    );
+        try {   
+                $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
+                $status = 1;  
+        } catch (Some_Component_Exception $e) { 
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){ 
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        return $status;
     } // end of signup
 
     /**
@@ -278,7 +321,6 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 
     public function getUserByEmailAndPassword($email,$passwd)
     {
-
         $encpasswd = $this->encryptPassword($passwd);
 
 
@@ -365,21 +407,109 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         }
     } // end of getUserByEmailAndPassword
 
+
+    /**
+     * User : get user detail by email
+     * @access public
+     * @param String email : email address
+     *
+     * @return Array | bool : user's master data if not user match then it will return false
+     *
+     */
+
+    public function getUserByEmail($email)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_detail_by_email_id(:email)');
+            $stmt->bindParam('email', $email, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowArray = $stmt->fetch();
+            $stmt->closeCursor();
+
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+
+
+        if (!($rowArray) || empty ($rowArray)) {
+            return FALSE;
+        }else {
+
+            if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+                    // update main password from temporary password if present
+                    if(!empty($rowArray['temporary_user_password']))
+                    {
+
+                        try {
+
+                            $stmt = $db->prepare('CALL sp_update_user_password_by_email_id(:email)');
+                            $stmt->bindParam('email', $rowArray['user_emailid'], PDO::PARAM_INT);
+                            $stmt->execute();
+                            $stmt->closeCursor();
+
+                        } catch (Some_Component_Exception $e) {
+                            if (strstr($e->getMessage(), 'unknown')) {
+                                // handle one type of exception
+                                $lang_msg = "Unknown Error!";
+                            } elseif (strstr($e->getMessage(), 'not found')) {
+                                // handle another type of exception
+                                $lang_msg = "Not Found Error!";
+                            } else {
+                                $lang_msg = $e->getMessage();
+                            }
+                            $logger = Zend_Registry::get('log');
+                            $logger->log($lang_msg,Zend_Log::ERR);
+                        }
+                        catch(Exception $e){
+                            $lang_msg = $e->getMessage();
+                            $logger = Zend_Registry::get('log');
+                            $logger->log($lang_msg,Zend_Log::ERR);
+                        }
+                    }
+                    return $rowArray;
+                }
+                else
+                {
+                    return FALSE;
+                }
+        }
+    } // end of getUserByEmailAndPassword
+
+
     /**
      * Set Loggedin User data in session
      * 
      */
 
     public function logSession($udaya)
-    {
-       
+    {       
         $userSession = new Zend_Session_Namespace('user-session');
-
+        
         foreach($udaya as $ukey=>$uvalue)
         {
              $userSession->$ukey = $uvalue;
         }
-
     } // end of logSession
 
 
@@ -460,9 +590,136 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         return $temp_password;
         
     } // end of getUserFogotPassword
-    
 
 
+    /**
+      * Set status of user to 1 and activate user
+      * @param String email
+      */
+    public function activateUser($email) {
 
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+        try { $stmt = $this->_db->query("CALL sp_update_user_status_by_user_email_id(?)", "hg34505@gmail.com");
+
+        } catch (Some_Component_Exception $e) { 
+            
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+
+    }
+
+ /**
+     * User : get user detail by user id
+     * @access public
+     * @param id  : user id
+     *
+     * @return Array | bool : user's master data
+     *
+     */
+
+    public function getUserById($id)
+    {
+        // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_email_password_by_user_id(:id)');
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowArray = $stmt->fetch();
+            $stmt->closeCursor();
+            return $rowArray;
+
+    } // end of getUserById
+
+    /**
+     * User : get user partner detail by user id
+     * @access public
+     * @param id  : user id
+     *
+     * @return Array | bool : user partner data
+     *
+     */
+    public function getUserPartnerById($id)
+    {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+            // Stored procedure returns a single row
+            $stmt = $db->prepare('CALL sp_select_user_other_account_details_by_user_id(:id)');
+
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $rowArray = $stmt->fetchAll();
+
+            if(isset($rowArray) && !empty($rowArray))
+            {
+                return $rowArray;
+            }
+    } // end of getUserById
+
+      /**
+      * Update Email and Password and return it
+      * @param String email
+      * @return String temporary password
+      */
+
+     public function updateEmailPass($email,$pass)
+    {
+        $temp_password = $this->createRandomKey(6);
+
+        $enctemp_password = $this->encryptPassword($temp_password);
+
+        // now update this info on table means update temporary password on table
+
+        // get Db instance
+        $db = $this->getDbInstance();
+
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+
+            $stmt = $db->prepare('CALL sp_set_temporary_password_by_email_id(:email, :passwd)');
+            $stmt->bindParam('email', $email, PDO::PARAM_INT);
+            $stmt->bindParam('passwd', $enctemp_password);
+            $stmt->execute();
+            $stmt->closeCursor();
+
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+    }
 }
-

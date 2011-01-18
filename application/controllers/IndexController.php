@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Index Controller for Default Actions
  *
@@ -28,24 +29,33 @@
 
 class IndexController extends Zend_Controller_Action
 {
-
+    public $config = '';
+    
     public function init()
     {
         /* Initialize action controller here */
 
         //code to get baseurl and assign to view
-        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
-        $baseurl = $config->gopogo->url->base;
-        $this->view->baseurl = $baseurl;
+        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $baseurl = $this->config->gopogo->url->base;
+        $this->view->baseurl = $baseurl;       
     }
 
     public function indexAction()
-    {
-        // action body
-
-
-        GP_GPAuth::sendEmailSignupWelcome('mahesh@techdharma.com','12345','mahesh');
-
+    { 
+        $this->view->title = "Welcome to ".$this->config->gopogo->name;
+        $user = new Application_Model_DbTable_User();
+        //generate confirmation message by using translater
+        $session = $user->getSession();
+        //assign to view the tooltip messages
+        if ($session->tooltipDsp == "show") {
+            $session->tooltipMsg1 = "";
+            $session->tooltipMsg2 = "";
+        }
+        if(!empty($session->tooltipMsg1)) { 
+            $session->tooltipDsp = "show";
+            $this->view->showTooltip = "show";
+        }
     }
 
     /**
@@ -56,8 +66,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function howitworksAction() {
-        
+    public function howitworksAction()
+    {
+        $this->view->title = "How it works | ".$this->config->gopogo->name;
     }
 
     /**
@@ -68,8 +79,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function aboutusAction() {
-        
+    public function aboutAction()
+    {
+         $this->view->title = "About Us | ".$this->config->gopogo->name;
     }
 
     /**
@@ -80,8 +92,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function contactusAction() {
-        
+    public function contactAction()
+    {
+         $this->view->title = "Contact Us | ".$this->config->gopogo->name;
     }
 
     /**
@@ -92,9 +105,9 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function legalAction() {
-        
-
+    public function legalAction()
+    {
+         $this->view->title = "Legal | ".$this->config->gopogo->name;
     }
     
     public function cssAction()
@@ -102,4 +115,12 @@ class IndexController extends Zend_Controller_Action
         // action body
 
     }
+
+    public function codeAction()
+    {
+         $this->_helper->viewRenderer->setNoRender(true);
+         $captcha = new GP_Captcha();
+         $captcha->CreateImage(); die;
+    }
+
 }

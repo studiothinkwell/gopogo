@@ -270,10 +270,12 @@ return array(
     // Start GOPOGO messages ---------------------------------------
 
     // signin
-    "Enter Valid Email!" => "Enter Valid Email!",
-    "Passowrd lenght must be between 6-16!" => "Passowrd lenght must be between 6-16!",
+    "Please enter email!" => "Please enter Email Address",
+    "Enter Valid Email!" => "Please enter valid Email Address.",
+    "Password length must be between 6-16!" => "Password length must be between 6-16!",
+    "Please enter password!" => "Please enter Password.",
     "Welcome! You have Signedin Successfully!"=>"Welcome! You have Signedin Successfully!",
-    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Your email and password does not match! Or You have not signedup yet usimng this email!",
+    "Your email and password does not match! Or You have not signedup yet usimng this email!"=>"Sorry! Your account Email and Password does not match your login!",
 
     // logout
     "You have successfully logged out from system!" => "You have successfully logged out from system!",
@@ -281,13 +283,22 @@ return array(
     // forgot password
     "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
     "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
+    "Invalid captcha" =>"Invalid captcha",
 
     // signup
     "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
     "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
     "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
     "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
-
+    "Please enter password!"=>"Please enter Password",
+    "Please enter retype password!"=>"Please enter Retype Password",
+    "Confirm your GoPogo account"=>"Confirm your GoPogo account",
+    "Confirm your email address_msg1"=>"An activation link is sent to your email address, ",
+    "Confirm your email address_msg2"=>"Please confirm your account",
+    "Congratulations! Your email verified_msg1"=>"Congratulations! Your email address is verified",
+    "Congratulations! Your email verified_msg2"=>"Login details are sent to your email address, Please login to access gopogo",
+    "Invalid verification key"=>"The combination of verification key is invalid!",
+    "Verifiction key expired"=>"or Your verification key is expired",
     // general----
 
     // Unknown Error!

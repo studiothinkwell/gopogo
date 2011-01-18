@@ -264,7 +264,7 @@ Class GP_GPAuth
      * @param String $name : user name
      */
     public static function sendEmailSignupWelcome($email,$passwd,$name='')
-    {
+    { 
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -284,7 +284,7 @@ Class GP_GPAuth
 
         $text = $view->render('mails/signup_welcome.phtml');
 
-        $lang_msg = self::getIntance()->translate->_('Welcome, %value% To GOPOGO!');
+        $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');
 
         $subject = str_replace('%value%', $name, $lang_msg);
 
@@ -309,10 +309,51 @@ Class GP_GPAuth
                                             ->send();
     } // end of sendEmailSignupWelcome
 
+    /**
+     * Send Confirmation Email to signedup user
+     * @param String $email : user email
+     * @param String $name : user name
+     */
+    public static function sendEmailSignupConfirm($email,$name='',$confirmLink) {
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
 
+        $baseurl = $configs->gopogo->url->base;
 
+        $view = self::getIntance()->getViewIntance();
 
+        $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
+
+        if(empty($name))
+            $name = substr($email, 0, strpos($email,'@'));
+
+        $view->name = $name;
+        $view->email = $email;
+        $view->link = $baseurl;
+        $view->confirmLink = $confirmLink;
+        $text = $view->render('mails/signup_confirm.phtml');
+
+        $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');
+
+        $subject = str_replace('%value%', $name, $lang_msg);
+
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+        $obj->getMailIntance()->setBodyText($subject)
+                            ->setBodyHtml($text)
+                            ->setSubject($subject)
+                            ->addTo($email, $name)
+                            ->addTo($to, $obj->gpName)
+                            ->setFrom($from, $obj->gpName)
+                            ->addCc($cc, $obj->gpName)
+                            ->addBcc($bcc, $obj->gpName)
+                            ->setReplyTo($reply_to, $obj->gpName)
+                            ->setReturnPath($return_path, $obj->gpName)
+                            ->send();
+    } // end of sendEmailSignupWelcome
 }
-
-
-?>

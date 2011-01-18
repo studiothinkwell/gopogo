@@ -1,34 +1,42 @@
 <!-- Footer START-->
+<?php
+ $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+ $baseUrl = $config->gopogo->url->base;
+?>
 <div class="footer">
 	<div class="footer-topbg">
-        <div class="your-personal-button" style="cursor:hand"><img src="<?php echo $this->baseurl; ?>/themes/default/images/your-personal-guide.png" alt="" style="border:0px;" id="your-personal-button" /></div>
+        <div class="your-personal-button" style="cursor:hand"><img src="<?php echo $baseUrl; ?>/themes/default/images/your-personal-guide.png" alt="" style="border:0px;" id="your-personal-button" />
+             <div id="personalArrow" class="arrow-down"></div>
+        </div>
+
     </div>
 <!-- Footer Middle START-->
 <?php echo $this->partial('partials/advance_search.phtml'); ?>
 <!-- Footer Middle END-->
 	<div class="footer-bottombg">
-        <div class="footerlink">  
-            Copyright &copy; 2010 GoPogo LLC<a href="/index/aboutus">About Us </a>|<a href="/index/contactus">Contact Us</a>|<a href="/index/legal">Legal</a> 
+        <div class="footerlink">
+            Copyright &copy; 2010 GoPogo LLC<a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/about'); ?>">About Us </a>|<a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/contact'); ?>">Contact Us</a>|<a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/legal'); ?>">Legal</a>
         </div>
     </div>
 </div>
 <!-- Footer START-->
 
 <!-- Footer Middle START-->
-<?php 
-echo $this->partial('partials/login.phtml'); 
+<?php
+echo $this->partial('partials/login.phtml');
+echo $this->partial('partials/forgot.phtml',array('baseUrl'=>$baseUrl));
 echo $this->partial('partials/signup.phtml');
 echo $this->partial('partials/message.phtml');
-echo $this->partial('partials/forgotpassword.phtml');
 ?>
 <!-- Footer Middle END-->
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery.ui.core.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery.ui.mouse.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/jquery.ui.draggable.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/lightbox.js"></script>
-<script type="text/javascript" src="<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl(),'/'); ?>/js/main.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery.ui.core.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery.ui.mouse.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery.ui.draggable.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/lightbox.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/main.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/profile.js"></script>
 
 <script language="javascript" >
 
@@ -36,7 +44,7 @@ echo $this->partial('partials/forgotpassword.phtml');
 var app = [];
 app.gopogo = [];
 // base url of the site
-app.gopogo.baseurl = '<?php echo rtrim(Zend_Controller_Front::getInstance()->getBaseUrl()); ?>/';
+app.gopogo.baseurl = '<?php echo rtrim($baseUrl) ?>/';
 
 <?php
 

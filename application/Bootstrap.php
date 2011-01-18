@@ -226,13 +226,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
 
         //1.) normal
-        //$zendMailTransport = new Zend_Mail_Transport_Sendmail();
+        $zendMailTransport = new Zend_Mail_Transport_Sendmail();
 
         //2.) SMTP
 
         //$options = $this->getOption('mail');
         //Zend_Debug::dump($options);
-        //*
+        /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
             'auth'      =>$mailConfigs->mail->params->login,
@@ -287,11 +287,48 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         
         $indexController  = Zend_Controller_Front::getInstance();
-        $route = new Zend_Controller_Router_Route('about-us',array('controller' => 'index', 'module' => 'default', 'action' => 'aboutus'));
-        $indexController->getRouter()->addRoute('about-us',$route);    
+
+        $route = new Zend_Controller_Router_Route(
+                                    'how-it-works/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'howitworks'
+                                                   ));
+        $indexController->getRouter()->addRoute('how-it-works',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'about/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'about'
+                                                   ));
+        $indexController->getRouter()->addRoute('about',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'contact/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'contact'
+                                                   ));
+        $indexController->getRouter()->addRoute('contact',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'legal/:module',array(
+                                                    'controller' => 'index',
+                                                    'module' => 'default' ,
+                                                    'action' => 'legal'
+                                                   ));
+        $indexController->getRouter()->addRoute('legal',$route);
+
+        $route = new Zend_Controller_Router_Route(
+                                    'profile/:module',array(
+                                                    'controller' => 'Account',
+                                                    'module' => 'User' ,
+                                                    'action' => 'profile'
+                                                   ));
+        $indexController->getRouter()->addRoute('profile',$route);
+    
 
     }
 
-
 }
-

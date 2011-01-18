@@ -1,3 +1,20 @@
+<?php
+$loginFlag = false;
+$fbLogin = "false";
+$session = GP_GPAuth::getSession();
+
+if(!empty($session) && !empty($session->user_id) && $session->user_id>0)
+    {
+        $loginFlag = true;
+        $user_name = $session->user_name;
+        $fbLogin = "true";
+    }
+ else {
+        // create facebook object
+        $facebook = Facebook_FbClass::getConfig();
+    }
+?>
+
 <!--Create an account START-->
             <div id="signupBox" >
                 <form id="signupBoxForm" name="signupBoxForm" method="post">
@@ -15,7 +32,7 @@
                     </div>
                     <div class="create-ac-right">
 
-                        <span id="signup_error_msg" class="errorMsg1" ></span>
+                        <!-- <span id="signup_error_msg" class="errorMsg1" ></span> -->
                         <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignUpEmail"/></div>
                         <div class="create-ac-input2">
                             <input type="text" value="Password" onfocus="$('.clsSignUpPwdOld').attr('style','display:none');$('.clsSignUpPwd').removeAttr('style');$('.clsSignUpPwd').focus()" name="passwd" id="passwd" class="clsSignUpPwdOld"/>
@@ -35,9 +52,7 @@
 
                         </div>
                         <div class="create-ac-input4" >
-                            <fb:login-button perms="email,user_checkins">
-                                    Login with Facebook
-                                  </fb:login-button>
+                            <?php if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
                         </div>
                     </div>
                 </div>

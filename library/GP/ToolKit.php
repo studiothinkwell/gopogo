@@ -91,5 +91,109 @@ class GP_ToolKit {
     {
         return trim(GP_ToolKit::getEncriptedUrl(trim($base_url), trim($pathRelative)));
     }
+
+    /**
+     * Converts xml string into usefull php array()
+     * @param string $strContent
+     * @param Bool $getAttributes, default to 1, i.e true
+     * @return string $xmlArray
+     */
+    public static function xmlToArray($strContent, $getAttributes=1) {
+        if(!$strContent) return array();
+
+        if(!function_exists('xml_parser_create')) {
+            return array();
+        }
+
+
+        $parser = xml_parser_create();
+        xml_parser_set_option( $parser, XML_OPTION_CASE_FOLDING, 0 );
+        xml_parser_set_option( $parser, XML_OPTION_SKIP_WHITE, 1 );
+        xml_parse_into_struct( $parser, $strContent, $xmlValues );
+        xml_parser_free( $parser );
+
+        if(!$xmlValues) return;//Hmm...
+
+        //Initializations
+        $xmlArray = array();
+        $parents = array();
+        // $opened_tags = array();
+        $arr = array();
+
+        $current = &$xmlArray;
+
+        //Go through the tags.
+        foreach($xmlValues as $data) {
+            unset($attributes,$value);
+            extract($data);
+
+            $result = '';
+            if($getAttributes) {
+                $result = array();
+                if( true == isset( $value )) $result['value'] = $value;
+
+
+                if( true == isset( $attributes )) {
+                    foreach( $attributes as $attr => $val ) {
+                        if( 1 == $getAttributes ) $result['attr'][$attr] = $val;
+
+                    }
+                }
+            } elseif( true == isset( $value )) {
+                $result = $value;
+            }
+
+
+            if( "open" == $type ) {
+                $parent[$level-1] = &$current;
+                //array_keys — Return all the keys of an array
+                if( !is_array( $current ) or ( !in_array($tag, array_keys( $current )))) {
+                    $current[$tag] = $result;
+                    $current = &$current[$tag];
+
+                } else {
+                    if( true == isset($current[$tag][0] )) {
+                        array_push( $current[$tag], $result );
+                    } else {
+                        $current[$tag] = array( $current[$tag], $result );
+                    }
+                    $last = count($current[$tag]) - 1;
+                    $current = &$current[$tag][$last];
+                }
+
+            } elseif( "complete" == $type ) {
+
+                if( !isset( $current[$tag] )) {
+                    $current[$tag] = $result;
+
+                } else {
+                    if((is_array($current[$tag]) and $getAttributes == 0)
+                    or (isset($current[$tag][0]) and is_array($current[$tag][0]) and $getAttributes == 1)) {
+                        array_push( $current[$tag],$result );
+                    } else {
+                        $current[$tag] = array( $current[$tag], $result );
+                    }
+                }
+
+            } elseif( 'close' == $type ) {
+                $current = &$parent[$level-1];
+            }
+        }
+
+        return( $xmlArray );
+    }
+
+    /**
+     * Converts url in a SEO url
+     * @param url $strUrl
+     * @access   public
+     * @return string SEO URL
+     */
+
+    public static function getSeoUrl($strUrl)
+    {
+        return $strUrl;
+    }
+
 }
 ?>

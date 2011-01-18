@@ -1,0 +1,97 @@
+<?php
+require_once APPLICATION_PATH.'/../library/LibFacebook/lib/config.php';
+/*
+// Awesome Facebook Application
+//
+// Name: http://www.dev.thinkwellgroup.com/gopogofbconnect/
+//
+
+require_once 'facebook-php-sdk/src/facebook.php';
+
+// Create our Application instance.
+$facebook = new Facebook(array(
+  'appId'  => '156779974358466',
+  'secret' => '3f69c4e837202c7a152d3be267140e6c',
+  'cookie' => true,
+));
+*/
+$user = User::fbc_getLoggedIn();
+($user) ? $fb_active_session = $user->fbc_is_session_active() : $fb_active_session = FALSE;
+
+if (!$user) { 
+	// DISPLAY PAGE WHEN USER IS NOT LOGGED IN TO FB CONNECT
+	echo render_header($user);
+	echo render_logged_out_index();
+	echo render_footer();
+	exit;
+}
+
+// USER CONNECTED TO APPLICATION
+if ($user->fbc_is_facebook_user()) {
+
+	if ($_POST["comment"] != "") {
+		// PUBLISH STORY TO PROFILE FEED
+		$template_data = array(
+			'post-title'=>idx($GLOBALS, 'sample_post_title'),
+			'post-url'=>idx($GLOBALS, 'sample_post_url'),
+			'post'=>$_POST["comment"]);
+		$target_ids = array();
+		$body_general = '';
+		$publish_success = $user->fbc_publishFeedStory(idx($GLOBALS, 'feed_bundle_id'), $template_data);
+		if ($publish_success) { $publish_result = "Published story via GoPogo to your profile feed!"; } else { $publish_result = "Error publishing story!"; }
+	}
+
+	if ($_POST["status"] != "") {
+		// PUBLISH STORY TO PROFILE FEED
+		$status_success = $user->fbc_setStatus($_POST["status"]);
+		if ($status_success) { $status_result = "Updated your status via GoPogo!"; } else { $status_result = "Error updating your status!"; }
+	}
+
+	echo render_header($user);
+
+	// SHOW FACEBOOK STATUS
+	echo render_status($user, $status_result);
+
+	// POST FEED TO PROFILE
+	echo render_feed_form($user, $publish_result);
+
+	// SHOW ALL FRIENDS
+	$friends = $user->fbc_get_all_friends(TRUE);
+	echo render_friends_table_html($friends, 0, 10, "fbconnect_friend", "All Friends");
+
+	// SHOW ALL CONNECTED FRIENDS TO APPLICATION
+	$friends = $user->fbc_get_connected_friends(FALSE);
+	echo render_friends_table_html($friends, 0, 10, "fbconnect_friend", "Connected Friends");
+
+	// SHOW ALL UNCONNECTED FRIENDS TO APPLICATION
+	$friends = $user->fbc_get_unconnected_friends_xfbml(TRUE);
+	echo render_friends_table_xfbml($friends, 3, 5, "fbconnect_friend", "Unconnected Friends");
+
+	echo render_footer();
+} else {
+	echo render_header($user);
+	echo render_footer();
+}
+
+?>
+<h1>Would you like Gopogo</h1>
+<fb:like></fb:like>
+<!-- <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fplatform&amp;width=292&amp;colorscheme=light&amp;connections=10&amp;stream=true&amp;header=true&amp;height=587" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:587px;" allowTransparency="true"></iframe>
+
+
+
+
+<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.dev.thinkwellgroup.com%2Fgopogofbconnect%2F&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=verdana&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe> -->
+<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.dev.thinkwellgroup.com%2Fgopogofbconnect%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+
+<?php
+/*
+$post = $facebook->api('/me/feed?access_token='.$this->facebook_oauth_token, 'post',
+array('message'=> $message, 'name' => $name, 'link' => $link, 'caption' => $caption, 'description' => $description,
+'picture' => $picture));
+*/
+
+//$post = $facebook->api('/me/feed?access_token='.$this->facebook_oauth_token, 'post',
+//array('message'=> $message, 'name' => $name, 'link' => $link, 'caption' => $caption, 'description' => $description,
+//'picture' => $picture));
+?>
