@@ -316,7 +316,7 @@ Class GP_GPAuth
      * @param String $email : user email
      * @param String $name : user name
      */
-    public static function sendEmailSignupConfirm($email,$name='',$confirmLink) {
+    public static function sendEmailSignupConfirm($email,$passwd,$confirmLink,$name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -333,6 +333,7 @@ Class GP_GPAuth
         $view->email = $email;
         $view->link = $baseurl;
         $view->confirmLink = $confirmLink;
+        $view->password = $passwd;
         $text = $view->render('mails/signup_confirm.phtml');
 
         $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');

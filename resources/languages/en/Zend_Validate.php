@@ -281,12 +281,12 @@ return array(
     "You have successfully logged out from system!" => "You have successfully logged out from system!",
 
     // forgot password
-    "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"We have send a mail to your provided email, check the email and follow the steps form given link!",
+    "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"New password is sent to your mail account!",
     "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
     "Invalid captcha" =>"Invalid captcha",
 
     // signup
-    "Passowrd and Retype passowrd does not match!" => "Passowrd and Retype passowrd does not match!",
+    "Passowrd and Retype passowrd does not match!" => "Password and Retype password does not match!",
     "User already signedup by this email : '%value%'"=>"User already signedup by this email : '%value%'",
     "Welcome! you have successfully signedup!"=>"Welcome! you have successfully signedup!",
     "Welcome, %value% To GOPOGO!"=>"Welcome, %value% To GOPOGO!",
@@ -296,7 +296,7 @@ return array(
     "Confirm your email address_msg1"=>"An activation link is sent to your email address, ",
     "Confirm your email address_msg2"=>"Please confirm your account",
     "Congratulations! Your email verified_msg1"=>"Congratulations! Your email address is verified",
-    "Congratulations! Your email verified_msg2"=>"Login details are sent to your email address, Please login to access gopogo",
+    "Congratulations! Your email verified_msg2"=>"Now you have full access to gopogo",
     "Invalid verification key"=>"The combination of verification key is invalid!",
     "Verifiction key expired"=>"or Your verification key is expired",
     // general----

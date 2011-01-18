@@ -509,6 +509,8 @@ body
     display:table-cell;
     border:0px solid red;
     text-align:center !important;
+   *display:inline-block;
+    *float:left;
 }
 .mthum-two{
 background-color:#00FF33;
@@ -521,6 +523,7 @@ vertical-align:bottom;
     margin:0px 0px;
     width:138px;
     height:280px;
+    *width:137px;
 }
 .thum-txt {
     vertical-align: bottom;
@@ -530,6 +533,10 @@ vertical-align:bottom;
     font-weight:600;
     text-align:center;
     color:#686565;
+    *display:inline-block;
+    *font-size:11px;
+    *margin-top:5px;
+    *width: 138px;
 }
 .thum-txt * {
     vertical-align: middle;
@@ -776,6 +783,7 @@ vertical-align:bottom;
     color:#6c6968;
     text-align:center;
     border:0px solid red;
+    *margin-left:-75px;
 }
 .rg-thum-content
 {
