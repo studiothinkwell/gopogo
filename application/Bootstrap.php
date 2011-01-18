@@ -232,7 +232,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         //$options = $this->getOption('mail');
         //Zend_Debug::dump($options);
-        //*
+        /*
         $mailConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'mail');
         $config = array(
             'auth'      =>$mailConfigs->mail->params->login,
@@ -241,7 +241,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'ssl'       =>$mailConfigs->mail->params->ssl,
             'port'      =>$mailConfigs->mail->params->port
         );
-       // $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
+        $zendMailTransport = new Zend_Mail_Transport_Smtp($mailConfigs->mail->host, $config);
         //*/
 
         // set default transport

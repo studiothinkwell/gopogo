@@ -16,7 +16,7 @@ defined('APPLICATION_ENV')
 defined('PUBLIC_PATH')
     || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
-// Define path to application directory
+// Define path to domain
 defined('DOMAIN_PATH')
     || define('DOMAIN_PATH', $_SERVER['HTTP_HOST']);
 

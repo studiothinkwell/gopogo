@@ -190,10 +190,9 @@ class GP_ToolKit {
      * @return string SEO URL
      */
 
-   public function getSeoUrl($strUrl)
+    public static function getSeoUrl($strUrl)
     {
         return $strUrl;
-
     }
 
 }
