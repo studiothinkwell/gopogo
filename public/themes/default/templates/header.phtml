@@ -30,9 +30,7 @@
         $loginFlag = true;
         $userName = $session->user_name;
         $userEmailId = $session->user_emailid;
-        $fbLogin = "true";
-        session_register("sessionFlg");
-        $_SESSION['sessionFlg'] = $loginFlag;
+        $fbLogin = "true";           
     }
     else {
     // create facebook object

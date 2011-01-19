@@ -258,7 +258,7 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpPwdOld").val('Password');
     $(".clsSignUpPwd").attr('style','display:none');
     $(".clsSignUpRePwdOld").removeAttr('style');
-    $(".clsSignUpRePwdOld").val('Password');
+    $(".clsSignUpRePwdOld").val('Re-Type Password');
     $(".clsSignUpRePwd").attr('style','display:none');
 }
 

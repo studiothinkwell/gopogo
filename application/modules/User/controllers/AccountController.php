@@ -107,7 +107,6 @@ class User_AccountController extends Zend_Controller_Action
 
     public function loginAction() {
         $data = array();
-
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
         $msg = '';
@@ -347,6 +346,8 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
+
+
             //*/
             // validate capcha
             //*
