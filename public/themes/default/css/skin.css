@@ -1810,7 +1810,10 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 
 .top-Msg-window-r
 {
-	background-image:url(/themes/default/images/topmsg-bg1.jpg);
+        background-image:url(/themes/default/images/topmsg-bg1.jpg);
+        position:relative;
+        float:left;
+        text-align:left;
 }
 .top-Msg-window-icon-r
 {
