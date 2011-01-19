@@ -1374,6 +1374,7 @@ vertical-align:bottom;
     margin-left: 57px;
     margin-top: 10px;
     width: 79px;
+    cursor: pointer;
 }
 .forgot-row-m2 input
 {
@@ -1421,6 +1422,7 @@ vertical-align:bottom;
     height:23px;
     left:4px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
+    cursor: pointer;
 }
 
 
@@ -1543,8 +1545,7 @@ body:nth-of-type(1) .sign-in-create-account
     float: left;
     margin-top: 20px;
     left: 238px;
-
-
+    cursor: pointer;
 }
 .sign-in-input4
 {

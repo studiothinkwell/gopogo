@@ -349,19 +349,18 @@ class User_AccountController extends Zend_Controller_Action
 
 
             //*/
-              // validate capcha
+            // validate capcha
             //*
-            if($validFlag) {
-                if ($_SESSION['captcha'] == $_POST['captcha']) {
-                    // Yes, captcha is valid
-                } else {
-                     $lang_msg = $this->translate->_("Invalid captcha");
-                    //$msg .= str_replace('%value%', $email, $lang_msg);
-                    $msg .= $lang_msg;
-                    $validFlag = false;
-                }
+            if ($_SESSION['captcha'] == $_POST['captcha']) {
+                // Yes, captcha is valid
+            } else {
+                 $lang_msg = $this->translate->_("Invalid captcha");
+                //$msg .= str_replace('%value%', $email, $lang_msg);
+                $msg .= $lang_msg;
+                $validFlag = false;
             }
-            
+            //*/
+
             if($validFlag){
                 try {
                     $user = new Application_Model_DbTable_User();
@@ -419,6 +418,7 @@ class User_AccountController extends Zend_Controller_Action
             $logger = Zend_Registry::get('log');
             $logger->log($msg,Zend_Log::DEBUG);
         }
+
         $data['msg'] =  $msg;
         $data['status'] =  $status;
         $this->_helper->json($data, array('enableJsonExprFinder' => true));

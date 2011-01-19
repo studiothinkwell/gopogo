@@ -33,6 +33,8 @@ $(document).ready(function()
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();
+        $(".clsForgotEmail").focus();
+        $("#captcha-form").val('');
     });
 
   $(".clsForgot").click(function(){
@@ -44,6 +46,9 @@ $(document).ready(function()
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();
+        $(".clsForgotEmail").focus();
+        $("#captcha-form").val('');
+
     });
 
     $(".clsSignUp").click(function(){
