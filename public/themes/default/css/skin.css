@@ -1453,13 +1453,7 @@ vertical-align:bottom;
 .sign-in-create-account
 {
     font-size:12px;
-    color:#538ea3;
-    text-decoration:underline;
-}
-
-body:nth-of-type(1) .sign-in-create-account
-{
-    font-size:11px;
+    *font-size:11px !important;
     color:#538ea3;
     text-decoration:underline;
 }
@@ -1476,7 +1470,8 @@ body:nth-of-type(1) .sign-in-create-account
     position:relative;
     float:left;
     top:40px;
-    font-size:12px;
+    font-size:11px;
+    *font-size:10px;
     font-weight:600;
     color:#757575;
     width: 100%;
@@ -1810,6 +1805,9 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 .top-Msg-window-r
 {
 	background-image:url(/themes/default/images/topmsg-bg1.jpg);
+        position:relative;
+        float:left;
+        text-align:left;
 }
 .top-Msg-window-icon-r
 {

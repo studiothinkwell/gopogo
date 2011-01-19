@@ -4,15 +4,17 @@ $(document).ready(function() {
        if($(".clsEUPro").hasClass('save') ) {
            $().updateProfile("myinfo");
        } else {
+           var replacement = $("b", this).text() == "Edit" ? "Save" : "Edit";
+           $("b", this).fadeOut(function(){ $(this).text(replacement).fadeIn() });
            var inpArr = new Array(2);
-               inpArr[0] = new Array("clsDivUN","clsDivUN","text");
-               inpArr[1] = new Array("clsDivUD","clsDivUD","text");
-               inpArr[2] = new Array("clsEUPro","clsProAction","href");
+           inpArr[0] = new Array("clsDivUN","clsDivUN","text");
+           inpArr[1] = new Array("clsDivUD","clsDivUD","text");
+           inpArr[2] = new Array("clsEUPro","clsProAction","href");
            $().inplaceEditor(inpArr);
        }
     });
 
-    $.fn.inplaceEditor = function(inpArr) {  //alert(inpArr[0][1]); alert(inpArr[0][2]); alert(inpArr[0][3]);
+    $.fn.inplaceEditor = function(inpArr) {  
         var arrLen = inpArr.length;
         //alert(arrLength);
         for(i=0;i<arrLen-1;i++) {
@@ -27,13 +29,8 @@ $(document).ready(function() {
                 $("."+inpArr[arrLen-1][0]).addClass("save");
         }
     }
-
-    $(".inplaceclsEUProsave").click(function(){
-        $().updateProfile('myinfo');
-        
-    })
     //call ajax for update profile
-    $.fn.updateProfile = function (area) {
+    $.fn.updateProfile = function (area) { alert($('.inpclsDivUN').text());
         switch(area) {
         case 'myinfo':
         $.ajax({
@@ -57,3 +54,6 @@ $(document).ready(function() {
     }
 });
 
+  $(function() {
+      $("#tabs").tabs();
+  });

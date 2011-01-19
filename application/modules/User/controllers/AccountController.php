@@ -346,6 +346,8 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
+
+
             //*/
               // validate capcha
             //*
