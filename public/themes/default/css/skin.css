@@ -1386,8 +1386,14 @@ vertical-align:bottom;
 }
 .forgot-row-m2 input
 {
-	width:288px !important;
-        padding-left: 15px !important;
+	width:183px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+}
+
+.forgot-row-m2 input:focus
+{
+    outline:none;
 }
 .forgot-close-but
 {
@@ -1574,8 +1580,10 @@ body:nth-of-type(1) .sign-in-create-account
                                                 /**************************************Input styles START**************************************/
 .create-ac-right input
 {
-    width:290px;
+    width:270px;
     height:28px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size:15px;
     font-weight:600;
     color:#a9a9a9;
@@ -1583,8 +1591,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-right input
 {
-    width:300px;
-    padding-left: 15px;
+    width:295px;
+    padding-left: 10px;
+    padding-right: 10px;
     height:28px;
     font-size:15px;
     font-weight:600;
@@ -1593,8 +1602,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .forgot-box input
 {
-	width:275px;
-        padding-left: 15px;
+	width:270px;
+        padding-left: 10px;
+        padding-right: 10px;
 	height:28px;
 	font-size:15px;
 	font-weight:600;
