@@ -214,6 +214,7 @@ Class GP_GPAuth
 
     public static function sendEmailForgotPassword($email,$temp_password,$name='')
     {
+        
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -254,6 +255,7 @@ Class GP_GPAuth
                                             ->setReplyTo($reply_to, $obj->gpName)
                                             ->setReturnPath($return_path, $obj->gpName)
                                             ->send(); // self::getIntance()->getMailTransport()
+        
     } // end of sendEmailForgotPassword
 
 
@@ -284,7 +286,7 @@ Class GP_GPAuth
 
         $text = $view->render('mails/signup_welcome.phtml');
 
-        $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');
+        $lang_msg = self::getIntance()->translate->_('Welcome! you have successfully signedup!');
 
         $subject = str_replace('%value%', $name, $lang_msg);
 
@@ -314,7 +316,7 @@ Class GP_GPAuth
      * @param String $email : user email
      * @param String $name : user name
      */
-    public static function sendEmailSignupConfirm($email,$name='',$confirmLink) {
+    public static function sendEmailSignupConfirm($email,$passwd,$confirmLink,$name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -331,6 +333,7 @@ Class GP_GPAuth
         $view->email = $email;
         $view->link = $baseurl;
         $view->confirmLink = $confirmLink;
+        $view->password = $passwd;
         $text = $view->render('mails/signup_confirm.phtml');
 
         $lang_msg = self::getIntance()->translate->_('Confirm your GoPogo account');

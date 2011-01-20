@@ -60,13 +60,18 @@ $(document).ready(function(){
    }
     
     $(".clsEUPro").click(function(){
-       var inpArr = new Array(2);
+       if($(".clsEUPro").hasClass('save') ) {
+           $().updateProfile("myinfo");
+       } else {
+           var replacement = $("b", this).text() == "Edit" ? "Save" : "Edit";
+           $("b", this).fadeOut(function(){ $(this).text(replacement).fadeIn() });
+           var inpArr = new Array(2);
            inpArr[0] = new Array("clsDivUN","clsDivUN","text");
            inpArr[1] = new Array("clsDivUD","clsDivUD","text");
-           inpArr[2] = new Array("clsEUPro","clsProAction","button");
-       $().inplaceEditor(inpArr);
+           inpArr[2] = new Array("clsEUPro","clsProAction","href");
+           $().inplaceEditor(inpArr);
+       }
     });
-
 
 $(".clsUpdateAccUserEmail").click(function(){
     if($(".clsUpdateAccUserEmail").hasClass('save') ) {
@@ -110,6 +115,7 @@ $(".clsUpdateAccUserPass").click(function(){
     });
 
     $.fn.inplaceEditor = function(inpArr) {  //alert(inpArr[0][1]); alert(inpArr[0][2]); alert(inpArr[0][3]);
+
         var arrLen = inpArr.length;
         //alert(arrLength);
         for(i=0;i<arrLen-1;i++) {
@@ -128,15 +134,9 @@ $(".clsUpdateAccUserPass").click(function(){
     }
 
 
-
-
 $(".inplaceclsEUProsave").click(function(){
         $().updateProfile('myinfo');
-    })
-
-
-//    $(".inplaceclsUpdateAccUserEmailsave").click(function(){
-//        $().updateProfile('myAccEmail');
-//    })
-    
+   })
+              
 });
+

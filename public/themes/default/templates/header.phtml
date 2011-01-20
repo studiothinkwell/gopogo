@@ -9,8 +9,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php
-    echo $this->headMeta();
     echo $this->headTitle();
+    echo $this->headMeta();
+    
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
     GP_Asset::combieAndLoadCss();
@@ -30,9 +31,7 @@
         $loginFlag = true;
         $userName = $session->user_name;
         $userEmailId = $session->user_emailid;
-        $fbLogin = "true";
-        session_register("sessionFlg");
-        $_SESSION['sessionFlg'] = $loginFlag;
+        $fbLogin = "true";           
     }
     else {
     // create facebook object

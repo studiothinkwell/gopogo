@@ -1,5 +1,8 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
+
+error_reporting(E_ALL);
+
 // Define path to root directory
 defined('ROOT_PATH') || define('ROOT_PATH', realpath(dirname(dirname(__FILE__))));
 
@@ -16,7 +19,7 @@ defined('APPLICATION_ENV')
 defined('PUBLIC_PATH')
     || define('PUBLIC_PATH', realpath(dirname(__FILE__)));
 
-// Define path to application directory
+// Define path to domain
 defined('DOMAIN_PATH')
     || define('DOMAIN_PATH', $_SERVER['HTTP_HOST']);
 

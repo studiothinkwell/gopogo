@@ -151,7 +151,13 @@
                 </div>
  <!--Left Part END--> 
  <!-- Right part Start  -->
-            <?php $sessionFlg = $_SESSION['sessionFlg']; ?>
+            <?php 
+            $sessionFlg = null;
+            $session = GP_GPAuth::getSession();
+            if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
+                $sessionFlg = $session->user_id;
+            }
+            ?>
             	<div class="con-right">
                 	<!-- <div class="con-right-bg"><span class="con-left-head-txt1">Places You’ll Love</span></div> -->
                         <div class="con-right-ro1" <?php if($sessionFlg) { echo("style='height:250px'"); } ?> >

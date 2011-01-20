@@ -88,12 +88,41 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
     $("#logout").click(function(){
         $().doLogout();
     });
-    // add forgot password event
+    // add forgot password event 
     $("#forgotSubmitBox").click(function(){
+        $().debugLog('forgotSubmitBox');
         $().doForgot();
     });
 
 
+// set enter key action for forms
+    /*
+   $("#loginBoxForm input").bind("keydown", function(event) {
+
+      $().debugLog('loginBoxForm bind');
+
+      // track enter key
+      var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
+
+      $().debugLog(keycode);
+
+      if (keycode == 13) { // keycode for enter key
+         // force the 'Enter Key' to implicitly click the Update button
+         //document.getElementById('defaultActionButton').click();
+         //return false;
+
+         var tagName = event.target.tagName.toLowerCase();
+
+         $().debugLog(tagName);
+
+         $().doLogin();
+      }
+   }); // end of loginBoxForm
+   */
+
+   
+
+  
 // functions to handle the login / signin
 
         // do login
@@ -333,7 +362,7 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
 
         // do forgot
         $.fn.doForgot = function(){
-
+            $().debugLog('doForgot');
              // get serialized form data of forgot form
              var fdata = $("#forgotBoxForm").serialize();
 
@@ -501,52 +530,93 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
             $(".clsErrorText").text('');
         }
         
-    $('.submenu-box .submenu-div').hover
-          (
-                   function()
-                                {
-                                        var id = $(this).attr("id");
-                                        $(this).addClass(id+'-selected');
-                            },
-                   function()
-                                {
-                                        var id = $(this).attr("id");
-                                        $(this).removeClass(id+'-selected');
-                                }
-           );
+
+        $('.submenu-box .submenu-div').hover
+        (
+           function()
+                        {
+                                var id = $(this).attr("id");
+                                $(this).addClass(id+'-selected');
+                    },
+           function()
+                        {
+                                var id = $(this).attr("id");
+                                $(this).removeClass(id+'-selected');
+                        }
+        );
 
 
-// functions to explode string works same as php explode function
-$.fn.explode = function (delimiter, string, limit) {
-     var emptyArray = {0: ''};
+        // functions to explode string works same as php explode function
+        $.fn.explode = function (delimiter, string, limit) {
+             var emptyArray = { 0: '' };
 
-    // third argument is not required
-    if ( arguments.length < 2 ||
-        typeof arguments[0] == 'undefined' ||        typeof arguments[1] == 'undefined' ) {
-        return null;
-    }
+            // third argument is not required
+            if ( arguments.length < 2 ||
+                typeof arguments[0] == 'undefined' ||        typeof arguments[1] == 'undefined' ) {
+                return null;
+            }
 
-    if ( delimiter === '' ||        delimiter === false ||
-        delimiter === null ) {
-        return false;
-    }
-     if ( typeof delimiter == 'function' ||
-        typeof delimiter == 'object' ||
-        typeof string == 'function' ||
-        typeof string == 'object' ) {
-        return emptyArray;}
+            if ( delimiter === '' ||        delimiter === false ||
+                delimiter === null ) {
+                return false;
+            }
+             if ( typeof delimiter == 'function' ||
+                typeof delimiter == 'object' ||
+                typeof string == 'function' ||
+                typeof string == 'object' ) {
+                return emptyArray;    }
 
-    if ( delimiter === true ) {
-        delimiter = '1';
-    }
-    if (!limit) {
-        return string.toString().split(delimiter.toString());
-    } else {
-        // support for limit argument        var splitted = string.toString().split(delimiter.toString());
-        var partA = splitted.splice(0, limit - 1);
-        var partB = splitted.join(delimiter.toString());
-        partA.push(partB);
-        return partA;}
-}
+            if ( delimiter === true ) {
+                delimiter = '1';
+            }
+            if (!limit) {
+                return string.toString().split(delimiter.toString());
+            } else {
+                // support for limit argument        var splitted = string.toString().split(delimiter.toString());
+                var partA = splitted.splice(0, limit - 1);
+                var partB = splitted.join(delimiter.toString());
+                partA.push(partB);
+                return partA;    }
+        };
 
+
+       // basic form enter key setup function
+       // set enter key action for forms
+       $.fn.formEnterKey = function(formId,callbackfun,args){
+
+           $("#"+formId+" input").bind("keydown", function(event) {
+
+              $().debugLog(formId+' bind');
+              $().debugLog(callbackfun);
+              
+              // track enter key
+              var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
+
+              $().debugLog(keycode);
+
+              if (keycode == 13) { // keycode for enter key
+                 // force the 'Enter Key' to implicitly click the Update button
+                 //document.getElementById('defaultActionButton').click();
+                 //return false;
+
+                 var tagName = event.target.tagName.toLowerCase();
+
+                 $().debugLog(tagName);
+
+                 if(typeof args == undefined || args=='' )
+                    callbackfun();
+                 else
+                    callbackfun(args);
+              }
+           }); // end of loginBoxForm
+
+       }; // end of do formEnterKey
+
+       // // set enter key action for login form
+       $().formEnterKey('loginBoxForm',$().doLogin);
+
+       // // set enter key action for signup form
+       $().formEnterKey('signupBoxForm',$().doSignup);
+       // // set enter key action for forgot password form
+       $().formEnterKey('forgotBoxForm',$().doForgot);
 }); 
