@@ -28,6 +28,7 @@ $(document).ready
 </script>
 
 <body>
+ 
 <div id="master" align="center">
 	<div id="submaster">
 <!-- Header START-->
@@ -85,10 +86,15 @@ $(document).ready
                           <div class="my_acc_left_col">
                             	<div class="my_acc_sub_head">SIGN IN INFORMATION</div>
                            	<div class="my_acc_sub_text">Email:</div><div class="my_acc_sub_fill clsUpdateEmail"><?php echo $this->email;?></div>
-                                <div class="my_acc_sub_text">Password:</div><div class="my_acc_sub_fill clsUpdatePass">*******<?php //echo $this->password;?></div>
-                                <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateAccUserSignInInfo" ><a href="#" class="clsUpdateAccUserSignIn">Update</a></div>
-
-
+                                 <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateAccUserEmailInfo" ><a href="#" class="clsUpdateAccUserEmail"><b>Update</b></a></div>
+                         </div>
+                          <div class="my_acc_left_col">
+                                <div class="my_acc_sub_text">Password:</div><div class="my_acc_sub_fill clsUpdatePass">*******</div>
+                                <div class="clsResetPass"  style="display:none">
+                                <div class="my_acc_sub_text">New Password:</div><div class="my_acc_sub_fill"><input type="text" /></div>
+                                <div class="my_acc_sub_text">Retype Password:</div><div class="my_acc_sub_fill"><input type="text" /></div>
+                                </div>
+                                <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateAccUserPassInfo" ><a href="#" class="clsUpdateAccUserPass">Update</a></div>
                           </div>
                           <div class="my_acc_section_space"></div>
                           <div class="my_acc_left_col">
@@ -175,6 +181,7 @@ $(document).ready
         </div>
     </div>-->
 </div>
+          
 <!-- Footer START-->
 </body>
 </html>

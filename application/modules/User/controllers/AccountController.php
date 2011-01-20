@@ -63,8 +63,8 @@ class User_AccountController extends Zend_Controller_Action
 
      // collect username and password on the basis of user id
       $userData = $user->getUserById($_SESSION['user-session']['user_id']);
-      $email    = $userData['user_emailid']; 
-      $password =$userData['user_password']; 
+      $email    = $userData['user_emailid'];
+      $password = $userData['user_password'];
     
       $userPartnerData = $user->getUserPartnerById($_SESSION['user-session']['user_id']);
       $
@@ -360,20 +360,7 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
-            //*/
-
-              // validate capcha
-            //*
-            if ($_SESSION['captcha'] == $_POST['captcha']) {
-                // Yes, captcha is valid
-            } else {
-                $lang_msg = $this->translate->_("Invalid captcha");
-                //$msg .= str_replace('%value%', $email, $lang_msg);
-                $msg .= $lang_msg;
-                $validFlag = false;
-            }
-            //*/
-
+       
             if($validFlag){
 
                 try {
@@ -825,14 +812,14 @@ class User_AccountController extends Zend_Controller_Action
        // $this->_helper->json($data, array('enableJsonExprFinder' => true));
     }
 
-        /**
+     /**
      * User login
      * @access public
      * @param String email : email address in post
      * @param String passwd : password in post
      * @return json object - :msg, :status
      */
-    public function updateEmailPassAction($email,$pass)
+    public function updateAccountPassAjaxAction($email,$pass)
     {
 
     }
@@ -843,8 +830,149 @@ class User_AccountController extends Zend_Controller_Action
        $captcha->CreateImage();
     }
 
-    public function ajaxupdateemailpass() {
-        $this->_helper->viewRenderer->setNoRender(true);
+     /**
+     * User Account Email Update
+     * @access public
+     * @param String email : email address in post
+     * @return json object - :msg, :status
+     */
+    public function updateaccountemailajaxAction() {
+       $data = array();
 
-    }
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg    = '';
+        $status = 0;
+
+        $session = GP_GPAuth::getSession();
+        $id     = $session->user_id;
+      
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $email = $formData['email'];
+
+            // checking for valid email
+            //*
+            if(strlen($email) == 0 || $email == "Email Address") {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+            if (Zend_Validate::is($email, 'EmailAddress')) {
+                // Yes, email appears to be valid
+            } else {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Enter Valid Email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+            //*/
+            /*
+            $validator = new Zend_Validate_EmailAddress();
+            if ($validator->isValid($email)) {
+                // email appears to be valid
+            } else {
+                //$msg = '';
+                // email is invalid; print the reasons
+                foreach ($validator->getMessages() as $message) {
+                    //echo "$message\n";
+                    //$msg .= $br . "$message\n";
+                }
+                $msg .= "Enter valid email!";
+            }
+            //*/
+            // end checking for valid email
+
+       
+         
+
+            if($validFlag){
+
+                try {
+
+                        // create user model object
+                        $user = new Application_Model_DbTable_User();
+
+                        // update email
+                         $us =$user->updateUserEmail($id,$email);
+                         $status = 1;
+
+                       //$user->logSession($userData);
+
+                       //other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have changed your email Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                        //$this->_helper->redirector('profile');
+
+                        /*
+                        // log event signin
+                        $eventId = 1;
+                        $userId = $userData['user_id'];
+                        $eventDescription = "signin-login";
+
+                        $eventAttributes = array();
+
+                        GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
+
+                        */
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
+                        $msg .= $lang_msg;
+
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_('Not Found Error!');
+                        $msg .= $lang_msg;
+
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                $this->view->msg = $msg;
+            }
+        } // end of es post
+        else
+        {
+            $lang_msg = $this->translate->_('Post data not available!');
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+    } // end updateAccountEmailAjax
+
 }  

@@ -637,6 +637,9 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     public function getUserById($id)
     {
+
+        // get Db instance
+        $db = $this->getDbInstance();
         // Stored procedure returns a single row
             $stmt = $db->prepare('CALL sp_select_user_email_password_by_user_id(:id)');
             $stmt->bindParam('id', $id, PDO::PARAM_INT);
@@ -721,5 +724,55 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
+    }
+
+      /**
+      * Update Email and return it
+      * @param String email
+      * @param  id
+      * @return String email
+      */
+
+     public function updateUserEmail($id,$email)
+    {
+
+        //  update user email in the table
+
+        // get Db instance
+        $db = $this->getDbInstance();
+
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+            //$logger = Zend_Registry::get('log');
+            //$logger->log($id.$email,Zend_Log::INFO);
+            $stmt = $db->prepare('CALL sp_update_user_email_by_user_id(:id, :email)');
+            $stmt->bindParam('id', $id, PDO::PARAM_INT);
+            $stmt->bindParam('email', $email);
+            $stmt->execute();
+            $stmt->closeCursor();
+            //$logger->log('sdddddddddd-'.$id.$email,Zend_Log::DEBUG);
+
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+
+        //$logger->log('2323-'.$id.$email,Zend_Log::WARN);
     }
 }

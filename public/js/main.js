@@ -13,6 +13,8 @@ app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyinfo/';
 // add events on load
+//account email update url
+app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
 
 /**
  * This will apply toggle effect to bottom of page for advance search
@@ -58,12 +60,12 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
     }
 
     // add create account event
-    $(".clsSignUp").click(function(){
-        $("#loginBox").css({display:'none'});
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
-        $().setdefaultval();
-        $(".clsSignUpEmail").focus();
-    });
+//    $(".clsSignUp").click(function(){
+//        $("#loginBox").css({display:'none'});
+//        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
+//        $().setdefaultval();
+//        $(".clsSignUpEmail").focus();
+//    });
 
     // add signin  event
     $(".login").click(function(){
@@ -455,6 +457,9 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
         //function to show tooltip for success messages
         $.fn.showSuccessTooltip = function (msg) {
+            if(msg) {
+                $(".clsMSuccess").text(msg);
+            }
             $().finish();
             $(".clsSuccessMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
@@ -513,7 +518,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
 // functions to explode string works same as php explode function
 $.fn.explode = function (delimiter, string, limit) {
-     var emptyArray = { 0: '' };
+     var emptyArray = {0: ''};
 
     // third argument is not required
     if ( arguments.length < 2 ||
@@ -529,7 +534,7 @@ $.fn.explode = function (delimiter, string, limit) {
         typeof delimiter == 'object' ||
         typeof string == 'function' ||
         typeof string == 'object' ) {
-        return emptyArray;    }
+        return emptyArray;}
 
     if ( delimiter === true ) {
         delimiter = '1';
@@ -541,7 +546,7 @@ $.fn.explode = function (delimiter, string, limit) {
         var partA = splitted.splice(0, limit - 1);
         var partB = splitted.join(delimiter.toString());
         partA.push(partB);
-        return partA;    }
+        return partA;}
 }
 
 }); 

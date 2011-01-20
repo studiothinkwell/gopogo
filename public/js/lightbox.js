@@ -35,16 +35,6 @@ $(document).ready(function()
         $("#email").focus();
     });
 
-  $(".clsForgot").click(function(){
-        divId = "#forgotBox";
-        $("#loginBox").css({display:'none'});
-        $("#toggleForgot").css({display:''});
-        $(".errorMsg").text('');
-        $().enableLoginBox();
-        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
-        $().setdefaultval();
-        $("#email").focus();
-    });
 
     $(".clsSignUp").click(function(){
         $("#loginBox").hide();
