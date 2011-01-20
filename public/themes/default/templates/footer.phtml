@@ -48,12 +48,12 @@ app.gopogo.baseurl = '<?php echo rtrim($baseUrl) ?>/';
 
 <?php
 
-$gpConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
+//$gpConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
 // gopogo.debug.default
 // debug mode on:1 off:0
 // print_r($gpConfigs);
 ?>
-app.gopogo.debug = <?php echo $gpConfigs->gopogo->debug->default ?>;
+app.gopogo.debug = <?php echo $config->gopogo->debug->default ?>;
 
 </script>
 </body>

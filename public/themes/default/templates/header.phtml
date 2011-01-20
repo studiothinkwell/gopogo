@@ -9,8 +9,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php
-    echo $this->headMeta();
     echo $this->headTitle();
+    echo $this->headMeta();
+    
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
     GP_Asset::combieAndLoadCss();
@@ -117,8 +118,8 @@
                         <div class="menu3"><a href="#"></a></div>
                         <div class="menu4"><a href="#"></a></div>
                     </div>
-                    <div class="search"><input type="text" value="Search for..." onclick="if(this.value=='Search for...'){this.value='';}" onblur="if(this.value==''){this.value='Search for...'}"/></div>
-                    <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value='';}" onblur="if(this.value==''){this.value='City, State, and Zip'}"/></div>
+                    <div class="search"><input type="text" value="Search for..." onclick="if(this.value == 'Search for...'){this.value=''; $().setTextColor(this); }else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='Search for...';$().removeTextColor(this);} else if(this.value == 'Search for...'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
+                    <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value=''; $().setTextColor(this); } else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='City, State, and Zip';$().removeTextColor(this);} else if(this.value == 'City, State, and Zip'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
                     <div class="submenu">
                          <div class="submenu-box">
                         	<div id="s1menu1" class="s1menu1 submenu-div"></div>

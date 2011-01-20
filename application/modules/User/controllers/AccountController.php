@@ -351,7 +351,10 @@ class User_AccountController extends Zend_Controller_Action
             //*/
             // validate capcha
             //*
-            if ($_SESSION['captcha'] == $_POST['captcha']) {
+            $userSession = new Zend_Session_Namespace('user-session');
+            $captcha = $formData['captcha'];
+            //if ($_SESSION['captcha'] == $_POST['captcha']) {
+            if( !empty($userSession) && !empty($userSession->captcha) && $userSession->captcha==$captcha ){
                 // Yes, captcha is valid
             } else {
                  $lang_msg = $this->translate->_("Invalid captcha");
