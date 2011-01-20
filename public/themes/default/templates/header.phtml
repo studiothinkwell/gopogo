@@ -53,12 +53,16 @@
                <div class="top-Msg-window-r " >
                   <span class="top-Msg-window-icon-r"></span>
                       <span class="top-Msg-window-txt">
-                           <div class="clsErrorText"><br/></div>
+                           <div class="clsErrorText"><?php echo $session->tooltipMsg1;?><br/></div>
                            <div class="top-Msg-window-s">
-                           Please try <span class="top-mg-link">
+                           <?php echo $session->tooltipMsg2;?>
+                           <?php if(empty($session->tooltipMsg1)) { ?>
+                           Please try
+                           <span class="top-mg-link">
                                <a href="javascript:void(0)" class="clsSignIn toolSignIn">again.</a>
                                <a href="javascript:void(0)" class="clsSignUp toolSignUp">again.</a>
                            </span>
+                           <?php } ?>
                            </div>
                       </span>
                   <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError"></a>

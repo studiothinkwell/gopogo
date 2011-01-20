@@ -30,34 +30,26 @@ $(document).ready(function() {
         }
     }
     //call ajax for update profile
-    $.fn.updateProfile = function (area) { alert($('.inpclsDivUN').text());
+    $.fn.updateProfile = function (area) {  
         switch(area) {
         case 'myinfo':
         $.ajax({
               url: app.gopogo.profilemyinfo_url,
               type: 'POST',
-              dataType: 'json',
-              //data:fdata,
               timeout: 99999,
-              success: function(resp) {
-
-                  // do something with resp
-                  if(resp.status == 1) { // show error message
-
-                  }
-                  else {
-
-                   }
-               }
+              error: function(data){
+                  alert(data);
+               },
+              success: function(data) {
+                    $(".clsMsgDiv").hide();
+                    $(".dtlMsgDiv").html(data);
+                  // do something with resp                  
+               },
+               complete: function() {
+                    
+                }
          });
         }
     }
 });
 
-  /*
-
-  $(function() {
-      $("#tabs").tabs();
-  });
-
-  */
