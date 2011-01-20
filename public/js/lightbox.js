@@ -24,11 +24,11 @@ $(document).ready(function()
         var timestamp = new Date().getTime();
         //alert($(location).attr('href'));
         var sBaseUrl = $(location).attr('href');
-        $().debugLog(sBaseUrl);
+        //$().debugLog(sBaseUrl);
         var baseUrl = $.fn.explode('.com',sBaseUrl);
-        $().debugLog(baseUrl);
+        //$().debugLog(baseUrl);
         var img_src = baseUrl[0]+'.com/index/code?time=' + timestamp;
-        $().debugLog(img_src);
+        //$().debugLog(img_src);
         $('#imageCaptcha').attr('src',img_src);
         divId = "#forgotBox";
         $("#loginBox").css({display:'none'});
