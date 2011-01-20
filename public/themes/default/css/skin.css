@@ -510,7 +510,7 @@ body
     border:0px solid red;
     text-align:center !important;
    *display:inline-block;
-    *float:left;
+   *float:left;
 }
 .mthum-two{
 background-color:#00FF33;
@@ -1805,7 +1805,8 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 
 .top-Msg-window-r
 {
-	background-image:url(/themes/default/images/topmsg-bg1.jpg);
+
+        background-image:url(/themes/default/images/topmsg-bg1.jpg);
         position:relative;
         float:left;
         text-align:left;
