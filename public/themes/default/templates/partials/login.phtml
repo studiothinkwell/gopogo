@@ -26,10 +26,10 @@ else {
                 <div class="sign-in-centerbg" id="sign-in-centerbg">
                         <form action=""  id="loginBoxForm" name="loginBoxForm" method="post">
                         <div class="sign-in-right">
-                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''}" onblur="if(this.value=='') {this.value = 'Email Address'}" onkeypress="if(this.value=='Email Address') {this.value = ''}" name="email" id="email" class="clsSignInEmail"/></div>
+                            <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''; $().setTextColor(this); }else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value=='') {this.value = 'Email Address'; $().removeTextColor(this);} else if(this.value == 'Email Address'){ $().removeTextColor(this); } else {$().setTextColor(this);}" onkeypress="if(this.value=='Email Address') {this.value = '';$().removeTextColor(this);}else{$().setTextColor(this);}" name="email" id="email" class="clsSignInEmail"/></div>
                             <div class="create-ac-input2">
                                 <input type="text" onfocus="$('.clsSignInPwdOld').attr('style','display:none');$('.clsSignInPwd').removeAttr('style');$('.clsSignInPwd').focus()" value="Password" name="passwdOld" id="passwdOld" class="clsSignInPwdOld"/>
-                                <input type="password" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
+                                <input type="password" onfocus="$().setTextColor(this);" onblur="if(this.value=='') { $('.clsSignInPwdOld').removeAttr('style');$('.clsSignInPwd').attr('style','display:none');}" style="display: none;" value=""  name="passwd" id="passwd" class="clsSignInPwd"/>
                             </div>
                             <div class="sign-in-input3">
                                     <span class="sign-in-txt"><?php echo $this->mess; ?>Forgot your</span>

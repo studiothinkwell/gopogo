@@ -33,22 +33,7 @@ $(document).ready(function()
         $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
         $().setdefaultval();
         $("#email").focus();
-        $(".clsForgotEmail").focus();
-        $("#captcha-form").val('');
-    });
-
-  $(".clsForgot").click(function(){
-        divId = "#forgotBox";
-        $("#loginBox").css({display:'none'});
-        $("#toggleForgot").css({display:''});
-        $(".errorMsg").text('');
-        $().enableLoginBox();
-        $().displayModalBox("#forgotBox", ".create-ac-head", ".CLS_sign-in-centerbg" );
-        $().setdefaultval();
-        $("#email").focus();
-        $(".clsForgotEmail").focus();
-        $("#captcha-form").val('');
-
+        $(".clsForgotEmail").focus();        
     });
 
     $(".clsSignUp").click(function(){
@@ -84,13 +69,8 @@ $(document).ready(function()
        $(".clsPUserDesc").html(txtEdtUsrDesc);
        $(".clsProAction").html("<input type='button' class='clsSaveProfile' name='' value='Save'/>");
     });
-
-    $.fn.blockModalBox(".create-ac-head", "#signupBox");
-    $.fn.blockModalBox(".create-ac-head", "#loginBox");
-    $.fn.blockModalBox(".create-ac-head", "#forgotBox");
-
+  
 });
-
 
 
 $.fn.addResize = function() {
@@ -171,7 +151,7 @@ $.fn.addModalWindow = function(objId) {
 }
 
 $.fn.displayModalBox = function(mainBox, titleBox, container ) {
-
+/*
         $(mainBox).draggable();
 
         $(titleBox).mouseover(function(){
@@ -181,7 +161,7 @@ $.fn.displayModalBox = function(mainBox, titleBox, container ) {
         $(container).mouseover(function(){
                 $(mainBox).draggable('disable');
             });
-
+*/
         $().addModalWindow(mainBox);
 }
 
@@ -248,9 +228,10 @@ $.fn.setdefaultval = function() {
     for(i=0;i<7;i++) {
             $(arrAccount[i]).val("");
         }
-    $(".clsSignInEmail").val("Email Address");
-    $(".clsSignUpEmail").val("Email Address");
-    $(".clsForgotEmail").val("Email Address");
+    $(".clsSignInEmail").val("Email Address");$().removeTextColor(".clsSignInEmail");
+    $(".clsSignUpEmail").val("Email Address");$().removeTextColor(".clsSignUpEmail");
+    $(".clsForgotEmail").val("Email Address");$().removeTextColor(".clsForgotEmail");
+    $(".clsForgotPass").val("Characters");$().removeTextColor(".clsForgotPass");
     $(".clsSignInPwdOld").removeAttr('style');
     $(".clsSignInPwdOld").val('Password');
     $(".clsSignInPwd").attr('style','display:none');
@@ -259,21 +240,13 @@ $.fn.setdefaultval = function() {
     $(".clsSignUpPwd").attr('style','display:none');
     $(".clsSignUpRePwdOld").removeAttr('style');
     $(".clsSignUpRePwdOld").val('Re-Type Password');
-    $(".clsSignUpRePwd").attr('style','display:none');
+    $(".clsSignUpRePwd").attr('style','display:none');   
 }
 
+$.fn.setTextColor = function(id) {
+     $(id).attr('style','color:#000000');
+}
 
-$.fn.blockModalBox = function(title, modalBox) {
-    $(title).mousemove(function(){
-
-	$(modalBox).draggable({
-			containment: 'document',
-			start: function(event, ui) {
-			},
-			drag: function(event, ui) {
-			},
-			stop: function(event, ui) {
-			}
-		});
-    });
+$.fn.removeTextColor = function(id) {
+    $(id).attr('style','color:#A9A9A9');
 }
