@@ -369,7 +369,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                     !empty($rowArray) && is_array($rowArray) && count($rowArray)>0                    
                 ){
                     // update main password from temporary password if present                   
-                    if(!empty($rowArray['temporary_user_password']))
+                    if(!empty($rowArray['temporary_user_password']) && $encpasswd==$rowArray['temporary_user_password'])
                     {
 
                         try {
