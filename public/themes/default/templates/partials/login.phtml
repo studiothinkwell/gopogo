@@ -36,9 +36,8 @@ else {
                                     <a href="#" onclick="return false;" class="sign-in-create-account clsForgot" id="forgotPassword" >password</a>
                                     <span>or</span>
                                     <a href="#" onclick="return false;" class="clsSignUp sign-in-create-account createAccount">create account</a>
-                            </div>
-
-                            <div class="sign-in-button">&nbsp;<img alt="" id="loginSubmitBox" src="<?php echo $this->baseurl;?>/themes/default/images/sign-in.png"/></div>
+                            </div>                            
+                            <a  href="#" class="sign-in-button" id="loginSubmitBox"></a>
                             <div class="sign-in-input4">
                                   <?php  if($fbLogin == "false") { echo $facebook->FBLogin(); } ?>
                              </div>

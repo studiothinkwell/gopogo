@@ -215,7 +215,7 @@ body
 }
 .menu a
 {
-    outline:none;
+    /* outline:none; */
 }
 .menu1
 {
@@ -1548,11 +1548,14 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-button
 {
+    background:url(/themes/default/images/icons.png) no-repeat scroll -263px -98px transparent;
     position:relative;
     float: left;
     margin-top: 20px;
     left: 238px;
     cursor: pointer;
+    height: 29px;
+    width: 79px;
 }
 .sign-in-input4
 {
