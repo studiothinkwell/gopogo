@@ -625,38 +625,54 @@ class User_AccountController extends Zend_Controller_Action
      */
     public function confirmemailAction() { 
         $encVerifyKey = $this->_getParam('verify');
+        // create user model object
+        $user = new Application_Model_DbTable_User();
         if($encVerifyKey) {
             $verifyKey = base64_decode($encVerifyKey);
             //explode verifyKey an decrypt email for verification
             $arrVerifyKey = explode("###",$verifyKey);
             $urlEmail = $arrVerifyKey[1];
-            // create user model object
-            $user = new Application_Model_DbTable_User();
             //get related user_id, email from database and md5 it
-            $userData = $user->getUserByEmail($urlEmail);
-            $verifyWith = md5($userData['user_id'].$urlEmail);
-            $user = new Application_Model_DbTable_User();
-            //generate confirmation message by using translater
-            $session = $user->getSession();
-            if ($verifyWith == $arrVerifyKey[0]) {
-                $session->tooltipMsg1 = $this->translate->_("Congratulations! Your email verified_msg1");
-                $session->tooltipMsg2 = $this->translate->_("Congratulations! Your email verified_msg2");
-                $session->tooltipDsp = "hide";
-                // create user model object
-                $user = new Application_Model_DbTable_User();
+            $userData = $user->getUserByEmail($urlEmail); //echo '<pre>';print_r($userData);exit;
+            if ($userData['user_status_id']==1) {
+                $verifyWith = md5($userData['user_id'].$urlEmail);
+                //generate confirmation message by using translater
                 $session = $user->getSession();
-                if(!isset($session->emailVerify))
-                    $session->emailVerify = "fbSignUp";
-                else
-                    $session->emailVerify = "";
-                $this->view->emailVerify = $session->emailVerify;
-                //update status of user account isactive to 1
-                $user->activateuser($userData['user_emailid']);
-                GP_GPAuth::sendEmailSignupWelcome($userData['Email'],"");
-            } else {
+                if ($verifyWith == $arrVerifyKey[0]) {
+                    $session->tooltipMsg1 = $this->translate->_("Congratulations! Your email verified_msg1");
+                    $session->tooltipMsg2 = $this->translate->_("Congratulations! Your email verified_msg2");
+                    $session->tooltipDsp = "hide";
+                    // create user model object                    
+                    $session = $user->getSession();
+                    if(!isset($session->emailVerify))
+                        $session->emailVerify = "fbSignUp";
+                    else
+                        $session->emailVerify = "";
+                    $this->view->emailVerify = $session->emailVerify;
+                    //update status of user account isactive to 1
+                    $user->activateuser($userData['user_emailid']);
+                    GP_GPAuth::sendEmailSignupWelcome($userData['Email'],"");
+                    $user->logSession($userData);
+                } else {
+                    $session->tooltipMsg1 = $this->translate->_("Invalid verification key");
+                    $session->tooltipMsg2 = $this->translate->_("Verifiction key expired");
+                    $session->tooltipDsp = "hide";
+                    $session->isError = "yes";
+                }                
+            }
+            else if ($userData['user_status_id']==2) {
+                $session = $user->getSession();
+                $session->tooltipMsg1 = $this->translate->_("Your account allready verified_msg1");
+                $session->tooltipMsg2 = $this->translate->_("Your account allready verified_msg2");
+                $session->tooltipDsp = "hide";
+                $session->isError = "yes";
+            }
+            else {
+                $session = $user->getSession();
                 $session->tooltipMsg1 = $this->translate->_("Invalid verification key");
                 $session->tooltipMsg2 = $this->translate->_("Verifiction key expired");
                 $session->tooltipDsp = "hide";
+                $session->isError = "yes";
             }
             $this->_redirect('index/index');
         }
