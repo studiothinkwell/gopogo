@@ -1,18 +1,20 @@
 
-$(document).ready(function(){
+$(document).ready(function() {
     $(".clsEUPro").click(function(){
        if($(".clsEUPro").hasClass('save') ) {
            $().updateProfile("myinfo");
        } else {
+           var replacement = $("b", this).text() == "Edit" ? "Save" : "Edit";
+           $("b", this).fadeOut(function(){ $(this).text(replacement).fadeIn() });
            var inpArr = new Array(2);
-               inpArr[0] = new Array("clsDivUN","clsDivUN","text");
-               inpArr[1] = new Array("clsDivUD","clsDivUD","text");
-               inpArr[2] = new Array("clsEUPro","clsProAction","href");
+           inpArr[0] = new Array("clsDivUN","clsDivUN","text");
+           inpArr[1] = new Array("clsDivUD","clsDivUD","text");
+           inpArr[2] = new Array("clsEUPro","clsProAction","href");
            $().inplaceEditor(inpArr);
        }
     });
 
-    $.fn.inplaceEditor = function(inpArr) {  //alert(inpArr[0][1]); alert(inpArr[0][2]); alert(inpArr[0][3]);
+    $.fn.inplaceEditor = function(inpArr) {  
         var arrLen = inpArr.length;
         //alert(arrLength);
         for(i=0;i<arrLen-1;i++) {
@@ -27,29 +29,25 @@ $(document).ready(function(){
                 $("."+inpArr[arrLen-1][0]).addClass("save");
         }
     }
-
-    $(".inplaceclsEUProsave").click(function(){
-        $().updateProfile('myinfo');
-    })
     //call ajax for update profile
-    $.fn.updateProfile = function (area) {
+    $.fn.updateProfile = function (area) {  
         switch(area) {
-        default : alert(2);
+        case 'myinfo':
         $.ajax({
               url: app.gopogo.profilemyinfo_url,
               type: 'POST',
-              dataType: 'json',
-              //data:fdata,
               timeout: 99999,
-              success: function(resp){
-                  // do something with resp
-                  if(resp.status == 1) { // show error message
-
-                  }
-                  else {
-
-                   }
-               }
+              error: function(data){
+                  alert(data);
+               },
+              success: function(data) {
+                    $(".clsMsgDiv").hide();
+                    $(".dtlMsgDiv").html(data);
+                  // do something with resp                  
+               },
+               complete: function() {
+                    
+                }
          });
         }
     }

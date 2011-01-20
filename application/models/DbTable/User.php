@@ -369,7 +369,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                     !empty($rowArray) && is_array($rowArray) && count($rowArray)>0                    
                 ){
                     // update main password from temporary password if present                   
-                    if(!empty($rowArray['temporary_user_password']))
+                    if(!empty($rowArray['temporary_user_password']) && $encpasswd==$rowArray['temporary_user_password'])
                     {
 
                         try {
@@ -512,12 +512,15 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
         //add profile information into user session
         //
+        /*$userid = $userSession->user_id;
         // Stored procedure returns a single row
         $stmt = $db->prepare('CALL sp_select_user_profile_by_user_id(:userid)');
         $stmt->bindParam('userid', $udata['user_id'], PDO::PARAM_INT);
         $stmt->execute();
         $rowArray = $stmt->fetch();
-       // print_r($rowArray);exit;
+        foreach($rowArray as $ukey=>$uvalue) {
+             $userSession->$ukey = $uvalue;
+        }*/
     } // end of logSession
 
 

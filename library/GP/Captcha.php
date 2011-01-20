@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 /**
  * Captcha class
  *
@@ -104,7 +104,7 @@ class GP_Captcha {
     public function __construct($config = array()) {
     }
 
- public function CreateImage() {
+    public function CreateImage() {
 
         $ini = microtime(true);
 
@@ -115,8 +115,11 @@ class GP_Captcha {
         $text = $this->GetCaptchaText();
         $fontcfg  = $this->fonts[array_rand($this->fonts)];
         $this->WriteText($text, $fontcfg);
-       // $this->session_var =$text;
-        $_SESSION['captcha'] = $text;
+        // $this->session_var =$text;
+        //$_SESSION['captcha'] = $text;
+        // set captcha text in session
+        $userSession = new Zend_Session_Namespace('user-session');
+        $userSession->captcha = $text;
 
         $this->WaveImage();
 
@@ -177,7 +180,7 @@ class GP_Captcha {
      * @return string Text
      */
     protected function GetCaptchaText() {
-        //$text = $this->GetDictionaryCaptchaText();
+        $text = $this->GetDictionaryCaptchaText();
         if (!$text || 1) {
             $text = $this->GetRandomCaptchaText();
         }
@@ -336,13 +339,14 @@ class GP_Captcha {
      * File generation
      */
     protected function WriteImage() {
+
         if ($this->imageFormat == 'png' && function_exists('imagepng')) {
             header("Content-type: image/png");
             imagepng($this->im);
         } else {
             header("Content-type: image/jpeg");
             imagejpeg($this->im, null, 80);
-        }
+        }        
     }
 
  /**

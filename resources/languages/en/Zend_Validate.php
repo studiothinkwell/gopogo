@@ -299,6 +299,8 @@ return array(
     "Congratulations! Your email verified_msg2"=>"Now you have full access to gopogo",
     "Invalid verification key"=>"The combination of verification key is invalid!",
     "Verifiction key expired"=>"or Your verification key is expired",
+    "Your account allready verified_msg1" => "Your account allready verified",
+    "Your account allready verified_msg2" => "Please Login to access Gopogo",
     // general----
 
     // Unknown Error!

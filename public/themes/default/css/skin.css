@@ -215,7 +215,7 @@ body
 }
 .menu a
 {
-    outline:none;
+    /* outline:none; */
 }
 .menu1
 {
@@ -510,7 +510,7 @@ body
     border:0px solid red;
     text-align:center !important;
    *display:inline-block;
-    *float:left;
+   *float:left;
 }
 .mthum-two{
 background-color:#00FF33;
@@ -1209,7 +1209,7 @@ vertical-align:bottom;
     float:left;
     width:100%;
     height:53px;
-    cursor: move;
+   
 }
 .create-ac-leftbg
 {
@@ -1236,7 +1236,7 @@ vertical-align:bottom;
     width:45px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
-    cursor: move;
+   
 }
 .create-ac-close
 {
@@ -1290,7 +1290,7 @@ vertical-align:bottom;
 
 .create-ac-input1 input:focus
 {
-    outline:none;
+    outline:none;    
 }
 
 .create-ac-input2
@@ -1386,7 +1386,14 @@ vertical-align:bottom;
 }
 .forgot-row-m2 input
 {
-	width:203px !important;
+	width:183px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+}
+
+.forgot-row-m2 input:focus
+{
+    outline:none;
 }
 .forgot-close-but
 {
@@ -1455,13 +1462,7 @@ vertical-align:bottom;
 .sign-in-create-account
 {
     font-size:12px;
-    color:#538ea3;
-    text-decoration:underline;
-}
-
-body:nth-of-type(1) .sign-in-create-account
-{
-    font-size:11px;
+    *font-size:11px !important;
     color:#538ea3;
     text-decoration:underline;
 }
@@ -1478,7 +1479,8 @@ body:nth-of-type(1) .sign-in-create-account
     position:relative;
     float:left;
     top:40px;
-    font-size:12px;
+    font-size:11px;
+    *font-size:10px;
     font-weight:600;
     color:#757575;
     width: 100%;
@@ -1523,7 +1525,7 @@ body:nth-of-type(1) .sign-in-create-account
     width:40px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
-    cursor: move;
+   
 }
 .sign-in-bottombg
 {
@@ -1546,11 +1548,14 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-button
 {
+    background:url(/themes/default/images/icons.png) no-repeat scroll -263px -98px transparent;
     position:relative;
     float: left;
     margin-top: 20px;
     left: 238px;
     cursor: pointer;
+    height: 29px;
+    width: 79px;
 }
 .sign-in-input4
 {
@@ -1578,8 +1583,10 @@ body:nth-of-type(1) .sign-in-create-account
                                                 /**************************************Input styles START**************************************/
 .create-ac-right input
 {
-    width:290px;
+    width:270px;
     height:28px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size:15px;
     font-weight:600;
     color:#a9a9a9;
@@ -1587,7 +1594,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-right input
 {
-    width:317px;
+    width:295px;
+    padding-left: 10px;
+    padding-right: 10px;
     height:28px;
     font-size:15px;
     font-weight:600;
@@ -1596,7 +1605,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .forgot-box input
 {
-	width:290px;
+	width:270px;
+        padding-left: 10px;
+        padding-right: 10px;
 	height:28px;
 	font-size:15px;
 	font-weight:600;
@@ -1810,7 +1821,11 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 
 .top-Msg-window-r
 {
-	background-image:url(/themes/default/images/topmsg-bg1.jpg);
+
+        background-image:url(/themes/default/images/topmsg-bg1.jpg);
+        position:relative;
+        float:left;
+        text-align:left;
 }
 .top-Msg-window-icon-r
 {
@@ -1856,13 +1871,15 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
     background: url(/themes/default/images/icons.png) no-repeat scroll -106px -23px transparent;
 }
 
-.sign-in-txt {
+.sign-in-txt
+{
     font-size: 11px;
 }
 
 												/************************************** My Account START **************************************/
 
-.my_acc_head,.my_acc_right_head{
+.my_acc_head,.my_acc_right_head
+{
 	font-size:18px;
 	color:#000000;
 	outline:none;
@@ -1872,12 +1889,14 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:left;
 	font-weight:600;
 }
-.my_acc_right_head{
+.my_acc_right_head
+{
 	padding:18px 0px 20px 10px;
 	float:left;
 	width:300px;
 }
-.my_acc_left_col{
+.my_acc_left_col
+{
 	background-color:#e8e8e8;
 	padding:10px 20px 10px 20px;
 	float:left;
@@ -1885,7 +1904,8 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:left;
 	margin-left:22px;
 }
-.my_acc_sub_head{
+.my_acc_sub_head
+{
 	font-size:14px;
 	color:#000000;
 	outline:none;
@@ -1895,7 +1915,8 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:left;
 	font-weight:bold;
 }
-.my_acc_sub_text,.my_acc_sub_fill{
+.my_acc_sub_text,.my_acc_sub_fill
+{
 	font-size:12px;
 	color:#000000;
 	float:left;
@@ -1903,14 +1924,16 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:left;
 	font-weight:bold;
 }
-.my_acc_sub_fill{
+.my_acc_sub_fill
+{
 	width:400px;
 	text-align:left;
 	font-weight:normal;
 	outline:none;
 
 }
-.my_acc_link_text{
+.my_acc_link_text
+{
 	font-size:12px;
 	color:#000000;
 	float:Right;
@@ -1923,24 +1946,28 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	color:#2591b7;
 	text-decoration: underline;
 }
-.my_acc_link_text a:hover{
+.my_acc_link_text a:hover
+{
 	font-size:12px;
 	color:#2591b7;
 	text-decoration: underline;
 }
-.my_acc_section_space{
+.my_acc_section_space
+{
 	float:left;
 	height:10px;
 	width:100%;
 }
-.my_acc_section_sep{
+.my_acc_section_sep
+{
 	float:left;
 	border-bottom:1px solid #cdcccc;
 	width:600px;
 	margin:10px 0px;
 	margin-left:-13px;}
 
-.my_acc_right_bold_sub,.my_acc_right_sub_fill{
+.my_acc_right_bold_sub,.my_acc_right_sub_fill
+{
 	font-size:12px;
 	color:#000000;
 	float:left;
@@ -1949,25 +1976,24 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	font-weight:bold;
 	padding-left:23px;
 }
-.my_acc_right_sub_fill{
+.my_acc_right_sub_fill
+{
 	width:200px;
 	font-weight:normal;
 	outline:none;
 }
-.my_acc_right_sep{
+.my_acc_right_sep
+{
 	float:left;
 	border-bottom:1px solid #cdcccc;
 	width:365px;
 	margin:10px 0px;}
 
-.my_acc_purches_history{
+.my_acc_purches_history
+{
 	float:left;
 	width:154px;
 	margin:20px 0px 20px 180px;
-	text-align:right;}
-
-
-
-
-
-												/************************************** My Account END **************************************/
+	text-align:right;
+}
+/************************************** My Account END **************************************/

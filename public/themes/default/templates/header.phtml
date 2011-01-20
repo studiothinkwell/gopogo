@@ -9,8 +9,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php
-    echo $this->headMeta();
     echo $this->headTitle();
+    echo $this->headMeta();
+    
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
     GP_Asset::combieAndLoadCss();
@@ -30,9 +31,7 @@
         $loginFlag = true;
         $userName = $session->user_name;
         $userEmailId = $session->user_emailid;
-        $fbLogin = "true";
-        session_register("sessionFlg");
-        $_SESSION['sessionFlg'] = $loginFlag;
+        $fbLogin = "true";           
     }
     else {
     // create facebook object
@@ -54,12 +53,16 @@
                <div class="top-Msg-window-r " >
                   <span class="top-Msg-window-icon-r"></span>
                       <span class="top-Msg-window-txt">
-                           <div class="clsErrorText"><br/></div>
+                           <div class="clsErrorText"><?php echo $session->tooltipMsg1;?><br/></div>
                            <div class="top-Msg-window-s">
-                           Please try <span class="top-mg-link">
+                           <?php echo $session->tooltipMsg2;?>
+                           <?php if(empty($session->tooltipMsg1)) { ?>
+                           Please try
+                           <span class="top-mg-link">
                                <a href="javascript:void(0)" class="clsSignIn toolSignIn">again.</a>
                                <a href="javascript:void(0)" class="clsSignUp toolSignUp">again.</a>
                            </span>
+                           <?php } ?>
                            </div>
                       </span>
                   <a href="javascript:void(0)" class="top-Msg-window-close-r clsCloseError"></a>
@@ -110,19 +113,19 @@
                 </div>
                 <div class="headrow2">
                     <div class="menu">
-                        <div class="menu1"><a href="#"></a></div>
-                        <div class="menu2"><a href="#"></a></div>
-                        <div class="menu3"><a href="#"></a></div>
-                        <div class="menu4"><a href="#"></a></div>
+                        <a href="javascript:void(0)" class="menu1">&nbsp;</a>
+                        <a href="javascript:void(0)" class="menu2">&nbsp;</a>
+                        <a href="javascript:void(0)" class="menu3">&nbsp;</a>
+                        <a href="javascript:void(0)" class="menu4">&nbsp;</a>
                     </div>
-                    <div class="search"><input type="text" value="Search for..." onclick="if(this.value=='Search for...'){this.value='';}" onblur="if(this.value==''){this.value='Search for...'}"/></div>
-                    <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value='';}" onblur="if(this.value==''){this.value='City, State, and Zip'}"/></div>
+                    <div class="search"><input type="text" value="Search for..." onclick="if(this.value == 'Search for...'){this.value=''; $().setTextColor(this); }else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='Search for...';$().removeTextColor(this);} else if(this.value == 'Search for...'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
+                    <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value=''; $().setTextColor(this); } else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='City, State, and Zip';$().removeTextColor(this);} else if(this.value == 'City, State, and Zip'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
                     <div class="submenu">
                          <div class="submenu-box">
-                        	<div id="s1menu1" class="s1menu1 submenu-div"></div>
-                        	<div id="s1menu2" class="s1menu2 submenu-div"></div>
-                        	<div id="s1menu3" class="s1menu3 submenu-div"></div>
-                        	<div id="s1menu4" class="s1menu4 submenu-div"></div>
+                        	 <a href="javascript:void(0)"  id="s1menu1" class="s1menu1 submenu-div"></a>
+                        	 <a href="javascript:void(0)" id="s1menu2" class="s1menu2 submenu-div"></a>
+                        	 <a href="javascript:void(0)"  id="s1menu3" class="s1menu3 submenu-div"></a>
+                        	 <a href="javascript:void(0)"  id="s1menu4" class="s1menu4 submenu-div"></a>
                         </div>
                     </div>
                 </div>
