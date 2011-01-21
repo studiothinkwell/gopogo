@@ -215,7 +215,7 @@ body
 }
 .menu a
 {
-    outline:none;
+    /* outline:none; */
 }
 .menu1
 {
@@ -1386,7 +1386,14 @@ vertical-align:bottom;
 }
 .forgot-row-m2 input
 {
-	width:203px !important;
+	width:183px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+}
+
+.forgot-row-m2 input:focus
+{
+    outline:none;
 }
 .forgot-close-but
 {
@@ -1420,7 +1427,8 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:23px;
-    left:4px;
+    left:12px;
+    *left:4px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
 }
@@ -1541,11 +1549,14 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-button
 {
+    background:url(/themes/default/images/icons.png) no-repeat scroll -263px -98px transparent;
     position:relative;
     float: left;
     margin-top: 20px;
     left: 238px;
     cursor: pointer;
+    height: 29px;
+    width: 79px;
 }
 .sign-in-input4
 {
@@ -1573,8 +1584,10 @@ body:nth-of-type(1) .sign-in-create-account
                                                 /**************************************Input styles START**************************************/
 .create-ac-right input
 {
-    width:290px;
+    width:270px;
     height:28px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size:15px;
     font-weight:600;
     color:#a9a9a9;
@@ -1582,7 +1595,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .sign-in-right input
 {
-    width:317px;
+    width:295px;
+    padding-left: 10px;
+    padding-right: 10px;
     height:28px;
     font-size:15px;
     font-weight:600;
@@ -1591,7 +1606,9 @@ body:nth-of-type(1) .sign-in-create-account
 }
 .forgot-box input
 {
-	width:290px;
+	width:270px;
+        padding-left: 10px;
+        padding-right: 10px;
 	height:28px;
 	font-size:15px;
 	font-weight:600;
@@ -1672,6 +1689,11 @@ border:1px solid red;
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
+    }
+
+    .create-ac-create-but
+    {
+        left:4px;
     }
 }
 

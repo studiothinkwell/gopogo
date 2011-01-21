@@ -47,14 +47,18 @@ class IndexController extends Zend_Controller_Action
         $user = new Application_Model_DbTable_User();
         //generate confirmation message by using translater
         $session = $user->getSession();
-        //assign to view the tooltip messages
-        if ($session->tooltipDsp == "show") {
+        //assign to view the tooltip messages        
+        if ($session->tooltipDsp == "show") { 
             $session->tooltipMsg1 = "";
             $session->tooltipMsg2 = "";
         }
         if(!empty($session->tooltipMsg1)) { 
             $session->tooltipDsp = "show";
-            $this->view->showTooltip = "show";
+            if($session->isError == "yes")
+                $this->view->showTooltip = "showError";
+            else
+                $this->view->showTooltip = "showSuccess";
+            $session->isError = "";
         }
     }
 

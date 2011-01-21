@@ -11,7 +11,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
-app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyinfo/';
+app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 // add events on load
 //account email update url
 app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
@@ -47,17 +47,6 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
                        $(this).removeClass('selected');
                      }
        );
-
-    /**
-     * This will show success message when profile page loads
-     */
-    if($("#msgInput").val() == 'show') {
-        $(".clsSuccessMsg").removeAttr('style');
-        var body=document.getElementsByTagName('body')[0];
-        body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
-        $(".clsBlankDiv").attr('style','height:208px');
-        $(".clsErrorText").text();
-    }
 
     // add create account event
 //    $(".clsSignUp").click(function(){
@@ -468,19 +457,21 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
 
         //function to show tooltip for error messages
         $.fn.showErrorTooltip = function (msg,msgid) {
-            $().finish();
-            $(".clsErrorMsg").removeAttr('style');
-            var body=document.getElementsByTagName('body')[0];
-            body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
-            $(".clsBlankDiv").attr('style','height:208px');
-            $(".clsErrorText").text(msg);
-            if(msgid=="signup_error_msg") {
-                $(".toolSignIn").hide();
-                $(".toolSignUp").show();
-            }
-            else {
-                $(".toolSignIn").show();
-                $(".toolSignUp").hide();
+        $(".clsErrorMsg").removeAttr('style');
+        var body=document.getElementsByTagName('body')[0];
+        body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
+        $(".clsBlankDiv").attr('style','height:208px');
+        if(msg != "sessionErr") {
+                $().finish();
+                $(".clsErrorText").text(msg);
+                if(msgid=="signup_error_msg") {
+                    $(".toolSignIn").hide();
+                    $(".toolSignUp").show();
+                }
+                else {
+                    $(".toolSignIn").show();
+                    $(".toolSignUp").hide();
+                }
             }
         }
 
@@ -619,4 +610,17 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
        $().formEnterKey('signupBoxForm',$().doSignup);
        // // set enter key action for forgot password form
        $().formEnterKey('forgotBoxForm',$().doForgot);
+
+    /**
+     * This will show success message when profile page loads
+     */
+    if($("#msgInput").val() == 'showSuccess') {
+        $(".clsSuccessMsg").removeAttr('style');
+        var body=document.getElementsByTagName('body')[0];
+        body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
+        $(".clsBlankDiv").attr('style','height:208px');
+        $(".clsErrorText").text();
+    } else if ($("#msgInput").val() == 'showError') { 
+        $().showErrorTooltip('sessionErr','');
+    }
 }); 
