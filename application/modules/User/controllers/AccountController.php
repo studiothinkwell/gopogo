@@ -843,28 +843,40 @@ class User_AccountController extends Zend_Controller_Action
 
         $session = GP_GPAuth::getSession();
         $id     = $session->user_id;
-      
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+        $userData = $user->getUserById($id);
+        //get exisiting email of user by fetching against user id
+        $userData          = $user->getUserById($id);
+        $secondaryEmail    = $userData['user_emailid'];
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
             $br = "<br>";
             $validFlag = true;
-            $email = $formData['email'];
+            $primaryEmail = $formData['email'];
 
             // checking for valid email
             //*
-            if(strlen($email) == 0 || $email == "Email Address") {
+            if(strlen($primaryEmail) == 0 || $primaryEmail == "Email Address") {
                 if($validFlag) {
                     $lang_msg = $this->translate->_("Please enter email!");
                     $msg .= $lang_msg;
                     $validFlag = false;
                 }
             }
-            if (Zend_Validate::is($email, 'EmailAddress')) {
+            if (Zend_Validate::is($primaryEmail, 'EmailAddress')) {
                 // Yes, email appears to be valid
             } else {
                 if($validFlag) {
                     $lang_msg = $this->translate->_("Enter Valid Email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+            if($primaryEmail == $secondaryEmail) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Email already Exists!");
                     $msg .= $lang_msg;
                     $validFlag = false;
                 }
@@ -893,11 +905,10 @@ class User_AccountController extends Zend_Controller_Action
 
                 try {
 
-                        // create user model object
-                        $user = new Application_Model_DbTable_User();
+                        
 
                         // update email
-                         $us =$user->updateUserEmail($id,$email);
+                         $us =$user->updateUserEmail($id,$primaryEmail,$secondaryEmail);
                          $status = 1;
 
                        //$user->logSession($userData);

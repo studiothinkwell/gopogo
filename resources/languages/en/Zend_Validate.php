@@ -308,7 +308,8 @@ return array(
     // post data not found
     "Post data not available!"=>"Post data not available!",
 
-
+    //Account
+    "Email already Exists!"=>"Email already Exists!",
 
 
     // End GOPOGO messages -----------------------------------------

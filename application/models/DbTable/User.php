@@ -743,9 +743,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
       * @return String email
       */
 
-     public function updateUserEmail($id,$email)
+    public function updateUserEmail($id,$primaryEmail,$secondaryEmail)
     {
-
         //  update user email in the table
 
         // get Db instance
@@ -757,9 +756,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         try {
             //$logger = Zend_Registry::get('log');
             //$logger->log($id.$email,Zend_Log::INFO);
-            $stmt = $db->prepare('CALL sp_update_user_email_by_user_id(:id, :email)');
+            $stmt = $db->prepare('CALL sp_update_user_email_temporary_email_by_user_id(:id, :secondary_email, :primary_email)');
             $stmt->bindParam('id', $id, PDO::PARAM_INT);
-            $stmt->bindParam('email', $email);
+            $stmt->bindParam('secondary_email', $secondaryEmail);
+            $stmt->bindParam('primary_email', $primaryEmail);
             $stmt->execute();
             $stmt->closeCursor();
             //$logger->log('sdddddddddd-'.$id.$email,Zend_Log::DEBUG);
