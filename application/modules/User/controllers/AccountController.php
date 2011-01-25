@@ -817,7 +817,7 @@ class User_AccountController extends Zend_Controller_Action
             {
                 $logger = Zend_Registry::get('log');
                 $logger->log($msg,Zend_Log::DEBUG);
-            }
+            } 
 
             $data['msg'] =  $msg;
             $data['status'] =  $status;
