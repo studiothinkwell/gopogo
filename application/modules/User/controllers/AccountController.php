@@ -363,6 +363,21 @@ class User_AccountController extends Zend_Controller_Action
                 $validFlag = false;
             }
             //*/
+		
+	//check email address is present in database or not
+            $user = new Application_Model_DbTable_User();
+            if($validFlag) {
+                // check this email user exist or not
+                $userFlag = $user->checkUserByEmail($email);
+                if($userFlag) {
+
+                } else {
+                    $lang_msg = $this->translate->_("Email address not registered_1");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
 
             if($validFlag){
                 try {
