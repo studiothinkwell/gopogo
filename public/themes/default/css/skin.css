@@ -147,7 +147,8 @@ body
 
 .search input
 {
-    width:230px;
+   /* width:230px;*/
+   width: 190px;
     height:20px;
     font-size:14px;
     font-weight:600;
@@ -168,13 +169,13 @@ body
     width:150px;;
     height:25px;
     top:22px;
-    left:138px;
+    left:99px;
     font-size:15px;
 }
 
 .search_01 input
 {
-    width:230px;
+    width:190px;
     height:20px;
     font-size:14px;
     font-weight:600;

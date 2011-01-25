@@ -235,16 +235,16 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
                     }
                 },
                 success: function(resp){
-                    // do something with resp
-                    if(resp.status == 1) // show error message
-                    {
-                        $().signupSuccess(resp);
-                    }
-                    else
-                    {
-                        if(resp.status != 1)
-                            $().signupFail(resp);
-                    }
+                    // do something with resp                    
+                        if(resp.status == 1) // show error message
+                        {
+                            $().signupSuccess(resp);
+                        }
+                        else
+                        {
+                            if(resp.status != 1)
+                                $().signupFail(resp);
+                        }                    
                 },
                 complete: function(resp){
                     if(resp.readyState == 4)
