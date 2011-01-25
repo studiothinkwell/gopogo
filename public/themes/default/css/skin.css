@@ -1427,7 +1427,8 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:23px;
-    left:4px;
+    left:12px;
+    *left:4px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
 }
@@ -1688,6 +1689,11 @@ border:1px solid red;
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
+    }
+
+    .create-ac-create-but
+    {
+        left:4px;
     }
 }
 

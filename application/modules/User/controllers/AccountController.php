@@ -552,7 +552,7 @@ class User_AccountController extends Zend_Controller_Action
                         $user = new Application_Model_DbTable_User();
                         //get related user_id, email from database and md5 it
                         $userData = $user->getUserByEmail($email);
-                        //$lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
+                        $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
 
                         $this->_helper->flashMessenger->addMessage($lang_msg);
 

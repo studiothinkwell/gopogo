@@ -230,14 +230,17 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
                 },
                 success: function(resp){
                     // do something with resp
-                    if(resp.status == 1) // show error message
+                    if(resp.readyState == 4)
                     {
-                        $().signupSuccess(resp);
-                    }
-                    else
-                    {
-                        if(resp.status != 1)
-                            $().signupFail(resp);
+                        if(resp.status == 1) // show error message
+                        {
+                            $().signupSuccess(resp);
+                        }
+                        else
+                        {
+                            if(resp.status != 1)
+                                $().signupFail(resp);
+                        }
                     }
                 },
                 complete: function(resp){
