@@ -15,6 +15,10 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
 // add events on load
 //account email update url
 app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
+//account pass update url
+app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
+//account username update url
+app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
 
 /**
  * This will apply toggle effect to bottom of page for advance search

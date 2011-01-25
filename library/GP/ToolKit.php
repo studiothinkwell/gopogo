@@ -195,5 +195,30 @@ class GP_ToolKit {
         return $strUrl;
     }
 
+    /***
+     * This function can be used to check the string is a valid user name or not
+     *
+     * @param string The variable name you would like to check/validate
+     *
+     * return bool
+     */
+    function isValidUserName($str)
+    {
+        /***
+         *  This allows just alphanumeric characters and the underscore.
+         */
+        $strPattern = '/^[A-Za-z0-9_]+$/';
+
+        /***
+         *  And if you want to allow underscore only as concatenation character and
+         * want to force that the username must start with a alphabet character:
+         */
+
+        //$strPattern = '/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/';
+
+
+        return preg_match($strPattern, $str);
+    }
+
 }
 ?>

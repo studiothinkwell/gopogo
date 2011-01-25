@@ -20,9 +20,10 @@ $(document).ready(function(){
                    }
                }
          });
+         break;
          //for profile action
          //  case 'myAccEmail':
-         case 'myAccEmail':
+         case 'myAccEmail': 
               var fdata = {'email':$('.inpclsUpdateEmail').val()};
               $.ajax({
               url: app.gopogo.accountemailupdate_url,
@@ -33,22 +34,73 @@ $(document).ready(function(){
               success: function(resp){ 
                   // do something with resp
                   if(resp.status == 1) { // show error message
-                        $().updateSuccess(resp);
-                       
+                       $().updateSuccess(resp);
+                       $(".clsSubSuccess").text('Please login to access gopogo');
                        var inpArr = new Array(1);
                        inpArr[0] = new Array("inpclsUpdateEmail","clsUpdateEmail");
                        //inpArr[1] = new Array("clsUpdateConfirmNewPass","clsUpdateConfirmNewPass","text");
                        //inpArr[2] = new Array("clsUpdateAccUserEmail","clsUpdateAccUserEmailInfo","href");
                        $().inplaceEditor(inpArr,"save");
                   }
-                  else {
+                  else { 
+                        $(".clsSubError").text('.');
                         $().updateError(resp);
                    }
                }
          });
-         //for other action
+          break;
+         //for account password update action
+          case 'myAccPass':
+              var fdata = {'current_pass':$('.clsUpdateOldPass').val(),'new_pass':$('.clsUpdateNewPass').val(),'retype_pass':$('.clsUpdateConfirmPass').val()};
+          
+              $.ajax({
+              url: app.gopogo.accountpassupdate_url,
+              type: 'POST',
+              dataType: 'json',
+              data:fdata,
+              timeout: 99999,
+              success: function(resp){
+                  // do something with resp
+                  if(resp.status == 1) { // show error message
+                        $(".clsSubSuccess").text('.');
+                        $().updateSuccess(resp);
+                      // $().inplaceEditor(inpArr,"save");
+                  }
+                  else {
+                        $(".clsSubError").text('.');
+                        $().updateError(resp);
+                   }
+               }
+         });
+          break;
+         //for account username update action
+         case 'myAccUserName':
+              var fdata = {'username':$('.inpclsUpdateUserName').val()};
+              $.ajax({
+              url: app.gopogo.accountusernameupdate_url,
+              type: 'POST',
+              dataType: 'json',
+              data:fdata,
+              timeout: 99999,
+              success: function(resp){
+                  // do something with resp
+                  if(resp.status == 1) { // show error message
+                     
+                       $().updateSuccess(resp);
+                       $(".clsSubSuccess").text('.');
+                       var inpArr = new Array(1);
+                       inpArr[0] = new Array("inpclsUpdateUserName","clsUpdateUserName");
 
-        default :
+                       $().inplaceEditor(inpArr,"save");
+                  }
+                  else {
+                        $(".clsSubError").text('.');
+                        $().updateError(resp);
+                   }
+               }
+         });
+          break;
+          default :
 
         }
     }
@@ -56,11 +108,11 @@ $(document).ready(function(){
 $(".clsUpdateAccUserEmail").click(function(){
     if($(".clsUpdateAccUserEmail").hasClass('save') ) {
            $().updateProfile("myAccEmail");
-           var replacement = $("b", ".clsUpdateAccUserEmail").text() == "Save" ? "Update" : "Save";
+           var replacement = $("b", ".clsUpdateAccUserEmail").text() == "Save" ? "edit" : "Save";
            $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
            $(".clsUpdateAccUserEmail").removeClass("save");
        } else {
-           replacement = $("b", this).text() == "Update" ? "Save" : "Update";
+           replacement = $("b", this).text() == "edit" ? "Save" : "edit";
            $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
            var inpArr = new Array(2);
            inpArr[0] = new Array("clsUpdateEmail","clsUpdateEmail","text");
@@ -70,7 +122,23 @@ $(".clsUpdateAccUserEmail").click(function(){
        }
     });
 
-
+//Username Update
+$(".clsUpdateAccUserName").click(function(){
+    if($(".clsUpdateAccUserName").hasClass('save') ) {
+           $().updateProfile("myAccUserName");
+           var replacement = $("b", ".clsUpdateAccUserName").text() == "Save" ? "edit" : "Save";
+           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
+           $(".clsUpdateAccUserName").removeClass("save");
+       } else {
+           replacement = $("b", this).text() == "edit" ? "Save" : "edit";
+           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
+           var inpArr = new Array(2);
+           inpArr[0] = new Array("clsUpdateUserName","clsUpdateUserName","text");
+//           inpArr[1] = new Array("clsUpdateConfirmNewPass","clsUpdateConfirmNewPass","text");
+           inpArr[1] = new Array("clsUpdateAccUserName","clsUpdateAccUserNameInfo","href");
+           $().inplaceEditor(inpArr,"edit");
+       }
+    });
 
 
     $.fn.inplaceEditor = function(inpArr,act) {  
@@ -90,8 +158,8 @@ $(".clsUpdateAccUserEmail").click(function(){
                 }
                 break;
           case "save" :
-                arrLen = inpArr.length;  
-                for(i=0;i<arrLen;i++) {  
+                arrLen = inpArr.length;
+                for(i=0;i<arrLen;i++) { 
                     $("."+inpArr[0][1]).html($("."+inpArr[0][0]).val());
                 }
                 break;
@@ -99,9 +167,27 @@ $(".clsUpdateAccUserEmail").click(function(){
    }
 
 $(".clsUpdateAccUserPass").click(function(){
-     $(".clsResetPass").show();
-     $(".clsUpdatePass").html("<input type='text'/>");
-       var inpArr = new Array(3);
+    if($(".clsUpdateAccUserPass").hasClass('save')) {
+        $(".clsUpdatePass").show();
+        $(".clsUpdatePassTxt").show();
+        $(".clsUpdatePass").text('******');
+        $(".clsResetPass").hide();
+        $().updateProfile("myAccPass");
+        var replacement = $("b", ".clsUpdateAccUserPass").text() == "Save" ? "edit" : "Save";
+        $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
+        $(".clsUpdateAccUserPass").removeClass('save');
+    }
+    else {
+        $(".clsUpdateAccUserPass").addClass('save');
+        //$(".clsUpdatePass").hide();
+        //$(".clsUpdatePassTxt").hide();
+        $(".clsResetPass").show();
+        replacement = $("b", ".clsUpdateAccUserPass").text() == "edit" ? "Save" : "edit";
+        $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
+        $(".clsUpdatePass").html("<input type='text'/>");
+        var inpArr = new Array(3);
+       //
+    }
     });
 
  $(".clsUpdatePartnerInfo").click(function(){
@@ -127,7 +213,7 @@ $(".clsEUPro").click(function(){
        if($(".clsEUPro").hasClass('save') ) {
            $().updateProfile("myinfo");
        } else {
-           var replacement = $("b", this).text() == "Edit" ? "Save" : "Edit";
+           var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
            $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
            var inpArr = new Array(2);
            inpArr[0] = new Array("clsDivUN","clsDivUN","text");

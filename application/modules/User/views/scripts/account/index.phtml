@@ -1,6 +1,3 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>Welcome to Gopogo - Homepage</title>
@@ -9,179 +6,179 @@
  <script src="http://code.jquery.com/jquery-1.4.4.js"></script>
  <script>
 $(document).ready
-	(
-		 function()
-			{
-			  $('.submenu-box').hover
-			  (
-				   function()
-						{
-							$(this).addClass('selected');
-					    },
-				   function()
-						{
-							$(this).removeClass('selected');
-						}
-			   );
-			}
-	);
+    (
+         function()
+            {
+              $('.submenu-box').hover
+              (
+                   function()
+                        {
+                            $(this).addClass('selected');
+                        },
+                   function()
+                        {
+                            $(this).removeClass('selected');
+                        }
+               );
+            }
+    );
 </script>
-
 <body>
- 
 <div id="master" align="center">
 	<div id="submaster">
-<!-- Header START-->
-<!--        <div class="header">
-            <div class="head-mainbg">
-            	<div class="headrow1">
-                    <div class="logo"></div>
-                    <div class="topmenu">
+        <div style="height:150px;"></div>
+ <!--  Body START-->
+         <div class="contenter" align="center">
+        	<div class="con-box" align="center">
+<!--Left Part start-->
+            	<div class="con-left">
+                <div class="con-left-bg">
+                <span class="accountLeftHeadTxt">Account</span>
+                </div>
 
+                <div class="accountSectionLightGrayBg">
+                <span class="accountLeftSubTitleTxts">SIGN IN INFORMATION</span>
+                </div>
+
+
+                <!-- email update -->
+                <div class="accountSectionInnerLayout">
+                    <div class="emailPasswodUsernameHeadBg">
+                        <div class="emailPasswodUsernameHeadText">Email: </div>                        
                     </div>
-                </div>-->
-                <div class="headrow2">
-                    <div class="menu">
-                        <div class="menu1"><a href="#"></a></div>
-                        <div class="menu2"><a href="#"></a></div>
-                        <div class="menu3"><a href="#"></a></div>
-                        <div class="menu4"><a href="#"></a></div>
+                    <div class="emailPasswodUsernamesBg">
+                        <div class="emailPasswodUsernameText clsUpdateEmail"><?php echo $this->email;?></div>                         
                     </div>
-                    <div class="search"><input type="text" value="Search for..."/></div>
-                    <div class="search_01"><input type="text" value="City, State, and Zip"/></div>
-                    <div class="submenu">
-                        <div class="submenu-box">
-                        	<div class="s1menu1"></div>
-                        	<div class="s1menu2"></div>
-                        	<div class="s1menu3"></div>
-                        	<div class="s1menu4"></div>
-                        </div>
+                    <div class="emailPasswodUsernamesEdiBg">
+                        <div class="emailPasswodUsernamesEditText clsUpdateAccUserEmailInfo"><a href="#" class="clsUpdateAccUserEmail"><b>edit</b></a></div>                        
                     </div>
                 </div>
-            </div>
-<!--    Msg Window Green START-->
-            <!--            <div class="top-Msg-window">
-                            <span class="top-Msg-window-icon"></span>
-                            <span class="top-Msg-window-txt">
-                                <div>HURRAY!  You have joined the GoPogo community.<br /></div>
-                                <div class="top-Msg-window-s">
-                                Next Step:  Play!  Book a playlist and start having fun.  The more  you rate and play the wil get better recommendations.</div>
-                            </span>
-                            <span class="top-Msg-window-close"></span>
+                <!-- password update -->
+                <div class="accountSectionInnerLayout">
+                    <div class="emailPasswodUsernameHeadBg">                        
+                        <div class="emailPasswodUsernameHeadText clsUpdatePassTxt">Password: </div>                        
+                    </div>
+                    <div class="emailPasswodUsernamesBg">                        
+                        <div class="emailPasswodUsernameText clsUpdatePass">*******</div>
+                        <div class="clsResetPass"  style="display:none">
+                        <div class="emailPasswodUsernameHeadText">Current Password:</div><div class="emailPasswodUsernameText"><input type="password" class="clsUpdateOldPass"/></div>
+                        <div class="emailPasswodUsernameHeadText">New Password:</div><div class="emailPasswodUsernameText"><input type="password" class="clsUpdateNewPass"/></div>
+                        <div class="emailPasswodUsernameHeadText">Re-Type New Password:</div><div class="emailPasswodUsernameText"><input type="password" class="clsUpdateConfirmPass"/></div>
                         </div>
-            -->
-<!--    Msg Window Green START-->
-<!--    Msg Window RED START-->
+                    </div>
+                    <div class="emailPasswodUsernamesEdiBg">                        
+                        <div class="emailPasswodUsernamesEditText clsUpdateAccUserPassInfo"><a href="#" class="clsUpdateAccUserPass"><b>edit</b></a></div>                        
+                    </div>
+                </div>
 
-<!--    Msg Window RED START-->
-        </div>
-<!-- Header END-->
-<div style="height:150px;"></div>
-<!--  Body START-->
-        <div class="contenter" align="center">
-            <div class="con-box" align="center">
-                <!--Left Part start-->
-                        <div class="con-left">
-                        	<div class="my_acc_head">Account</div>
-                          <div class="my_acc_left_col">
-                            	<div class="my_acc_sub_head">SIGN IN INFORMATION</div>
-                           	<div class="my_acc_sub_text">Email:</div><div class="my_acc_sub_fill clsUpdateEmail"><?php echo $this->email;?></div>
-                                 <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateAccUserEmailInfo" ><a href="#" class="clsUpdateAccUserEmail"><b>Update</b></a></div>
-                         </div>
-                          <div class="my_acc_left_col">
-                                <div class="my_acc_sub_text">Password:</div><div class="my_acc_sub_fill clsUpdatePass">*******</div>
-                                <div class="clsResetPass"  style="display:none">
-                                <div class="my_acc_sub_text">New Password:</div><div class="my_acc_sub_fill"><input type="text" /></div>
-                                <div class="my_acc_sub_text">Retype Password:</div><div class="my_acc_sub_fill"><input type="text" /></div>
-                                </div>
-                                <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateAccUserPassInfo" ><a href="#" class="clsUpdateAccUserPass">Update</a></div>
-                          </div>
-                          <div class="my_acc_section_space"></div>
-                          <div class="my_acc_left_col">
-                            	<div class="my_acc_sub_head">PARTNER INFORMATION</div>
-                           	<div class="my_acc_sub_text">Name:</div><div class="my_acc_sub_fill clsUpdateFullName"><?php echo $this->fullName;?></div>
-                                <div class="my_acc_sub_text">username:</div><div class="my_acc_sub_fill clsUpdateUserEmail"><?php echo $this->email;?></div>
-                                <div class="my_acc_sub_text">Twitter:</div><div class="my_acc_sub_fill clsUpdateTwitterUserName"><?php echo $this->twitterUserName;?></div>
-                                <div class="my_acc_sub_text">Facebook:</div><div class="my_acc_sub_fill clsUpdateFbUserName"><?php echo $this->fbUserName;?></div>
-                                <div class="my_acc_sub_text">&nbsp;</div><div class="my_acc_link_text clsUpdateUserPartneInfo"><a href="#" class="clsUpdatePartnerInfo">Update</a></div>
-                          </div>
-                          <div class="my_acc_section_space"></div>
+                <!-- username update -->
+                <div class="accountSectionInnerLayout">
+                    <div class="emailPasswodUsernameHeadBg">                        
+                        <div class="emailPasswodUsernameHeadText">Username:</div>                        
+                    </div>
+                    <div class="emailPasswodUsernamesBg">                        
+                        <div class="emailPasswodUsernameText clsUpdateUserName"><?php echo $this->userName;?>    </div>
+                    </div>
+                    <div class="emailPasswodUsernamesEdiBg">
+                        <div class="emailPasswodUsernamesEditText clsUpdateAccUserNameInfo"><a href="#" class="clsUpdateAccUserName"><b>edit</b></a></div>
+                    </div>
+                </div>
 
-                          <div>&nbsp;</div>
 
-                        </div>
-                <!--Left Part END-->
-                 <!-- Right part Start  -->
-                        <div class="con-right">
-                       	  <div class="my_acc_right_head">Sample Heading</div>
-<!--                            <div class="my_acc_purches_history"><span class="my_acc_link_text"><a href="#">View More</a></span></div>
--->              </div>
-                <!-- Right part end  -->
-            </div>
-        </div>
-<!--  Body END-->
-    </div>
+
+
+                <div class="accountSectionLightGrayBg">
+                <span class="accountLeftSubTitleTxts">PARTNER INFORMATION</span>
+                </div>
+
+                <div class="accountSectionInnerLayout">
+                <div class="emailPasswodUsernameHeadBg">
+                <div class="emailPasswodUsernameHeadText">Twitter:</div>
+                <div class="emailPasswodUsernameHeadText">Facebook: </div>
+                </div>
+                 <div class="emailPasswodUsernamesBg">
+                 <div class="emailPasswodUsernameText">@Becky</div>
+                 <div class="emailPasswodUsernameText">Becky Denson</div>
+                 </div>
+                  <div class="emailPasswodUsernamesEdiBg">
+                  <div class="emailPasswodUsernamesEditText">edit</div>
+                  <div class="emailPasswodUsernamesEditText">edit</div>
+                  </div>
+                </div>
+
+                <div class="accountSectionLightGrayBg">
+                <span class="accountLeftSubTitleTxts">PAYMENT METHODS</span>
+                </div>
+
+                <div class="accountSectionInnerLayout">
+                <div class="emailPasswodUsernameHeadBg">
+                <div class="emailPasswodUsernameHeadText">Type: </div>
+                <div class="emailPasswodUsernameHeadText">Number: </div>
+                <div class="emailPasswodUsernameHeadText">Exp. Date:</div>
+                <div class="emailPasswodUsernameHeadText">Cardholder Name:</div>
+                <div class="emailPasswodUsernameHeadText">Billing Address:</div>
+                </div>
+                 <div class="emailPasswodUsernamesBg">
+                 <div class="emailPasswodUsernameText"> Visa</div>
+                 <div class="emailPasswodUsernameText">****3856</div>
+                 <div class="emailPasswodUsernameText">06/24/12  </div>
+                  <div class="emailPasswodUsernameText">Becky Denson</div>
+                  <div class="emailPasswodUsernameText">Becky Denson</div>
+                   <div class="emailPasswodUsernameText">1234 Grainville Ave</div>
+                    <div class="emailPasswodUsernameText">Lost Angelesddddddddd, CA 90025</div>
+                 </div>
+                  <div class="emailPasswodUsernamesEdiBg">
+                  <div class="emailPasswodUsernamesEditText">edit</div>
+                  </div>
+                </div>
+
+                <div class="accountSectionInnerLayout1">
+                <div class="emailPasswodUsernameHeadBg">
+                <div class="emailPasswodUsernameHeadText">Type: </div>
+                <div class="emailPasswodUsernameHeadText">Number: </div>
+                <div class="emailPasswodUsernameHeadText">Exp. Date:</div>
+                <div class="emailPasswodUsernameHeadText">Cardholder Name:</div>
+                <div class="emailPasswodUsernameHeadText">Billing Address:</div>
+                </div>
+                 <div class="emailPasswodUsernamesBg">
+                 <div class="emailPasswodUsernameText"> Visa</div>
+                 <div class="emailPasswodUsernameText">****3856</div>
+                 <div class="emailPasswodUsernameText">06/24/12  </div>
+                  <div class="emailPasswodUsernameText">Becky Denson</div>
+                  <div class="emailPasswodUsernameText">Becky Denson</div>
+                   <div class="emailPasswodUsernameText">1234 Grainville Ave</div>
+                    <div class="emailPasswodUsernameText">Lost Angeles, CA 90025</div>
+                     <div class="emailPasswodUsernameText">(123) 456-7890</div>
+                 </div>
+                  <div class="emailPasswodUsernamesEdiBg">
+                  <div class="emailPasswodUsernamesEditText">edit</div>
+                  </div>
+                </div>
+
+           </div>
+ <!--Left Part END-->
+ <!-- Right part Start  -->
+            	<div class="con-right">
+  <div class="accountSectionrightTopHeadBg">
+  <div class="accountRightHeadTxt">Purchase History</div>
+  <div class="haveAQuestionText">Have a Question?</div>
+  </div>
+
+  <div class="accountSectionrightDropDowndBg">
+  <div class="dropDownBg">
+  <div class="dropDownText">Orders placed in past 6 months</div>
+  </div>
+  </div>
+
+  <div class="accountSectionBlueTitle">No Purchases Found.</div>
+  <div class="accountSectionNormalText">Please select another date range.</div>
+  </div>
+                </div>
+      		</div>
+     	</div>
+ <!--  Body END-->
      <div class="blankdiv"></div>
 </div>
-<!-- Footer START-->
-<div class="footer">
-	<div class="footer-topbg">
 
-        <div class="your-personal-button">
-        <a href="#"><img src="images/your-personal-guide.png" alt="" style="border:0px;"/></a>
-                <div class="arrow-up"></div>
-
-<!--        </div>
-    </div>-->
-<!-- Footer Middle START-->
-       <!--<div class="footer-middle">
-                <div class="footer-control">
-                    <div class="footer-cel1">
-                         <div class="footer-header-txt">I want to spend</div>
-                         <div class="footer-lefticon1"></div>
-                         <div class="footer-input-box">
-                             <div class="footer-input1"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                             <div class="footer-input2"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                             <div class="footer-input3"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                         </div>
-                    </div>
-                    <div class="footer-cel2">
-                         <div class="footer-header-txt">Something good for</div>
-                         <div class="footer-lefticon2"></div>
-                         <div class="footer-input-box">
-                             <div class="footer-input12"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                             <div class="footer-input12"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                             <div class="footer-input12"><input type="text" value="" style="width:50px; height:15px;"/></div>
-                         </div>
-                    </div>
-                    <div class="footer-cel3">
-                         <div class="footer-header-txt">In this neighborhood</div>
-                         <div class="footer-input-box">
-                             <div class="footer-input13"><input type="text" value="" style="width:90px; height:15px;"/></div>
-                             <div class="footer-menu">
-                            	<div class="footer-white-txt">Glendale</div>
-                                <div class="footer-input-option"></div>
-                             </div>
-                             <div class="footer-menu">
-                            	<div class="footer-white-txt">Glendale</div>
-                                <div class="footer-input-option"></div>
-                             </div>
-                             <div class="footer-menu">
-                            	<div class="footer-white-txt">Glendale</div>
-                                <div class="footer-input-option"></div>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-        </div>-->
-<!-- Footer Middle END-->
-<!--	<div class="footer-bottombg">
-        <div class="footerlink">
-            Copyright © 2010 GoPogo LLC<a href="#">About Us </a>|<a href="#">Contact Us</a>|<a href="#">Legal</a>
-        </div>
-    </div>-->
-</div>
-          
-<!-- Footer START-->
 </body>
 </html>
