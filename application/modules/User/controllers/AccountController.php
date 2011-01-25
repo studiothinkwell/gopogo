@@ -63,6 +63,7 @@ class User_AccountController extends Zend_Controller_Action
       $session = GP_GPAuth::getSession();
       $id     = $session->user_id;
      // collect username and password on the basis of user id
+      
       $userData = $user->getUserByIdTemp($id);
       $email    = $userData['user_emailid'];
       $password = $userData['user_password'];
