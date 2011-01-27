@@ -1420,7 +1420,8 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:23px;
-    left:4px;
+    left:12px;
+    *left:4px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
 }
@@ -1672,6 +1673,10 @@ border:1px solid red;
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
+    }
+    .create-ac-create-but
+    {
+        left:4px;
     }
 }
 
@@ -1981,3 +1986,28 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:right;
 }
 /************************************** My Account END **************************************/
+
+
+#createNewPlaylist
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:400px;
+    height:auto;
+    border:0px solid red;
+    display: none;
+    top:0px;
+    left:0px
+}
+
+
+/*******safari and opera coding start*********/
+
+html[xmlns*=""].create-ac-create-but
+    {
+        left:40px;
+    }
+
+/*******safari and opera coding end*********/

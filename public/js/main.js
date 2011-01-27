@@ -12,6 +12,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyinfo/';
+
 // add events on load
 
 /**
@@ -542,7 +543,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
         // functions to explode string works same as php explode function
         $.fn.explode = function (delimiter, string, limit) {
-             var emptyArray = { 0: '' };
+             var emptyArray = {0: ''};
 
             // third argument is not required
             if ( arguments.length < 2 ||
@@ -558,7 +559,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
                 typeof delimiter == 'object' ||
                 typeof string == 'function' ||
                 typeof string == 'object' ) {
-                return emptyArray;    }
+                return emptyArray;}
 
             if ( delimiter === true ) {
                 delimiter = '1';
@@ -570,7 +571,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
                 var partA = splitted.splice(0, limit - 1);
                 var partB = splitted.join(delimiter.toString());
                 partA.push(partB);
-                return partA;    }
+                return partA;}
         };
 
 
@@ -606,7 +607,9 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
        }; // end of do formEnterKey
 
-       // // set enter key action for login form
+
+// set enter on form
+       // set enter key action for login form
        $().formEnterKey('loginBoxForm',$().doLogin);
 
        // // set enter key action for signup form
@@ -614,4 +617,77 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
        // // set enter key action for forgot password form
        $().formEnterKey('forgotBoxForm',$().doForgot);
+
+
+       // fetch popup div in background when page load.
+
+// functions to handle the ajax html for popups
+
+        // load ajax html
+        $.fn.loadAjaxHtml = function(partials){
+            $().debugLog('loadAjaxHtml');
+             // get serialized form data of forgot form
+             var fdata = {'partials':partials.join()};
+
+             // make ajax request for signup
+             $.ajax({
+                url: app.gopogo.ajaxhtml_url,
+                type: 'get',
+                dataType: 'text/html',
+                data:fdata,
+                timeout: 99999,
+                error: function(resp){
+                    if(resp.readyState == 4) {
+                        $().AjaxHtmlFail(resp);
+                    }
+                },
+                success: function(resp){                    
+                    $().AjaxHtmlSuccess(resp);
+                },
+                complete: function(resp){
+                    if(resp.readyState == 4) {
+                        $().AjaxHtmlWelcome(resp);
+                    }
+                }
+            });
+
+        }; // end of do AjaxHtml
+
+        // AjaxHtml success
+
+        $.fn.AjaxHtmlSuccess = function(resp){
+            $().debugLog('AjaxHtmlSuccess');
+            //$().debugLog(resp);
+            
+            $(resp).appendTo("body");
+        };
+
+        // AjaxHtml welcome
+
+        $.fn.AjaxHtmlWelcome = function(resp){
+            $().debugLog('AjaxHtmlWelcome');
+            $().debugLog(resp);
+        };
+
+        // AjaxHtml fail
+
+        $.fn.AjaxHtmlFail = function(resp){
+            $().debugLog('AjaxHtmlFail');
+            $().debugLog(resp);
+            if(resp.status == 0) // show error message
+            {
+                $().errorMessage(resp.msg,'errorMsg');
+            }
+        };
+
+/*
+        // set partials
+        app.gopogo.partials = ['forgot','message','create_playlist_popup'];
+
+        // load all above partials
+        $().loadAjaxHtml(app.gopogo.partials);
+*/
+
+
+
 }); 

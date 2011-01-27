@@ -123,4 +123,11 @@ class IndexController extends Zend_Controller_Action
          $captcha->CreateImage(); die;
     }
 
+    public function ajaxhtmlAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $partials = $this->getRequest()->getParam('partials');
+        $this->view->partials = $partials;
+    }
+
 }
