@@ -614,7 +614,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         if(!is_object($db))
             throw new Exception("",Zend_Log::CRIT);
         try {
-            $stmt = $this->_db->query("CALL sp_update_user_status_by_user_email_id(?)", $email);
+            $status = 2;
+            $stmt = $db->prepare('CALL sp_update_user_status_by_user_email_id(:email, :status)');
+            $stmt->bindParam('email', $email, PDO::PARAM_INT);
+            $stmt->bindParam('status', $status);
+            $stmt->execute();
+            $stmt->closeCursor();
         } catch (Some_Component_Exception $e) { 
             
             if (strstr($e->getMessage(), 'unknown')) {

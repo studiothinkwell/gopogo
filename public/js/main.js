@@ -11,7 +11,8 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
-app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyinfo/';
+
+app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 
 // add events on load
 
@@ -46,17 +47,6 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
                        $(this).removeClass('selected');
                      }
        );
-
-    /**
-     * This will show success message when profile page loads
-     */
-    if($("#msgInput").val() == 'show') {
-        $(".clsSuccessMsg").removeAttr('style');
-        var body=document.getElementsByTagName('body')[0];
-        body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
-        $(".clsBlankDiv").attr('style','height:208px');
-        $(".clsErrorText").text();
-    }
 
     // add create account event
     $(".clsSignUp").click(function(){
@@ -241,16 +231,16 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
                     }
                 },
                 success: function(resp){
-                    // do something with resp
-                    if(resp.status == 1) // show error message
-                    {
-                        $().signupSuccess(resp);
-                    }
-                    else
-                    {
-                        if(resp.status != 1)
-                            $().signupFail(resp);
-                    }
+                    // do something with resp                    
+                        if(resp.status == 1) // show error message
+                        {
+                            $().signupSuccess(resp);
+                        }
+                        else
+                        {
+                            if(resp.status != 1)
+                                $().signupFail(resp);
+                        }                    
                 },
                 complete: function(resp){
                     if(resp.readyState == 4)
@@ -467,19 +457,21 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
 
         //function to show tooltip for error messages
         $.fn.showErrorTooltip = function (msg,msgid) {
-            $().finish();
             $(".clsErrorMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
             $(".clsBlankDiv").attr('style','height:208px');
-            $(".clsErrorText").text(msg);
-            if(msgid=="signup_error_msg") {
-                $(".toolSignIn").hide();
-                $(".toolSignUp").show();
-            }
-            else {
-                $(".toolSignIn").show();
-                $(".toolSignUp").hide();
+            if(msg != "sessionErr") {
+                $().finish();
+                $(".clsErrorText").text(msg);
+                if(msgid=="signup_error_msg") {
+                    $(".toolSignIn").hide();
+                    $(".toolSignUp").show();
+                }
+                else {
+                    $(".toolSignIn").show();
+                    $(".toolSignUp").hide();
+                }
             }
         }
 
@@ -619,75 +611,17 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'profile/index/ajaxupdatemyi
        $().formEnterKey('forgotBoxForm',$().doForgot);
 
 
-       // fetch popup div in background when page load.
-
-// functions to handle the ajax html for popups
-
-        // load ajax html
-        $.fn.loadAjaxHtml = function(partials){
-            $().debugLog('loadAjaxHtml');
-             // get serialized form data of forgot form
-             var fdata = {'partials':partials.join()};
-
-             // make ajax request for signup
-             $.ajax({
-                url: app.gopogo.ajaxhtml_url,
-                type: 'get',
-                dataType: 'text/html',
-                data:fdata,
-                timeout: 99999,
-                error: function(resp){
-                    if(resp.readyState == 4) {
-                        $().AjaxHtmlFail(resp);
-                    }
-                },
-                success: function(resp){                    
-                    $().AjaxHtmlSuccess(resp);
-                },
-                complete: function(resp){
-                    if(resp.readyState == 4) {
-                        $().AjaxHtmlWelcome(resp);
-                    }
-                }
-            });
-
-        }; // end of do AjaxHtml
-
-        // AjaxHtml success
-
-        $.fn.AjaxHtmlSuccess = function(resp){
-            $().debugLog('AjaxHtmlSuccess');
-            //$().debugLog(resp);
-            
-            $(resp).appendTo("body");
-        };
-
-        // AjaxHtml welcome
-
-        $.fn.AjaxHtmlWelcome = function(resp){
-            $().debugLog('AjaxHtmlWelcome');
-            $().debugLog(resp);
-        };
-
-        // AjaxHtml fail
-
-        $.fn.AjaxHtmlFail = function(resp){
-            $().debugLog('AjaxHtmlFail');
-            $().debugLog(resp);
-            if(resp.status == 0) // show error message
-            {
-                $().errorMessage(resp.msg,'errorMsg');
-            }
-        };
-
-/*
-        // set partials
-        app.gopogo.partials = ['forgot','message','create_playlist_popup'];
-
-        // load all above partials
-        $().loadAjaxHtml(app.gopogo.partials);
-*/
-
-
+    /**
+     * This will show success message when profile page loads
+     */
+    if($("#msgInput").val() == 'showSuccess') {
+        $(".clsSuccessMsg").removeAttr('style');
+        var body=document.getElementsByTagName('body')[0];
+        body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
+        $(".clsBlankDiv").attr('style','height:208px');
+        $(".clsErrorText").text();
+    } else if ($("#msgInput").val() == 'showError') { 
+        $().showErrorTooltip('sessionErr','');
+    }
 
 }); 
