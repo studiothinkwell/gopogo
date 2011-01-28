@@ -60,13 +60,13 @@ class User_AccountController extends Zend_Controller_Action
         //$this->_helper->viewRenderer->setNoRender(true);
 
         $session = GP_GPAuth::getSession();
-        
+
         if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
             // do nothing
         } else {
-            
+
             // redirect to home page
-            $this->_redirect();            
+            $this->_redirect();
         }
 
         //$user = new Application_Model_DbTable_User();
@@ -86,7 +86,7 @@ class User_AccountController extends Zend_Controller_Action
         $this->view->email                  = trim($email);
         //$this->view->password               = trim($password);
         $this->view->userName               = trim($username);
-   
+
 
     } // end indexAction
 
@@ -175,7 +175,7 @@ class User_AccountController extends Zend_Controller_Action
 
                     // check and get user data if email and password match
                     $userData = $user->getUserByEmailAndPassword($email,$passwd);
-                    
+
                     if($userData)
                     {
                         $status = 1;
@@ -357,7 +357,7 @@ class User_AccountController extends Zend_Controller_Action
             }
 
             //*/
-		
+
 	//check email address is present in database or not
             $user = new Application_Model_DbTable_User();
             if($validFlag) {
@@ -441,8 +441,8 @@ class User_AccountController extends Zend_Controller_Action
      *
      */
 
-    public function profileAction() {      
-        $user = new Application_Model_DbTable_User();        
+    public function profileAction() {
+        $user = new Application_Model_DbTable_User();
         $session = $user->getSession();
         if(isset($session->isSignedUp)) {
             unset($session->isSignedUp);
@@ -486,7 +486,7 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
-            
+
             // end checking for valid email
 
             $passwd = $formData['passwd']; //$form->getValue('passwd');
@@ -498,8 +498,8 @@ class User_AccountController extends Zend_Controller_Action
                     $msg .= $lang_msg;
                     $validFlag = false;
                 }
-            }            
-            
+            }
+
             // check length of passowrd
             if ($validFlag && Zend_Validate::is(strlen($passwd), 'Between', array('min' => 6, 'max' => 16))) {
                 // Yes, $value is between 1 and 12
@@ -636,7 +636,7 @@ class User_AccountController extends Zend_Controller_Action
      * @param String retype_passwd : retype password in post
      * @return json object - :msg, :status
      */
-    public function confirmemailAction() { 
+    public function confirmemailAction() {
         $encVerifyKey = $this->_getParam('verify');
         // create user model object
         $user = new Application_Model_DbTable_User();
@@ -655,7 +655,7 @@ class User_AccountController extends Zend_Controller_Action
                     $session->tooltipMsg1 = $this->translate->_("Congratulations! Your email verified_msg1");
                     $session->tooltipMsg2 = $this->translate->_("Congratulations! Your email verified_msg2");
                     $session->tooltipDsp = "hide";
-                    // create user model object                    
+                    // create user model object
                     $session = $user->getSession();
                     if(!isset($session->emailVerify))
                         $session->emailVerify = "fbSignUp";
@@ -671,7 +671,7 @@ class User_AccountController extends Zend_Controller_Action
                     $session->tooltipMsg2 = $this->translate->_("Verifiction key expired");
                     $session->tooltipDsp = "hide";
                     $session->isError = "yes";
-                }                
+                }
             }
             else if ($userData['user_status_id']==2) {
                 $session = $user->getSession();
@@ -733,9 +733,9 @@ class User_AccountController extends Zend_Controller_Action
         $status = 0;
         $msg = "";
         // create user model object
-        if ($userFlag) { 
+        if ($userFlag) {
             $userData = $user->getUserByEmail($userData['Email']);
-        }else { 
+        }else {
             $status = $user->fbsignup($udata);
 
             // check and get user data if email and password match
@@ -874,7 +874,7 @@ class User_AccountController extends Zend_Controller_Action
             //$userData = $user->getUserById($id);
             //get exisiting email of user by fetching against user id
             //$userData          = $user->getUserById($id);
-            
+
 
             if ($this->getRequest()->isPost()) {
                 $formData = $this->getRequest()->getPost();
@@ -921,7 +921,7 @@ class User_AccountController extends Zend_Controller_Action
                         $validFlag = false;
                     }
                 }
-                
+
                 // create user model object
                 $user = new Application_Model_DbTable_User();
 
@@ -947,7 +947,7 @@ class User_AccountController extends Zend_Controller_Action
                             $id     = $session->user_id;
 
                             // set new temporary email
-                            $us =$user->updateUserEmail($id,trim($newEmail));                            
+                            $us =$user->updateUserEmail($id,trim($newEmail));
 
                             $lang_msg = $this->translate->_('Welcome! You have changed your email Successfully!');
 
@@ -1302,13 +1302,13 @@ class User_AccountController extends Zend_Controller_Action
                 // checking for valid email
                 //*
                 if($validFlag && strlen($userName) == 0) {
-                    
+
                     $lang_msg = $this->translate->_("Please enter username!");
                     $msg .= $lang_msg;
                     $validFlag = false;
-                   
+
                 }
-                
+
                 /*
                 if($validFlag && $userName == $assignedUsername) {
                     if($validFlag) {
@@ -1319,7 +1319,7 @@ class User_AccountController extends Zend_Controller_Action
                 }
                 */
 
-                if($validFlag && $checkUsername['user_name'] == 'True') {                    
+                if($validFlag && $checkUsername['user_name'] == 'True') {
                     $lang_msg = $this->translate->_("This username is already assigned to some other user!");
                     $msg .= $lang_msg;
                     $validFlag = false;
@@ -1427,7 +1427,7 @@ class User_AccountController extends Zend_Controller_Action
             $oldEmail = $arrVerifyKey[2];
 
             $user = new Application_Model_DbTable_User();
-            
+
             //get related user_id, email from database and md5 it
             $userData = $user->getUserByEmail($oldEmail);
 
@@ -1452,9 +1452,9 @@ class User_AccountController extends Zend_Controller_Action
                     $this->view->emailVerify = $session->emailVerify;
                     //update status of user account isactive to 1
                     //$user->activateuser($userData['user_emailid']);
-                    
+
                     $user->resetEmailNewFromOldEmail($user_id, $newEmail);
-                    
+
                     //GP_GPAuth::sendEmailChangeWelcome($newEmail,"");
                     $userData2 = $user->getUserByEmail($newEmail);
                     $user->logSession($userData2);
@@ -1487,4 +1487,4 @@ class User_AccountController extends Zend_Controller_Action
 
     }
 
-}  
+}

@@ -153,7 +153,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      * User signup new user
      * @access public
      * @param String email : email address
-     * @param String passwd : password     
+     * @param String passwd : password
      */
 
     public function signup($udata) {
@@ -180,12 +180,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
-                $lang_msg = "Unknown Error!";               
+                $lang_msg = "Unknown Error!";
             } elseif (strstr($e->getMessage(), 'not found')) {
                 // handle another type of exception
-                $lang_msg = "Not Found Error!";              
+                $lang_msg = "Not Found Error!";
             } else {
-                $lang_msg = $e->getMessage();                
+                $lang_msg = $e->getMessage();
             }
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
@@ -194,7 +194,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $lang_msg = $e->getMessage();
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
-        }   
+        }
         return TRUE;
     } // end of signup
 
@@ -206,7 +206,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      */
 
     public function fbsignup($udata)
-    { 
+    {
         $data = $udata;
         $status = 0;
         $username = substr($data['user_emailid'], 0, strpos($data['user_emailid'],'@'));
@@ -221,10 +221,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                         ,   $data['TempPass']
                         ,   ''
                     );
-        try {   
+        try {
                 $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
-                $status = 1;  
-        } catch (Some_Component_Exception $e) { 
+                $status = 1;
+        } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";
@@ -237,7 +237,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
-        catch(Exception $e){ 
+        catch(Exception $e){
             $lang_msg = $e->getMessage();
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
@@ -297,7 +297,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }else {
             if(
-                    !empty($rowArray) && is_array($rowArray) && count($rowArray)>0                   
+                    !empty($rowArray) && is_array($rowArray) && count($rowArray)>0
                     && !empty($rowArray['email_status']) && $rowArray['email_status']==="True"
                 )
                     return TRUE;
@@ -314,7 +314,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      * @access public
      * @param String email : email address
      * @param String passwd : password
-     *  
+     *
      * @return Array | bool : user's master data if not user match then it will return false
      *
      */
@@ -366,9 +366,9 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }else {
 
             if(
-                    !empty($rowArray) && is_array($rowArray) && count($rowArray)>0                    
+                    !empty($rowArray) && is_array($rowArray) && count($rowArray)>0
                 ){
-                    // update main password from temporary password if present                   
+                    // update main password from temporary password if present
                     if(!empty($rowArray['temporary_user_password']) && $encpasswd==$rowArray['temporary_user_password'])
                     {
 
@@ -397,11 +397,11 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                             $logger = Zend_Registry::get('log');
                             $logger->log($lang_msg,Zend_Log::ERR);
                         }
-                    }                
+                    }
                     return $rowArray;
                 }
                 else
-                {                    
+                {
                     return FALSE;
                 }
         }
@@ -469,14 +469,14 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     /**
      * Set Loggedin User data in session
-     * 
+     *
      */
 
-    public function logSession($udata) { 
+    public function logSession($udata) {
         // get Db instance
         $db = $this->getDbInstance();
         $userSession = new Zend_Session_Namespace('user-session');
-        
+
         foreach($udata as $ukey=>$uvalue) {
              $userSession->$ukey = $uvalue;
         }
@@ -496,7 +496,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     /**
      * Destroy Loggedin User data from session
-     * 
+     *
      */
 
     public function destroySession()
@@ -569,7 +569,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         // return temporary password
         return $temp_password;
-        
+
     } // end of getUserFogotPassword
 
 
@@ -590,8 +590,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $stmt->bindParam('status', $status);
             $stmt->execute();
             $stmt->closeCursor();
-        } catch (Some_Component_Exception $e) { 
-            
+        } catch (Some_Component_Exception $e) {
+
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";

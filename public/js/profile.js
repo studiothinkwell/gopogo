@@ -115,7 +115,7 @@ $(document).ready(function(){
                        inpArr[0] = new Array("inpclsUpdateUserName","clsUpdateUserName");
 
                        $().inplaceEditor(inpArr,"save");
-                       
+
                        $().debugLog($("b", ".clsUpdateAccUserName").text());
 
                        var replacement = $("b", ".clsUpdateAccUserName").text() == "Save" ? "edit" : "Save";
@@ -137,7 +137,7 @@ $(document).ready(function(){
         }
     }
 
-    // inplace editor 
+    // inplace editor
 
     $.fn.inplaceEditor = function(inpArr,act) {
 
@@ -177,7 +177,7 @@ $(document).ready(function(){
             $().updateProfile("myAccEmail");
 
            // change email text box to span /div with text
-           
+
         } else {
            var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
            //var replacement = "Save";
@@ -195,8 +195,8 @@ $(document).ready(function(){
         if($(".clsUpdateAccUserName").hasClass('save') ) {
             $().debugLog(2);
             $().closeSuccessTooltip();
-            $().closeErrorTooltip();            
-            
+            $().closeErrorTooltip();
+
             var username = $('.inpclsUpdateUserName').val();
             if($().validateUsername(username)){
                 $().updateProfile("myAccUserName");
@@ -209,7 +209,7 @@ $(document).ready(function(){
                 // top-Msg-window-s
                 $('.top-Msg-window-s').text(msg2);
             }
-            
+
             $().debugLog(3);
         } else {
             $().debugLog(4);
@@ -234,7 +234,7 @@ $(document).ready(function(){
              $().debugLog(2);
             $().closeSuccessTooltip();
             $().closeErrorTooltip();
-            
+
             $().updateProfile("myAccPass");
              $().debugLog(3);
         }

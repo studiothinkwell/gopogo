@@ -1,37 +1,9 @@
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Welcome to Gopogo - Homepage</title>
-<link href="CSS/skin.css" rel="stylesheet" type="text/css" />
-</head>
- <script src="http://code.jquery.com/jquery-1.4.4.js"></script>
- <script>
-$(document).ready
-    (
-         function()
-            {
-              $('.submenu-box').hover
-              (
-                   function()
-                        {
-                            $(this).addClass('selected');
-                        },
-                   function()
-                        {
-                            $(this).removeClass('selected');
-                        }
-               );
-            }
-    );
-</script>
-<body>
-<div id="master" align="center">
-	<div id="submaster">
-        <div style="height:150px;"></div>
- <!--  Body START-->
-         <div class="contenter" align="center">
-        	<div class="con-box" align="center">
-<!--Left Part start-->
-            	<div class="con-left">
+<div style="height:150px;"></div>
+<!--  Body START-->
+<div class="contenter" align="center">
+    <div class="con-box" align="center">
+        <!--Left Part start-->
+        <div class="con-left">
                 <div class="con-left-bg">
                 <span class="accountLeftHeadTxt">Account</span>
                 </div>
@@ -105,82 +77,26 @@ $(document).ready
                   <div class="emailPasswodUsernamesEditText">edit</div>
                   </div>
                 </div>
-                <?php
-                /*
-                <div class="accountSectionLightGrayBg">
-                <span class="accountLeftSubTitleTxts">PAYMENT METHODS</span>
-                </div>
 
-                <div class="accountSectionInnerLayout">
-                <div class="emailPasswodUsernameHeadBg">
-                <div class="emailPasswodUsernameHeadText">Type: </div>
-                <div class="emailPasswodUsernameHeadText">Number: </div>
-                <div class="emailPasswodUsernameHeadText">Exp. Date:</div>
-                <div class="emailPasswodUsernameHeadText">Cardholder Name:</div>
-                <div class="emailPasswodUsernameHeadText">Billing Address:</div>
-                </div>
-                 <div class="emailPasswodUsernamesBg">
-                 <div class="emailPasswodUsernameText"> Visa</div>
-                 <div class="emailPasswodUsernameText">****3856</div>
-                 <div class="emailPasswodUsernameText">06/24/12  </div>
-                  <div class="emailPasswodUsernameText">Becky Denson</div>
-                  <div class="emailPasswodUsernameText">Becky Denson</div>
-                   <div class="emailPasswodUsernameText">1234 Grainville Ave</div>
-                    <div class="emailPasswodUsernameText">Lost Angelesddddddddd, CA 90025</div>
-                 </div>
-                  <div class="emailPasswodUsernamesEdiBg">
-                  <div class="emailPasswodUsernamesEditText">edit</div>
-                  </div>
-                </div>
+        </div>
+        <!--Left Part END-->
+        <!-- Right part Start  -->
+        <div class="con-right">
+            <div class="accountSectionrightTopHeadBg">
+            <div class="accountRightHeadTxt">Purchase History</div>
+            <div class="haveAQuestionText">Have a Question?</div>
+            </div>
 
-                <div class="accountSectionInnerLayout1">
-                <div class="emailPasswodUsernameHeadBg">
-                <div class="emailPasswodUsernameHeadText">Type: </div>
-                <div class="emailPasswodUsernameHeadText">Number: </div>
-                <div class="emailPasswodUsernameHeadText">Exp. Date:</div>
-                <div class="emailPasswodUsernameHeadText">Cardholder Name:</div>
-                <div class="emailPasswodUsernameHeadText">Billing Address:</div>
-                </div>
-                 <div class="emailPasswodUsernamesBg">
-                 <div class="emailPasswodUsernameText"> Visa</div>
-                 <div class="emailPasswodUsernameText">****3856</div>
-                 <div class="emailPasswodUsernameText">06/24/12  </div>
-                  <div class="emailPasswodUsernameText">Becky Denson</div>
-                  <div class="emailPasswodUsernameText">Becky Denson</div>
-                   <div class="emailPasswodUsernameText">1234 Grainville Ave</div>
-                    <div class="emailPasswodUsernameText">Lost Angeles, CA 90025</div>
-                     <div class="emailPasswodUsernameText">(123) 456-7890</div>
-                 </div>
-                  <div class="emailPasswodUsernamesEdiBg">
-                  <div class="emailPasswodUsernamesEditText">edit</div>
-                  </div>
-                </div>
-                */
-                ?>
-           </div>
- <!--Left Part END-->
- <!-- Right part Start  -->
-            	<div class="con-right">
-  <div class="accountSectionrightTopHeadBg">
-  <div class="accountRightHeadTxt">Purchase History</div>
-  <div class="haveAQuestionText">Have a Question?</div>
-  </div>
+            <div class="accountSectionrightDropDowndBg">
+            <div class="dropDownBg">
+            <div class="dropDownText">Orders placed in past 6 months</div>
+            </div>
+            </div>
 
-  <div class="accountSectionrightDropDowndBg">
-  <div class="dropDownBg">
-  <div class="dropDownText">Orders placed in past 6 months</div>
-  </div>
-  </div>
-
-  <div class="accountSectionBlueTitle">No Purchases Found.</div>
-  <div class="accountSectionNormalText">Please select another date range.</div>
-  </div>
-                </div>
-      		</div>
-     	</div>
- <!--  Body END-->
-     <div class="blankdiv"></div>
+            <div class="accountSectionBlueTitle">No Purchases Found.</div>
+            <div class="accountSectionNormalText">Please select another date range.</div>
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+ 

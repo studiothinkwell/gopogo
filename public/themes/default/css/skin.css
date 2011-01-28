@@ -1209,7 +1209,7 @@ vertical-align:bottom;
     float:left;
     width:100%;
     height:53px;
-   
+
 }
 .create-ac-leftbg
 {
@@ -1236,7 +1236,7 @@ vertical-align:bottom;
     width:45px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
-   
+
 }
 .create-ac-close
 {
@@ -1290,7 +1290,7 @@ vertical-align:bottom;
 
 .create-ac-input1 input:focus
 {
-    outline:none;    
+    outline:none;
 }
 
 .create-ac-input2
@@ -1526,7 +1526,7 @@ body:nth-of-type(1) .sign-in-create-account
     width:40px;
     height:53px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
-   
+
 }
 .sign-in-bottombg
 {
@@ -1686,7 +1686,7 @@ border:1px solid red;
         src: url('themes/default/images/arial.ttf');
         font-weight:600;
     }
-    
+
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
