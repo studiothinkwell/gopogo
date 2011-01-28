@@ -60,40 +60,23 @@ class User_AccountController extends Zend_Controller_Action
       //$this->_helper->viewRenderer->setNoRender(true);
 
       $user = new Application_Model_DbTable_User();
-
+      $session = GP_GPAuth::getSession();
+      $id     = $session->user_id;
      // collect username and password on the basis of user id
-      $userData = $user->getUserById($_SESSION['user-session']['user_id']);
-      $email    = $userData['user_emailid']; 
-      $password =$userData['user_password']; 
+      
+      $userData = $user->getUserByIdTemp($id);
+      $email    = $userData['user_emailid'];
+      $password = $userData['user_password'];
     
-      $userPartnerData = $user->getUserPartnerById($_SESSION['user-session']['user_id']);
-      $
-      $fullName ='';
-      $fbAccountUserName='';
-      $twitterAccountUserName ='';
-      foreach($userPartnerData as $k => $v)
-      {
-          //print_r($v);
-             if($v['account_type_id'] == 1)
-             {
-                 $fbAccountUserName = $v['account_username'];
-                // echo $value;
-             }
-             if($v['account_type_id'] == 2)
-             {
-                 $twitterAccountUserName = $v['account_username'];
-                // echo $value;
-             }
-
-             $fullName = $v['Name'];
-         }
-
+      
+      //get exisiting username of user by fetching against user id
+      $userData          = $user->getUserUserNameById($id);
+      $username          = $userData['user_name'];
       //print_r($userPartnerData);die;
-      $this->view->email                  =$email;;
-      $this->view->password               = $password;
-      $this->view->fullName               =$fullName;;
-      $this->view->fbUserName             =$fbAccountUserName;;
-      $this->view->twitterUserName        =$twitterAccountUserName;
+      $this->view->email                  = trim($email);
+      $this->view->password               = trim($password);
+      $this->view->userName               = trim($username);
+   
 
     } // end indexAction
 
@@ -362,7 +345,23 @@ class User_AccountController extends Zend_Controller_Action
                 $msg .= $lang_msg;
                 $validFlag = false;
             }
+
             //*/
+		
+	//check email address is present in database or not
+            $user = new Application_Model_DbTable_User();
+            if($validFlag) {
+                // check this email user exist or not
+                $userFlag = $user->checkUserByEmail($email);
+                if($userFlag) {
+
+                } else {
+                    $lang_msg = $this->translate->_("Email address not registered_1");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
 
             if($validFlag){
                 try {
@@ -566,7 +565,8 @@ class User_AccountController extends Zend_Controller_Action
                         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'cdn');
                         $confirmLink = $this->config->baseHttp."/User/Account/confirmemail/verify/".$confirmKey;
                         $username = substr($email, 0, strpos($email,'@'));
-                        GP_GPAuth::sendEmailSignupConfirm($email,$passwd,$confirmLink,$username);
+                        $case = 1;
+                        GP_GPAuth::sendEmailSignupConfirm($email,$passwd,$confirmLink,$username,$case);
 
                         $user = new Application_Model_DbTable_User();
                         //generate confirmation message by using translater
@@ -832,8 +832,498 @@ class User_AccountController extends Zend_Controller_Action
        $captcha->CreateImage();
     }
 
-    public function ajaxupdateemailpass() {
-        $this->_helper->viewRenderer->setNoRender(true);
+     /**
+     * User Account Email Update
+     * @access public
+     * @param String email : email address in post
+     * @return json object - :msg, :status
+     */
+    public function updateaccountemailajaxAction() {
+        $data = array();
 
-    }
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg    = '';
+        $status = 0;
+
+        $session = GP_GPAuth::getSession();
+        $id     = $session->user_id;
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+        //$userData = $user->getUserById($id);
+        //get exisiting email of user by fetching against user id
+        $userData          = $user->getUserById($id);
+        $secondaryEmail    = $userData['user_emailid'];
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            $br = "<br>";
+            $validFlag = true;
+            $primaryEmail = $formData['email'];
+            $checkEmailExist = $user->checkUserByEmail(trim($primaryEmail));
+            $toolKit = new GP_ToolKit();
+            $name = substr($primaryEmail, 0, strpos($primaryEmail,'@'));
+            $validEmail = $toolKit->isValidUserName($name);
+            //print_r($validEmail);
+           // die;
+            // checking for valid email
+            //*
+            if(strlen($primaryEmail) == 0 || $primaryEmail == "Email Address") {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            if($validEmail == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter valid email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            if (Zend_Validate::is($primaryEmail, 'EmailAddress')) {
+                // Yes, email appears to be valid
+            } else {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Enter Valid Email!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+            if($primaryEmail == $secondaryEmail) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Email already Exists!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+           if($checkEmailExist['email_status'] == 'True') {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Email is already assigned to some other user!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            if($validFlag){
+
+                try {
+
+
+                        // update email
+                        $us =$user->updateUserEmail($id,trim($primaryEmail),trim($secondaryEmail));
+
+                        $status = 1;
+
+                        $userStatus = $user->getUserStatus();
+                        if($userStatus != 1)
+                        {
+                            $changeStatus = $user->updateUserStatus($primaryEmail, 1);
+                        }
+                       
+
+                       //$user->logSession($userData);
+
+                       //other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have changed your email Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                                // generate confirmation key
+                        $md5Key = md5($id.$primaryEmail);
+                        $confirmKey = base64_encode($md5Key."###".$primaryEmail);
+                        // send the account confirmation email
+                        //code to get baseurl and assign to view
+                        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'cdn');
+                        $confirmLink = $this->config->baseHttp."/User/Account/confirmemail/verify/".$confirmKey;
+                        $username = substr($primaryEmail, 0, strpos($primaryEmail,'@'));
+                        $case =2;
+                        if (GP_GPAuth::sendEmailSignupConfirm($primaryEmail,$passwd='',$confirmLink,$username,$case)) {
+                            $confirmSent = true;
+                        } else {
+                            $confirmSent = false;
+                        }
+                        $user = new Application_Model_DbTable_User();
+                        //generate confirmation message by using translater
+                        $session = $user->getSession();
+                        $confirmMsg1 = $this->translate->_("Confirm your email address_msg1");
+                        $confirmMsg2 = $this->translate->_("Confirm your email address_msg2");
+                        $session->tooltipMsg1 = $confirmMsg1;
+                        $session->tooltipMsg2 = $confirmMsg2;
+                        $session->tooltipDsp = "hide";
+
+                       if($confirmSent) {
+                           // $gp = new GP_GPAuth();
+                           GP_GPAuth::sendAccountEmailUpdate($secondaryEmail,$primaryEmail);
+                       }
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
+                        $msg .= $lang_msg;
+
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_('Not Found Error!');
+                        $msg .= $lang_msg;
+
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                $this->view->msg = $msg;
+            }
+        } // end of es post
+        else
+        {
+            $lang_msg = $this->translate->_('Post data not available!');
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+    } // end updateAccountEmailAjax
+
+     /**
+     * User Account Password Update
+     * @access public
+     * @param String pass : user password in post
+     * @return json object - :msg, :status
+     */
+    public function updateaccountpassajaxAction()
+    {
+        $data = array();
+
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg    = '';
+        $status = 0;
+
+        $session = GP_GPAuth::getSession();
+        $id     = $session->user_id;
+
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+        $userData = $user->getUserById($id);
+        // create user model object
+        //$user = new Application_Model_DbTable_User();
+       // $userData = $user->getUserById($id);
+       //get exisiting email of user by fetching against user id
+       // $userData          = $user->getUserById($id);
+       // $secondaryEmail    = $userData['user_emailid'];
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $currentPassword = $formData['current_pass'];
+            $newPassword     = $formData['new_pass'];
+            $retypePassword  = $formData['retype_pass'];
+
+            //fetch user's actual encrypted password from db
+            $userData = $user->getUserById($id);
+            $userEmail = $userData['user_emailid'];
+            $Originalpassword = $userData['user_password'];
+            //check whether user's posted current password is same as it is in db
+
+            $encPass = $user->encryptPassword($currentPassword);
+            //check for current password
+            if(strlen($currentPassword) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter current password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            // check length of current passowrd
+            if ($validFlag && Zend_Validate::is(strlen($currentPassword), 'Between', array('min' => 6, 'max' => 16))) {
+                // Yes, $value is between 1 and 12
+            } else if($validFlag) {
+                $msg .="Current Password length must be between 6-16!";
+                $validFlag = false;
+            }
+            //echo 'posted-'.  $encryptPass = $userData['user_password'];
+            if($validFlag && $Originalpassword == $encPass) { 
+                //password values are matching
+            }
+            else if($validFlag) {
+            $lang_msg = $this->translate->_("Please enter correct current password!");
+            $msg .= $lang_msg;
+            $validFlag = false;
+            }
+
+   
+            if(strlen($newPassword) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter New Password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            // check length of new passowrd
+            if ($validFlag && Zend_Validate::is(strlen($newPassword), 'Between', array('min' => 6, 'max' => 16))) {
+                // Yes, $value is between 1 and 12
+            } else if($validFlag) {
+                $msg .="New Password length must be between 6-16!";
+                $validFlag = false;
+            }
+
+            if(strlen($retypePassword) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter retype password!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            // check length of retype passowrd
+            if ($validFlag && Zend_Validate::is(strlen($retypePassword), 'Between', array('min' => 6, 'max' => 16))) {
+                // Yes, $value is between 1 and 12
+            } else if($validFlag) {
+                $msg .= "Retype Password length must be between 6-16!";
+                $validFlag = false;
+            }
+
+            //
+            if($validFlag && !empty ($newPassword) && !empty ($retypePassword) && trim($newPassword)==trim($retypePassword)) {
+
+            } else if($validFlag) {
+                $lang_msg = $this->translate->_("New Passowrd and Retype passowrd are not matching!");
+                $msg .= $lang_msg;
+                $validFlag = false;
+            }
+
+
+            if($validFlag){
+
+                try {
+                        // update pass
+                        $us =$user->updateUserPass($id,trim($newPassword));
+                        $status = 1;
+
+                       //$user->logSession($userData);
+
+                       //other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have changed your password Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+                               
+                        $gp = new GP_GPAuth();
+                        $username = substr($userEmail, 0, strpos($userEmail,'@'));
+                        $gp->sendAccountPasswordChange($userEmail,$newPassword,$username);
+
+                        //$this->_helper->redirector('profile');
+
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
+                        $msg .= $lang_msg;
+
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_('Not Found Error!');
+                        $msg .= $lang_msg;
+
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                $this->view->msg = $msg;
+            }
+        } // end of es post
+        else
+        {
+            $lang_msg = $this->translate->_('Post data not available!');
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+
+    } //end of updateAccountPassAjaxAction
+
+     /**
+     * User Account User Name Update
+     * @access public
+     * @param String email : username in post
+     * @return json object - :msg, :status
+     */
+    public function updateaccountusernameajaxAction() {
+        $data = array();
+
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
+        $msg    = '';
+        $status = 0;
+
+        $session = GP_GPAuth::getSession();
+        $id     = $session->user_id;
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+        //$userData = $user->getUserById($id);
+      
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            $br = "<br>";
+            $validFlag = true;
+            $userName = $formData['username'];
+            //get exisiting username of user by fetching against user id
+            $userData          = $user->getUserUserNameById($id);
+            $assignedUsername  = $userData['user_name'];
+            //check the uniqueness of username
+            $checkUsername     = $user->checkUniqueUserName($userName);
+
+            // checking for valid email
+            //*
+            if(strlen($userName) == 0) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("Please enter username!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+           
+            if($userName == $assignedUsername) {
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("This username is already assigned to you!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+   
+            if($checkUsername['user_name'] == 'True') { 
+                if($validFlag) {
+                    $lang_msg = $this->translate->_("This username is already assigned to some other user!");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
+
+            if($validFlag){
+
+                try {
+
+
+                        // update email
+                        $us =$user->updateUserName($id,trim($userName));
+
+                        $status = 1;
+
+                       //$user->logSession($userData);
+
+                       //other data
+
+                        $lang_msg = $this->translate->_('Welcome! You have changed your username Successfully!');
+
+                        $this->_helper->flashMessenger->addMessage($lang_msg);
+
+                        $msg = $lang_msg;
+
+                } catch (Some_Component_Exception $e) {
+                    if (strstr($e->getMessage(), 'unknown')) {
+                        // handle one type of exception
+
+                        $lang_msg = $this->translate->_('Unknown Error!');
+
+                        $msg .= $lang_msg;
+
+                    } elseif (strstr($e->getMessage(), 'not found')) {
+                        // handle another type of exception
+                        $lang_msg = $this->translate->_('Not Found Error!');
+                        $msg .= $lang_msg;
+
+                    } else {
+                        $lang_msg = $this->translate->_($e->getMessage());
+                        $msg .= $lang_msg;
+                    }
+                }
+
+                $this->view->msg = $msg;
+
+            }else{
+                $this->view->msg = $msg;
+            }
+        } // end of es post
+        else
+        {
+            $lang_msg = $this->translate->_('Post data not available!');
+            $msg = $lang_msg;
+        }
+
+        // log error if not success
+
+        if($status != 1)
+        {
+            $logger = Zend_Registry::get('log');
+            $logger->log($msg,Zend_Log::DEBUG);
+
+            //throw new Exception($msg,Zend_Log::DEBUG);
+        }
+
+        $data['msg'] =  $msg;
+        $data['status'] =  $status;
+
+        // return json response
+        $this->_helper->json($data, array('enableJsonExprFinder' => true));
+
+    } // end updateaccountusernameajaxAction
+
+
 }  
