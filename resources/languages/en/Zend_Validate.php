@@ -313,6 +313,26 @@ return array(
     "Post data not available!"=>"Post data not available!",
 
 
+    //Account
+    "Email already Exists!"=>"Email already Exists!",
+    "Please enter correct current password!"=>"Please enter correct password",
+    "Welcome! You have changed your password Successfully!"=>"Welcome! You have changed your password Successfully!",
+    "Password update mail"=>"Password Update info has been sent to your email, ",
+    "Your gopogo account password has been changed"=>"Your gopogo account password has been changed",
+    "Please enter username"=>"Please enter username",
+    "This username is already assigned to you!"=>"This username is already assigned to you!",
+    "This username is already assigned to some other user!"=>"This username is already assigned to some other user!",
+    "Welcome! You have changed your username Successfully!"=>"Welcome! You have changed your username Successfully!",
+    "Current Password length must be between 6-16!"=>"Current Password length must be between 6-16!",
+    "Please enter current password!"=>"Please enter current password!",
+    "Please enter correct current password!"=>"Please enter correct current password!",
+    "Your gopogo account email has been changed"=>"Your gopogo account email has been changed",
+    "Email is already assigned to some other user!"=>"Email is already assigned to some other user!",
+    "Please enter valid email!"=>"Please enter valid email.Only letters,numbers or underscore is allowed in email!",
+    "Confirm your updated gopogo email!"=>"Confirm your updated gopogo email",
+    "You have change your gopogo email!"=>"You have change your gopogo email!",
+    "You have changed your gopogo password!"=>"You have changed your gopogo password!",
+    "Username not valid! Username must start with alphabet character and allowed characters a-zA-Z0-9 and underscore."=>"Username not valid! Username must start with alphabet character and allowed characters a-zA-Z0-9 and underscore.",
 
 
     // End GOPOGO messages -----------------------------------------

@@ -11,8 +11,15 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
-
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
+
+//account email update url
+app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
+//account pass update url
+app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
+//account username update url
+app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
+
 
 // add events on load
 
@@ -49,12 +56,12 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
        );
 
     // add create account event
-    $(".clsSignUp").click(function(){
-        $("#loginBox").css({display:'none'});
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
-        $().setdefaultval();
-        $(".clsSignUpEmail").focus();
-    });
+//    $(".clsSignUp").click(function(){
+//        $("#loginBox").css({display:'none'});
+//        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
+//        $().setdefaultval();
+//        $(".clsSignUpEmail").focus();
+//    });
 
     // add signin  event
     $(".login").click(function(){
@@ -77,7 +84,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
     $("#logout").click(function(){
         $().doLogout();
     });
-    // add forgot password event 
+    // add forgot password event
     $("#forgotSubmitBox").click(function(){
         $().debugLog('forgotSubmitBox');
         $().doForgot();
@@ -109,9 +116,9 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
    }); // end of loginBoxForm
    */
 
-   
 
-  
+
+
 // functions to handle the login / signin
 
         // do login
@@ -231,16 +238,16 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
                     }
                 },
                 success: function(resp){
-                    // do something with resp                    
-                        if(resp.status == 1) // show error message
-                        {
-                            $().signupSuccess(resp);
-                        }
-                        else
-                        {
-                            if(resp.status != 1)
-                                $().signupFail(resp);
-                        }                    
+                    // do something with resp
+                    if(resp.status == 1) // show error message
+                    {
+                        $().signupSuccess(resp);
+                    }
+                    else
+                    {
+                        if(resp.status != 1)
+                            $().signupFail(resp);
+                    }
                 },
                 complete: function(resp){
                     if(resp.readyState == 4)
@@ -453,15 +460,16 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
             {
                 alert(msg);
             }
+            return;
         }
 
         //function to show tooltip for error messages
         $.fn.showErrorTooltip = function (msg,msgid) {
-            $(".clsErrorMsg").removeAttr('style');
-            var body=document.getElementsByTagName('body')[0];
-            body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
-            $(".clsBlankDiv").attr('style','height:208px');
-            if(msg != "sessionErr") {
+        $(".clsErrorMsg").removeAttr('style');
+        var body=document.getElementsByTagName('body')[0];
+        body.style.backgroundImage='url(/themes/default/images/bg-left1.png)';
+        $(".clsBlankDiv").attr('style','height:208px');
+        if(msg != "sessionErr") {
                 $().finish();
                 $(".clsErrorText").text(msg);
                 if(msgid=="signup_error_msg") {
@@ -477,6 +485,9 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
 
         //function to show tooltip for success messages
         $.fn.showSuccessTooltip = function (msg) {
+            if(msg) {
+                $(".clsMSuccess").text(msg);
+            }
             $().finish();
             $(".clsSuccessMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
@@ -517,7 +528,8 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         }
-        
+
+
         $('.submenu-box .submenu-div').hover
         (
            function()
@@ -535,7 +547,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
 
         // functions to explode string works same as php explode function
         $.fn.explode = function (delimiter, string, limit) {
-             var emptyArray = {0: ''};
+             var emptyArray = { 0: '' };
 
             // third argument is not required
             if ( arguments.length < 2 ||
@@ -551,7 +563,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
                 typeof delimiter == 'object' ||
                 typeof string == 'function' ||
                 typeof string == 'object' ) {
-                return emptyArray;}
+                return emptyArray;    }
 
             if ( delimiter === true ) {
                 delimiter = '1';
@@ -563,7 +575,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
                 var partA = splitted.splice(0, limit - 1);
                 var partB = splitted.join(delimiter.toString());
                 partA.push(partB);
-                return partA;}
+                return partA;    }
         };
 
 
@@ -575,7 +587,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
 
               $().debugLog(formId+' bind');
               $().debugLog(callbackfun);
-              
+
               // track enter key
               var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
 
@@ -599,17 +611,13 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
 
        }; // end of do formEnterKey
 
-
-// set enter on form
-       // set enter key action for login form
+       // // set enter key action for login form
        $().formEnterKey('loginBoxForm',$().doLogin);
 
        // // set enter key action for signup form
        $().formEnterKey('signupBoxForm',$().doSignup);
-
        // // set enter key action for forgot password form
        $().formEnterKey('forgotBoxForm',$().doForgot);
-
 
     /**
      * This will show success message when profile page loads
@@ -620,8 +628,7 @@ app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyin
         body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
         $(".clsBlankDiv").attr('style','height:208px');
         $(".clsErrorText").text();
-    } else if ($("#msgInput").val() == 'showError') { 
+    } else if ($("#msgInput").val() == 'showError') {
         $().showErrorTooltip('sessionErr','');
     }
-
-}); 
+});
