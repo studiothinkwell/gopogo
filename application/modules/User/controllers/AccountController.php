@@ -56,45 +56,8 @@ class User_AccountController extends Zend_Controller_Action
     } // end init
 
     public function indexAction()
-    {
-<<<<<<< HEAD
-      //$this->_helper->viewRenderer->setNoRender(true);
+    {      
 
-      $user = new Application_Model_DbTable_User();
-
-     // collect username and password on the basis of user id
-      $userData = $user->getUserById($_SESSION['user-session']['user_id']);
-      $email    = $userData['user_emailid']; 
-      $password =$userData['user_password']; 
-    
-      $userPartnerData = $user->getUserPartnerById($_SESSION['user-session']['user_id']);
-      $fullName ='';
-      $fbAccountUserName='';
-      $twitterAccountUserName ='';
-      foreach($userPartnerData as $k => $v)
-      {
-          //print_r($v);
-             if($v['account_type_id'] == 1)
-             {
-                 $fbAccountUserName = $v['account_username'];
-                // echo $value;
-             }
-             if($v['account_type_id'] == 2)
-             {
-                 $twitterAccountUserName = $v['account_username'];
-                // echo $value;
-             }
-
-             $fullName = $v['Name'];
-         }
-
-      //print_r($userPartnerData);die;
-      $this->view->email                  =$email;;
-      $this->view->password               = $password;
-      $this->view->fullName               =$fullName;;
-      $this->view->fbUserName             =$fbAccountUserName;;
-      $this->view->twitterUserName        =$twitterAccountUserName;
-=======
         //$this->_helper->viewRenderer->setNoRender(true);
 
         $session = GP_GPAuth::getSession();
@@ -125,7 +88,7 @@ class User_AccountController extends Zend_Controller_Action
         //$this->view->password               = trim($password);
         $this->view->userName               = trim($username);
 
->>>>>>> ab3ff2b52b75114b4863e2cf96ba033fff1db0e7
+
 
     } // end indexAction
 
@@ -751,11 +714,9 @@ class User_AccountController extends Zend_Controller_Action
      * @param String email : email address in post
      * @return json object - :msg, :status
      */
-<<<<<<< HEAD
-     public function fbsigninAction() { 
-=======
+
     public function fbsigninAction() {
->>>>>>> ab3ff2b52b75114b4863e2cf96ba033fff1db0e7
+
         $this->_helper->viewRenderer->setNoRender(true);
         $session1 = GP_GPAuth::getSession();
         // user_id
@@ -775,7 +736,7 @@ class User_AccountController extends Zend_Controller_Action
         // create facebook object
         $facebook = Facebook_FbClass::getConfig();
         $userData = $facebook->FBLogin();
-<<<<<<< HEAD
+
         //print_r($userData);exit;
         if(is_array($userData)) { 
             // check this email user exist or not
@@ -803,34 +764,7 @@ class User_AccountController extends Zend_Controller_Action
             }
                 try {
                         $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
-=======
-        // check this email user exist or not
-        $userFlag = $user->checkUserByEmail($userData['Email']);
-        $udata['user_emailid'] = $userData['Email'];
-        $udata['FacebookId'] = $userData['UserID'];
-        $udata['UserName'] = $userData['Name'];
-        // create random password
-        $temp_password = $user->createRandomKey(6);
-        $enctemp_password = $user->encryptPassword($temp_password);
-        $udata['TempPass'] = $enctemp_password;
-        $status = 0;
-        $msg = "";
-        // create user model object
-        if ($userFlag) {
-            $userData = $user->getUserByEmail($userData['Email']);
-        }else {
-            $status = $user->fbsignup($udata);
 
-            // check and get user data if email and password match
-            $userData = $user->getUserByEmailAndPassword($userData['Email'],$temp_password);
-            $session = GP_GPAuth::getSession();
-            $session->isSignedUp = "fbSignUp";
-            // send the welcome email
-            GP_GPAuth::sendEmailSignupWelcome($userData['Email'],$temp_password);
-        }
-            try {
-                    $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
->>>>>>> ab3ff2b52b75114b4863e2cf96ba033fff1db0e7
 
                         if($userData)
                         {

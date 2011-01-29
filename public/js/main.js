@@ -11,7 +11,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
-<<<<<<< HEAD
+
 app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 // message detail page
 app.gopogo.messagedtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
@@ -21,7 +21,7 @@ app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/profile/ajaxreplymsg';
 app.gopogo.msglist_url = app.gopogo.baseurl + 'User/profile/ajaxmsglist';
 // message detail url
 app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
-=======
+
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 
 //account email update url
@@ -31,8 +31,6 @@ app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateacco
 //account username update url
 app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
 
-
->>>>>>> ab3ff2b52b75114b4863e2cf96ba033fff1db0e7
 // add events on load
 
 /**
