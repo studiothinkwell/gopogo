@@ -67,7 +67,6 @@ class User_AccountController extends Zend_Controller_Action
       $password =$userData['user_password']; 
     
       $userPartnerData = $user->getUserPartnerById($_SESSION['user-session']['user_id']);
-      $
       $fullName ='';
       $fbAccountUserName='';
       $twitterAccountUserName ='';
@@ -322,7 +321,6 @@ class User_AccountController extends Zend_Controller_Action
 
     public function forgotpasswordAction()
     {
-
         $data = array();
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
 
@@ -354,20 +352,33 @@ class User_AccountController extends Zend_Controller_Action
             $userSession = new Zend_Session_Namespace('user-session');
             $captcha = $formData['captcha'];
             //if ($_SESSION['captcha'] == $_POST['captcha']) {
-            if( !empty($userSession) && !empty($userSession->captcha) && $userSession->captcha==$captcha ){
-                // Yes, captcha is valid
-            } else {
-                 $lang_msg = $this->translate->_("Invalid captcha");
-                //$msg .= str_replace('%value%', $email, $lang_msg);
-                $msg .= $lang_msg;
-                $validFlag = false;
+            if($validFlag) {
+                if( !empty($userSession) && !empty($userSession->captcha) && $userSession->captcha==$captcha ){
+                    // Yes, captcha is valid
+                } else {
+                     $lang_msg = $this->translate->_("Invalid captcha");
+                    //$msg .= str_replace('%value%', $email, $lang_msg);
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
             }
             //*/
+            //check email address is present in database or not
+            $user = new Application_Model_DbTable_User();
+            if($validFlag) {
+                // check this email user exist or not
+                $userFlag = $user->checkUserByEmail($email);
+                if($userFlag) {
+
+                } else {
+                    $lang_msg = $this->translate->_("Email address not registered_1");
+                    $msg .= $lang_msg;
+                    $validFlag = false;
+                }
+            }
 
             if($validFlag){
                 try {
-                    $user = new Application_Model_DbTable_User();
-
                     // reset temporary password
                     $temp_password = $user->getUserFogotPassword($email);
 
@@ -529,7 +540,7 @@ class User_AccountController extends Zend_Controller_Action
             // check this email user exist or not
             $userFlag = $user->checkUserByEmail($email);
 
-            if($userFlag){
+            if($userFlag['user_emailid']=='True') {
                 if($validFlag) {
                     $lang_msg = $this->translate->_("User already signedup by this email : '%value%'");
                     $msg .= str_replace('%value%', $email, $lang_msg);

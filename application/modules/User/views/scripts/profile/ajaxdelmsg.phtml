@@ -1,0 +1,19 @@
+<div>
+    <?php if(sizeof($this->commentArr)>0) {
+        foreach ($this->commentArr as $comment) { ?>
+        <div style="font-size: 15px">
+            <div> <input type="checkbox" onclick="alert(1)"> image  &nbsp;&nbsp;<b><?php echo $comment['commentAuthor'];?> &nbsp;&nbsp;</b></div>
+            <div></div>
+            <div>
+                <?php echo $comment['comment'];?><br />
+            </div>
+        </div><div class="rg-thum-content" style="width:83px"></div>
+    <?php }
+    }
+    ?>
+    <div>
+        Reply<br/>
+        <textarea rows="5" cols="25"></textarea>
+        <input type="button" onclick="doReplyMsg()" name="" id="" value="Reply"/>
+    </div>
+</div>

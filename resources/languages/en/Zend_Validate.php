@@ -284,6 +284,8 @@ return array(
     "We have send a mail to your provided email, check the email and follow the steps form given link!"=>"New password is sent to your mail account!",
     "You have requested Gopogo - forgot password!"=>"You have requested Gopogo - forgot password!",
     "Invalid captcha" =>"Invalid captcha",
+    "Email address not registered_1" =>"Provided email address is not present in our database",
+    "Email address not registered_2" =>"Provide your correct email address",
 
     // signup
     "Passowrd and Retype passowrd does not match!" => "Password and Retype password does not match!",
@@ -300,7 +302,7 @@ return array(
     "Invalid verification key"=>"The combination of verification key is invalid!",
     "Verifiction key expired"=>"or Your verification key is expired",
     "Your account allready verified_msg1" => "Your account allready verified",
-    "Your account allready verified_msg2" => "Please Login to access Gopogo",
+    "Your account allready verified_msg2" => "Please use your email id and password to access Gopogo",
     // general----
 
     // Unknown Error!
