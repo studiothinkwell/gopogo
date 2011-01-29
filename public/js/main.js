@@ -11,6 +11,7 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
+<<<<<<< HEAD
 app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 // message detail page
 app.gopogo.messagedtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
@@ -20,6 +21,18 @@ app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/profile/ajaxreplymsg';
 app.gopogo.msglist_url = app.gopogo.baseurl + 'User/profile/ajaxmsglist';
 // message detail url
 app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+=======
+app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
+
+//account email update url
+app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
+//account pass update url
+app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
+//account username update url
+app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
+
+
+>>>>>>> ab3ff2b52b75114b4863e2cf96ba033fff1db0e7
 // add events on load
 
 /**
@@ -55,12 +68,12 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
        );
 
     // add create account event
-    $(".clsSignUp").click(function(){
-        $("#loginBox").css({display:'none'});
-        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
-        $().setdefaultval();
-        $(".clsSignUpEmail").focus();
-    });
+//    $(".clsSignUp").click(function(){
+//        $("#loginBox").css({display:'none'});
+//        $().displayModalBox("#signupBox", ".create-ac-head", ".create-ac-centerbg");
+//        $().setdefaultval();
+//        $(".clsSignUpEmail").focus();
+//    });
 
     // add signin  event
     $(".login").click(function(){
@@ -83,7 +96,7 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
     $("#logout").click(function(){
         $().doLogout();
     });
-    // add forgot password event 
+    // add forgot password event
     $("#forgotSubmitBox").click(function(){
         $().debugLog('forgotSubmitBox');
         $().doForgot();
@@ -115,9 +128,9 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
    }); // end of loginBoxForm
    */
 
-   
 
-  
+
+
 // functions to handle the login / signin
 
         // do login
@@ -458,6 +471,7 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
             {
                 alert(msg);
             }
+            return;
         }
 
         //function to show tooltip for error messages
@@ -482,6 +496,9 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
 
         //function to show tooltip for success messages
         $.fn.showSuccessTooltip = function (msg) {
+            if(msg) {
+                $(".clsMSuccess").text(msg);
+            }
             $().finish();
             $(".clsSuccessMsg").removeAttr('style');
             var body=document.getElementsByTagName('body')[0];
@@ -522,7 +539,8 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         }
-        
+
+
         $('.submenu-box .submenu-div').hover
         (
            function()
@@ -580,7 +598,7 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
 
               $().debugLog(formId+' bind');
               $().debugLog(callbackfun);
-              
+
               // track enter key
               var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
 
@@ -609,7 +627,6 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
 
        // // set enter key action for signup form
        $().formEnterKey('signupBoxForm',$().doSignup);
-
        // // set enter key action for forgot password form
        $().formEnterKey('forgotBoxForm',$().doForgot);
 
@@ -622,7 +639,7 @@ app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
         body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
         $(".clsBlankDiv").attr('style','height:208px');
         $(".clsErrorText").text();
-    } else if ($("#msgInput").val() == 'showError') { 
+    } else if ($("#msgInput").val() == 'showError') {
         $().showErrorTooltip('sessionErr','');
     }
-}); 
+});
