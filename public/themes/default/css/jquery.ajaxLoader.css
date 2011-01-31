@@ -1,0 +1,4 @@
+div.jquery-ajax-loader {
+	background: url(/themes/default/images/jquery.ajaxLoader.gif) no-repeat 50% 50%;
+	opacity: .6;
+}
