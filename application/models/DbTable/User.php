@@ -1236,8 +1236,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $stmt->execute();
             $stmt->closeCursor();
             $logger = Zend_Registry::get('log');
-            
-        } catch (Some_Component_Exception $e) {
+            } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";
@@ -1249,7 +1248,42 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             }
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
-        }catch(Exception $e){
+        }
+    }
+
+     /* User Partners : get user partners by user id
+     * @access public
+     * @param user_id  : user id
+     *
+     * @return Array | bool : user's master data
+     *
+     */
+
+    public function getUserPartners($user_id) {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+                // Stored procedure returns a single row
+                $stmt = $db->prepare('CALL sp_select_user_other_account_username_by_user_id(:user_id)');
+                $stmt->bindParam('user_id', $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $rowArray = $stmt->fetchAll();
+                $stmt->closeCursor();
+                if (!($rowArray) || empty ($rowArray)) {
+                    return FALSE;
+                }else {
+                if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+                    return $rowArray;
+                }
+                else {
+                    return FALSE;
+                }
+            }
+        }
+        catch(Exception $e){
             $lang_msg = $e->getMessage();
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);

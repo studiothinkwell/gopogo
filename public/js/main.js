@@ -37,6 +37,9 @@ app.gopogo.fbRemoveEmail_url = app.gopogo.baseurl + 'User/Account/ajaxremovefbem
 //sign up facebook signup url
 app.gopogo.fbsignup_url = app.gopogo.baseurl + 'User/Account/fbsignin';
 
+//account partner remove url
+app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/removepartnerajax/';
+
 // add events on load
 
 /**

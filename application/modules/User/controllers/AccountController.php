@@ -78,6 +78,23 @@ class User_AccountController extends Zend_Controller_Action
         //$this->view->password = trim($password);
         $this->view->userName = trim($username);
 
+
+
+        // get partner infromation
+
+        $user = new Application_Model_DbTable_User();
+
+        $partnersData = $user->getUserPartners($id);
+
+        //echo "<pre>";
+        //print_r($partnersData);
+
+        $reindexPartners = $this->reindexPartners($partnersData);
+        //echo "<pre>";
+        //print_r($reindexPartners);
+        $this->view->partners   = $reindexPartners;        
+
+
         // create user model object
         $user = new Application_Model_DbTable_User();
         // check and get user data if email and password match
@@ -95,6 +112,24 @@ class User_AccountController extends Zend_Controller_Action
         $this->view->assign('facebookName',$facebookName);
         $this->view->assign('twitterName',$twitterName);
     } // end indexAction
+
+    /**
+     *  Re-index the partner array by accoun type id
+     * @param Array $partners : parters list
+     * @return Array $partners : parters list
+     */
+    function reindexPartners($partners)
+    {
+        $reIndexParters = array();
+
+        if(!empty ($partners) && is_array($partners) && count($partners)>0){
+            foreach($partners as $partner)
+            {
+                 $reIndexParters[$partner['account_type_id']] = $partner;
+            }
+        }
+        return $reIndexParters;
+    }
 
     /**
      * User login
