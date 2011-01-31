@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Twitter GOPOGO</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <?php
+        $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $baseUrl = $config->gopogo->url->base;
+        ?>
+        <script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery-1.4.2.js"></script>  
+    </head>
+    <body>
+            
+        <?php //echo $this->content->screen_name; ?>
+        Could not connect to Twitter. Refresh the page or try again later.
+        <script type="text/javascript" >
+
+        var gopogo = {};
+            gopogo.twitter = {'id':'<?php echo $this->content->id; ?>','screen_name':'<?php echo $this->content->screen_name; ?>','name':'<?php echo $this->content->name; ?>'};
+        
+        $(document).ready(function(){            
+
+            if(typeof gopogo != undefined &&  typeof gopogo.twitter != undefined ){
+                //console.log(gopogo.twitter);
+                
+                //window.opener
+
+                //console.log(window.opener);
+                //console.log(window.opener.location);
+
+                window.opener.$('.dsplUpdateTwitter').html('@'+gopogo.twitter.screen_name);
+
+                window.opener.$('.twitterBox1').removeClass('d1').addClass("d2");
+                window.opener.$('.twitterBox2').removeClass('d2').addClass("d1");
+
+                window.close();
+
+            }
+
+        });
+        </script>
+        
+    </body>
+</html>

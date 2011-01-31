@@ -20,6 +20,8 @@ app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateacco
 //account username update url
 app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
 
+//account partner remove url
+app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/removepartnerajax/';
 
 // add events on load
 
