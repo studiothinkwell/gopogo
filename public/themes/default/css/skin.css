@@ -1236,7 +1236,7 @@ vertical-align:bottom;
     float:left;
     width:45px;
     height:53px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -50px 2px transparent;
 
 }
 .create-ac-close
@@ -1264,7 +1264,7 @@ vertical-align:bottom;
     float:left;
     width:583px;
     min-height:50px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -302px -10px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -301px -8px transparent;
 }
 .create-ac-left
 {
@@ -1428,8 +1428,8 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:23px;
-    left:12px;
-    *left:4px;
+    left:13px;
+    *left:5px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
 }
@@ -1526,7 +1526,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:40px;
     height:53px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -51px 2px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -50px 2px transparent;
 
 }
 .sign-in-bottombg
@@ -1535,7 +1535,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:346px;
     height:57px;
-    background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll 0px -15px transparent;
+    background:url(/themes/default/images/sign-in-botom-bg.png) no-repeat scroll -3px -14px transparent;
 }
 .sign-in-right, .forgot-box
 {
@@ -1694,7 +1694,7 @@ border:1px solid red;
 
     .create-ac-create-but
     {
-        left:4px;
+        left:5px;
     }
 }
 
