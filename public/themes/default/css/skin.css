@@ -1686,6 +1686,7 @@ border:1px solid red;
         src: url('themes/default/images/arial.ttf');
         font-weight:600;
     }
+
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
@@ -2003,6 +2004,37 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	text-align:right;
 }
 /************************************** My Account END **************************************/
+
+
+#createNewPlaylist
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    width:400px;
+    height:auto;
+    border:0px solid red;
+    display: none;
+    top:0px;
+    left:0px
+}
+
+
+/*******safari and opera coding start*********/
+
+html[xmlns*=""].create-ac-create-but
+    {
+        left:40px;
+    }
+
+/*******safari and opera coding end*********/
+
+
+
+
+
+
 /**** 24 jan 2011 accountsection css classes start here ***/
 
 .accountLeftHeadTxt{
@@ -2046,10 +2078,12 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	float:left;
 	margin-left:22px;
 	width:614px;
-	/*padding-top:7px;*/
+	padding-top:7px;
 	border-top:2px solid #dedede;
 	}
-
+.accountSectionInnerLayout a {
+      color:#3B7F97;
+}
 .emailPasswodUsernameHeadBg{
 	float:left;
 	width:16%;
@@ -2067,6 +2101,14 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	line-height:22px;
 	}
 
+.emailPasswodUsernameHeadTextNormal{
+	font-size:12px;
+	margin-left:3px;
+	color:#363231;
+	text-decoration:none;
+	text-align:left;
+	line-height:22px;
+	}
 .emailPasswodUsernamesBg{
 	float:left;
 	width:24%;
@@ -2076,7 +2118,7 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 .emailPasswodUsernameText{
 	font-size:12px;
 	font-weight:normal;
-	margin-left:7px;
+	margin-left:3px;
 	color:#363231;
 	text-decoration:none;
 	text-align:left;
@@ -2146,7 +2188,7 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	margin-left:7px;
 	width:100%;
 	padding-top:5px;
-	background:url(/themes/default/images/inner-page-img.png) no-repeat scroll -72px -258px transparent;
+	background:url((/themes/default/images/inner-page-img.png) no-repeat scroll -72px -258px transparent;
 	height:35px;
 	}
 
@@ -2187,7 +2229,3 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	width:100%;
 	text-align:left;
 	}
-.h1{
-   height:1px;
-}
-/**** 24 jan 2011 accountsection css classes start here ***/ 
