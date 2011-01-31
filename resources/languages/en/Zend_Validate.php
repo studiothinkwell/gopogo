@@ -302,7 +302,7 @@ return array(
     "Invalid verification key"=>"The combination of verification key is invalid!",
     "Verifiction key expired"=>"or Your verification key is expired",
     "Your account allready verified_msg1" => "Your account allready verified",
-    "Your account allready verified_msg2" => "Please Login to access Gopogo",
+    "Your account allready verified_msg2" => "Please use your email id and password to access Gopogo",
     // general----
 
     // Unknown Error!

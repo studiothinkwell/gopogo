@@ -302,14 +302,25 @@ $(".clsEUPro").click(function(){
 
     $.fn.validateUsername = function(username){
         /***
-         *  And if you want to allow underscore only as concatenation character and
-         * want to force that the username must start with a alphabet character:
+         *  if you want to allow underscore only as concatenation character and
+         *  want to force that the username must start with a alphabet character:
          */
         var regex = /^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/;
         var uvlFlag = regex.test(username);
         $().debugLog(uvlFlag);
         return uvlFlag;
     }
+
+    // validate email : return true / false
+
+    $.fn.validateEmail = function(email){
+        var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        var evlFlag = regex.test(email);
+        $().debugLog(evlFlag);
+        return evlFlag;
+    }
+
+
 
 
 });

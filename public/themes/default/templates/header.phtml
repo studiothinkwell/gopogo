@@ -14,6 +14,8 @@
     
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
+//  GP_Asset::addCss('/themes/default/css/jquery.rating.css');
+//  GP_Asset::addCss('/themes/default/css/jquery.ajaxLoader.css');
     GP_Asset::combieAndLoadCss();
 ?>
 </head>
@@ -26,7 +28,6 @@
     $fbLogin = false;
     $userEmailId = '';
     $user_name = '';
-
     if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
         $loginFlag = true;
         $userName = $session->user_name;
@@ -90,6 +91,7 @@
                             <?php if(!isset($session->fbLogoutUrl) || $session->fbLogoutUrl == "#"){
                                     $facebook = Facebook_FbClass::getConfig();
                                     $fbArray = $facebook->FBLogin();
+                                    //print_r($fbArray);
                                     if(is_array($facebook->FBLogin())) {
                                         $logout = 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl();
                                         $session->fbLogoutUrl = $facebook->getLogoutUrl($logout);

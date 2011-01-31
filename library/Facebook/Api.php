@@ -114,9 +114,29 @@ class Facebook_Api {
             e.async = true;
             document.getElementById('fb-root').appendChild(e);
             }());
-            </script>
 
-            <fb:login-button perms=\"" . $this->Permissions . "\" onlogin='" . $this->CallBack . "'>Connect</fb:login-button>
+            function fblogin() {
+                FB.login(function(response) {
+                  if (response.session) {
+                    if (response.perms) {
+                      // user is logged in and granted some permissions.
+                      // perms is a comma separated list of granted permissions
+                      getstatus();
+                      window.location='http://mujaffar.mygopogo.com/User/Account/fbsignin';
+                    } else {
+                      // user is logged in, but did not grant any permissions
+                    }
+                  } else {
+                    // user is not logged in
+                  }
+                }, {perms:'email'});
+
+            }
+
+            
+            </script>
+            <!-- <a href='#' onclick='fblogin()'><img src='http://mujaffar.mygopogo.com/themes/default/images/facebook-login-button.png'></a> -->
+            <fb:login-button perms=\"" . $this->Permissions . "\" onlogin='showloader(); " . $this->CallBack . "'>Connect</fb:login-button>
           ";
     }
 
@@ -165,7 +185,7 @@ class Facebook_Api {
      *
      * @return mixed
      */
-    function FBLogin() {
+   public function FBLogin() {
         $session = $this->_facebook->getSession();   
         $me = null;
         if ($session) { 
