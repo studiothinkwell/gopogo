@@ -115,7 +115,7 @@ class Facebook_Api {
             document.getElementById('fb-root').appendChild(e);
             }());            
             </script>
-             <div> <a href='#' class='fbLogin' onclick='fblogin()'>&nbsp;</a> </div>
+             <div> <a href='#' class='fbLogin' onclick='fblogin()'></a> </div>
             <!-- <fb:login-button perms=\"" . $this->Permissions . "\" onlogin='jsfblogin(); " . $this->CallBack . "'>Connect</fb:login-button> -->
           ";
     }

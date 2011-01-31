@@ -266,10 +266,15 @@
                         <div class="accountSectionPasswordbg">
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
-                                <div class="emailPasswodUsernameTextNew2 ">
+<!--                                <div class="emailPasswodUsernameTextNew2 ">
                                     <div class=" ">
                                         <a href="#"><input type="button" value="Connect with Facebook" id="facebook-connect" /></a>
                                     </div>
+                                </div>-->
+                                 <div class="emailPasswodUsernameTextNew2 clsFbEmail">
+                                 <?php if($this->facebookName) { echo $this->facebookName; }
+                                       else if (empty($this->facebookName)) { echo $facebook->FBLogin(); }
+                                  ?>
                                 </div>
                             </div>
                         </div>
