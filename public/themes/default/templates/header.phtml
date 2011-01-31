@@ -11,10 +11,28 @@
 <?php
     echo $this->headTitle();
     echo $this->headMeta();
-    
+
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
+
     GP_Asset::addCss('/themes/default/css/jquery.ajaxLoader.css');
+
+    $browser = new GP_Browser();
+
+    switch($browser->getBrowser())
+    {
+       case GP_Browser::BROWSER_FIREFOX:
+            GP_Asset::addCss('/themes/default/css/firefox.css'); break;
+       case GP_Browser::BROWSER_IE:
+            GP_Asset::addCss('/themes/default/css/ie.css'); break;
+       case GP_Browser::BROWSER_SAFARI:
+            GP_Asset::addCss('/themes/default/css/safari.css'); break;
+       case GP_Browser::BROWSER_CHROME:
+            GP_Asset::addCss('/themes/default/css/chrome.css'); break;
+       case GP_Browser::BROWSER_OPERA:
+            GP_Asset::addCss('/themes/default/css/opera.css'); break;
+    } 
+
     GP_Asset::combieAndLoadCss();
 ?>
 </head>
@@ -32,7 +50,7 @@
         $loginFlag = true;
         $userName = $session->user_name;
         $userEmailId = $session->user_emailid;
-        $fbLogin = "true";           
+        $fbLogin = "true";
     }
     else {
     // create facebook object
@@ -54,8 +72,10 @@
                <div class="top-Msg-window-r " >
                   <span class="top-Msg-window-icon-r"></span>
                       <span class="top-Msg-window-txt">
+
                            <div class="clsErrorText"><?php echo $session->tooltipMsg1;?><br/></div>
-                           <div class="top-Msg-window-s">
+
+                           <div class="top-Msg-window-s clsSubError">
                            <?php echo $session->tooltipMsg2;?>
                            <?php if(empty($session->tooltipMsg1)) { ?>
                            Please try
@@ -101,7 +121,7 @@
                                 if($loginFlag){
                                     echo $userEmailId;
                             ?>
-                            | <a href="<?php echo $baseUrl; ?>/User/account/" >Account</a>
+                            | <a href="<?php echo $baseUrl; ?>/User/Account/" >Account</a>
                             | <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
                             | <a href="<?php echo $session->fbLogoutUrl;?>" id='logout' >Sign out</a>
                             <?php } else { ?>
@@ -114,15 +134,14 @@
                 </div>
                 <div class="headrow2">
                     <div class="menu">
-
                         <a href="javascript:void(0)" class="menu1">&nbsp;</a>
                         <a href="javascript:void(0)" class="menu2">&nbsp;</a>
                         <a href="javascript:void(0)" class="menu3">&nbsp;</a>
                         <a href="javascript:void(0)" class="menu4">&nbsp;</a>
-
                     </div>
                     <div class="search"><input type="text" value="Search for..." onclick="if(this.value == 'Search for...'){this.value=''; $().setTextColor(this); }else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='Search for...';$().removeTextColor(this);} else if(this.value == 'Search for...'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
                     <div class="search_01"><input type="text" value="City, State, and Zip" onclick="if(this.value=='City, State, and Zip'){this.value=''; $().setTextColor(this); } else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='City, State, and Zip';$().removeTextColor(this);} else if(this.value == 'City, State, and Zip'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>
+                    <div style="border:0px solid red;float:right;position: relative;top:15px;padding-right: 25px"><a href="javascript:void(0)" ><img src="/themes/default/images/searchBtn.png" border="0" /></a></div>
                     <div class="submenu">
                          <div class="submenu-box">
                         	 <a href="javascript:void(0)"  id="s1menu1" class="s1menu1 submenu-div"></a>
@@ -142,4 +161,4 @@
                     <li><?php echo $this->escape($message); ?></li>
                 <?php endforeach; ?>
                 </ul>
-                <?php endif; ?>
+                <?php endif; ?> 

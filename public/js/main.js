@@ -11,6 +11,17 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
+
+app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
+// message detail page
+app.gopogo.messagedtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+// reply for message url
+app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/profile/ajaxreplymsg';
+// message list url
+app.gopogo.msglist_url = app.gopogo.baseurl + 'User/profile/ajaxmsglist';
+// message detail url
+app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 
 //account email update url
@@ -126,8 +137,7 @@ app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/remove
         // do login
         $.fn.doLogin = function(){
             // get serialized form data of login form
-            var fdata = $("#loginBoxForm").serialize();
-
+            var fdata = $("#loginBoxForm").serialize();            
             // make ajax request for login
             $.ajax({
                url: app.gopogo.signin_url,

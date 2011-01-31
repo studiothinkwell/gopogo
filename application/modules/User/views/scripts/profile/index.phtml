@@ -1,69 +1,293 @@
-<script type="tetext/javascript">
-    
-</script>
-
 <div class="clsBlankDiv" style="height:150px;"></div>
 <!--  Body START-->
-         <div class="contenter" align="center">
+<!-- <div class="contenter" align="center">
         	<div class="con-box" align="center">
-<!--Left Part start-->
+<!--Left Part start --/>
             	<div class="con-left">                	
                     <div class="con-left-bg">
-                        
+
                     </div>			
                 </div>
- <!--Left Part END-->
- <!-- Right part Start  -->
-            <?php $session = GP_GPAuth::getSession(); ?>
+<!--Left Part END--/>
+<!-- Right part Start  --/>
+<?php $session = GP_GPAuth::getSession(); ?>
             	<div class="con-right">
-                    <div class="con-right-bg"><span class="con-left-head-txt1">My Info</span></div>
-                    <div class="con-right-ro1" style="height:250px">
-                            <div class=""><img style="height:75px" alt="" src="/themes/default/images/thum.png"></div>
-                            <div class="heading-txt clsDivUN"><?php echo $session->user_name; ?></div><br/>
-                            <div class="clsDivUD"><?php echo $session->user_profile_description; ?></div>
-                            <div class="clsProAction" ><a href="#" class="clsEUPro"><b>Edit</b></a>&nbsp;</div>
-                    </div>
-                    <div id="tabs" class="con-right-row4">
-                        <ul>
-                            <li><a href="#tabs-1">Messages</a>
-                            <a href="#tabs-2">Comments</a>
-                            <a href="#tabs-3">Photos</a></li>
-                        </ul>
+                   <div class="con-right-bg"><span class="con-left-head-txt1">My Info</span></div>
+                   <div class="con-right-ro1" style="height:250px">
+                           <div class=""><img style="height:75px" alt="" src="/themes/default/images/thum.png"></div>
+                           <div class="heading-txt clsDivUN"><?php echo $session->user_name; ?></div><br/>
+                           <div class="clsDivUD"><?php echo $session->user_profile_description; ?></div>
+                           <div class="clsProAction" ><a href="#" class="clsEUPro"><b>Edit</b></a>&nbsp;</div>
+                   </div>
+                   <div id="tabs" class="con-right-row4">
+                       <ul>
+                           <li><a href="#tabs-1">Messages</a>
+                           <a href="#tabs-2">Comments</a>
+                           <a href="#tabs-3">Photos</a></li>
+                       </ul>
 
-                  <!--  Message Box START-->
-                  <div class="clsMsgDiv">
-                      <?php foreach($result as $row) { ?>
-                        <div>
-                            <div class="rg-thum-content" style="width:50px"><b>Billy Idol &nbsp;&nbsp;</b></div>
-                            <div class="rg-thum-content" style="padding-left: 10px">
-                                <b>Behind the scenes Pasadena</b><br />
-                                Cool playlist! Will definitely try it out some time...
-                            </div>
-                        </div><div class="rg-thum-content" style="width:83px"></div>
-                        <div> 
-                            <div class="rg-thum-content" style="width:50px"><b>Billy Idol &nbsp;&nbsp;</b></div>
-                            <div class="rg-thum-content" style="padding-left: 10px">
-                                <b>Rainbow Bar &nbsp; Grill</b><br />
-                                One liner desciption of what the item is...
-                            </div>
-                        </div><div class="rg-thum-content" style="width:83px"></div>
-                        <div>
-                            <div class="rg-thum-content" style="width:50px"><b>Billy Idol &nbsp;&nbsp;</b></div>
-                            <div class="rg-thum-content" style="padding-left: 10px">
-                                <b>Rainbow Bar &nbsp; Grill</b><br />
-                                One liner desciption of what the item is...
-                            </div>
-                        </div>
-                        <?php } ?>
-                  </div>
-                  <div class="dtlMsgDiv">
-                      
-                  </div>
-                  <!--  Thumb Box START-->
-                    </div>
-  <!-- Right part end  -->
-                </div>
+<!--  Message Box START--/>
+<div class="clsMsgDiv">
+<?php
+if (sizeof($this->msgArr) > 0) {
+    foreach ($this->msgArr as $rowMsg) {
+ ?>
+                  <div>
+                      <div class="rg-thum-content" style="width:95px"><b><?php echo $rowMsg['msgAuthor']; ?> &nbsp;&nbsp;</b></div>
+                      <div class="rg-thum-content" style="padding-left: 10px">
+                          <a href="javascript:void(0)" class="clsMsgId_<?php $rowMsg['msgId'] ?>" onclick="showMsgDtl()">Reply &nbsp;</a><b><?php echo $rowMsg['msgHead']; ?></b><br />
+<?php echo $rowMsg['msgComment']; ?>...
+                      </div>
+                  </div><div class="rg-thum-content" style="width:83px"></div>
+<?php
+    }
+}
+?>
+</div>
+<div>
+    <input type="button" name="" id="" style="display: none" class="clsBackMsg" value="Back to Messages"/>&nbsp;&nbsp;
+    <input type="button" name="" id="" style="display: none" class="clsDeleteMsg" value="Delete"/>
+    <div class="dtlMsgDiv" style="display:none"></div>
+</div>
+<!--  Thumb Box START--/>
+  </div>
+<!-- Right part end  --/>
+              </div>
       		</div>
      	</div>
- <!--  Body END-->
-<div class="blankdiv"></div>
+<!--  Body END--/> -->
+
+<div align="center" class="contener">
+    <div align="center" class="con-box">
+        <!--Left Part start-->
+        <div class="con-left">
+            <div class="left-area">
+                <div class="tab_main_area">
+                    <div class="tab_area_bg">
+                        <div class="tab1-selected"><a href="#"> </a></div>
+                        <div class="tab2"><a href="#"></a></div>
+                        <div class="tab3"><a href="#"></a></div>
+
+                    </div>
+                </div>
+
+                <div class="playlist_area">
+
+                    <div class="play_list_bg">
+                        <div class="playlist-area-text">Playlist name </div>
+                        <div class="playlist-area-text-arrow"></div>
+                    </div>
+
+                    <div class="playlist-area-bg">
+                        <div class="play_list_bg">
+                            <div class="playlist-area-text">Rating </div>
+                            <div class="playlist-area-text-arrow"></div>
+                        </div></div>
+
+                </div>
+
+                <div class="rating_list_area">
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">A Walk in the park	</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Qua Sera Sera</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">20 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area1"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">Star Spotting	</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">15 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Hollywood Horrors	</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">32 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">Dumplings and murder</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">38 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Dogs day out </div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">Noir LA</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">66 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Picnic in the park</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">96 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area"> A Walk in the park	</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Qua Sera Sera</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">Dumplings and murder</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">38 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Dogs day out </div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">A Walk in the park	</div>
+                        <div class=" rating_image_area1"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Qua Sera Sera</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">66 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area">A Walk in the park	</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Qua Sera Sera</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">66 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="light-gray_rating_list_bg">
+                        <div class="rating_text_area"> A Walk in the park	</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">36 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                    <div class="dark-gray_rating_list_bg">
+                        <div class="rating_text_area">Qua Sera Sera</div>
+                        <div class=" rating_image_area"></div>
+                        <div class="rating_number_area">66 rating</div>
+                        <div class="rating_edit_area"><a href="#">edit</a></div>
+                        <div class=" rating_close_area"><a href="#"></a></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!--Left Part END-->
+        <!-- Right part Start  -->
+        <div class="con-right">
+            <div class="con-right_gray_bg">
+                <div class="con-right-bg">
+                    <span class="photo-title-area">My Info</span></div>
+                <div class="photo_profile_area">
+                    <div class="photo_profile_bg">
+                        <div class="photo_area"> <img border="0" src="/themes/default/images/becky_photo.jpg"></div>
+                        <div class="photo_text-area">
+                            <div class="clsProfileLoader">
+                                <div class="photo_title clsDivUN"><?php echo $session->user_name; ?></div>
+                                <div class="photo_description clsDivUD"><?php echo $session->user_profile_description; ?></div>
+                            </div>
+                            <div class="average_rating_text">Average Rating</div>
+                            <div style="width:201px">
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}" checked="checked"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}"/>
+                                <input name="adv1" type="radio" class="star {split:2}" checked="checked"/>
+                            </div>
+                            <div class="average_edit_text clsProAction"><a href="javascript:void(0)" class="clsEUPro"><b>edit</b></a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-message-comment-tab_area">
+                    <div class="message-tab-selected"><a href="#"></a></div>
+                    <div class="comments-tab"><a href="#"></a></div>
+                    <div class="photos-tab"><a href="#"></a></div>
+                </div>
+
+                <div class="clsMsgList">
+
+                </div>
+
+                <div class="clsMsgRply">
+
+                </div>
+                <!-- Right part end  -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="blankdiv">
+
+</div>

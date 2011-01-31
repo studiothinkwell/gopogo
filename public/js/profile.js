@@ -318,6 +318,7 @@ $(".clsEUPro").click(function(){
         var evlFlag = regex.test(email);
         $().debugLog(evlFlag);
         return evlFlag;
+
     } 
 
 
@@ -700,8 +701,5 @@ $(".clsEUPro").click(function(){
         $().updateSettings("facebook",settings);
 
     });
-
-    // facebook connect
-    
 
 });
