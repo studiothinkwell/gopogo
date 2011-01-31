@@ -12,13 +12,16 @@ app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
-// add events on load
+
 //account email update url
 app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
 //account pass update url
 app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
 //account username update url
 app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
+
+
+// add events on load
 
 /**
  * This will apply toggle effect to bottom of page for advance search
@@ -81,7 +84,7 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
     $("#logout").click(function(){
         $().doLogout();
     });
-    // add forgot password event 
+    // add forgot password event
     $("#forgotSubmitBox").click(function(){
         $().debugLog('forgotSubmitBox');
         $().doForgot();
@@ -113,9 +116,9 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
    }); // end of loginBoxForm
    */
 
-   
 
-  
+
+
 // functions to handle the login / signin
 
         // do login
@@ -457,6 +460,7 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
             {
                 alert(msg);
             }
+            return;
         }
 
         //function to show tooltip for error messages
@@ -524,7 +528,7 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         }
-        
+
 
         $('.submenu-box .submenu-div').hover
         (
@@ -583,7 +587,7 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
 
               $().debugLog(formId+' bind');
               $().debugLog(callbackfun);
-              
+
               // track enter key
               var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
 
@@ -624,7 +628,7 @@ app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/update
         body.style.backgroundImage='url(/themes/default/images/bg-left2.png)';
         $(".clsBlankDiv").attr('style','height:208px');
         $(".clsErrorText").text();
-    } else if ($("#msgInput").val() == 'showError') { 
+    } else if ($("#msgInput").val() == 'showError') {
         $().showErrorTooltip('sessionErr','');
     }
-}); 
+});

@@ -244,6 +244,8 @@ Class GP_GPAuth
         $reply_to = $configs->gopogo->mail->params->reply_to;
         $return_path = $configs->gopogo->mail->params->return_path;
 
+        $obj->getMailIntance()->clearRecipients();
+
         $obj->getMailIntance()->setBodyText($subject)
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
@@ -298,6 +300,8 @@ Class GP_GPAuth
         $reply_to = $configs->gopogo->mail->params->reply_to;
         $return_path = $configs->gopogo->mail->params->return_path;
 
+        $obj->getMailIntance()->clearRecipients();
+
         $obj->getMailIntance()->setBodyText($subject)
                                             ->setBodyHtml($text)
                                             ->setSubject($subject)
@@ -347,6 +351,8 @@ Class GP_GPAuth
         $reply_to = $configs->gopogo->mail->params->reply_to;
         $return_path = $configs->gopogo->mail->params->return_path;
 
+        $obj->getMailIntance()->clearRecipients();
+
         $obj->getMailIntance()->setBodyText($subject)
                             ->setBodyHtml($text)
                             ->setSubject($subject)
@@ -359,4 +365,184 @@ Class GP_GPAuth
                             ->setReturnPath($return_path, $obj->gpName)
                             ->send();
     } // end of sendEmailSignupWelcome
+
+
+    /**
+     * Send Confirmation Email to user  on email change
+     * @param String $email : user new email
+     * @param String $email : user old email
+     * @param String $confirmLink : conformation link
+     * @param String $name : user name
+     */
+    public static function sendEmailUpdateEmailConfirm($newemail,$oldemail,$confirmLink,$name='') {
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
+
+        $baseurl = $configs->gopogo->url->base;
+
+        $view = self::getIntance()->getViewIntance();
+
+        $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
+
+        if(empty($name))
+            $name = substr($newemail, 0, strpos($newemail,'@'));
+
+        $view->name = $name;
+        $view->oldemail = $oldemail;
+        $view->email = $newemail;
+        $view->link = $baseurl;
+        $view->confirmLink = $confirmLink;
+        
+        $text = $view->render('mails/email_update_confirm.phtml');
+
+        $lang_msg = self::getIntance()->translate->_('Confirm your updated gopogo email!');
+
+        $subject = str_replace('%value%', $name, $lang_msg);
+
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+
+        $obj->getMailIntance()->clearRecipients();
+        
+        $obj->getMailIntance()->setBodyText($subject)
+                            ->setBodyHtml($text)
+                            ->setSubject($subject)
+                            ->addTo($newemail, $name)
+                            ->addTo($to, $obj->gpName)
+                            ->setFrom($from, $obj->gpName)
+                            ->addCc($cc, $obj->gpName)
+                            ->addBcc($bcc, $obj->gpName)
+                            ->setReplyTo($reply_to, $obj->gpName)
+                            ->setReturnPath($return_path, $obj->gpName)
+                            ->send();
+        
+    } // end of sendEmailUpdateEmailConfirm
+
+
+
+
+    /**
+     * Send Confirmation Email to user  on email change
+     * @param String $email : user new email
+     * @param String $email : user old email
+     * @param String $name : user name
+     */
+    public static function sendAccountEmailUpdateInfo($oldemail,$newemail,$name='') {
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
+
+        $baseurl = $configs->gopogo->url->base;
+
+        $view = self::getIntance()->getViewIntance();
+
+        $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
+
+        if(empty($name))
+            $name = substr($oldemail, 0, strpos($oldemail,'@'));
+
+        $view->name = $name;
+        $view->oldemail = $oldemail;
+        $view->email = $newemail;
+        $view->link = $baseurl;        
+
+        $text = $view->render('mails/email_update_info_user.phtml');
+
+        $lang_msg = self::getIntance()->translate->_('You have change your gopogo email!');
+
+        $subject = str_replace('%value%', $name, $lang_msg);
+
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+        $obj->getMailIntance()->clearRecipients();
+
+        $obj->getMailIntance()->setBodyText($subject)
+                            ->setBodyHtml($text)
+                            ->clearRecipients()
+                            ->clearSubject()
+                            ->setSubject($subject)
+                            ->addTo($oldemail, $name)
+                            ->addTo($to, $obj->gpName)
+                            ->clearFrom()   
+                            ->setFrom($from, $obj->gpName)
+                            ->addCc($cc, $obj->gpName)
+                            ->addBcc($bcc, $obj->gpName)
+                            ->clearReplyTo()
+                            ->setReplyTo($reply_to, $obj->gpName)
+                            ->clearReturnPath()
+                            ->setReturnPath($return_path, $obj->gpName)
+                            ->send();
+
+    } // end of sendAccountEmailUpdateInfo
+
+
+
+     /**
+     * Send Confirmation Email to signedup user
+     * @param String $email : user email
+     * @param String $name : user name
+     */
+    public static function sendAccountPasswordChange($email,$passwd,$name='') {
+        $obj = self::getIntance();
+        $configs = $obj->getConfig();
+
+        $baseurl = $configs->gopogo->url->base;
+
+        $view = self::getIntance()->getViewIntance();
+
+        $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
+
+        if(empty($name))
+            $name = substr($email, 0, strpos($email,'@'));
+
+        $view->name = $name;
+        $view->email = $email;
+        $view->link = $baseurl;
+        $view->password = $passwd;
+
+        $text = $view->render('mails/password_update_info.phtml');
+
+
+        $lang_msg = self::getIntance()->translate->_('You have changed your gopogo password!');
+
+        $subject = str_replace('%value%', $name, $lang_msg);
+
+        $to = $configs->gopogo->mail->params->to;
+        $from = $configs->gopogo->mail->params->from;
+        $cc = $configs->gopogo->mail->params->cc;
+        $bcc = $configs->gopogo->mail->params->bcc;
+        $reply_to = $configs->gopogo->mail->params->reply_to;
+        $return_path = $configs->gopogo->mail->params->return_path;
+
+        $obj->getMailIntance()->clearRecipients();
+
+        $obj->getMailIntance()->setBodyText($subject)
+                            ->setBodyHtml($text)
+                            ->clearRecipients()
+                            ->setSubject($subject)
+                            ->addTo($email, $name)
+                            ->addTo($to, $obj->gpName)
+                            ->setFrom($from, $obj->gpName)
+                            ->addCc($cc, $obj->gpName)
+                            ->addBcc($bcc, $obj->gpName)
+                            ->setReplyTo($reply_to, $obj->gpName)
+                            ->setReturnPath($return_path, $obj->gpName)
+                            ->send();
+    } // end of sendAccountPasswordChange
+
+
+
+
+
+
+
 }

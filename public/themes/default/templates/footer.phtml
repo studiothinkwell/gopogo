@@ -23,10 +23,13 @@
 
 <!-- Footer Middle START-->
 <?php
+
 echo $this->partial('partials/login.phtml');
 echo $this->partial('partials/forgot.phtml',array('baseUrl'=>$baseUrl));
 echo $this->partial('partials/signup.phtml');
 echo $this->partial('partials/message.phtml');
+//echo $this->partial('partials/create_playlist_popup.phtml');
+
 ?>
 <!-- Footer Middle END-->
 <script type="text/javascript" src="<?php echo $baseUrl; ?>/js/jquery-1.4.2.js"></script>
@@ -37,6 +40,7 @@ echo $this->partial('partials/message.phtml');
 <script type="text/javascript" src="<?php echo $baseUrl; ?>/js/lightbox.js"></script>
 <script type="text/javascript" src="<?php echo $baseUrl; ?>/js/main.js"></script>
 <script type="text/javascript" src="<?php echo $baseUrl; ?>/js/profile.js"></script>
+<script type="text/javascript" src="<?php echo $baseUrl; ?>/js/create_playlist.js"></script>
 
 <script language="javascript" >
 

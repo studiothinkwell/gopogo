@@ -1,6 +1,10 @@
 
 $(document).ready(function(){
-//call ajax for update profile
+
+// basic update functions
+
+    //call ajax for update profile
+
     $.fn.updateProfile = function (area) {
         switch(area) {
          case 'myinfo':
@@ -23,7 +27,7 @@ $(document).ready(function(){
          break;
          //for profile action
          //  case 'myAccEmail':
-         case 'myAccEmail': 
+         case 'myAccEmail':
               var fdata = {'email':$('.inpclsUpdateEmail').val()};
               $.ajax({
               url: app.gopogo.accountemailupdate_url,
@@ -31,7 +35,7 @@ $(document).ready(function(){
               dataType: 'json',
               data:fdata,
               timeout: 99999,
-              success: function(resp){ 
+              success: function(resp){
                   // do something with resp
                   if(resp.status == 1) { // show error message
                        $().updateSuccess(resp);
@@ -39,20 +43,25 @@ $(document).ready(function(){
                        var inpArr = new Array(1);
                        inpArr[0] = new Array("inpclsUpdateEmail","clsUpdateEmail");
                        //inpArr[1] = new Array("clsUpdateConfirmNewPass","clsUpdateConfirmNewPass","text");
-                       //inpArr[2] = new Array("clsUpdateAccUserEmail","clsUpdateAccUserEmailInfo","href");
+                       inpArr[2] = new Array("clsUpdateAccUserEmail","clsUpdateAccUserEmailInfo","href");
                        $().inplaceEditor(inpArr,"save");
+                       $().debugLog($("b", ".clsUpdateAccUserEmail").text());
+                       var replacement = $("b", ".clsUpdateAccUserEmail").text() == "Save" ? "edit" : "Save";
+                       $().debugLog(replacement);
+                       $("b", ".clsUpdateAccUserEmail").fadeOut(function(){$("b",".clsUpdateAccUserEmail").text(replacement).fadeIn()});
+                       $(".clsUpdateAccUserEmail").removeClass("save");
                   }
-                  else { 
+                  else {
                         $(".clsSubError").text('.');
                         $().updateError(resp);
-                   }
+                  }
                }
          });
           break;
          //for account password update action
           case 'myAccPass':
               var fdata = {'current_pass':$('.clsUpdateOldPass').val(),'new_pass':$('.clsUpdateNewPass').val(),'retype_pass':$('.clsUpdateConfirmPass').val()};
-          
+
               $.ajax({
               url: app.gopogo.accountpassupdate_url,
               type: 'POST',
@@ -63,8 +72,22 @@ $(document).ready(function(){
                   // do something with resp
                   if(resp.status == 1) { // show error message
                         $(".clsSubSuccess").text('.');
+
                         $().updateSuccess(resp);
-                      // $().inplaceEditor(inpArr,"save");
+                        // $().inplaceEditor(inpArr,"save");
+                        $().debugLog($("b", ".clsUpdateAccUserPass").text());
+                        var replacement = $("b", ".clsUpdateAccUserPass").text() == "Save" ? "edit" : "Save";
+                        //var replacement = "edit";
+                        $().debugLog(replacement);
+                        $("b", ".clsUpdateAccUserPass").fadeOut(function(){$("b",".clsUpdateAccUserPass").text(replacement).fadeIn()});
+                        $(".clsUpdateAccUserPass").removeClass('save');
+
+                        $(".clsUpdatePass").show();
+                        $(".clsUpdatePassTxt").show();
+                        //$(".clsUpdatePass").text('******');
+                        //$(".clsUpdatePass").hide();
+                        $(".clsResetPass").hide();
+
                   }
                   else {
                         $(".clsSubError").text('.');
@@ -85,69 +108,47 @@ $(document).ready(function(){
               success: function(resp){
                   // do something with resp
                   if(resp.status == 1) { // show error message
-                     
+
                        $().updateSuccess(resp);
                        $(".clsSubSuccess").text('.');
                        var inpArr = new Array(1);
                        inpArr[0] = new Array("inpclsUpdateUserName","clsUpdateUserName");
 
                        $().inplaceEditor(inpArr,"save");
+
+                       $().debugLog($("b", ".clsUpdateAccUserName").text());
+
+                       var replacement = $("b", ".clsUpdateAccUserName").text() == "Save" ? "edit" : "Save";
+                       $().debugLog(replacement);
+                       $("b", ".clsUpdateAccUserName").fadeOut(function(){$("b",".clsUpdateAccUserName").text(replacement).fadeIn()});
+                       $(".clsUpdateAccUserName").removeClass("save");
+
+
                   }
                   else {
                         $(".clsSubError").text('.');
                         $().updateError(resp);
                    }
                }
-         });
-          break;
-          default :
+            });
+            break;
+            default :
 
         }
     }
 
-$(".clsUpdateAccUserEmail").click(function(){
-    if($(".clsUpdateAccUserEmail").hasClass('save') ) {
-           $().updateProfile("myAccEmail");
-           var replacement = $("b", ".clsUpdateAccUserEmail").text() == "Save" ? "edit" : "Save";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-           $(".clsUpdateAccUserEmail").removeClass("save");
-       } else {
-           replacement = $("b", this).text() == "edit" ? "Save" : "edit";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-           var inpArr = new Array(2);
-           inpArr[0] = new Array("clsUpdateEmail","clsUpdateEmail","text");
-//           inpArr[1] = new Array("clsUpdateConfirmNewPass","clsUpdateConfirmNewPass","text");
-           inpArr[1] = new Array("clsUpdateAccUserEmail","clsUpdateAccUserEmailInfo","href");
-           $().inplaceEditor(inpArr,"edit");
-       }
-    });
+    // inplace editor
 
-//Username Update
-$(".clsUpdateAccUserName").click(function(){
-    if($(".clsUpdateAccUserName").hasClass('save') ) {
-           $().updateProfile("myAccUserName");
-           var replacement = $("b", ".clsUpdateAccUserName").text() == "Save" ? "edit" : "Save";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-           $(".clsUpdateAccUserName").removeClass("save");
-       } else {
-           replacement = $("b", this).text() == "edit" ? "Save" : "edit";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-           var inpArr = new Array(2);
-           inpArr[0] = new Array("clsUpdateUserName","clsUpdateUserName","text");
-//           inpArr[1] = new Array("clsUpdateConfirmNewPass","clsUpdateConfirmNewPass","text");
-           inpArr[1] = new Array("clsUpdateAccUserName","clsUpdateAccUserNameInfo","href");
-           $().inplaceEditor(inpArr,"edit");
-       }
-    });
+    $.fn.inplaceEditor = function(inpArr,act) {
 
-
-    $.fn.inplaceEditor = function(inpArr,act) {  
-       
-       switch (act) {
+         switch (act) {
            case "edit":
-                var arrLen = inpArr.length; 
+                var arrLen = inpArr.length;
                 for(i=0;i<arrLen-1;i++) {
-                    var txtEditData = $("<input type='"+inpArr[i][2]+"' name='' id='' class='inp"+inpArr[i][0]+"' value='"+$("."+inpArr[i][0]).text()+"'/>");
+
+                    var inpval = $.trim($("."+inpArr[i][0]).text());
+
+                    var txtEditData = $("<input type='"+inpArr[i][2]+"' name='' id='' class='inp"+inpArr[i][0]+"' value='"+inpval+"'/>");
                     $("."+inpArr[i][1]).html(txtEditData);
                 }
                 switch(inpArr[arrLen-1][2]) {
@@ -159,37 +160,101 @@ $(".clsUpdateAccUserName").click(function(){
                 break;
           case "save" :
                 arrLen = inpArr.length;
-                for(i=0;i<arrLen;i++) { 
+                for(i=0;i<arrLen;i++) {
                     $("."+inpArr[0][1]).html($("."+inpArr[0][0]).val());
                 }
                 break;
-    }
+        }
    }
 
-$(".clsUpdateAccUserPass").click(function(){
-    if($(".clsUpdateAccUserPass").hasClass('save')) {
-        $(".clsUpdatePass").show();
-        $(".clsUpdatePassTxt").show();
-        $(".clsUpdatePass").text('******');
-        $(".clsResetPass").hide();
-        $().updateProfile("myAccPass");
-        var replacement = $("b", ".clsUpdateAccUserPass").text() == "Save" ? "edit" : "Save";
-        $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-        $(".clsUpdateAccUserPass").removeClass('save');
-    }
-    else {
-        $(".clsUpdateAccUserPass").addClass('save');
-        //$(".clsUpdatePass").hide();
-        //$(".clsUpdatePassTxt").hide();
-        $(".clsResetPass").show();
-        replacement = $("b", ".clsUpdateAccUserPass").text() == "edit" ? "Save" : "edit";
-        $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-        $(".clsUpdatePass").html("<input type='text'/>");
-        var inpArr = new Array(3);
-       //
-    }
+// update handler
+
+    // update email event handler
+    $(".clsUpdateAccUserEmail").click(function(){
+        if($(".clsUpdateAccUserEmail").hasClass('save') ) {
+            $().closeSuccessTooltip();
+            $().closeErrorTooltip();
+            $().updateProfile("myAccEmail");
+
+           // change email text box to span /div with text
+
+        } else {
+           var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
+           //var replacement = "Save";
+           $("b", ".clsUpdateAccUserEmail").fadeOut(function(){$("b",".clsUpdateAccUserEmail").text(replacement).fadeIn()});
+           var inpArr = new Array(2);
+           inpArr[0] = new Array("clsUpdateEmail","clsUpdateEmail","text");
+           inpArr[1] = new Array("clsUpdateAccUserEmail","clsUpdateAccUserEmailInfo","href");
+           $().inplaceEditor(inpArr,"edit");
+        }
     });
 
+    //update username event handler
+    $(".clsUpdateAccUserName").click(function(){
+        $().debugLog(1);
+        if($(".clsUpdateAccUserName").hasClass('save') ) {
+            $().debugLog(2);
+            $().closeSuccessTooltip();
+            $().closeErrorTooltip();
+
+            var username = $('.inpclsUpdateUserName').val();
+            if($().validateUsername(username)){
+                $().updateProfile("myAccUserName");
+            } else {
+
+                var msg1 = 'Username not valid!';
+                var msg2 = 'Username must start with alphabet character and allowed characters a-zA-Z0-9 and underscore.';
+                $().showErrorTooltip(msg1);
+
+                // top-Msg-window-s
+                $('.top-Msg-window-s').text(msg2);
+            }
+
+            $().debugLog(3);
+        } else {
+            $().debugLog(4);
+            var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
+            //var replacement = "Save";
+            $("b", ".clsUpdateAccUserName").fadeOut(function(){$("b",".clsUpdateAccUserName").text(replacement).fadeIn()});
+            var inpArr = new Array(2);
+            inpArr[0] = new Array("clsUpdateUserName","clsUpdateUserName","text");
+            inpArr[1] = new Array("clsUpdateAccUserName","clsUpdateAccUserNameInfo","href");
+            $().inplaceEditor(inpArr,"edit");
+            $().debugLog(5);
+        }
+    });
+
+
+
+    // update password event handler
+    $(".clsUpdateAccUserPass").click(function(){
+        $().debugLog(1);
+        $().debugLog($(".clsUpdateAccUserPass").hasClass('save'));
+        if($(".clsUpdateAccUserPass").hasClass('save')) {
+             $().debugLog(2);
+            $().closeSuccessTooltip();
+            $().closeErrorTooltip();
+
+            $().updateProfile("myAccPass");
+             $().debugLog(3);
+        }
+        else {
+             $().debugLog(4);
+             $(".clsUpdateAccUserPass").addClass('save');
+            //$(".clsUpdatePass").hide();
+            //$(".clsUpdatePassTxt").hide();
+            $(".clsResetPass").show();
+            var replacement = $("b", ".clsUpdateAccUserPass").text() == "edit" ? "Save" : "edit";
+            //var replacement = "Save";
+            $("b", ".clsUpdateAccUserPass").fadeOut(function(){$("b",".clsUpdateAccUserPass").text(replacement).fadeIn()});
+            //$(".clsUpdatePass").html("<input type='text'/>");
+            //var inpArr = new Array(3);
+            $(".clsUpdatePass").hide();
+            $().debugLog(5);
+        }
+    });
+
+// update partner info - facebook event handler
  $(".clsUpdatePartnerInfo").click(function(){
      if($(".clsUpdatePartnerInfo").hasClass('save') ) {
            $().updateProfile("myinfo");
@@ -207,7 +272,7 @@ $(".clsUpdateAccUserPass").click(function(){
 
 $(".inplaceclsEUProsave").click(function(){
         $().updateProfile('myinfo');
-   })              
+   })
 
 $(".clsEUPro").click(function(){
        if($(".clsEUPro").hasClass('save') ) {
@@ -232,5 +297,19 @@ $(".clsEUPro").click(function(){
    $.fn.updateSuccess = function(resp){
        $().showSuccessTooltip(resp.msg);
    }
-    
+
+    // validate username : return true / false
+
+    $.fn.validateUsername = function(username){
+        /***
+         *  And if you want to allow underscore only as concatenation character and
+         * want to force that the username must start with a alphabet character:
+         */
+        var regex = /^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/;
+        var uvlFlag = regex.test(username);
+        $().debugLog(uvlFlag);
+        return uvlFlag;
+    }
+
+
 });
