@@ -1432,6 +1432,7 @@ vertical-align:bottom;
     *left:5px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
+    top:-2px;
 }
 
 
@@ -1690,12 +1691,7 @@ border:1px solid red;
     .thum-txt {
         font-size: 12px;
         font-weight: 600;
-    }
-
-    .create-ac-create-but
-    {
-        left:5px;
-    }
+    }    
 }
 
 /***************** For Chrome End*********************/

@@ -14,6 +14,23 @@
 
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
+
+    $browser = new GP_Browser();
+
+    switch($browser->getBrowser())
+    {
+       case GP_Browser::BROWSER_FIREFOX:
+            GP_Asset::addCss('/themes/default/css/firefox.css'); break;
+       case GP_Browser::BROWSER_IE:
+            GP_Asset::addCss('/themes/default/css/ie.css'); break;
+       case GP_Browser::BROWSER_SAFARI:
+            GP_Asset::addCss('/themes/default/css/safari.css'); break;
+       case GP_Browser::BROWSER_CHROME:
+            GP_Asset::addCss('/themes/default/css/chrome.css'); break;
+       case GP_Browser::BROWSER_OPERA:
+            GP_Asset::addCss('/themes/default/css/opera.css'); break;
+    }      
+    
     GP_Asset::combieAndLoadCss();
 ?>
 </head>
