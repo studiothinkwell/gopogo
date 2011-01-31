@@ -488,9 +488,11 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $stmt->bindParam('userid', $udata['user_id'], PDO::PARAM_INT);
         $stmt->execute();
         $rowArray = $stmt->fetch();
-        foreach($rowArray as $ukey=>$uvalue) {
-             $userSession->$ukey = $uvalue;
-        } 
+        if (sizeof($rowArray) > 1) {
+            foreach($rowArray as $ukey=>$uvalue) {
+                 $userSession->$ukey = $uvalue;
+            }
+        }
     } // end of logSession
 
 
