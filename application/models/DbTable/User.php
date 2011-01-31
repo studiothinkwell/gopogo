@@ -1212,8 +1212,48 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $logger = Zend_Registry::get('log');
             $logger->log($lang_msg,Zend_Log::ERR);
         }
-
         //end of function updateUserStatus
     }
 
+    /**
+      * Insert other (Facebook/twitter etc.) account information into other profile table
+      * @param  int      user id
+      */
+    public function insertOtherAccountDetails($accTypeid, $userId, $userEmail) {
+        // get Db instance
+        $db = $this->getDbInstance();
+
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try { 
+            $verified = 'Y';
+            $stmt = $db->prepare('CALL sp_insert_user_other_account_details(:type_id, :user_id, :new_email, :verified)');
+            $stmt->bindParam('type_id', $accTypeid, PDO::PARAM_INT);
+            $stmt->bindParam('user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam('new_email', $userEmail, PDO::PARAM_INT);
+            $stmt->bindParam('verified', $verified, PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->closeCursor();
+            $logger = Zend_Registry::get('log');
+            
+        } catch (Some_Component_Exception $e) {
+            if (strstr($e->getMessage(), 'unknown')) {
+                // handle one type of exception
+                $lang_msg = "Unknown Error!";
+            } elseif (strstr($e->getMessage(), 'not found')) {
+                // handle another type of exception
+                $lang_msg = "Not Found Error!";
+            } else {
+                $lang_msg = $e->getMessage();
+            }
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+        //end of function updateUserStatus
+    }
 }

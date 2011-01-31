@@ -1,10 +1,10 @@
 
-$(document).ready(function(){
-
+$(document).ready(function() {
+    loadMsgList();
+// Change facebook login button image to edit hyperlink
+   // $('b','.clsBtnFbLogin').text('edit');
 // basic update functions
-
-    //call ajax for update profile
-
+//call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
          case 'myinfo':
@@ -320,7 +320,127 @@ $(".clsEUPro").click(function(){
         return evlFlag;
     }
 
+    $.fn.jsfblogin = function() {
+        alert(1);
+        alert('uprofile');
+        //return true;
+    }
 
-
-
+    // call ajax on clsRmvFbUname click to remove entry for the other account detail table
+    $(".clsEUPro").click(function(){
+        $.ajax({
+          url: app.gopogo.fbRemoveEmail_url,
+          type: 'POST',
+          timeout: 99999,
+          success: function() {
+              // Logout from facebook
+                FB.logout(function() {
+                    // user is now logged out
+                    window.location = app.gopogo.profile_url;
+                });
+           }
+        });
+    });
 });
+
+function fblogin() { 
+    FB.login(function(response) {
+      if (response.session) {
+        // Get path of the url to chek it is Account update or fb signup
+        var wndwLocation = window.location.pathname; 
+        if (response.perms) {
+          // user is logged in and granted some permissions.
+          // perms is a comma separated list of granted permissions
+          if ( wndwLocation == '/User/Account') {
+              FB.api('/me', function(fbData) { 
+                // Call ajax to update profile information
+                var fdata = {'email':fbData.email};
+                $.ajax({
+                  url: app.gopogo.fbemailupdate_url,
+                  type: 'POST',
+                  dataType: 'json',
+                  data:fdata,
+                  timeout: 99999,
+                  success: function() { 
+                      $(".clsFbEmail").html(fbData.email);
+                   }
+                });
+
+                // Logout from facebook
+                FB.logout(function() {
+                    // user is now logged out
+                });
+              });            
+          } else { 
+              // Call ajax for facebook sign up action
+              $.ajax({
+                  url: app.gopogo.fbsignup_url,
+                  type: 'POST',                  
+                  timeout: 99999,
+                  success: function() { 
+                      // Logout from facebook
+                        FB.logout(function() { 
+                            // user is now logged out
+                            window.location = app.gopogo.profile_url;
+                        });                      
+                   }
+                });
+          }
+        } else {
+          // user is logged in, but did not grant any permissions
+        }
+      } else {
+        // user is not logged in
+      }
+    }, {perms:'email'});
+
+}
+
+function loadMsgList() {
+    //call ajax to generate message list on load
+    $.ajax({
+          url: app.gopogo.msglist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data){
+              alert(data);
+           },
+          success: function(data) {
+                $(".clsMsgList").html(data);
+           },
+           complete: function() {
+
+            }
+     });
+}
+
+//call ajax to reply for an message
+function doReplyMsg() {
+    $.ajax({
+          url: app.gopogo.replymessage_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data){
+              alert(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) {
+                //$('.gray_date_subject_bg').ajaxLoader();
+                $(".clsMsgList").hide();
+                $(".clsMsgRply").html(data);
+                $(".clsMsgRply").show();
+              // do something with resp
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+function backMsgClick() {
+     $(".clsMsgRply").hide();
+     loadMsgList();
+     $(".clsMsgList").show();
+ }

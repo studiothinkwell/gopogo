@@ -57,39 +57,43 @@ class User_AccountController extends Zend_Controller_Action
 
     public function indexAction()
     {      
-
-        //$this->_helper->viewRenderer->setNoRender(true);
-
         $session = GP_GPAuth::getSession();
-
         if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
             // do nothing
         } else {
-
             // redirect to home page
             $this->_redirect();
         }
-
         //$user = new Application_Model_DbTable_User();
-
         $id     = $session->user_id;
         // collect username and password on the basis of user id
-
         //$userData = $user->getUserByIdTemp($id);
         $email    = $session->user_emailid;
         //$password = $userData['user_password'];
-
-
         //get exisiting username of user by fetching against user id
         //$userData          = $user->getUserUserNameById($id);
         $username          = $session->user_name;
         //print_r($userPartnerData);die;
-        $this->view->email                  = trim($email);
-        //$this->view->password               = trim($password);
-        $this->view->userName               = trim($username);
+        $this->view->email = trim($email);
+        //$this->view->password = trim($password);
+        $this->view->userName = trim($username);
 
-
-
+        // create user model object
+        $user = new Application_Model_DbTable_User();
+        // check and get user data if email and password match
+        $userOtherAccData = $user->getUserPartnerById($id);
+        $twitterName = "";
+        $facebookName = "";
+        if(sizeof($userOtherAccData)>0) {
+            foreach($userOtherAccData as $data) {
+                if($data['account_type_id']== 1)
+                    $facebookName = $data['account_username'];
+                if($data['account_type_id']== 2)
+                    $twitterName = $data['account_username'];
+            }
+        }
+        $this->view->assign('facebookName',$facebookName);
+        $this->view->assign('twitterName',$twitterName);
     } // end indexAction
 
     /**
@@ -760,7 +764,10 @@ class User_AccountController extends Zend_Controller_Action
                 $session = GP_GPAuth::getSession();
                 $session->isSignedUp = "fbSignUp";
                 // send the welcome email
-                GP_GPAuth::sendEmailSignupWelcome($userData['Email'],$temp_password);
+                GP_GPAuth::sendEmailSignupWelcome($userData['user_emailid'],$temp_password);
+
+                // Inser facebook data into other account details table
+                $user->insertOtherAccountDetails(1,$userData['user_id'],$userData['user_emailid']);
             }
                 try {
                         $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
@@ -784,7 +791,7 @@ class User_AccountController extends Zend_Controller_Action
 
                             $msg = $lang_msg;
 
-                            $this->_redirect($this->config->url->base.'/profile');
+                            //$this->_redirect($this->config->url->base.'/profile');
 
                             // log event signin
                             $eventId = 1;
@@ -793,8 +800,7 @@ class User_AccountController extends Zend_Controller_Action
 
                             $eventAttributes = array();
 
-                            //GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
-
+                            GP_GPEventLog::log($eventId,$userId,$eventDescription,$eventAttributes);
                         }
                         else
                         {
@@ -1504,9 +1510,25 @@ class User_AccountController extends Zend_Controller_Action
         }else {
             $this->_redirect('index/index');
         }
-
-
-
     }
 
+    /**
+     * Update facebook email id
+     * @access public
+     * @param String email : email address in post
+     * @return json object - :msg, :status
+     * @author mujaffar <mujaffar@techdharma.com>
+     */
+    public function ajaxaddfbemailAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout()->disableLayout();
+        $session = GP_GPAuth::getSession();
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+        }
+        $user = new Application_Model_DbTable_User();
+        // Inser facebook data into other account details table
+        $user->insertOtherAccountDetails(1,$session->user_id,$formData['email']);
+    }
+    
 }
