@@ -244,7 +244,7 @@ class Twitter_IndexController extends Zend_Controller_Action
 
                            //other data
 
-                            $lang_msg = $this->translate->_('Welcome! You have removed Successfully!');
+                            $lang_msg = $this->translate->_('You have removed Successfully!');
 
                             $this->_helper->flashMessenger->addMessage($lang_msg);
 

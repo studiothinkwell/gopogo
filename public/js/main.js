@@ -465,7 +465,7 @@ app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/remove
 
         // log message if console is available else not
         // if force then alert if console is not available
-        $.fn.debugLog = function (msg,force){
+        $.fn.debugLog = function (msg,force){  
             var debugFlag = true;
             // console is defined
             if(app.gopogo.debug==1 && typeof console !== 'undefined' )
