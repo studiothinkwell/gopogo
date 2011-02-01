@@ -60,6 +60,7 @@ class IndexController extends Zend_Controller_Action
                 $this->view->showTooltip = "showSuccess";
             $session->isError = "";
         }
+        $this->view->activeModule = "BrowsePlaylists";
     }
 
     /**

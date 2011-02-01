@@ -590,8 +590,7 @@ class User_AccountController extends Zend_Controller_Action
 
                     try {
                         // add data to database
-                        $user->signup($udata);
-
+                        $user->signup($udata);                        
                         $status = 1;
                         // create user model object
                         $user = new Application_Model_DbTable_User();
@@ -682,7 +681,7 @@ class User_AccountController extends Zend_Controller_Action
             $arrVerifyKey = explode("###",$verifyKey);
             $urlEmail = $arrVerifyKey[1];
             //get related user_id, email from database and md5 it
-            $userData = $user->getUserByEmail($urlEmail); //echo '<pre>';print_r($userData);exit;
+            $userData = $user->getUserByEmail($urlEmail); 
             if ($userData['user_status_id']==1) {
                 $verifyWith = md5($userData['user_id'].$urlEmail);
                 //generate confirmation message by using translater
