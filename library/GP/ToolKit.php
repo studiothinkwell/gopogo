@@ -14,7 +14,6 @@
 
 
 
-
 /**
  *
  * Gopogo Url Encription class
@@ -196,7 +195,6 @@ class GP_ToolKit {
     }
 
 
-
     /***
      * This function can be used to check the string is a valid user name or not
      *
@@ -217,7 +215,6 @@ class GP_ToolKit {
          */
 
         $strPattern = '/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/';
-
 
         return preg_match($strPattern, $str);
     }

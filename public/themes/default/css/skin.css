@@ -1226,7 +1226,7 @@ vertical-align:bottom;
     float:left;
     width:523px;
     height:51px;
-    top:2px;
+    top:6px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
     background-repeat:repeat-x;
 }
@@ -1245,7 +1245,7 @@ vertical-align:bottom;
     float:left;
     left: 545px;
     width:30px;
-    height:31px;
+    height:35px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 }
@@ -1264,7 +1264,7 @@ vertical-align:bottom;
     float:left;
     width:583px;
     min-height:50px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -301px -8px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -301px -11px transparent;
 }
 .create-ac-left
 {
@@ -1402,7 +1402,7 @@ vertical-align:bottom;
     float:left;
     left: 0px;
     width:30px;
-    height:31px;
+    height:35px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 
@@ -1430,7 +1430,7 @@ vertical-align:bottom;
     height:23px;
     left:13px;
     *left:5px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -px transparent;
     cursor: pointer;
     top:-2px;
 }
@@ -1517,7 +1517,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:285px;
     height:51px;
-    top:2px;
+    top:6px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
     background-repeat:repeat-x;
 }
@@ -1576,7 +1576,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     left: 306px;
     width:30px;
-    height:31px;
+    height:35px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 }
@@ -1757,7 +1757,7 @@ border:1px solid red;
     }
 
 .fb_button, .fb_button_rtl  {
-background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent !important;
+background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -30px transparent !important;
 
     border: 0 solid red;
     float: left;
