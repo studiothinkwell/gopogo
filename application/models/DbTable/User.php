@@ -168,15 +168,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $udata = array(
                         1
                         ,   0
-                        ,   ''
+                        ,   'null'
                         ,   $data['user_emailid']
-                        ,   $username
+                        ,   'null'
                         ,   $data['user_password']
                         ,   $data['user_password']
                         ,   ''
                     );
-        try {
-            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); print_r($udata);
+        try { echo '<pre>';
+        print_r($udata);exit;
+        $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); //print_r($udata);
             
         } catch (Some_Component_Exception $e) { 
             if (strstr($e->getMessage(), 'unknown')) {
