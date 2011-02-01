@@ -186,9 +186,9 @@
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
                                 <div class="emailPasswodUsernameTextNew2 ">
-                                    <div class="">
-                                        <a href="#"><input type="button" value="Connect with Twitter" id="twitter-connect" /></a>
-                                    </div>
+                                    <a href="#"  title="Connect with Twitter" alt="Connect with Twitter" id="twitter-connect" name="twitter-connect">
+                                        <div class=" connect-twitter ">&nbsp;</div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -210,10 +210,10 @@
                         <div class="accountSectionPasswordbg">
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
-                                <div class="emailPasswodUsernameTextNew2 ">
-                                    <div class="">
-                                        <a href="#"><input type="button" value="Connect with Twitter" id="twitter-connect" /></a>
-                                    </div>
+                                <div class="emailPasswodUsernameTextNew2 ">                                    
+                                    <a href="#"  title="Connect with Twitter" alt="Connect with Twitter" id="twitter-connect" name="twitter-connect">
+                                        <div class=" connect-twitter ">&nbsp;</div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -243,19 +243,25 @@
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
                                 <div class="emailPasswodUsernameTextNew2 ">
+                                    <a href="#"  title="Connect with Facebook" alt="Connect with Facebook" id="facebook-connect" name="facebook-connect">
+                                        <div class=" connect-facebook ">&nbsp;</div>
+                                    </a>
+                                    <!--
                                     <div class=" ">
                                         <a href="#"><input type="button" value="Connect with Facebook" id="facebook-connect" /></a>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?php } else { ?>
+                    <div class="clear h5" ></div>
                     <div class="accountSectionInnerLayout facebookBox1 d1">
                         <div class="accountSectionPasswordbg">
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
-                                <div class="emailPasswodUsernameTextNew2 dsplUpdateFacebook">pqr</div>
+                                <div class="emailPasswodUsernameTextNew2 dsplUpdateFacebook">&nbsp;</div>
                                 <div class="connectbtn-text remove-facebook">
                                     <a href="#">Remove</a>
                                 </div>
@@ -266,16 +272,26 @@
                         <div class="accountSectionPasswordbg">
                             <div class="rowSectionBg">
                                 <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
-<!--                                <div class="emailPasswodUsernameTextNew2 ">
+<!--
+                                <div class="emailPasswodUsernameTextNew2 ">
                                     <div class=" ">
                                         <a href="#"><input type="button" value="Connect with Facebook" id="facebook-connect" /></a>
                                     </div>
-                                </div>-->
-                                 <div class="emailPasswodUsernameTextNew2 clsFbEmail">
-                                 <?php if($this->facebookName) { echo $this->facebookName; }
-                                       else if (empty($this->facebookName)) { echo $facebook->FBLogin(); }
-                                  ?>
                                 </div>
+-->
+                                <div class="emailPasswodUsernameTextNew2 ">
+                                    <a href="#"  title="Connect with Facebook" alt="Connect with Facebook" id="facebook-connect" name="facebook-connect">
+                                        <div class=" connect-facebook ">&nbsp;</div>
+                                    </a>
+                                 </div>
+                                 <!--
+                                 <div class="emailPasswodUsernameTextNew2 clsFbEmail">
+                                  <?php //if($this->facebookName) { echo $this->facebookName; }
+                                       //else if (empty($this->facebookName)) { echo $facebook->FBLogin(); }
+                                  ?>
+                                 </div>
+                                 -->
+
                             </div>
                         </div>
                     </div>
@@ -314,8 +330,8 @@
         <!-- Right part Start  -->
         <div class="con-right">
             <div class="accountSectionrightTopHeadBg">
-            <div class="accountRightHeadTxt">Purchase History</div>
-            <div class="haveAQuestionText">Have a Question?</div>
+                <div class="accountRightHeadTxt">Purchase History</div>
+                <div class="haveAQuestionText"><a href="#"> Have a Question?</a></div>
             </div>
 
             <div class="accountSectionrightDropDowndBg">

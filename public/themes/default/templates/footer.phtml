@@ -63,5 +63,27 @@ app.gopogo.baseurl = '<?php echo rtrim($baseUrl) ?>/';
 app.gopogo.debug = <?php echo $config->gopogo->debug->default ?>;
 
 </script>
+
+
+<div id="fb-root"></div>
+<?php
+$fbIds = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'facebook');
+?>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+                appId: <?php echo $fbIds->facebook->appid; ?>,
+                status: true,
+                cookie: true,
+                xfbml: true
+            });
+    };
+    (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    }());
+</script>
+
 </body>
 </html>

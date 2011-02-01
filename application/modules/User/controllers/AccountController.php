@@ -93,24 +93,7 @@ class User_AccountController extends Zend_Controller_Action
         //echo "<pre>";
         //print_r($reindexPartners);
         $this->view->partners   = $reindexPartners;        
-
-
-        // create user model object
-        $user = new Application_Model_DbTable_User();
-        // check and get user data if email and password match
-        $userOtherAccData = $user->getUserPartnerById($id);
-        $twitterName = "";
-        $facebookName = "";
-        if(sizeof($userOtherAccData)>0) {
-            foreach($userOtherAccData as $data) {
-                if($data['account_type_id']== 1)
-                    $facebookName = $data['account_username'];
-                if($data['account_type_id']== 2)
-                    $twitterName = $data['account_username'];
-            }
-        }
-        $this->view->assign('facebookName',$facebookName);
-        $this->view->assign('twitterName',$twitterName);
+        
     } // end indexAction
 
     /**
