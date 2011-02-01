@@ -1,30 +1,38 @@
-
+// declair global variables for profile
+var profile = new Array(2);
 $(document).ready(function() {
+//call ajax to generate message list on load
     loadMsgList();
-
-    // Change facebook login button image to edit hyperlink
-   // $('b','.clsBtnFbLogin').text('edit');
-// basic update functions
-//call ajax for update profile
+// call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
-         case 'myinfo':
-            $.ajax({
-              url: app.gopogo.profilemyinfo_url,
-              type: 'POST',
-              dataType: 'json',
-              data:fdata,
-              timeout: 99999,
-              success: function(resp){
-                  // do something with resp
-                  if(resp.status == 1) { // show error message
-
-                  }
-                  else {
-
+         case 'myinfo':  
+            var fdata = {'userName':$(".inpclsDivUN").val(),'userDesc':$(".inpclsDivUD").val()};
+            if($().validateUsername($(".inpclsDivUN").val())){
+                $.ajax({
+                  url: app.gopogo.profilemyinfo_url,
+                  type: 'POST',
+                  dataType: 'json',
+                  data:fdata,
+                  timeout: 99999,
+                  success: function(data){
+                      //code to manage html after save process complete
+                          var inpArr = new Array(2);
+                          inpArr[0] = new Array("inpclsDivUN","clsDivUN");
+                          inpArr[1] = new Array("inpclsDivUD","clsDivUD");
+                          $().inplaceEditor(inpArr,"save");
+                      if(data == 0) {
+                          $(".clsDivUN").text(profile[0]);
+                          $(".clsDivUD").text(profile[1]);
+                      }
+                      $(".clsEUPro").removeClass('save');
+                      $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
+                      $(".save_info").hide();
+                      $(".clsEUPro").show();
+                      // do something with resp
                    }
-               }
-         });
+                });
+            }
          break;
          //for profile action
          //  case 'myAccEmail':
@@ -140,16 +148,20 @@ $(document).ready(function() {
 
     // inplace editor
 
-    $.fn.inplaceEditor = function(inpArr,act) {
+    $.fn.inplaceEditor = function(inpArr,act) { 
 
          switch (act) {
-           case "edit":
+           case "edit" :
                 var arrLen = inpArr.length;
+                //alert(arrLength);
                 for(i=0;i<arrLen-1;i++) {
-
-                    var inpval = $.trim($("."+inpArr[i][0]).text());
-
-                    var txtEditData = $("<input type='"+inpArr[i][2]+"' name='' id='' class='inp"+inpArr[i][0]+"' value='"+inpval+"'/>");
+                    var txtEditData;
+                    if (inpArr[i][2] == "text") {
+                        txtEditData = $("<input type='"+inpArr[i][2]+"' name='' id='' maxlength='"+inpArr[i][3]+"' class='inp"+inpArr[i][0]+"' value='"+$("."+inpArr[i][0]).text()+"'/>");
+                    }
+                    if (inpArr[i][2] == 'textarea') {
+                        txtEditData = $("<textarea name='' id='' style='width:210px' class='inp"+inpArr[i][0]+"'>"+$("."+inpArr[i][0]).text()+"</textarea>");
+                    }
                     $("."+inpArr[i][1]).html(txtEditData);
                 }
                 switch(inpArr[arrLen-1][2]) {
@@ -159,10 +171,10 @@ $(document).ready(function() {
                         $("."+inpArr[arrLen-1][0]).addClass("save");
                 }
                 break;
-          case "save" :
+            case "save" :
                 arrLen = inpArr.length;
                 for(i=0;i<arrLen;i++) {
-                    $("."+inpArr[0][1]).html($("."+inpArr[0][0]).val());
+                    $("."+inpArr[i][1]).html($("."+inpArr[i][0]).val());
                 }
                 break;
         }
@@ -272,21 +284,38 @@ $(document).ready(function() {
     });
 
 
-$(".inplaceclsEUProsave").click(function(){
+$(".inplaceclsEUProsave").click(function() {
         $().updateProfile('myinfo');
    })
 
-$(".clsEUPro").click(function(){
+
+
+$(".clsEUPro").click(function() {
        if($(".clsEUPro").hasClass('save') ) {
-           $().updateProfile("myinfo");
+           if (profile[0] != $(".inpclsDivUN").val() || profile[1] != $(".inpclsDivUD").val()) {
+                $().updateProfile("myinfo");
+           } else {
+               // suggest to change value
+               var inpArr = new Array(2);
+               inpArr[0] = new Array("inpclsDivUN","clsDivUN");
+               inpArr[1] = new Array("inpclsDivUD","clsDivUD");
+               $().inplaceEditor(inpArr,"save");
+               $(".clsEUPro").removeClass('save');
+               $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
+           }
        } else {
+           $(".clsEUPro").hide();
+           $(".save_info").show();
+           // assign value to global variable of profile
+           profile[0] = $(".clsDivUN").text();
+           profile[1] = $(".clsDivUD").text();
            var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
            $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
-           var inpArr = new Array(2);
-           inpArr[0] = new Array("clsDivUN","clsDivUN","text");
-           inpArr[1] = new Array("clsDivUD","clsDivUD","text");
+           inpArr = new Array(2);
+           inpArr[0] = new Array("clsDivUN","clsDivUN","text","20");
+           inpArr[1] = new Array("clsDivUD","clsDivUD","textarea");
            inpArr[2] = new Array("clsEUPro","clsProAction","href");
-           $().inplaceEditor(inpArr);
+           $().inplaceEditor(inpArr,"edit");
        }
     });
 
@@ -754,11 +783,11 @@ function fblogin() {
     FB.login(function(response) {
       if (response.session) {
         // Get path of the url to chek it is Account update or fb signup
-        var wndwLocation = window.location.pathname;
+        var wndwLocation = window.location.pathname; alert(wndwLocation);
         if (response.perms) {
           // user is logged in and granted some permissions.
           // perms is a comma separated list of granted permissions
-          if ( wndwLocation == '/User/Account') {
+          if ( wndwLocation == '/User/Account' || wndwLocation == '/user/Account' || wndwLocation == '/User/account/' || wndwLocation == '/user/account' || wndwLocation == '/User/Account/#') {
               FB.api('/me', function(fbData) {
 
                 $().debugLog(fbData);
@@ -858,3 +887,19 @@ function backMsgClick() {
      loadMsgList();
      $(".clsMsgList").show();
  }
+
+function savemyinfo() { 
+    if (profile[0] != $(".inpclsDivUN").val() || profile[1] != $(".inpclsDivUD").val()) {
+                $().updateProfile("myinfo");
+           } else {
+               // suggest to change value
+               var inpArr = new Array(2);
+               inpArr[0] = new Array("inpclsDivUN","clsDivUN");
+               inpArr[1] = new Array("inpclsDivUD","clsDivUD");
+               $().inplaceEditor(inpArr,"save");
+               $(".clsEUPro").removeClass('save');
+               $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
+               $(".save_info").hide();
+               $(".clsEUPro").show();
+           }
+}
