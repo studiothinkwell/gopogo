@@ -995,7 +995,7 @@ class User_AccountController extends Zend_Controller_Action
                             // set new temporary email
                             $us =$user->updateUserEmail($id,trim($newEmail));
 
-                            $lang_msg = $this->translate->_('You have changed your email Successfully!');
+                            $lang_msg = $this->translate->_('Activation link has been send successfully!');
 
                             $this->_helper->flashMessenger->addMessage($lang_msg);
 
@@ -1381,9 +1381,11 @@ class User_AccountController extends Zend_Controller_Action
 
                             $status = 1;
 
-                           //$user->logSession($userData);
+                            $session->user_name  = trim($userName);
 
-                           //other data
+                            //$user->logSession($userData);
+
+                            //other data
 
                             $lang_msg = $this->translate->_('You have changed your username Successfully!');
 

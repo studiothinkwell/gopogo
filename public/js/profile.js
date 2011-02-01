@@ -625,7 +625,7 @@ $(".clsEUPro").click(function() {
         // set values to display 
         switch(actionName) {
             case 'email':
-                $(".clsSubSuccess").text('Confirm again this new email!');
+                $(".clsSubSuccess").text('Confirm again this new email : ' + data.email);
                 $().debugLog(data.email);
                 $('.dsplUpdateEmail').html(data.email);
                 break;
