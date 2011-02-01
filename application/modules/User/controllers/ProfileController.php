@@ -26,7 +26,7 @@ class User_ProfileController extends Zend_Controller_Action {
         /* Initialize action controller here */
         // Code to check user is loged in or not
         $session = GP_GPAuth::getSession();
-        if(empty ($session->user_name)) { 
+        if(empty ($session->user_id)) {
             $this->_redirect();
         }
     }

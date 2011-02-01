@@ -2650,6 +2650,7 @@ width:270px;
 	color:#363231;
 	text-decoration:none;
 	text-align:left;
+        height:38px;
 	}
 
 .average_rating_text{
@@ -2667,7 +2668,7 @@ width:270px;
 	padding-top:6px;
 	background:url(/themes/default/images/inner-page-img.png) no-repeat -62px -92px transparent;
 	height:26px;
-	width:54%;
+	width:36%;
 	}
 
 .average_edit_text a{
@@ -3235,3 +3236,43 @@ width:270px;
     border:0px;
     float:left;
 }
+/**** 1st feb 2010 **/
+.backtomsg_bg{
+    float:left;
+    padding-top:7px;
+    width:36%;
+    background:url(/themes/default/images/inner-page-img.png) no-repeat scroll -63px -306px transparent;
+    height:36px;
+    text-align:left;
+ }
+
+ .msgHeading{
+	width:37%;
+	float:left;
+	padding:5px 0px 0px 12px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#363231;
+	font-weight:bold;
+	text-align:left;
+	}
+       .msg_bg{
+	float:left;
+	width:365px;
+	background-color:#eaeaeb;
+	height:44px;
+	padding-bottom:1px;
+	}
+
+        .msg_bg {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	text-align:left;
+	font-weight:normal;
+	float:left;
+	color:#363231; clear:both;
+        height:33px;
+	}
+
+
+/*** end here **/
