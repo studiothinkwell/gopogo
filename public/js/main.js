@@ -531,7 +531,8 @@ app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/remove
         })
         //function to close tooltip for error messages
         $.fn.closeErrorTooltip = function () {
-            $(".clsErrorMsg").attr('style','display:none');
+            //$(".clsErrorMsg").attr('style','display:none');
+            $(".clsErrorMsg").hide();
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
             $(".clsBlankDiv").attr('style','height:150px');
@@ -540,7 +541,8 @@ app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/remove
 
         //function to close tooltip for success messages
         $.fn.closeSuccessTooltip = function () {
-            $(".clsSuccessMsg").attr('style','display:none');
+            //$(".clsSuccessMsg").attr('style','display:none');
+            $(".clsSuccessMsg").hide();
             var body=document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
             $(".clsBlankDiv").attr('style','height:150px');
