@@ -5,7 +5,7 @@ app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
 app.gopogo.signup_url = app.gopogo.baseurl + 'User/Account/signup/';
 // profile url
-app.gopogo.profile_url = app.gopogo.baseurl + 'profile';
+app.gopogo.profile_url = app.gopogo.baseurl + 'User/profile';
 // logout url
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
