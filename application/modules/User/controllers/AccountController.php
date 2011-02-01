@@ -975,7 +975,7 @@ class User_AccountController extends Zend_Controller_Action
 
                     $checkEmailExist = $user->checkUserByEmail(trim($newEmail));
 
-                    if($checkEmailExist['email_status'] == 'True') {
+                    if($checkEmailExist) {
                         if($validFlag) {
                             $lang_msg = $this->translate->_("Email is already assigned to some other user!");
                             $msg .= $lang_msg;
@@ -1026,9 +1026,7 @@ class User_AccountController extends Zend_Controller_Action
                             $session->tooltipMsg1 = $confirmMsg1;
                             $session->tooltipMsg2 = $confirmMsg2;
                             $session->tooltipDsp = "hide";
-
-                            $logger = Zend_Registry::get('log');
-                            $logger->log('mahesh prasad -2 ',Zend_Log::DEBUG);
+                            
                             // this is not working
                             /*
                             if($confirmSent) {
@@ -1040,8 +1038,7 @@ class User_AccountController extends Zend_Controller_Action
                             }
                             */
                             GP_GPAuth::sendAccountEmailUpdateInfo($oldEmail,$newEmail);
-                            $logger = Zend_Registry::get('log');
-                            $logger->log('mahesh prasad -3',Zend_Log::DEBUG);
+                          
                             $status = 1;
                     } catch (Some_Component_Exception $e) {
                         if (strstr($e->getMessage(), 'unknown')) {
