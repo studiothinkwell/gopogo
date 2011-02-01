@@ -1785,11 +1785,12 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 /******* css code for error messages    Dated - 11 jan 2011 *******/
 .top-Msg-window,.top-Msg-window-r
 {
-	position:absolute;
+	position:relative;
 	width:1024px;
 	height:58px;
 	background-image:url(/themes/default/images/topmsg-bg.jpg);
 	background-repeat:repeat-x;
+        float:left;
 }
 .top-Msg-window-icon,.top-Msg-window-icon-r
 {
@@ -1798,13 +1799,15 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	height:50px;
 	margin-left:10px;
 	background:url("/themes/default/images/icons.png") no-repeat scroll -198px -3px transparent;
+        text-align: left;
+
 }
 .top-Msg-window-txt,.top-Msg-window-txt-r
 {
 	width:700px;
 	font-size:18px;
 	font-weight:800;
-	text-align:left;
+	text-align:left !important;
 	line-height: 27px;
 }
 

@@ -362,21 +362,23 @@ $(".clsEUPro").click(function() {
         //var clsClassName = event.target.parentNode.className;
 
         var clsClassName = $(event.target.parentNode).attr('class');
-       
+        
         var regexSave = /save/;
-       
-        if( clsClassName == '' || clsClassName == null || regexSave.test(clsClassName) || $.isEmptyObject($(event.target.parentNode).attr('class'))){
+        
+        // || $.isEmptyObject($(event.target.parentNode).attr('class'))
+        if( clsClassName == '' || clsClassName == null || regexSave.test(clsClassName) ){
+            
             $().clearErrorMessage();
             //var actionClass = event.target.parentNode.parentNode.className;
             var actionClass = $(event.target.parentNode.parentNode).attr('class');
-
+            
             // update email action
             // save            
             $().debugLog('save');
             var regexUEmail = /email/;
             var regexUPassword = /password/;
             var regexUUsername = /username/;
-
+            
             if(regexUEmail.test(actionClass) || regexUEmail.test(clsClassName) ){
 
                 // save email
@@ -490,6 +492,7 @@ $(".clsEUPro").click(function() {
             }
 
         }else if(typeof $(event.target.parentNode).attr('class') != undefined ){
+            
             $().clearErrorMessage();
             //var actionClass = event.target.parentNode.className;
             var actionClass = $(event.target.parentNode).attr('class');
