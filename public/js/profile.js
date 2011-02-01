@@ -327,15 +327,19 @@ $(".clsEUPro").click(function(){
     // add signin box click handlar
 
     $(".signinbox").click(function(event) {
-        $().debugLog('signinbox');
-
-        var clsClassName = event.target.parentNode.className;
         
+        $().debugLog('signinbox');
+        
+        //var clsClassName = event.target.parentNode.className;
+
+        var clsClassName = $(event.target.parentNode).attr('class');
+       
         var regexSave = /save/;
-
-        if( regexSave.test(clsClassName) || $.isEmptyObject($(event.target.parentNode).attr('class'))){
-
-            var actionClass = event.target.parentNode.parentNode.className;
+       
+        if( clsClassName == '' || clsClassName == null || regexSave.test(clsClassName) || $.isEmptyObject($(event.target.parentNode).attr('class'))){
+            $().clearErrorMessage();
+            //var actionClass = event.target.parentNode.parentNode.className;
+            var actionClass = $(event.target.parentNode.parentNode).attr('class');
 
             // update email action
             // save            
@@ -456,9 +460,10 @@ $(".clsEUPro").click(function(){
                 }
             }
 
-        }else if(typeof event.target.parentNode.className != undefined ){
-
-            var actionClass = event.target.parentNode.className;
+        }else if(typeof $(event.target.parentNode).attr('class') != undefined ){
+            $().clearErrorMessage();
+            //var actionClass = event.target.parentNode.className;
+            var actionClass = $(event.target.parentNode).attr('class');
 
             var regexUpdate = /update/;
             var regexCancel = /cancel/;
