@@ -1226,7 +1226,7 @@ vertical-align:bottom;
     float:left;
     width:523px;
     height:51px;
-    top:6px;
+    top:2px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
     background-repeat:repeat-x;
 }
@@ -1518,7 +1518,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     width:285px;
     height:51px;
-    top:6px;
+    top:2px;
     background-image:url(/themes/default/images/Create-account-tbg.png);
     background-repeat:repeat-x;
 }
