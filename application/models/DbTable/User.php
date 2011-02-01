@@ -168,9 +168,9 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $udata = array(
                         1
                         ,   0
-                        ,   'NULL'
+                        ,   null
                         ,   $data['user_emailid']
-                        ,   'NULL'
+                        ,   null
                         ,   $data['user_password']
                         ,   ''
                         ,   ''
