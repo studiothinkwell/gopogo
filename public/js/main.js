@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$(document).ready(function(){ 
 // login url
 app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
@@ -30,6 +30,12 @@ app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateacc
 app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
 //account username update url
 app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
+//account facebook email update url
+app.gopogo.fbemailupdate_url = app.gopogo.baseurl + 'User/Account/ajaxaddfbemail/';
+//account facebook email remove url
+app.gopogo.fbRemoveEmail_url = app.gopogo.baseurl + 'User/Account/ajaxremovefbemail';
+//sign up facebook signup url
+app.gopogo.fbsignup_url = app.gopogo.baseurl + 'User/Account/fbsignin';
 
 //account partner remove url
 app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/removepartnerajax/';
