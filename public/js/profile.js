@@ -1,10 +1,11 @@
 
-$(document).ready(function(){
+$(document).ready(function() {
+    loadMsgList();
 
+    // Change facebook login button image to edit hyperlink
+   // $('b','.clsBtnFbLogin').text('edit');
 // basic update functions
-
-    //call ajax for update profile
-
+//call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
          case 'myinfo':
@@ -56,7 +57,7 @@ $(document).ready(function(){
                         $().updateError(resp);
                   }
                }
-         });
+            });
           break;
          //for account password update action
           case 'myAccPass':
@@ -169,6 +170,7 @@ $(document).ready(function(){
 
 // update handler
 
+
     // update email event handler
     $(".clsUpdateAccUserEmail").click(function(){
         if($(".clsUpdateAccUserEmail").hasClass('save') ) {
@@ -231,7 +233,7 @@ $(document).ready(function(){
         $().debugLog(1);
         $().debugLog($(".clsUpdateAccUserPass").hasClass('save'));
         if($(".clsUpdateAccUserPass").hasClass('save')) {
-             $().debugLog(2);
+            $().debugLog(2);
             $().closeSuccessTooltip();
             $().closeErrorTooltip();
 
@@ -318,9 +320,491 @@ $(".clsEUPro").click(function(){
         var evlFlag = regex.test(email);
         $().debugLog(evlFlag);
         return evlFlag;
+
+    } 
+
+
+    // add signin box click handlar
+
+    $(".signinbox").click(function(event) {
+        $().debugLog('signinbox');
+
+        var clsClassName = event.target.parentNode.className;
+        
+        var regexSave = /save/;
+
+        if( regexSave.test(clsClassName) || $.isEmptyObject($(event.target.parentNode).attr('class'))){
+
+            var actionClass = event.target.parentNode.parentNode.className;
+
+            // update email action
+            // save            
+            $().debugLog('save');
+            var regexUEmail = /email/;
+            var regexUPassword = /password/;
+            var regexUUsername = /username/;
+
+            if(regexUEmail.test(actionClass) || regexUEmail.test(clsClassName) ){
+
+                // save email
+                var email = $('.inpclsUpdateEmail').val();
+                $().debugLog('email - ' + email);
+
+                // validate email
+                if($().validateEmail(email)){
+                    
+                    $().clearErrorMessage();
+                    var fdata = {'email':email};
+                    var settings = {'data':fdata,'url':app.gopogo.accountemailupdate_url};
+
+                    $('.save-email').ajaxLoader();
+
+                    $().updateSettings("email",settings);
+                    
+                } else {
+
+                    var msg1 = 'Email not valid!';
+                    var msg2 = 'Enter valid email, like xyz@pqr.com';
+                    $().showErrorTooltip(msg1);
+
+                    // top-Msg-window-s
+                    $('.top-Msg-window-s').text(msg2);
+                }
+
+            }else if(regexUPassword.test(actionClass) || regexUPassword.test(clsClassName) ){
+               
+                // save password
+                var oldPassword = $('.inpclsUpdateOldPassword').val();
+                var newPassword = $('.inpclsUpdateNewPassword').val();
+                var confirmNewPassword = $('.inpclsUpdateConfirmNewPassword').val();                
+               
+                var vlflag = true;
+
+                // validate password
+                var msg1 = '';
+
+                if(confirmNewPassword!=newPassword){
+                    msg1 = 'New Password and Re-type New Password does not match!';
+                    vlflag = false;
+                }
+
+                if(confirmNewPassword==''){
+                    msg1 = 'Re-type New Password must not be blank!';
+                    vlflag = false;
+                }else if(confirmNewPassword.length<6 || oldPassword.length>16){
+                    msg1 = 'Re-type New Password length must be between 6 and 16!';
+                    vlflag = false;
+                }
+
+                if(newPassword==''){
+                    msg1 = 'New Password must not be blank!';
+                    vlflag = false;
+                }else if(newPassword.length<6 || oldPassword.length>16){
+                    msg1 = 'New Password length must be between 6 and 16!';
+                    vlflag = false;
+                }
+
+                if(oldPassword==''){
+                    msg1 = 'Old Password must not be blank!';
+                    vlflag = false;
+                }else if(oldPassword.length<6 || oldPassword.length>16){
+                    msg1 = 'Old Password length must be between 6 and 16!';
+                    vlflag = false;
+                }
+
+                if(vlflag){
+                    $().clearErrorMessage();
+
+                    var fdata = {'current_pass':oldPassword,'new_pass':newPassword,'retype_pass':confirmNewPassword};
+                    $().debugLog('password data - ' + fdata);
+                    var settings = {'data':fdata,'url':app.gopogo.accountpassupdate_url};
+
+                    $('.save-password').ajaxLoader();
+
+                    $().updateSettings("password",settings);
+
+                }else{
+                    $().showErrorTooltip(msg1);
+                    $(".clsSubError").text('.');
+                    $('.top-Msg-window-s').text('.');
+                }
+            
+            }else if(regexUUsername.test(actionClass) || regexUUsername.test(clsClassName) ){
+                // save username
+                var username = $('.inpclsUpdateUsername').val();
+                $().debugLog('username - ' + username);
+
+                // validate username
+                if($().validateUsername(username)){
+
+                    $().clearErrorMessage();
+                    var fdata = {'username':username};
+                    var settings = {'data':fdata,'url':app.gopogo.accountusernameupdate_url};
+
+                    $('.save-username').ajaxLoader();
+
+                    $().updateSettings("username",settings);
+
+                } else {
+
+                    var msg1 = 'Username not valid!';
+                    var msg2 = 'Username must start with alphabet character and allowed characters a-zA-Z0-9 and underscore.';
+                    $().showErrorTooltip(msg1);
+
+                    // top-Msg-window-s
+                    $('.top-Msg-window-s').text(msg2);
+                }
+            }
+
+        }else if(typeof event.target.parentNode.className != undefined ){
+
+            var actionClass = event.target.parentNode.className;
+
+            var regexUpdate = /update/;
+            var regexCancel = /cancel/;
+            var regexSave = /save/;            
+
+            // update action
+            if(regexUpdate.test(actionClass)){
+
+                // update
+                $().debugLog('update');
+
+                var regexUEmail = /email/;
+                var regexUPassword = /password/;
+                var regexUUsername = /username/;
+
+                if(regexUEmail.test(actionClass)){
+
+                    $().resetClasses();
+                    // email emailbox
+                    $('.emailbox').removeClass('d1').addClass("d2");
+                    $('.dsplfld-email').removeClass('d2').addClass("d1");
+
+                }else if(regexUPassword.test(actionClass)){
+                    $().resetClasses();
+                    // password passwordbox
+                    $('.passwordbox').removeClass('d1').addClass("d2");
+                    $('.dsplfld-password').removeClass('d2').addClass("d1");
+
+                }else if(regexUUsername.test(actionClass)){
+                    $().resetClasses();
+                    // username usernamebox
+                    $('.usernamebox').removeClass('d1').addClass("d2");
+                    $('.dsplfld-username').removeClass('d2').addClass("d1");
+                }
+            }else if(regexCancel.test(actionClass)){
+                // cancel
+                $().debugLog('cancel');
+                $().resetClasses();
+
+            }else if(regexSave.test(actionClass)){
+                // save
+            }
+
+        } else {
+
+        }
+    });
+
+
+    // reset classes
+    $.fn.resetClasses = function(){      
+        
+        $().debugLog('resetClasses');
+
+        $('.emailbox').removeClass('d2').addClass("d1");
+        $('.passwordbox').removeClass('d2').addClass("d1");
+        $('.usernamebox').removeClass('d2').addClass("d1");
+
+
+        $('.dsplfld-email').removeClass('d1').addClass("d2");
+        $('.dsplfld-password').removeClass('d1').addClass("d2");
+        $('.dsplfld-username').removeClass('d1').addClass("d2");
+
+        // remove loader
+        $().removeLoader();
     }
 
+    // clear error message
+    $.fn.clearErrorMessage = function(){
+
+        $().closeSuccessTooltip();
+        $().closeErrorTooltip();
+        // clsSubSuccess
+        //$('.top-Msg-window-s').text(msg2);
+        $('.top-Msg-window-s').text('.');
+    }
+
+    // update user settings
+
+    $.fn.updateSettings = function ( actionName, settings ){
+
+        $.ajax({
+          url: settings.url,
+          type: 'POST',
+          dataType: 'json',
+          data:settings.data,
+          timeout: 99999,
+          error: function(resp){
+                $().removeLoader();
+                $().debugLog('error');
+                $().debugLog(resp);
+                if(resp.readyState == 4) {
+
+                }
+          },
+          success: function(resp){
+
+              $().debugLog('success');
+              $().debugLog(resp);
+              // do something with resp
+              if(resp.status == 1) { // show error message
+                    $().updateSuccess(resp);
+                    $().successUpdate(actionName,settings.data);
+              }
+              else {
+                    $().removeLoader();
+                    $(".clsSubError").text('.');
+                    $().updateError(resp);
+              }
+           },
+           complete: function(resp) {
+               $().debugLog('complete');
+               $().debugLog(resp);
+               if(resp.readyState == 4) {
+
+               }
+           }
+        });
+
+    }
+
+    // profile success update
+    $.fn.successUpdate = function ( actionName, data ){
+        $().debugLog('successUpdate');
+        $().resetClasses();
+
+        // set values to display 
+        switch(actionName) {
+            case 'email':
+                $(".clsSubSuccess").text('Confirm again this new email!');
+                $().debugLog(data.email);
+                $('.dsplUpdateEmail').html(data.email);
+                break;
+            case 'password':
+                $().debugLog(data.new_pass);
+                //$('.dsplUpdatePassword').html(data.new_pass);
+                break;
+            case 'username':
+                $().debugLog(data.username);
+                $('.dsplUpdateUsername').html(data.username);
+                break;
+
+            case 'twitter':
+                $().debugLog(data.partner);
+                $('.dsplUpdateTwitter').html('');
+                $('.twitterBox1').removeClass('d2').addClass("d1");
+                $('.twitterBox2').removeClass('d1').addClass("d2");
+                break;
+            case 'facebook':
+                $().debugLog(data.partner);
+                $('.dsplUpdateFacebook').html('');
+
+                $('.facebookBox1').removeClass('d2').addClass("d1");
+                $('.facebookBox2').removeClass('d1').addClass("d2");
+                
+                break;
+            default :
+        }
+
+    }
+
+    // remove loader
+
+    $.fn.removeLoader = function ( ){
+        $('.save-email').ajaxLoaderRemove();
+        $('.save-password').ajaxLoaderRemove();
+        $('.save-username').ajaxLoaderRemove();
+        $('.remove-twitter').ajaxLoaderRemove();
+        $('.remove-facebook').ajaxLoaderRemove();
+    }
+
+    // twitter oauth popup
+
+    $.fn.oauthpopup = function (options){
+
+        $().debugLog('twitter-connect : oauthpopup');
+
+        options.windowName = options.windowName ||  'ConnectWithOAuth'; // should not include space for IE
+        options.windowOptions = options.windowOptions || 'location=0,status=0,width=600,height=300';
+        options.callback = options.callback || function(){
+            $().debugLog('twitter-connect : options.callback');
+            window.location.reload();
+        };
+        var that = this;
+
+        that._oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
+
+        that._oauthInterval = window.setInterval(function(){
+            $().debugLog('twitter-connect : _oauthInterval');
+            if (that._oauthWindow.closed) {
+                window.clearInterval(that._oauthInterval);
+                options.callback();
+            }
+        }, 1000);
+    }
+
+    
+    // twitter connect event handlar
 
 
+    $('#twitter-connect').click(function(){
+        $().debugLog('twitter-connect');
+        $().oauthpopup({
+            path: app.gopogo.baseurl + '/Twitter/index/redirect',
+            callback: function(){
 
+                $().debugLog('twitter-connect : callback');
+
+            }
+        });
+    });
+
+    // remove twitter
+
+    $(".remove-twitter").click(function(event) {
+        $().debugLog('remove-twitter');
+        $().debugLog(event);
+
+        $().clearErrorMessage();
+        var fdata = {'partner':'twitter'};
+        var settings = {'data':fdata,'url':app.gopogo.accountremovepartner_url};
+
+        $('.remove-twitter').ajaxLoader();
+
+        $().updateSettings("twitter",settings);
+        
+    });
+
+    // remove twitter
+
+    $(".remove-facebook").click(function(event) {
+        
+        $().debugLog('remove-facebook');
+        $().debugLog(event);
+
+        $().clearErrorMessage();
+        var fdata = {'partner':'facebook'};
+        var settings = {'data':fdata,'url':app.gopogo.accountremovepartner_url};
+
+        $('.remove-facebook').ajaxLoader();
+
+        $().updateSettings("facebook",settings);
+
+    });
+
+    
 });
+
+function fblogin() { 
+    FB.login(function(response) {
+      if (response.session) {
+        // Get path of the url to chek it is Account update or fb signup
+        var wndwLocation = window.location.pathname;
+        if (response.perms) {
+          // user is logged in and granted some permissions.
+          // perms is a comma separated list of granted permissions
+          if ( wndwLocation == '/User/Account') {
+              FB.api('/me', function(fbData) {
+                // Call ajax to update profile information
+                var fdata = {'email':fbData.email};
+                $.ajax({
+                  url: app.gopogo.fbemailupdate_url,
+                  type: 'POST',
+                  dataType: 'json',
+                  data:fdata,
+                  timeout: 99999,
+                  success: function() {
+                      $(".clsFbEmail").html(fbData.email);
+                      $(".remove-facebook").show();
+                   }
+                });
+
+                // Logout from facebook
+                FB.logout(function() {
+                    // user is now logged out
+                });
+              });
+          } else {
+              // Call ajax for facebook sign up action
+              $.ajax({
+                  url: app.gopogo.fbsignup_url,
+                  type: 'POST',
+                  timeout: 99999,
+                  success: function() {
+                      // Logout from facebook
+                        FB.logout(function() {
+                            // user is now logged out
+                            window.location = app.gopogo.profile_url;
+                        });
+                   }
+                });
+          }
+        } else {
+          // user is logged in, but did not grant any permissions
+        }
+      } else {
+        // user is not logged in
+      }
+    }, {perms:'email'});
+  }
+
+  function loadMsgList() {
+    //call ajax to generate message list on load
+    $.ajax({
+          url: app.gopogo.msglist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data){
+              alert(data);
+           },
+          success: function(data) {
+                $(".clsMsgList").html(data);
+           },
+           complete: function() {
+
+            }
+     });
+}
+
+//call ajax to reply for an message
+function doReplyMsg() {
+    $.ajax({
+          url: app.gopogo.replymessage_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data){
+              alert(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) {
+                //$('.gray_date_subject_bg').ajaxLoader();
+                $(".clsMsgList").hide();
+                $(".clsMsgRply").html(data);
+                $(".clsMsgRply").show();
+              // do something with resp
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+function backMsgClick() {
+     $(".clsMsgRply").hide();
+     loadMsgList();
+     $(".clsMsgList").show();
+ }

@@ -1,3 +1,8 @@
+
+<?php
+    // Create facebook object for facebook login functionality
+    $facebook = Facebook_FbClass::getConfig();
+?>
 <div style="height:150px;"></div>
 <!--  Body START-->
 <div class="contenter" align="center">
@@ -9,10 +14,101 @@
                 </div>
 
                 <div class="accountSectionLightGrayBg">
-                <span class="accountLeftSubTitleTxts">SIGN IN INFORMATION</span>
+                    <span class="accountLeftSubTitleTxts">SIGN IN INFORMATION</span>
+                </div>
+
+                <div class="signinbox">
+
+                        <div class="accountSectionInnerLayout">
+                                <div class="accountSectionPasswordbg dsplfld-email">
+                                        <div class="rowSectionBg">
+                                                <div class="emailPasswodUsernameHeadTextNew">Email: </div>
+                                                <div class="emailPasswodUsernameTextNew dsplUpdateEmail"><?php echo $this->email;?></div>
+                                                <div class="updatebtn-text clsemail-update">                                                    
+                                                    <a href="#">update</a>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="emailbox d1">
+                                        <div class="accountSectionPasswordbg">
+                                                <div class="rowSectionBg">
+                                                        <div class="emailPasswodUsernameHeadTextNew">Email*:</div>
+                                                        <div class="emailPasswodUsernameTextNew"><input class="accountSectionInputBg inpclsUpdateEmail" type="text" /></div>
+                                                </div>
+                                        </div>
+                                        <div class="accountSectionBottomButton">
+                                                <div class="cancelbtn-text clsemail-cancel">
+                                                        <a href="#">Cancel</a>
+                                                </div>
+                                                <div class="accountSectionBottomButtonBg save-email">
+                                                        <a href="#"><img src="/themes/default/images/save.png" border="0" /></a>                                                        
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="accountSectionInnerLayout">
+                                <div class="accountSectionPasswordbg dsplfld-password">
+                                        <div class="rowSectionBg">
+                                                <div class="emailPasswodUsernameHeadTextNew">Password: </div>
+                                                <div class="emailPasswodUsernameTextNew dsplUpdatePassword">************</div>
+                                                <div class="updatebtn-text clspassword-update"><a href="#">update</a></div>
+                                        </div>
+                                </div>
+                                <div class="passwordbox d1">
+                                        <div class="accountSectionPasswordbg">
+                                                <div class="rowSectionBg">
+                                                        <div class="emailPasswodUsernameHeadTextNew">Old Password*:</div>
+                                                        <div class="emailPasswodUsernameTextNew"><input class="accountSectionInputBg inpclsUpdateOldPassword" type="password" /></div>
+                                                </div>
+                                                <div class="rowSectionBg">
+                                                        <div class="emailPasswodUsernameHeadTextNew">New Password*:</div>
+                                                        <div class="emailPasswodUsernameTextNew"><input class="accountSectionInputBg inpclsUpdateNewPassword" type="password" /></div>
+                                                </div>
+                                                <div class="rowSectionBg">
+                                                        <div class="emailPasswodUsernameHeadTextNew">Re-type New Password*:</div>
+                                                        <div class="emailPasswodUsernameTextNew"><input class="accountSectionInputBg inpclsUpdateConfirmNewPassword" type="password" /></div>
+                                                </div>
+                                        </div>
+                                        <div class="accountSectionBottomButton">
+                                                <div class="cancelbtn-text clsepassword-cancel"><a href="#">Cancel</a></div>
+                                                <div class="accountSectionBottomButtonBg save-password">
+                                                        <a href="#"><img src="/themes/default/images/save.png" border="0" /></a>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="accountSectionInnerLayout">
+                                <div class="accountSectionPasswordbg dsplfld-username">
+                                        <div class="rowSectionBg">
+                                                <div class="emailPasswodUsernameHeadTextNew">Username: </div>
+                                                <div class="emailPasswodUsernameTextNew dsplUpdateUsername"><?php echo $this->userName;?></div>
+                                                <div class="updatebtn-text clsusername-update"><a href="#">update</a></div>
+                                        </div>
+                                </div>
+                                <div class="usernamebox d1">
+                                        <div class="accountSectionPasswordbg">
+                                                <div class="rowSectionBg">
+                                                        <div class="emailPasswodUsernameHeadTextNew">Username*:</div>
+                                                        <div class="emailPasswodUsernameTextNew"><input class="accountSectionInputBg inpclsUpdateUsername" type="text" /></div>
+                                                </div>
+                                        </div>
+                                        <div class="accountSectionBottomButton">
+                                                <div class="cancelbtn-text clseusername-cancel"><a href="#">Cancel</a></div>
+                                                <div class="accountSectionBottomButtonBg save-username">
+                                                        <a href="#"><img src="/themes/default/images/save.png" border="0" /></a>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
                 </div>
 
 
+
+                <?php
+                /*
                 <!-- email update -->
                 <div class="accountSectionInnerLayout">
                     <div class="emailPasswodUsernameHeadBg">
@@ -56,13 +152,141 @@
                     </div>
                 </div>
 
+                */
+                ?>
 
-
+                <div class="h5 clear"></div>
 
                 <div class="accountSectionLightGrayBg">
-                <span class="accountLeftSubTitleTxts">PARTNER INFORMATION</span>
+                    <span class="accountLeftSubTitleTxts">PARTNER INFORMATION</span>
                 </div>
 
+                <div class="partnerbox">
+
+                    <?php
+                    // for twitter
+                    // partners
+                    if(!empty($this->partners) && is_array($this->partners) && count($this->partners)>0 && !empty($this->partners[2]))
+                    {
+                    ?>
+                    <div class="accountSectionInnerLayout twitterBox1 d2">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
+                                <div class="emailPasswodUsernameTextNew2 dsplUpdateTwitter">@<?php echo $this->partners[2]['account_username']; ?></div>
+                                <div class="connectbtn-text remove-twitter">
+                                    <a href="#">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accountSectionInnerLayout twitterBox2 d1">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
+                                <div class="emailPasswodUsernameTextNew2 ">
+                                    <div class="">
+                                        <a href="#"><input type="button" value="Connect with Twitter" id="twitter-connect" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <div class="accountSectionInnerLayout twitterBox1 d1">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
+                                <div class="emailPasswodUsernameTextNew2 dsplUpdateTwitter">&nbsp;</div>
+                                <div class="connectbtn-text remove-twitter">
+                                    <a href="#">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accountSectionInnerLayout twitterBox2 d2">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Twitter: </div>
+                                <div class="emailPasswodUsernameTextNew2 ">
+                                    <div class="">
+                                        <a href="#"><input type="button" value="Connect with Twitter" id="twitter-connect" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+
+
+                    <?php
+                    // for facebook
+                    // partners
+                    if(!empty($this->partners) && is_array($this->partners) && count($this->partners)>0 && !empty($this->partners[1]))
+                    {
+                    ?>
+                    <div class="accountSectionInnerLayout facebookBox1 d2">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
+                                <div class="emailPasswodUsernameTextNew2 dsplUpdateFacebook"><?php echo $this->partners[1]['account_username']; ?></div>
+                                <div class="connectbtn-text remove-facebook">
+                                    <a href="#">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accountSectionInnerLayout facebookBox2 d1">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
+                                <div class="emailPasswodUsernameTextNew2 ">
+                                    <div class=" ">
+                                        <a href="#"><input type="button" value="Connect with Facebook" id="facebook-connect" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <div class="accountSectionInnerLayout facebookBox1 d1">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
+                                <div class="emailPasswodUsernameTextNew2 dsplUpdateFacebook">pqr</div>
+                                <div class="connectbtn-text remove-facebook">
+                                    <a href="#">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accountSectionInnerLayout facebookBox2 d2">
+                        <div class="accountSectionPasswordbg">
+                            <div class="rowSectionBg">
+                                <div class="emailPasswodUsernameHeadTextNew">Facebook: </div>
+<!--                                <div class="emailPasswodUsernameTextNew2 ">
+                                    <div class=" ">
+                                        <a href="#"><input type="button" value="Connect with Facebook" id="facebook-connect" /></a>
+                                    </div>
+                                </div>-->
+                                 <div class="emailPasswodUsernameTextNew2 clsFbEmail">
+                                 <?php if($this->facebookName) { echo $this->facebookName; }
+                                       else if (empty($this->facebookName)) { echo $facebook->FBLogin(); }
+                                  ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+
+
+
+                </div>
+
+                <?php
+                /*
                 <div class="accountSectionInnerLayout">
                 <div class="emailPasswodUsernameHeadBg">
                 <div class="emailPasswodUsernameHeadText">Twitter:</div>
@@ -70,14 +294,21 @@
                 </div>
                  <div class="emailPasswodUsernamesBg">
                  <div class="emailPasswodUsernameText">@Becky</div>
-                 <div class="emailPasswodUsernameText">Becky Denson</div>
+                     <div class="emailPasswodUsernameText clsFbEmail">
+                     <?php if($this->facebookName) { echo $this->facebookName; }
+                           else if (empty($this->facebookName)) { echo $facebook->FBLogin(); }
+                      ?>
+                     </div>
                  </div>
                   <div class="emailPasswodUsernamesEdiBg">
                   <div class="emailPasswodUsernamesEditText">edit</div>
-                  <div class="emailPasswodUsernamesEditText">edit</div>
+
+                  <div class="emailPasswodUsernamesEditText clsRmvFbUname">
+                  <?php if(!empty($this->facebookName)) { ?><a href="#" >Remove</a> <?php } ?></div>
                   </div>
                 </div>
-
+                */
+                ?>
         </div>
         <!--Left Part END-->
         <!-- Right part Start  -->
@@ -96,7 +327,11 @@
             <div class="accountSectionBlueTitle">No Purchases Found.</div>
             <div class="accountSectionNormalText">Please select another date range.</div>
         </div>
+           
+        <div class="blankdiv"></div>
+        <div class="blankdiv"></div>
     </div>
+
 </div>
 
  

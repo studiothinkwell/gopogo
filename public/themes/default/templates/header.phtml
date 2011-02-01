@@ -14,6 +14,9 @@
 
     GP_Asset::addCss('/themes/default/css/skin.css');
     GP_Asset::addCss('/themes/default/css/lightbox.css');
+//  GP_Asset::addCss('/themes/default/css/jquery.rating.css');
+
+    GP_Asset::addCss('/themes/default/css/jquery.ajaxLoader.css');
 
     $browser = new GP_Browser();
 
@@ -29,8 +32,8 @@
             GP_Asset::addCss('/themes/default/css/chrome.css'); break;
        case GP_Browser::BROWSER_OPERA:
             GP_Asset::addCss('/themes/default/css/opera.css'); break;
-    }      
-    
+    } 
+
     GP_Asset::combieAndLoadCss();
 ?>
 </head>
@@ -121,7 +124,7 @@
                             ?>
                             | <a href="<?php echo $baseUrl; ?>/User/account/" >Account</a>
                             | <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
-                            | <a href="<?php echo $session->fbLogoutUrl;?>" id='logout' >Sign out</a>
+                            | <a href="javascript:void(0)" id='logout' >Sign out</a>
                             <?php } else { ?>
                             <a href="javascript:void(0)" class='clsSignIn' >Sign in</a> or
                             <a href="javascript:void(0)" class='clsSignUp' >Create an Account</a> |
