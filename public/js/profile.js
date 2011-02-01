@@ -637,7 +637,7 @@ $(".clsEUPro").click(function(){
         $().debugLog('twitter-connect : oauthpopup');
 
         options.windowName = options.windowName ||  'ConnectWithOAuth'; // should not include space for IE
-        options.windowOptions = options.windowOptions || 'location=0,status=0,width=600,height=300';
+        options.windowOptions = options.windowOptions || 'location=0,status=0,width=785,height=350';
         options.callback = options.callback || function(){
             $().debugLog('twitter-connect : options.callback');
             window.location.reload();
@@ -653,9 +653,37 @@ $(".clsEUPro").click(function(){
                 options.callback();
             }
         }, 1000);
+
+        // centering popup
+        $().debugLog(that._oauthWindow);
+
+        $().centerPopup(that._oauthWindow);
     }
 
-    
+    // centering popup
+    $.fn.centerPopup = function (newWindow){
+        //request data for centering
+        var windowWidth = document.documentElement.clientWidth;
+        $().debugLog('windowWidth : ' + windowWidth);
+        var windowHeight = document.documentElement.clientHeight;
+        $().debugLog('windowHeight : ' + windowHeight);
+        var popupHeight = $(newWindow).height();
+        $().debugLog('popupHeight : ' + popupHeight);
+        var popupWidth = $(newWindow).width();
+        $().debugLog('popupWidth : ' + popupWidth);
+
+        var wleft = windowWidth/2-popupWidth/2;
+        var wtop = windowHeight/2-popupHeight/2;
+        //centering
+        $(newWindow).css({
+            "position": "absolute",
+            "top": windowHeight/2-popupHeight/2,
+            "left": windowWidth/2-popupWidth/2
+        });
+
+        newWindow.moveTo(wleft, wtop);
+        newWindow.focus();
+    }
     // twitter connect event handlar
 
 
@@ -687,7 +715,7 @@ $(".clsEUPro").click(function(){
         
     });
 
-    // remove twitter
+    // remove facebook
 
     $(".remove-facebook").click(function(event) {
         
@@ -704,6 +732,16 @@ $(".clsEUPro").click(function(){
 
     });
 
+    // facebook connect event handlar
+
+    $('#facebook-connect').click(function(){
+        $().debugLog('facebook-connect');
+
+        // opeen FB login pupup
+        fblogin();
+        
+    });
+
     
 });
 
@@ -717,6 +755,9 @@ function fblogin() {
           // perms is a comma separated list of granted permissions
           if ( wndwLocation == '/User/Account') {
               FB.api('/me', function(fbData) {
+
+                $().debugLog(fbData);
+
                 // Call ajax to update profile information
                 var fdata = {'email':fbData.email};
                 $.ajax({
@@ -726,8 +767,10 @@ function fblogin() {
                   data:fdata,
                   timeout: 99999,
                   success: function() {
-                      $(".clsFbEmail").html(fbData.email);
-                      $(".remove-facebook").show();
+                        $(".dsplUpdateFacebook").html(fbData.email);
+                        //$(".remove-facebook").show();
+                        $('.facebookBox1').removeClass('d1').addClass("d2");
+                        $('.facebookBox2').removeClass('d2').addClass("d1");
                    }
                 });
 
@@ -767,7 +810,8 @@ function fblogin() {
           type: 'POST',
           timeout: 99999,
           error: function(data){
-              alert(data);
+              //alert(data);
+              $().debugLog(data);
            },
           success: function(data) {
                 $(".clsMsgList").html(data);
@@ -785,7 +829,8 @@ function doReplyMsg() {
           type: 'POST',
           timeout: 99999,
           error: function(data){
-              alert(data);
+              //alert(data);
+              $().debugLog(data);
            },
           onload: function() {
 
