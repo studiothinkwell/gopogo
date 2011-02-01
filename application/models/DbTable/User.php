@@ -168,18 +168,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $udata = array(
                         1
                         ,   0
-                        ,   'null'
+                        ,   'NULL'
                         ,   $data['user_emailid']
-                        ,   'null'
-                        ,   $data['user_password']
+                        ,   'NULL'
                         ,   $data['user_password']
                         ,   ''
+                        ,   ''
                     );
-        try { echo '<pre>';
-        print_r($udata);exit;
-        $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); //print_r($udata);
-            
-        } catch (Some_Component_Exception $e) { 
+        try {
+            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
+        } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";
@@ -763,7 +761,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
       * @param String
       * @return String temporary password
       */
-    public function updateUserInfo($userid,$userName,$profileDesc) {
+    public function updateUserInfo($userName,$userid,$profileDesc) {     
        // get Db instance
         $db = $this->getDbInstance();
         if(!is_object($db))
@@ -771,13 +769,18 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         try {
         // update user name
-            $stmt = $db->prepare('CALL sp_insert_update_user_profile_master(:userid, :username, :descp)');
+            $stmt = $db->prepare('CALL sp_update_user_name_by_user_id(:userid, :username)');
             $stmt->bindParam('userid', $userid);
             $stmt->bindParam('username', $userName);
-            $stmt->bindParam('descp', $profileDesc);
             $stmt->execute();
             $stmt->closeCursor();
 
+            // update profile description
+            $stmt = $db->prepare('CALL sp_update_user_profile_description_user_id(:userid, :desc)');
+            $stmt->bindParam('userid', $userid);
+            $stmt->bindParam('desc', $profileDesc);
+            $stmt->execute();
+            $stmt->closeCursor();
             echo 1;
             return true;
         } catch (Some_Component_Exception $e) {
