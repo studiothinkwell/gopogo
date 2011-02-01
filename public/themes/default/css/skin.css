@@ -1267,7 +1267,7 @@ vertical-align:bottom;
     float:left;
     left: 545px;
     width:30px;
-    height:35px;
+    height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 }
@@ -1286,7 +1286,7 @@ vertical-align:bottom;
     float:left;
     width:583px;
     min-height:50px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -301px -11px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -301px -8px transparent;
 }
 .create-ac-left
 {
@@ -1425,7 +1425,7 @@ vertical-align:bottom;
     float:left;
     left: 0px;
     width:30px;
-    height:35px;
+    height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 
@@ -1453,7 +1453,7 @@ vertical-align:bottom;
     height:23px;
     left:13px;
     *left:5px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -px transparent;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
     top:-2px;
 }
@@ -1600,7 +1600,7 @@ body:nth-of-type(1) .sign-in-create-account
     float:left;
     left: 306px;
     width:30px;
-    height:35px;
+    height:31px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
     cursor: pointer;
 }
@@ -1781,7 +1781,7 @@ border:1px solid red;
     }
 
 .fb_button, .fb_button_rtl  {
-background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -30px transparent !important;
+background: url(/themes/default/images/Create-account.png) no-repeat scroll -130px -29px transparent !important;
 
     border: 0 solid red;
     float: left;
