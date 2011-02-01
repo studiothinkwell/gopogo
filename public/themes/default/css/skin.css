@@ -2130,6 +2130,16 @@ background: url(/themes/default/images/Create-account.png) no-repeat scroll -130
 	padding-bottom:5px;
 	}
 
+.haveAQuestionText a{
+	font-size:12px;
+	color:#000;
+	text-align:left;
+	color:#3b7f97;
+	text-decoration:underline;
+	float:left;
+	padding-top:5px;
+	padding-bottom:5px;
+	}
 .accountSectionrightDropDowndBg{
 	background-color:#cacaca;
 	height:41px;
@@ -2265,7 +2275,7 @@ width:270px;
 .cancelbtn-text {
             color:#6C6C6C;
             float:left;
-            font-size:14px;
+            font-size:11px;
             font-weight:bold;
             padding-right:5px;
             padding-top:3px;
@@ -2275,7 +2285,7 @@ width:270px;
 	}
 
 .cancelbtn-text a{
-	font-size:14px;
+	font-size:11px;
 	color:#6C6C6C;
 	font-weight:bold;
 	text-decoration:underline;
@@ -2283,7 +2293,7 @@ width:270px;
 	}
 
 .cancelbtn-text a:hover{
-	font-size:14px;
+	font-size:11px;
 	color:#6C6C6C;
 	font-weight:bold;
 	text-decoration:underline;
@@ -3236,6 +3246,7 @@ width:270px;
     border:0px;
     float:left;
 }
+
 /**** 1st feb 2010 **/
 .backtomsg_bg{
     float:left;
@@ -3276,3 +3287,31 @@ width:270px;
 
 
 /*** end here **/
+
+.signinbox input{
+    color:#000000;
+}
+
+.signinbox a{
+    color:#5EA6BF;
+}
+
+.partnerbox a{
+    color:#5EA6BF;
+}
+
+.connect-twitter {
+    background:url(/themes/default/images/connect-with-twitter.png) no-repeat;
+    border:0px;
+    float:left;
+    width:151px;
+    height:23px;
+}
+.connect-facebook {
+    background:url(/themes/default/images/connect-with-facebook.png) no-repeat;
+    border:0px;
+    float:left;
+    width:168px;
+    height:23px;
+}
+
