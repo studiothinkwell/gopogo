@@ -225,7 +225,7 @@ body
     width:115px;
     height:61px;
     padding-right:11px;
-    background-image:url(/themes/default/images/menu1.png);
+    background-image:url(/themes/default/images/menu1_over.png);
     background-repeat:no-repeat;
 }
 .menu1 a
@@ -237,7 +237,18 @@ body
     padding-right:11px;
 }
 
-.menu1 a:hover
+/*.menu1 a:hover
+{
+    position:relative;
+    float:left;
+    width:115px;
+    height:61px;
+    padding-right:11px;
+    background-image:url(/themes/default/images/menu1.png);
+    background-repeat:no-repeat;
+}*/
+
+.menu1active
 {
     position:relative;
     float:left;
@@ -300,6 +311,17 @@ body
     width:95 px;
     height:61px;
     padding-right:11px;
+    background-image:url(/themes/default/images/menu3.png);
+    background-repeat:no-repeat;
+}
+
+.menu3active
+{
+    float:left;
+    width:95px;
+    height:61px;
+    padding-right:11px;
+    top: 4px;
     background-image:url(/themes/default/images/menu3.png);
     background-repeat:no-repeat;
 }
@@ -3278,7 +3300,7 @@ width:270px;
 	padding-bottom:1px;
 	}
 
-        .msg_bg {
+        .message_text {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:12px;
 	text-align:left;
@@ -3286,8 +3308,32 @@ width:270px;
 	float:left;
 	color:#363231; clear:both;
         height:33px;
+        padding-left:12px;
 	}
 
+        .replyAreaBg{
+	float:left;
+	width:346px;
+	}
+
+    .replyText{
+        font-size:12px;
+        color:#3B7F97;
+        text-align:left;
+        padding:5px 0px 0px 19px;
+        float:left;
+        font-weight: bold;
+        }
+    .replyArea{
+        float:left;
+        padding:5px 0px 0px 5px;
+        }
+    .replyBtn{
+        float:left;
+        text-align:right;
+        width:306px;
+        padding:5px 0px 0px 5px;
+        }
 
 /*** end here **/
 

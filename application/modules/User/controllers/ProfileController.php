@@ -45,6 +45,7 @@ class User_ProfileController extends Zend_Controller_Action {
         $msgArr[2]['msgHead'] = "Billy Idol's Day in LA";
         $msgArr[2]['msgComment'] = "Behind the scenes Pasadena...";
         $this->view->assign('msgArr',$msgArr);
+        $this->view->activeModule = "MyProfile";
     }
 
     public function ajaxupdatemyinfoAction() {
@@ -57,7 +58,7 @@ class User_ProfileController extends Zend_Controller_Action {
         $session = GP_GPAuth::getSession();
         // create user model object
         $user = new Application_Model_DbTable_User();
-        $status = $user->updateUserInfo($fData['userName'],$session->user_id,$fData['userDesc']);
+        $status = $user->updateUserInfo($session->user_id,$fData['userName'],$fData['userDesc']);
         if($status) {
             $session->user_name = $fData['userName'];
             $session->user_profile_description = $fData['userDesc'];
