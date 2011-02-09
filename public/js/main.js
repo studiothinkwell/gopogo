@@ -21,6 +21,12 @@ app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/profile/ajaxreplymsg';
 app.gopogo.msglist_url = app.gopogo.baseurl + 'User/profile/ajaxmsglist';
 // message detail url
 app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+// message delete url
+app.gopogo.deletemessage_url = app.gopogo.baseurl + 'User/profile/ajaxdelmsg';
+// comment list url
+app.gopogo.commentlist_url = app.gopogo.baseurl + 'User/profile/ajaxcommentlist';
+// photos list url
+app.gopogo.photoslist_url = app.gopogo.baseurl + 'User/profile/ajaxphotoslist';
 
 app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
 

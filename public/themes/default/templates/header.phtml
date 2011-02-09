@@ -145,10 +145,12 @@
                     <div style="border:0px solid red;float:right;position: relative;top:15px;padding-right: 25px"><a href="javascript:void(0)" ><img src="/themes/default/images/searchBtn.png" border="0" /></a></div>
                     <div class="submenu">
                          <div class="submenu-box">
+                             <?php if($this->activeModule != "MyProfile") { ?>
                         	 <a href="javascript:void(0)" id="s1menu1" class="s1menu1 submenu-div"></a>
                         	 <a href="javascript:void(0)" id="s1menu2" class="s1menu2 submenu-div"></a>
                         	 <a href="javascript:void(0)" id="s1menu3" class="s1menu3 submenu-div"></a>
-                        	 <a href="javascript:void(0)" id="s1menu4" class="s1menu4 submenu-div "></a>
+                        	 <a href="javascript:void(0)" id="s1menu4" class="s1menu4 submenu-div"></a>
+                             <?php } ?>
                         </div>
                     </div>
                 </div>

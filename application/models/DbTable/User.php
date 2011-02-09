@@ -176,7 +176,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                         ,   ''
                     );
         try {
-            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); print_r($udata);
+            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); 
             
         } catch (Some_Component_Exception $e) { 
             if (strstr($e->getMessage(), 'unknown')) {
@@ -1285,5 +1285,78 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $logger->log($lang_msg,Zend_Log::ERR);
         }
         //end of function updateUserStatus
+    }
+
+    /* Message List : get message list for playlist for an user
+     * @access public
+     * @param user_id  : user id, playlist_id
+     *
+     * @return Array 
+     *
+     */
+
+    public function getUserMessageList($user_id, $offset, $limit) { 
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+                // Stored procedure returns an array
+                $stmt = $db->prepare('CALL sp_select_user_message_list_by_user_id(:user_id,:offset,:limit)');
+                $stmt->bindParam('user_id', $user_id, PDO::PARAM_INT);
+                $stmt->bindParam('offset', $offset, PDO::PARAM_INT);
+                $stmt->bindParam('limit', $limit, PDO::PARAM_INT);
+                $stmt->execute();
+                $rowArray = $stmt->fetchAll();
+                $stmt->closeCursor();
+                if (!($rowArray) || empty ($rowArray)) {
+                    return FALSE;
+                }else {
+                if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+                    return $rowArray;
+                }
+                else {
+                    return FALSE;
+                }
+            }
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
+    }
+
+    public function getMsgDtl($senderId, $receiverId) {
+        // get Db instance
+        $db = $this->getDbInstance();
+        if(!is_object($db))
+            throw new Exception("",Zend_Log::CRIT);
+
+        try {
+            // Stored procedure returns an array
+            $stmt = $db->prepare('CALL sp_select_user_message_detail_by_user_id(:sendId,:recId)');
+            $stmt->bindParam('sendId', $senderId, PDO::PARAM_INT);
+            $stmt->bindParam('recId', $receiverId, PDO::PARAM_INT);
+            $stmt->execute();
+                $rowArray = $stmt->fetchAll();
+                $stmt->closeCursor();
+                if (!($rowArray) || empty ($rowArray)) {
+                    return FALSE;
+                }else {
+                    if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+                        return $rowArray;
+                    }
+                    else {
+                        return FALSE;
+                    }
+                }
+        }
+        catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
     }
 }

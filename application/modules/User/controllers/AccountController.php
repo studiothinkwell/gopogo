@@ -55,45 +55,27 @@ class User_AccountController extends Zend_Controller_Action
 
     } // end init
 
-    public function indexAction()
-    {      
+    public function indexAction() {
         $session = GP_GPAuth::getSession();
-        if( !empty($session) && !empty($session->user_id) && $session->user_id>0 ) {
-            // do nothing
-        } else {
+        if( empty($session) && empty($session->user_id) && $session->user_id<0 ) {
             // redirect to home page
             $this->_redirect();
         }
         //$user = new Application_Model_DbTable_User();
         $id     = $session->user_id;
         // collect username and password on the basis of user id
-        //$userData = $user->getUserByIdTemp($id);
         $email    = $session->user_emailid;
-        //$password = $userData['user_password'];
         //get exisiting username of user by fetching against user id
-        //$userData          = $user->getUserUserNameById($id);
         $username          = $session->user_name;
-        //print_r($userPartnerData);die;
         $this->view->email = trim($email);
-        //$this->view->password = trim($password);
         $this->view->userName = trim($username);
 
-
-
         // get partner infromation
-
         $user = new Application_Model_DbTable_User();
-
         $partnersData = $user->getUserPartners($id);
 
-        //echo "<pre>";
-        //print_r($partnersData);
-
         $reindexPartners = $this->reindexPartners($partnersData);
-        //echo "<pre>";
-        //print_r($reindexPartners);
         $this->view->partners   = $reindexPartners;        
-        
     } // end indexAction
 
     /**
@@ -136,7 +118,6 @@ class User_AccountController extends Zend_Controller_Action
             $email = $formData['email'];
 
             // checking for valid email
-            //*
             if(strlen($email) == 0 || $email == "Email Address") {
                 if($validFlag) {
                     $lang_msg = $this->translate->_("Please enter email!");
@@ -153,23 +134,6 @@ class User_AccountController extends Zend_Controller_Action
                     $validFlag = false;
                 }
             }
-            //*/
-            /*
-            $validator = new Zend_Validate_EmailAddress();
-            if ($validator->isValid($email)) {
-                // email appears to be valid
-            } else {
-                //$msg = '';
-                // email is invalid; print the reasons
-                foreach ($validator->getMessages() as $message) {
-                    //echo "$message\n";
-                    //$msg .= $br . "$message\n";
-                }
-                $msg .= "Enter valid email!";
-            }
-            //*/
-            // end checking for valid email
-
             $passwd = $formData['passwd'];
 
             if(strlen($passwd) == 0) {
@@ -590,7 +554,8 @@ class User_AccountController extends Zend_Controller_Action
 
                     try {
                         // add data to database
-                        $user->signup($udata);                        
+                        $user->signup($udata);
+
                         $status = 1;
                         // create user model object
                         $user = new Application_Model_DbTable_User();
@@ -681,7 +646,7 @@ class User_AccountController extends Zend_Controller_Action
             $arrVerifyKey = explode("###",$verifyKey);
             $urlEmail = $arrVerifyKey[1];
             //get related user_id, email from database and md5 it
-            $userData = $user->getUserByEmail($urlEmail); 
+            $userData = $user->getUserByEmail($urlEmail); //echo '<pre>';print_r($userData);exit;
             if ($userData['user_status_id']==1) {
                 $verifyWith = md5($userData['user_id'].$urlEmail);
                 //generate confirmation message by using translater

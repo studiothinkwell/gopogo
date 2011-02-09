@@ -2,7 +2,7 @@
 var profile = new Array(2);
 $(document).ready(function() {
 //call ajax to generate message list on load
-    loadMsgList();
+    //loadMsgList();
 // call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
@@ -786,7 +786,7 @@ function fblogin() {
     FB.login(function(response) {
       if (response.session) {
         // Get path of the url to chek it is Account update or fb signup
-        var wndwLocation = window.location.pathname; alert(wndwLocation);
+        var wndwLocation = window.location.pathname; 
         if (response.perms) {
           // user is logged in and granted some permissions.
           // perms is a comma separated list of granted permissions
@@ -840,39 +840,64 @@ function fblogin() {
     }, {perms:'email'});
   }
 
-  function loadMsgList() {
+  // Global variable for storing messages id
+  var msgIds;
+  // Global variable for storting message list ( Asc, Desc)
+  var msgSort = "Desc";
+  // Global variable for storing sender and receiver ids
+  var senderId;
+  var receiverId;
+  function loadMsgList() {    
     //call ajax to generate message list on load
+    var pData = {'msgSort':msgSort};
     $.ajax({
           url: app.gopogo.msglist_url,
           type: 'POST',
+          data: pData,
           timeout: 99999,
           error: function(data){
               //alert(data);
               $().debugLog(data);
            },
           success: function(data) {
+                $(".clsMsgRply").hide();
+                $(".clsCommentList").hide();                
                 $(".clsMsgList").html(data);
+                $(".clsMsgList").show();
+                msgIds = $(".clsHdnChkMsg").val();
            },
            complete: function() {
 
             }
-     });
+     });     
+}
+
+// function to sort message listing
+function sortMsgList() {
+    if (msgSort == 'Desc') {
+        $(".black-arrow-bg").style('background','url(/themes/default/images/inner-page-img.png) no-repeat scroll -173px -30px transparent;');
+        msgSort = 'Asc'; alert(1);
+    } else if (msgSort == 'Asc') {
+        msgSort = 'Desc';
+    }
+    loadMsgList();
 }
 
 //call ajax to reply for an message
-function doReplyMsg() {
+function doReplyMsg(receiverId) {
+    fdata = {'receiverId':receiverId};
     $.ajax({
           url: app.gopogo.replymessage_url,
           type: 'POST',
+          data:fdata,
           timeout: 99999,
-          error: function(data){
-              //alert(data);
+          error: function(data) {
               $().debugLog(data);
            },
           onload: function() {
 
           },
-          success: function(data) {
+          success: function(data) { 
                 //$('.gray_date_subject_bg').ajaxLoader();
                 $(".clsMsgList").hide();
                 $(".clsMsgRply").html(data);
@@ -906,3 +931,129 @@ function savemyinfo() {
                $(".clsEUPro").show();
            }
 }
+
+function selAllChk() {
+    if($("input[name=selectAll]")[0].checked == true) {
+        for (i = 0; i < $("input[name=msgChk]").length; i++)
+        $("input[name=msgChk]")[i].checked = true ;
+    }
+    else { 
+        for (i = 0; i < $("input[name=msgChk]").length; i++)
+        $("input[name=msgChk]")[i].checked = false ;
+    }
+}
+
+//function to delete messages
+function delMsg() {
+    var delMsgIds="";
+    for (i = 0; i < $("input[name=msgChk]").length; i++) {
+        if($("input[name=msgChk]")[i].checked == true ) { 
+            delMsgIds+=$("input[name=msgChk]")[i].value;
+        }
+        // If value is not last one then append the comma else not
+        if( i+1 != $("input[name=msgChk]").length ) {
+            delMsgIds+=",";
+        }
+    }
+
+    /* @security code check */
+    // Code to check return ids are actually present or not in our global variable msgIds
+    // make array of global variable
+    var arrMsgIds = explode(",",msgIds);
+    // make array of del msg ids
+    var arrDelMsgIds = explode(",",delMsgIds); 
+    var sDelMsgIds=""; 
+    for(i=0;i<arrDelMsgIds.length;i++) { 
+        if(in_array(arrDelMsgIds[i],arrMsgIds)) { 
+            // Append it to delete list
+            sDelMsgIds+=arrDelMsgIds[i]+",";
+        }
+    }
+    alert(sDelMsgIds);
+    fdata = {'delMsgIds':delMsgIds};
+    // call an ajax to delete messages
+    // Post : Message ids
+    $.ajax({
+          url: app.gopogo.deletemessage_url,
+          type: 'POST',
+          data:fdata,
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function() {
+                // Call ajax to refresh message listing
+                loadMsgList();
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+//function to display comments on comment tab click
+$('.clsComments').click(function(){
+    loadCommentList();
+});
+
+//function to display messages on message tab click
+$('.clsMessages').click(function(){
+    loadMsgList();
+});
+
+//function to display photos on Photos tab click
+$('.clsPhotos').click(function(){
+    loadPhotosList();
+});
+
+function loadCommentList() {
+    $.ajax({
+          url: app.gopogo.commentlist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) { 
+                // Show output data in clsComment div
+                $(".clsMsgList").hide();
+                $(".clsCommentList").html(data);
+                $(".clsCommentList").show();
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+function loadPhotosList() {
+    $.ajax({
+          url: app.gopogo.photoslist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) {
+                // Show output data in clsComment div
+                $(".clsMsgList").hide();
+                $(".clsReplyMsg").hide();
+                $(".clsCommentList").hide();
+                $(".clsPhotosList").html(data);
+                $(".clsPhotosList").show();
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
