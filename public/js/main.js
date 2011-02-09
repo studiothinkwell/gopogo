@@ -40,6 +40,10 @@ app.gopogo.fbsignup_url = app.gopogo.baseurl + 'User/Account/fbsignin';
 //account partner remove url
 app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/removepartnerajax/';
 
+// yahoo local search controller url
+app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplaces/';
+
+
 // add events on load
 
 /**

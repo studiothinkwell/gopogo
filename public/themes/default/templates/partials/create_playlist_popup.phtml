@@ -1,0 +1,136 @@
+
+<!--Create playlist START-->
+            <div id="createNewPlaylistBox" class="pg-popup crtpopup-w500 crtpopup-h450" >
+                <form id="createNewPlaylistForm" name="createNewPlaylistForm" method="post">
+                    <div class="pg-popup-head">
+                        <div class="pg-popup-head-leftbg"></div>
+                        <div class="pg-popup-head-middlebg crtpopup-head-middlebg">
+                            <div class="pg-popup-head-txt">Create a <b>playlist</b></div>
+                        </div>
+                        <div class="pg-popup-head-rightbg"></div>
+                        <div class="pg-popup-head-close clsPopupClose"></div>
+                    </div>
+                    <div class="clear "></div>
+                    <div class="pg-popup-centerbg">
+                        <div class="crtpopup-center">
+                            <div class="create-tabs">
+                                <ul class="create-tabs-ul clsCrtplTabsMain" >
+                                    <li class="create-tabs-li tab-on" ><a class="clsCreateTab stop" href="#">Add Stops => </a></li>
+                                    <li class="create-tabs-li tab-off" ><a class="clsCreateTab detail" href="#">Add Details => </a></li>
+                                    <li class="create-tabs-li tab-off" ><a class="clsCreateTab tag" href="#">Tag It => </a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="create-tabs-contents">
+                                <div class="content-stops  tabs-contents">
+                                    <div class="create-tabs-contents-list" id="crtpl-stops" >
+
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="create-tabs-add-stop">
+                                        <span class="add-stop-sr" >1</span>
+                                        <a class="crtplAddStop" href="#">Add the first stop</a>
+                                    </div>
+                                    <div class="create-tabs-contents-info">
+                                        <div class="crtpl-total-price">$25</div>
+                                        <div class="crtpl-total-hour">3 hrs</div>
+                                        <div class="crtpl-places">
+                                            <span id="crtpl-place-3">Pune</span>, <span id="crtpl-place-45">Mumbai</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-details tabs-contents d1">
+                                    Details
+                                </div>
+                                <div class="content-tags tabs-contents d1">
+                                    Tags
+                                </div>
+                                <div class="clear"></div>
+                                <div class="crtpopup-buttons fl-right">
+                                    <a class="clsCrtPopupBack d1" href="#">Back</a>
+                                    <a class="clsCrtPopupNext " href="#">Next</a>
+                                    <a class="clsCrtPopupCreatePlaylist d1" href="#">Create Playlist</a>
+                                </div>
+                            </div>
+                            <div class="playlist-search-box d1">
+                                <div class="playlist-search-box">
+                                    <a class="clsCrtPopupBackSearch " href="#">Back</a>
+                                    <div class="playlist-search-create-tabs">
+                                        <ul class="playlist-search-create-tabs-ul" >
+                                            <li class="playlist-search-create-tabs-li playlist-search-tab-on clsCrtPopupYouLove" ><a class="clsCreatePlaces youlove" href="#">Places you'll love</a></li>
+                                            <li class="playlist-search-create-tabs-li playlist-search-tab-off clsCrtPopupFavorite" ><a class="clsCreatePlaces favorite" href="#">Your favorite places</a></li>
+                                            <li class="playlist-search-create-tabs-li playlist-search-tab-off clsCrtPopupNearBy" ><a class="clsCreatePlaces nearby" href="#">Near by places</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear "></div>
+                                    <div class="playlist-search-filters">
+                                        <input type="text" name="playlist_search_place" id="playlist_search_place" class="inpclsPlaylistSearchPlace" />
+                                        <a class="clsCrtPopupSearch " href="#">Search Places</a>
+                                    </div>
+                                    <div class="clear "></div>
+                                    <div class="playlist-search-content" id="crtpl-search-content">
+                                        list of stops / places
+                                        <ul>
+                                            <li>
+                                                <div class="fl_left">
+                                                    <div class="fl_left srch-sr">
+                                                    1.
+                                                    </div>
+                                                    <div class="fl_left srch-address">
+                                                        <b>MG Road</b><br>
+                                                        Yadwada Pune 411006 $25 6 hrs
+                                                    </div>
+                                                    <div class="fl_left srch-action">
+                                                        <a href="#" class="clscrtAddToStopsList" >Add</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="fl_left">
+                                                    <div class="fl_left srch-sr">
+                                                    2.
+                                                    </div>
+                                                    <div class="fl_left srch-address">
+                                                        <b>Nagar Road</b><br>
+                                                        Yadwada Pune 411006 $25 6 hrs
+                                                    </div>
+                                                    <div class="fl_left srch-action">
+                                                        <a href="#" class="clscrtAddToStopsList" >Add</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="fl_left">
+                                                    <div class="fl_left srch-sr">
+                                                    3.
+                                                    </div>
+                                                    <div class="fl_left srch-address">
+                                                        <b>XYZ Road</b><br>
+                                                        Yadwada Pune 411006 $25 6 hrs
+                                                    </div>
+                                                    <div class="fl_left srch-action">
+                                                        <a href="#" class="clscrtAddToStopsList" >Add</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="playlist-search-pagination fl-right d1">
+                                        <span class="playlist-search-pagination-text">1-10 of 32,232</span>
+                                        <a class="clsCrtPopupListPrev d1" href="#">Prev</a>
+                                        <a class="clsCrtPopupListNext " href="#">Next</a>
+                                        <a class="clsCrtPopupListLast d1" href="#">Last</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear "></div>
+                    <div class="pg-popup-bottom">
+                        <div class="pg-popup-bottom-leftbg"></div>
+                        <div class="pg-popup-bottom-middlebg crtpopup-bottom-middlebg"></div>
+                        <div class="pg-popup-bottom-rightbg"></div>
+                    </div>
+                </form>
+            </div>
+<!--Create playlist END-->

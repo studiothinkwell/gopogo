@@ -1202,7 +1202,7 @@ vertical-align:bottom;
     height:75px;
 }
 
-                                                /*************************************Create Account START**************************************/
+/*************************************Create Account START**************************************/
 .create-ac-box
 {
     position:relative;
@@ -1460,8 +1460,8 @@ vertical-align:bottom;
 
 
 
-                                                /**************************************Create Account END**************************************/
-                                                /************************************** Sign in START **************************************/
+/**************************************Create Account END**************************************/
+/************************************** Sign in START **************************************/
 
 #loginBox, #forgotBox
 {
@@ -3371,3 +3371,294 @@ width:270px;
 .w924{
     width:924px;
 }
+
+/********* pg-popup start ************/
+
+.pg-popup
+{
+    position:absolute;
+    z-index: 999;
+    overflow: auto;
+    float:left;
+    border:0px solid red;
+    display: none;
+    top: 0px;
+    left: 0px;
+    text-align:left;
+}
+
+.pg-popup-head
+{
+    position:relative;
+    float:left;
+    width:100%;
+    height:53px;
+
+}
+
+.pg-popup-head-leftbg
+{
+    position:relative;
+    float:left;
+    width:20px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll 0px 2px transparent;
+}
+.pg-popup-head-middlebg
+{
+    position:relative;
+    float:left;
+    width:88%;
+    height:51px;
+    top:2px;
+    background-image:url(/themes/default/images/Create-account-tbg.png);
+    background-repeat:repeat-x;
+}
+
+.pg-popup-head-rightbg
+{
+    position:relative;
+    float:left;
+    width:40px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -50px 2px transparent;
+
+}
+
+.pg-popup-head-close
+{
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -91px -12px transparent;
+    cursor: pointer;
+
+    float:right;
+    height:40px;
+    position:absolute;
+    right:3px;
+    top:7px;
+    width:40px;
+    z-index:100;
+}
+
+.pg-popup-head-txt
+{
+    font-size:26px;
+    line-height:50px;
+    color:#FFF;
+    text-align:left;
+}
+
+.pg-popup-centerbg
+{
+    position:relative;
+    float:left;    
+    min-height:340px;
+    max-height:340px;
+    background-image:url(/themes/default/images/Create-account-centerbg.png);
+    background-repeat:repeat-y;
+    right:2px;
+    width:100%;
+}
+
+.pg-popup-bottom-leftbg
+{
+    position:relative;
+    float:left;
+    width:20px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat -299px -7px transparent;
+}
+
+.pg-popup-bottom-middlebg
+{
+    position:relative;
+    float:left;    
+    height:51px;    
+    background:url(/themes/default/images/Create-account.png) repeat-x scroll -365px -7px transparent;
+    background-repeat:repeat-x;
+}
+
+.pg-popup-bottom-rightbg
+{
+    position:relative;
+    float:left;
+    right:1px;
+    width:20px;
+    height:53px;
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -863px -7px transparent;
+
+}
+
+.fl-right{
+    float: right;
+}
+.fl-left{
+    float: left;
+}
+/********* pg-popup end ************/
+
+
+/********* Create Playlist start ************/
+
+.crtpopup-w500{
+     width:500px;
+}
+.crtpopup-h450{
+     height:450px;
+}
+.crtpopup-head-middlebg{
+     width:88%;
+}
+.crtpopup-bottom-middlebg{
+    width:92%;
+}
+.crtpopup-center{    
+    max-width:480px;
+    padding:0 10px;
+}
+
+/*
+.crtpopup-w500{
+     width:700px;
+}
+.crtpopup-h400{
+     height:500px;
+}
+.crtpopup-head-middlebg{
+     width:88%;
+}
+.crtpopup-bottom-middlebg{
+    width:92%;
+}
+*/
+
+
+.create-tabs{
+    /* The UL */
+    float:right;
+    /*padding-right:13px;*/
+}
+
+.create-tabs li{
+	/* This will arrange the LI-s next to each other */
+	display:inline;
+}
+.create-tabs ul{
+	/* This will arrange the LI-s next to each other */
+	display:block;
+        margin:0;
+        padding:0;
+}
+
+.create-tabs li a,.create-tabs li a:visited{
+	/* Styling the hyperlinks of the tabs as colorful buttons */
+
+	float:left;
+	font-size:18px;
+
+	/* display:block allows for additinal CSS rules to take effect, such as paddings: */
+	display:block;
+
+	/* padding:7px 16px 1px; */
+	margin:4px 5px;
+	height:29px;
+
+	/* Giving positioning */
+	position:relative;
+
+	/* CSS3 text-shadow */
+	text-shadow:1px 1px 1px #CCCCCC;
+
+        cursor: pointer;
+}
+.create-tabs li a:hover{    
+    color:#9dbe3d;
+}
+
+.playlist-search-create-tabs li{
+	/* This will arrange the LI-s next to each other */
+	display:inline;
+}
+.playlist-search-create-tabs ul{
+	/* This will arrange the LI-s next to each other */
+	display:block;
+        margin:0;
+        padding:0;
+}
+
+.playlist-search-create-tabs li a,.playlist-search-create-tabs li a:visited{
+	/* Styling the hyperlinks of the tabs as colorful buttons */
+
+	float:left;
+	font-size:16px;
+
+	/* display:block allows for additinal CSS rules to take effect, such as paddings: */
+	display:block;
+
+	/* padding:7px 16px 1px; */
+	margin:4px 5px;
+	height:29px;
+
+	/* Giving positioning */
+	position:relative;
+
+	/* CSS3 text-shadow */
+	text-shadow:1px 1px 1px #CCCCCC;
+
+        cursor: pointer;
+}
+.playlist-search-create-tabs li a:hover{
+    color: bisque;
+}
+
+.tab-on, .tab-on{
+    color: bisque;
+}
+.tab-off,.tab-off a{
+    color: #686565;
+}
+
+.crtpl-total-price{
+    width:40px;
+    float:left;
+
+}
+
+.crtpl-total-hour{
+    width:50px;
+    float:left;
+
+}
+
+.crtpopup-buttons a {
+   float: left;
+   padding: 0 10px 0 10px;
+}
+
+.srch-sr{
+    width:25px;
+    float:left;
+}
+
+.srch-address{
+    width:300px;
+    float:left;
+}
+
+.srch-action{
+    width:60px;
+    float:left;
+}
+
+.playlist-search-content{
+
+}
+
+.playlist-search-content ul{
+
+}
+
+.playlist-search-content li{
+    display:inline;
+}
+
+/********* Create Playlist end ************/
