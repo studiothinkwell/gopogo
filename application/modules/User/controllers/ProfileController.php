@@ -35,7 +35,7 @@ class User_ProfileController extends Zend_Controller_Action {
      * @access public
      */
     public function indexAction() {
-       
+        
     }
 
     /**

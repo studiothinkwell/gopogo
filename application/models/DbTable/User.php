@@ -263,16 +263,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         if(!is_object($db))
             throw new Exception("",Zend_Log::CRIT);
-
+        
         try {
 
             $stmt = $db->prepare('CALL sp_check_user_exist(:email)');
             $stmt->bindParam('email', $email, PDO::PARAM_INT);
             $stmt->execute();
             $rowArray = $stmt->fetch();
-
+            
             $stmt->closeCursor();
-
+            
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
