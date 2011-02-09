@@ -5,24 +5,24 @@
 
 <div class="msg_bg">
     <div class="msgHeading"> Billy idols day in LA  </div> <br/>
-    <div class="msgTitleText"> Between You and Dwight Schrute</div>
+    <div class="white_bg_dark_text"> Between You and Dwight Schrute</div>
 </div>
 
 <div>
-   <?php if(sizeof($this->rMsgDtl)>0) {
-        foreach($this->rMsgDtl as $msg) { ?>
+   <?php //if(sizeof($this->rMsgDtl)>0) {
+        //foreach($this->rMsgDtl as $msg) { ?>
    <div class="white_bg_area">
       <div class="user-image"><img src="/themes/default/images/dummy-image.png" border="0" /></div>
       <div class="firstRowBg"> <div class="white_bg_title1">Dwight Schrute </div>
-      <div class="white_bg_gray_text1"> <?php echo $msg['send_date'];?> </div>
-      <div class="white_bg_bluetext1"> <?php echo $msg['Message'];?> </div>
+      <div class="white_bg_gray_text1"> <?php //echo $msg['send_date'];?> </div>
+      <div class="white_bg_bluetext1"> <?php //echo $msg['Message'];?> </div>
       </div>
    </div>
    <div class="light_gray_bor_bg"> &nbsp;</div>
-  <?php  } } ?>
+  <?php //} } ?>
     <div class="replyAreaBg">
         <div class="replyText">Reply</div>
-        <div class="replyArea"> <textarea style="width: 290px; height: 80px;"> This is text area this is Test Area </textarea> </div>
+        <div class="replyArea"> <textarea> This is text area this is Test Area </textarea> </div>
         <div class="replyBtn"><img src="reply.png" border="0"></div>
         </div>
 </div>

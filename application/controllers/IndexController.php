@@ -38,7 +38,8 @@ class IndexController extends Zend_Controller_Action
         //code to get baseurl and assign to view
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
         $baseurl = $this->config->gopogo->url->base;
-        $this->view->baseurl = $baseurl;       
+        $this->view->baseurl = $baseurl;
+        $this->view->activeModule = "BrowsePlaylists";
     }
 
     public function indexAction()
@@ -60,7 +61,6 @@ class IndexController extends Zend_Controller_Action
                 $this->view->showTooltip = "showSuccess";
             $session->isError = "";
         }
-        $this->view->activeModule = "BrowsePlaylists";
     }
 
     /**
