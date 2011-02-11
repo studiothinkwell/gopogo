@@ -22,11 +22,18 @@
  */
 class User_ProfileController extends Zend_Controller_Action {
     public function init() {
-        /* Initialize action controller here */
-        // Code to check user is loged in or not
-        $session = GP_GPAuth::getSession();
-        if (empty($session->user_id)) {
-            $this->_redirect();
+        try {
+            /* Initialize action controller here */
+            // Code to check user is loged in or not
+            $session = GP_GPAuth::getSession();
+            if (empty($session->user_id)) {
+                $this->_redirect();
+            }
+        } catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg, Zend_Log::ERR);
+
         }
     }
 
@@ -37,4 +44,5 @@ class User_ProfileController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->activeModule = "MyProfile";
     }
+
 }

@@ -114,9 +114,9 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                         ,   ''
                     );
         try {
-            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata); 
+            $stmt = $this->_db->query("CALL sp_insert_user_master(?,?,?,?,?,?,?,?)", $udata);
             return TRUE;
-        } catch (Some_Component_Exception $e) { 
+        } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
                 $lang_msg = "Unknown Error!";
@@ -200,16 +200,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         if(!is_object($db))
             throw new Exception("Unable to create DB object",Zend_Log::CRIT);
-        
+
         try {
 
             $stmt = $db->prepare('CALL sp_check_user_exist(:email)');
             $stmt->bindParam('email', $email, PDO::PARAM_INT);
             $stmt->execute();
             $rowArray = $stmt->fetch();
-            
+
             $stmt->closeCursor();
-            
+
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
                 // handle one type of exception
@@ -236,7 +236,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 return TRUE;
         else
             return FALSE;
-       
+
 
     } // end of checkUserByEmail
 

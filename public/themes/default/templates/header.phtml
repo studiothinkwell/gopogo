@@ -122,7 +122,7 @@
                                 if($loginFlag){
                                     echo $userEmailId;
                             ?>
-                            | <a href="<?php echo $baseUrl; ?>/User/account/" >Account</a>
+                            | <a href="<?php echo $baseUrl; ?>/account/" >Account</a>
                             | <a href="<?php echo GP_ToolKit::getSeoUrl($baseUrl.'/how-it-works'); ?>">How it works</a>
                             | <a href="javascript:void(0)" id='logout' >Sign out</a>
                             <?php } else { ?>
@@ -137,7 +137,7 @@
                     <div class="menu">
                         <a href="<?php echo $baseUrl; ?>" class="<?php if($this->activeModule == "BrowsePlaylists") { ?>menu1active<?php } else { ?> menu1<?php } ?>"></a>
                         <a href="<?php echo $baseUrl; ?>" class="menu2"></a>
-                        <a href="<?php echo $baseUrl; ?>/User/profile" class="<?php if($this->activeModule == "MyProfile") {?> menu3active <?php } else {?> menu3 <?php } ?>"></a>
+                        <a href="<?php echo $baseUrl; ?>/profile" class="<?php if($this->activeModule == "MyProfile") {?> menu3active <?php } else {?> menu3 <?php } ?>"></a>
                         <a href="#" class="menu4 clsCreatePlaylist"></a>
                     </div>
                     <div class="search"><input type="text" value="Search for..." onclick="if(this.value == 'Search for...'){this.value=''; $().setTextColor(this); }else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value==''){this.value='Search for...';$().removeTextColor(this);} else if(this.value == 'Search for...'){ $().removeTextColor(this); } else {$().setTextColor(this);}"/></div>

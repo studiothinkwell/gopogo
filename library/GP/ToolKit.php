@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gopogo : Utility ToolKit class.
  *
@@ -12,8 +13,6 @@
  * @path /library/GP/
  */
 
-
-
 /**
  *
  * Gopogo Url Encription class
@@ -24,29 +23,28 @@
  * @access   public
  * @path /library/GP/
  */
-
 class GP_ToolKit {
 
-     /**
-      * Used to encripte a CDN server requested url, if hasCdn is set in application.ini
-      *
-      * @param string $str
-      * @return md5 hash of a string $str
-      * @access public
-      *
-      */
-    public static function getEncriptedUrl($base_url, $str )
-    {   $str = trim($str);
+    /**
+     * Used to encripte a CDN server requested url, if hasCdn is set in application.ini
+     *
+     * @param string $str
+     * @return md5 hash of a string $str
+     * @access public
+     *
+     */
+    public static function getEncriptedUrl($base_url, $str) {
+        $str = trim($str);
         $hasCdn = GP_ToolKit::getHasCdn();
-        if( (""!= $str) && ("1" == $hasCdn )) {
-            $azUrl = 'http:\\\\'.BUCKET_NAME.'.'. AMAZON_S3_URL;
+        if (("" != $str) && ("1" == $hasCdn )) {
+            $azUrl = 'http:\\\\' . BUCKET_NAME . '.' . AMAZON_S3_URL;
             $jpg = explode('.', $str);
-            $ext = '.'.$jpg[1];
+            $ext = '.' . $jpg[1];
             $str = $jpg[0];
         }
-       // echo '<<br> str in  getEncriptedUrl =' . $hasCdn ? md5($str).$ext : $str;
-        return $hasCdn ? $azUrl.'\\'.md5(trim($str)).$ext : trim($base_url).trim($str);
-      }
+        // echo '<<br> str in  getEncriptedUrl =' . $hasCdn ? md5($str).$ext : $str;
+        return $hasCdn ? $azUrl . '\\' . md5(trim($str)) . $ext : trim($base_url) . trim($str);
+    }
 
     /**
      * Gets the application base path, sets it to BASE_URL
@@ -55,7 +53,7 @@ class GP_ToolKit {
      */
     public static function getBasePath() {
 
-       return BASE_URL;
+        return BASE_URL;
     }
 
     /**
@@ -65,18 +63,16 @@ class GP_ToolKit {
      */
     public static function getHasCdn() {
 
-       return HAS_CDN;
+        return HAS_CDN;
     }
 
     /**
-     *
      * @param String $base_url
      * @param String $pathRelative
      * @access   public
      * @return String Returns md5 hash of a string $pathRelative, if hasCdn is set to 1 in application.ini
      */
-    public static function getUrl( $base_url, $pathRelative )
-    {
+    public static function getUrl($base_url, $pathRelative) {
         return trim(GP_ToolKit::getEncriptedUrl(trim($base_url), trim($pathRelative)));
     }
 
@@ -87,22 +83,23 @@ class GP_ToolKit {
      * @return string $xmlArray
      */
     public static function xmlToArray($strContent, $getAttributes=1) {
-        if(!$strContent) return array();
+        if (!$strContent)
+            return array();
 
-        if(!function_exists('xml_parser_create')) {
+        if (!function_exists('xml_parser_create')) {
             return array();
         }
 
 
         $parser = xml_parser_create();
-        xml_parser_set_option( $parser, XML_OPTION_CASE_FOLDING, 0 );
-        xml_parser_set_option( $parser, XML_OPTION_SKIP_WHITE, 1 );
-        xml_parse_into_struct( $parser, $strContent, $xmlValues );
-        xml_parser_free( $parser );
+        xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
+        xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
+        xml_parse_into_struct($parser, $strContent, $xmlValues);
+        xml_parser_free($parser);
 
-        if(!$xmlValues) return;//Hmm...
-
-        //Initializations
+        if (!$xmlValues)
+            return; //Hmm...
+            //Initializations
         $xmlArray = array();
         $parents = array();
         // $opened_tags = array();
@@ -111,60 +108,57 @@ class GP_ToolKit {
         $current = &$xmlArray;
 
         //Go through the tags.
-        foreach($xmlValues as $data) {
-            unset($attributes,$value);
+        foreach ($xmlValues as $data) {
+            unset($attributes, $value);
             extract($data);
 
             $result = '';
-            if($getAttributes) {
+            if ($getAttributes) {
                 $result = array();
-                if( true == isset( $value )) $result['value'] = $value;
+                if (true == isset($value))
+                    $result['value'] = $value;
 
 
-                if( true == isset( $attributes )) {
-                    foreach( $attributes as $attr => $val ) {
-                        if( 1 == $getAttributes ) $result['attr'][$attr] = $val;
-
+                if (true == isset($attributes)) {
+                    foreach ($attributes as $attr => $val) {
+                        if (1 == $getAttributes)
+                            $result['attr'][$attr] = $val;
                     }
                 }
-            } elseif( true == isset( $value )) {
+            } elseif (true == isset($value)) {
                 $result = $value;
             }
 
 
-            if( "open" == $type ) {
-                $parent[$level-1] = &$current;
+            if ("open" == $type) {
+                $parent[$level - 1] = &$current;
                 //array_keys — Return all the keys of an array
-                if( !is_array( $current ) or ( !in_array($tag, array_keys( $current )))) {
+                if (!is_array($current) or (!in_array($tag, array_keys($current)))) {
                     $current[$tag] = $result;
                     $current = &$current[$tag];
-
                 } else {
-                    if( true == isset($current[$tag][0] )) {
-                        array_push( $current[$tag], $result );
+                    if (true == isset($current[$tag][0])) {
+                        array_push($current[$tag], $result);
                     } else {
-                        $current[$tag] = array( $current[$tag], $result );
+                        $current[$tag] = array($current[$tag], $result);
                     }
                     $last = count($current[$tag]) - 1;
                     $current = &$current[$tag][$last];
                 }
+            } elseif ("complete" == $type) {
 
-            } elseif( "complete" == $type ) {
-
-                if( !isset( $current[$tag] )) {
+                if (!isset($current[$tag])) {
                     $current[$tag] = $result;
-
                 } else {
-                    if((is_array($current[$tag]) and $getAttributes == 0)
-                    or (isset($current[$tag][0]) and is_array($current[$tag][0]) and $getAttributes == 1)) {
-                        array_push( $current[$tag],$result );
+                    if ((is_array($current[$tag]) and $getAttributes == 0)
+                            or (isset($current[$tag][0]) and is_array($current[$tag][0]) and $getAttributes == 1)) {
+                        array_push($current[$tag], $result);
                     } else {
-                        $current[$tag] = array( $current[$tag], $result );
+                        $current[$tag] = array($current[$tag], $result);
                     }
                 }
-
-            } elseif( 'close' == $type ) {
-                $current = &$parent[$level-1];
+            } elseif ('close' == $type) {
+                $current = &$parent[$level - 1];
             }
         }
 
@@ -177,28 +171,25 @@ class GP_ToolKit {
      * @access   public
      * @return string SEO URL
      */
-
-    public static function getSeoUrl($strUrl)
-    {
+    public static function getSeoUrl($strUrl) {
         return $strUrl;
     }
 
-
-    /***
+    /*     * *
      * This function can be used to check the string is a valid user name or not
      *
      * @param string The variable name you would like to check/validate
      *
      * return bool
      */
-    public static  function isValidUserName($str)
-    {
-        /***
+
+    public static function isValidUserName($str) {
+        /*         * *
          *  This allows just alphanumeric characters and the underscore.
          */
         //$strPattern = '/^[A-Za-z0-9_]+$/';
 
-        /***
+        /*         * *
          *  And if you want to allow underscore only as concatenation character and
          * want to force that the username must start with a alphabet character:
          */
@@ -277,5 +268,21 @@ class GP_ToolKit {
     } // end of function decrypt
 
     /*********************model functions end***********************/
+
+    /**
+     * Re-index the partner array by accoun type id
+     * @param Array $partners : parters list
+     * @return Array $partners : parters list
+     */
+    public static function reindexPartners($partners) {
+        $reIndexParters = array();
+        if (!empty($partners) && is_array($partners) && count($partners) > 0) {
+            foreach ($partners as $partner) {
+                $reIndexParters[$partner['account_type_id']] = $partner;
+            }
+        }
+        return $reIndexParters;
+    }
+
 }
 ?>

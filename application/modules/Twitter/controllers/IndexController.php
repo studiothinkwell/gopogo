@@ -89,7 +89,7 @@ class Twitter_IndexController extends Zend_Controller_Action
             $session = GP_GPAuth::getSession();
 
             /* If access tokens are not available redirect to connect page. */
-            
+
             if( empty($session) || empty($session->access_token) || empty($session->access_token['oauth_token']) || empty($session->access_token['oauth_token_secret']) ) {
                 // redirect to home page
                 $this->_redirect('Twitter/index/clearsessions');
@@ -104,7 +104,7 @@ class Twitter_IndexController extends Zend_Controller_Action
             /* If method is set change API call made. Test is called by default. */
             $content = $connection->get('account/verify_credentials');
 
-            $twitterUserName    =   $content->screen_name;            
+            $twitterUserName    =   $content->screen_name;
 
             $this->view->content = $content;
 
@@ -135,7 +135,7 @@ class Twitter_IndexController extends Zend_Controller_Action
         }
 
     } // end of indexAction
-    
+
     /**
      * connect to twitter
      */
@@ -268,7 +268,7 @@ class Twitter_IndexController extends Zend_Controller_Action
         }
 
     } // end of clearsessionsAction
-    
+
     /**
      * remove partner information
      * @param String : ( in post) partner type like - facebook and twitter
@@ -301,7 +301,7 @@ class Twitter_IndexController extends Zend_Controller_Action
                     $msg .= $lang_msg;
                     $validFlag = false;
                 }
-                
+
 
                 if($validFlag){
 

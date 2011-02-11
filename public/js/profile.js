@@ -15,7 +15,8 @@ $(document).ready(function() {
                   dataType: 'json',
                   data:fdata,
                   timeout: 99999,
-                  success: function(data){
+                  success: function(data){                      
+                      $(".save_info").ajaxLoader();
                       //code to manage html after save process complete
                           var inpArr = new Array(2);
                           inpArr[0] = new Array("inpclsDivUN","clsDivUN");
@@ -25,11 +26,12 @@ $(document).ready(function() {
                           $(".clsDivUN").text(profile[0]);
                           $(".clsDivUD").text(profile[1]);
                       }
-                      $(".clsEUPro").removeClass('save');
-                      $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
-                      $(".save_info").hide();
-                      $(".clsEUPro").show();
-                      // do something with resp
+                   },
+                   complete: function() {
+                       $(".accountSectionBottomButtonBg").ajaxLoaderRemove();
+                       $(".save_info").hide();
+                       $(".clsEUPro").removeClass('save');
+                       $(".clsEUPro").show();
                    }
                 });
             }
@@ -116,8 +118,7 @@ $(document).ready(function() {
               timeout: 99999,
               success: function(resp){
                   // do something with resp
-                  if(resp.status == 1) { // show error message
-
+                  if(resp.status == 1) { 
                        $().updateSuccess(resp);
                        $(".clsSubSuccess").text('.');
                        var inpArr = new Array(1);
@@ -300,8 +301,7 @@ $(".clsEUPro").click(function() {
                inpArr[0] = new Array("inpclsDivUN","clsDivUN");
                inpArr[1] = new Array("inpclsDivUD","clsDivUD");
                $().inplaceEditor(inpArr,"save");
-               $(".clsEUPro").removeClass('save');
-               $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
+               $(".clsEUPro").removeClass('save');               
            }
        } else {
            $(".clsEUPro").hide();
@@ -309,8 +309,6 @@ $(".clsEUPro").click(function() {
            // assign value to global variable of profile
            profile[0] = $(".clsDivUN").text();
            profile[1] = $(".clsDivUD").text();
-           var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
            inpArr = new Array(2);
            inpArr[0] = new Array("clsDivUN","clsDivUN","text","20");
            inpArr[1] = new Array("clsDivUD","clsDivUD","textarea");
@@ -789,8 +787,8 @@ function fblogin() {
         var wndwLocation = window.location.pathname; 
         if (response.perms) {
           // user is logged in and granted some permissions.
-          // perms is a comma separated list of granted permissions
-          if ( wndwLocation == '/User/Account' || wndwLocation == '/user/Account' || wndwLocation == '/User/account/' || wndwLocation == '/user/account' || wndwLocation == '/User/Account/#') {
+          // perms is a comma separated list of granted permissions          
+          if ( wndwLocation == '/account') { 
               FB.api('/me', function(fbData) {
 
                 $().debugLog(fbData);
@@ -826,7 +824,7 @@ function fblogin() {
                       // Logout from facebook
                         FB.logout(function() {
                             // user is now logged out
-                            window.location = app.gopogo.profile_url;
+                            $(location).attr('href',app.gopogo.profile_url);
                         });
                    }
                 });
@@ -860,11 +858,16 @@ function fblogin() {
               $().debugLog(data);
            },
           success: function(data) {
-                $(".clsMsgRply").hide();
-                $(".clsCommentList").hide();                
-                $(".clsMsgList").html(data);
-                $(".clsMsgList").show();
-                msgIds = $(".clsHdnChkMsg").val();
+                if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    $(".clsMsgRply").hide();
+                    $(".clsCommentList").hide();
+                    $(".clsMsgList").html(data);
+                    $(".clsMsgList").show();
+                    msgIds = $(".clsHdnChkMsg").val();
+                }
            },
            complete: function() {
 
@@ -897,12 +900,16 @@ function doReplyMsg(receiverId) {
           onload: function() {
 
           },
-          success: function(data) { 
-                //$('.gray_date_subject_bg').ajaxLoader();
-                $(".clsMsgList").hide();
-                $(".clsMsgRply").html(data);
-                $(".clsMsgRply").show();
-              // do something with resp
+          success: function(data) {
+               if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    //$('.gray_date_subject_bg').ajaxLoader();
+                    $(".clsMsgList").hide();
+                    $(".clsMsgRply").html(data);
+                    $(".clsMsgRply").show();
+                }
            },
            complete: function() {
                 //$('.gray_date_subject_bg').ajaxLoaderRemove();
@@ -969,7 +976,6 @@ function delMsg() {
             sDelMsgIds+=arrDelMsgIds[i]+",";
         }
     }
-    alert(sDelMsgIds);
     fdata = {'delMsgIds':delMsgIds};
     // call an ajax to delete messages
     // Post : Message ids
@@ -1020,11 +1026,16 @@ function loadCommentList() {
           onload: function() {
 
           },
-          success: function(data) { 
-                // Show output data in clsComment div
-                $(".clsMsgList").hide();
-                $(".clsCommentList").html(data);
-                $(".clsCommentList").show();
+          success: function(data) {
+                if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    // Show output data in clsComment div
+                    $(".clsMsgList").hide();
+                    $(".clsCommentList").html(data);
+                    $(".clsCommentList").show();
+                }
            },
            complete: function() {
                 //$('.gray_date_subject_bg').ajaxLoaderRemove();
@@ -1044,12 +1055,17 @@ function loadPhotosList() {
 
           },
           success: function(data) {
+              if (data == 'logout') {
+                  $(location).attr('href','/index/index');
+              }
+              else {
                 // Show output data in clsComment div
                 $(".clsMsgList").hide();
                 $(".clsReplyMsg").hide();
                 $(".clsCommentList").hide();
                 $(".clsPhotosList").html(data);
                 $(".clsPhotosList").show();
+              }
            },
            complete: function() {
                 //$('.gray_date_subject_bg').ajaxLoaderRemove();

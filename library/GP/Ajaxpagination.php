@@ -48,8 +48,7 @@ class GP_Ajaxpagination {
     }
 
     function get_pagination($url, $areaId, $spName, $size, $num, $pageNum, $param) {
-        // create user model object
-        $user = new Application_Model_DbTable_User();
+
         //If there are some rows then start the pagination
         if ($num > 0) {
             //Determine the maxpage and the offset for the query
@@ -60,9 +59,9 @@ class GP_Ajaxpagination {
             //Initiate the navigation bar
             $nav = '';
 
-//					get low end
+            //	get low end
             $page = $pageNum - floor($this->pageCount / 2);
-//				get upperbound
+            //	get upperbound
             $upper = $pageNum + floor($this->pageCount / 2);
 
             if ($page <= 0) {
@@ -181,11 +180,9 @@ class GP_Ajaxpagination {
             case 'getUserMessageList' :
                 return $profile->getUserMessageList($param['userId'], $offset, $limit);
                 break;
-
             case '' :
                 return;
                 break;
-
             case '' :
                 return;
                 break;

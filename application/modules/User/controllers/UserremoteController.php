@@ -36,12 +36,19 @@ class User_UserremoteController extends Zend_Controller_Action {
      * User Index
      * @access public
      */
-    public function init() {
-        /* Initialize action controller here */
-        // Zend_Translate object for langhuage translator
-        $this->translate = Zend_Registry::get('Zend_Translate');
-        //code to get baseurl and assign to view
-        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
+    public function init() 
+    {
+        try {
+            // Zend_Translate object for langhuage translator
+            $this->translate = Zend_Registry::get('Zend_Translate');
+            //code to get baseurl and assign to view
+            $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
+        }
     }
 
 // end init
@@ -58,7 +65,7 @@ class User_UserremoteController extends Zend_Controller_Action {
         $loginFlag = false;
         $fbLogin = "false";
         $user_name = '';
-        $user = new Application_Model_DbTable_User();
+        
         if (!empty($session) && !empty($session->user_id) && $session->user_id > 0) {
             $loginFlag = true;
             $user_name = $session->user_name;
@@ -76,10 +83,12 @@ class User_UserremoteController extends Zend_Controller_Action {
                 // create random password
                 $temp_password = GP_ToolKit::createRandomKey(6);
                 $enctemp_password = GP_ToolKit::encryptPassword($temp_password);
+
                 $udata['TempPass'] = $enctemp_password;
                 $status = 0;
                 $msg = "";
                 // create user model object
+                $user = new Application_Model_DbTable_User();
                 if ($userFlag) {
                     $userData = $user->getUserByEmail($userData['Email']);
                 } else {
@@ -90,15 +99,17 @@ class User_UserremoteController extends Zend_Controller_Action {
                     // send the welcome email
                     GP_GPAuth::sendEmailSignupWelcome($userData['user_emailid'], $temp_password);
                     // Inser facebook data into other account details table
+
                     $account = new Application_Model_DbTable_Account();
                     $account->insertOtherAccountDetails(1, $userData['user_id'], $userData['user_emailid']);
+
                 }
                 try {
                     $lang_msg = $this->translate->_("Welcome! you have successfully signedup!");
                     if ($userData) {
                         $status = 1;
                         // set user info in session
-                        $user->logSession($userData);
+                        GP_GPAuth::logSession($userData);
                         $ukey = "fbLogoutUrl";
                         $logout = 'http://' . $_SERVER['HTTP_HOST'];
                         $user->$ukey = $facebook->getLogoutUrl($logout);
@@ -226,6 +237,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                         $account = new Application_Model_DbTable_Account();
                         // set new temporary email
                         $us = $account->updateUserEmail($id, trim($newEmail));
+
                         $lang_msg = $this->translate->_('Activation link has been send successfully!');
                         $this->_helper->flashMessenger->addMessage($lang_msg);
                         $msg = $lang_msg;
@@ -239,7 +251,9 @@ class User_UserremoteController extends Zend_Controller_Action {
                         $username = substr($newEmail, 0, strpos($newEmail, '@'));
                         GP_GPAuth::sendEmailUpdateEmailConfirm($newEmail, $oldEmail, $confirmLink, $username);
                         //generate confirmation message by using translater
+
                         $session = GP_GPAuth::getSession();
+
                         $confirmMsg1 = $this->translate->_("Confirm your email address_msg1");
                         $confirmMsg2 = $this->translate->_("Confirm your email address_msg2");
                         $session->tooltipMsg1 = $confirmMsg1;
@@ -311,6 +325,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                 $newPassword = $formData['new_pass'];
                 $retypePassword = $formData['retype_pass'];
                 $user = new Application_Model_DbTable_User();
+
                 $account = new Application_Model_DbTable_Account();
                 $id = $session->user_id;
                 $userData = $account->getUserById($id);
@@ -318,6 +333,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                 $Originalpassword = $userData['user_password'];
                 //check whether user's posted current password is same as it is in db
                 $encPass = GP_ToolKit::encryptPassword($currentPassword);
+
                 //check for current password
                 if (strlen($currentPassword) == 0) {
                     if ($validFlag) {
@@ -378,7 +394,9 @@ class User_UserremoteController extends Zend_Controller_Action {
                 if ($validFlag) {
                     try {
                         // update pass
+
                         $us = $account->updateUserPass($id, trim($newPassword));
+
                         $status = 1;
                         $lang_msg = $this->translate->_('You have changed your password Successfully!');
                         $this->_helper->flashMessenger->addMessage($lang_msg);
@@ -451,7 +469,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                     $msg .= $lang_msg;
                     $validFlag = false;
                 }
-                $user = new Application_Model_DbTable_User();
+
                 $account = new Application_Model_DbTable_Account();
                 $id = $session->user_id;
                 //get exisiting username of user by fetching against user id
@@ -460,6 +478,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                     $assignedUsername = $userData['user_name'];
                     //check the uniqueness of username
                     $checkUsername = $account->checkUniqueUserName($userName);
+
                 }
                 // checking for valid email
                 if ($validFlag && strlen($userName) == 0) {
@@ -475,7 +494,9 @@ class User_UserremoteController extends Zend_Controller_Action {
                 if ($validFlag) {
                     try {
                         // update email
+
                         $us = $account->updateUserName($id, trim($userName));
+
                         $status = 1;
                         $session->user_name = trim($userName);
                         //other data

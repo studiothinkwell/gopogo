@@ -45,7 +45,8 @@ class User_ProfileremoteController extends Zend_Controller_Action {
             try {
                 // create profile model object
                 $profile = new Application_Model_DbTable_Profile();
-                $status = $user->updateUserInfo($session->user_id, $fData['userName'], $fData['userDesc']);
+
+                $status = $profile->updateUserInfo($session->user_id, $fData['userName'], $fData['userDesc']);
                 if ($status) {
                     $session->user_name = $fData['userName'];
                     $session->user_profile_description = $fData['userDesc'];
@@ -83,21 +84,28 @@ class User_ProfileremoteController extends Zend_Controller_Action {
      */
     public function ajaxreplymsgAction() {
         $this->_helper->layout()->disableLayout();
-        //get receiver id from post and sender id from session
-        $session = GP_GPAuth::getSession();
-        if ($session->user_id) {
-            if ($this->getRequest()->isPost()) {
-                $fData = $this->getRequest()->getPost();
+
+        try {
+            //get receiver id from post and sender id from session
+            $session = GP_GPAuth::getSession();
+            if ($session->user_id) {
+                if ($this->getRequest()->isPost()) {
+                    $fData = $this->getRequest()->getPost();
+                }
+                //call sp to get messages related to that user
+                // create profile model object
+                $profile = new Application_Model_DbTable_Profile();
+                $msgDtl = $profile->getMsgDtl(4, $fData['receiverId']);
+                $this->view->assign('rMsgDtl', $msgDtl);
+            } else {
+                $this->_helper->viewRenderer->setNoRender(true);
+                // Echo logout for redirecting to index from js
+                echo "logout";
             }
-            //call sp to get messages related to that user
-            // create user model object
-            $profile = new Application_Model_DbTable_Profile();
-            $msgDtl = $profile->getmsgdtl(4, $fData['receiverId']);
-            $this->view->assign('rMsgDtl', $msgDtl);
-        } else {
-            $this->_helper->viewRenderer->setNoRender(true);
-            // Echo logout for redirecting to index from js
-            echo "logout";
+        } catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg, Zend_Log::ERR);
         }
     }
 
@@ -107,16 +115,22 @@ class User_ProfileremoteController extends Zend_Controller_Action {
      * @param String Message Ids : comma saperated message ids
      */
     public function ajaxmsgdelAction() {
-        $session = GP_GPAuth::getSession();
-        if ($session->user_id) {
-            //get message id from post
-            if ($this->getRequest()->isPost()) {
-                $fData = $this->getRequest()->getPost();
+        try {
+            $session = GP_GPAuth::getSession();
+            if ($session->user_id) {
+                //get message id from post
+                if ($this->getRequest()->isPost()) {
+                    $fData = $this->getRequest()->getPost();
+                }
+            } else {
+                $this->_helper->viewRenderer->setNoRender(true);
+                // Echo logout for redirecting to index from js
+                echo "logout";
             }
-        } else {
-            $this->_helper->viewRenderer->setNoRender(true);
-            // Echo logout for redirecting to index from js
-            echo "logout";
+        } catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg, Zend_Log::ERR);
         }
     }
 
@@ -127,18 +141,24 @@ class User_ProfileremoteController extends Zend_Controller_Action {
      */
     public function ajaxmsglistAction() {
         $this->_helper->layout()->disableLayout();
-        // Code to get user id from session
-        $session = GP_GPAuth::getSession();
-        if ($session->user_id) {
-            $param['userId'] = $session->user_id;
-            $pgnObj = new GP_Ajaxpagination('', 'User/profileremote/ajaxmsglist', 'clsMsgList', $this->_getParam('p'), $page_count = 2);
-            $result = $pgnObj->pagination('getUserMessageList', $param, 10);
-            $this->view->assign('msgList', $result['list']);
-            $this->view->assign('paging', $result['paging']);
-        } else {
-            $this->_helper->viewRenderer->setNoRender(true);
-            // Echo logout for redirecting to index from js
-            echo "logout";
+        try {
+            // Code to get user id from session
+            $session = GP_GPAuth::getSession();
+            if ($session->user_id) {
+                $param['userId'] = $session->user_id;
+                $pgnObj = new GP_Ajaxpagination('', 'User/profileremote/ajaxmsglist', 'clsMsgList', $this->_getParam('p'), $page_count = 2);
+                $result = $pgnObj->pagination('getUserMessageList', $param, 10);
+                $this->view->assign('msgList', $result['list']);
+                $this->view->assign('paging', $result['paging']);
+            } else {
+                $this->_helper->viewRenderer->setNoRender(true);
+                // Echo logout for redirecting to index from js
+                echo "logout";
+            }
+        } catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg, Zend_Log::ERR);
         }
     }
 
@@ -148,18 +168,24 @@ class User_ProfileremoteController extends Zend_Controller_Action {
      * @param String User Id : User id from session
      */
     public function ajaxcommentlistAction() {
-        $session = GP_GPAuth::getSession();
-        if ($session->user_id) {
-            $this->_helper->layout()->disableLayout();
-            $param = "";
-            $pgnObj = new GP_Ajaxpagination('', 'User/profileremote/ajaxcommentlist', 'clsCommentList', $this->_getParam('p'), $page_count = 2);
-            $result = $pgnObj->pagination('getUserMessageList', $param, "1");
-            $this->view->assign('msgList', $result['list']);
-            $this->view->assign('paging', $result['paging']);
-        } else {
-            $this->_helper->viewRenderer->setNoRender(true);
-            // Echo logout for redirecting to index from js
-            echo "logout";
+        try {
+            $session = GP_GPAuth::getSession();
+            if ($session->user_id) {
+                $this->_helper->layout()->disableLayout();
+                $param = "";
+                $pgnObj = new GP_Ajaxpagination('', 'User/profileremote/ajaxcommentlist', 'clsCommentList', $this->_getParam('p'), $page_count = 2);
+                $result = $pgnObj->pagination('getUserMessageList', $param, "1");
+                $this->view->assign('msgList', $result['list']);
+                $this->view->assign('paging', $result['paging']);
+            } else {
+                $this->_helper->viewRenderer->setNoRender(true);
+                // Echo logout for redirecting to index from js
+                echo "logout";
+            }
+        } catch (Exception $e) {
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg, Zend_Log::ERR);
         }
     }
 
