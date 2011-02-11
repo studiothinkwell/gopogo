@@ -23,69 +23,49 @@
  * @access   public
  * @path /library/GP/
  */
+Class GP_GPAuth {
 
-Class GP_GPAuth
-{
     /**
      * @var session data
      */
-
     protected static $session = null;
-
     /**
      * @var user model
      */
-
     protected static $user = null;
-
     /**
      * @var GPAuth
      */
-
     protected static $gpAuth = null;
-
     /**
      * @var Zend_Mail
      */
-
     protected static $zendMail = null;
-
     /**
      * @var Zend_Mail_Transport_Sendmail
      */
-
     protected static $zendMailTransport = null;
-
     /**
      * @var Zend_View
      */
-
     protected static $zendView = null;
 
 
     /*
      * @var Application configurations
      */
-
     protected static $appConfigs = null;
-
-
     /**
      * Front object
      */
-
     protected static $frontObject = null;
-
-
     /**
      * $var Zend_Translate
      */
     protected $translate = null;
-
     /**
      * $var
      */
-
     protected $gpName = "GOPOGO";
 
     /*
@@ -93,116 +73,111 @@ Class GP_GPAuth
      * @return object self
      *
      */
-    protected function getIntance()
-    {
-        if(self::$gpAuth===null)
-        {
+    protected function getIntance() {
+        if (self::$gpAuth === null) {
             self::$gpAuth = new self();
         }
         return self::$gpAuth;
-    } // end of getIntance
+    }
+
+// end of getIntance
 
     /**
      * get user model object
      * @return object user model
      *
      */
-    protected function getUserIntance()
-    {
-        if(self::$user===null)
-        {
+    protected function getUserIntance() {
+        if (self::$user === null) {
             self::$user = new Application_Model_DbTable_User();
         }
         return self::$user;
-    } // end of getUserIntance
+    }
+
+// end of getUserIntance
 
     /**
      * get Zend_Mail object
      * @return object Zend_Mail
      *
      */
-    protected function getMailIntance()
-    {
-        if(self::$zendMail===null)
-        {
+    protected function getMailIntance() {
+        if (self::$zendMail === null) {
             self::$zendMail = Zend_Registry::get('mailer');
         }
         return self::$zendMail;
-    } // end of getMailIntance
+    }
+
+// end of getMailIntance
 
     /**
      * get Zend_View object
      * @return object Zend_View
      *
      */
-    protected function getViewIntance()
-    {
-        if(self::$zendView===null)
-        {
+    protected function getViewIntance() {
+        if (self::$zendView === null) {
             self::$zendView = new Zend_View();
         }
         return self::$zendView;
-    } // end of getViewIntance
+    }
 
+// end of getViewIntance
 
     /**
      * constructor
      *
      */
-
-    public function  __construct()
-    {
+    public function __construct() {
         // Zend_Translate object for langhuage translator
         $this->translate = Zend_Registry::get('Zend_Translate');
-    } // end of __construct
+    }
+
+// end of __construct
 
     /**
      * Get user session data
      *
      * @return Array user's session data
      */
-
-    public static function getSession()
-    {
-        if(self::$session===null)
-        {
+    public static function getSession() {
+        if (self::$session === null) {
             self::$session = self::getIntance()->getUserIntance()->getSession();
         }
         return self::$session;
-    } // end of getSession
+    }
 
+// end of getSession
 
     /**
      * get front controller object
      * @return object front controller
      *
      */
-    protected function getFronIntance()
-    {
-        if(self::$frontObject===null)
-        {
+    protected function getFronIntance() {
+        if (self::$frontObject === null) {
             self::$frontObject = Zend_Controller_Front::getInstance();
         }
         return self::$frontObject;
-    } // end of getFronIntance
+    }
+
+// end of getFronIntance
 
     /**
      * Get GOPOGO configuration
      * @return object GOPOGO configuration object
      */
-    protected function getConfig()
-    {
+    protected function getConfig() {
         /**
          * Load application configurations
          */
-        if(self::$appConfigs===null)
-        {
-            self::$appConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        if (self::$appConfigs === null) {
+            self::$appConfigs = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
         }
         return self::$appConfigs;
-    } // end of getConfig
+    }
 
-
+// end of getConfig
 
     /**
      * Send email template to user for resetting password : forgot password
@@ -211,10 +186,8 @@ Class GP_GPAuth
      * @param String user name
      *
      */
+    public static function sendEmailForgotPassword($email, $temp_password, $name='') {
 
-    public static function sendEmailForgotPassword($email,$temp_password,$name='')
-    {
-        
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -224,8 +197,8 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($email, 0, strpos($email,'@'));
+        if (empty($name))
+            $name = substr($email, 0, strpos($email, '@'));
 
         $view->name = $name;
         $view->email = $email;
@@ -247,19 +220,19 @@ Class GP_GPAuth
         $obj->getMailIntance()->clearRecipients();
 
         $obj->getMailIntance()->setBodyText($subject)
-                                            ->setBodyHtml($text)
-                                            ->setSubject($subject)
-                                            ->addTo($email, $name)
-                                            ->addTo($to, $obj->gpName)
-                                            ->setFrom($from, $obj->gpName)
-                                            ->addCc($cc, $obj->gpName)
-                                            ->addBcc($bcc, $obj->gpName)
-                                            ->setReplyTo($reply_to, $obj->gpName)
-                                            ->setReturnPath($return_path, $obj->gpName)
-                                            ->send(); // self::getIntance()->getMailTransport()
-        
-    } // end of sendEmailForgotPassword
+                ->setBodyHtml($text)
+                ->setSubject($subject)
+                ->addTo($email, $name)
+                ->addTo($to, $obj->gpName)
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send(); // self::getIntance()->getMailTransport()
+    }
 
+// end of sendEmailForgotPassword
 
     /**
      * Send Welcome Email to signedup user
@@ -267,8 +240,7 @@ Class GP_GPAuth
      * @param String $passwd : user password
      * @param String $name : user name
      */
-    public static function sendEmailSignupWelcome($email,$passwd,$name='')
-    { 
+    public static function sendEmailSignupWelcome($email, $passwd, $name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -278,8 +250,8 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($email, 0, strpos($email,'@'));
+        if (empty($name))
+            $name = substr($email, 0, strpos($email, '@'));
 
         $view->name = $name;
         $view->email = $email;
@@ -303,24 +275,26 @@ Class GP_GPAuth
         $obj->getMailIntance()->clearRecipients();
 
         $obj->getMailIntance()->setBodyText($subject)
-                                            ->setBodyHtml($text)
-                                            ->setSubject($subject)
-                                            ->addTo($email, $name)
-                                            ->addTo($to, $obj->gpName)
-                                            ->setFrom($from, $obj->gpName)
-                                            ->addCc($cc, $obj->gpName)
-                                            ->addBcc($bcc, $obj->gpName)
-                                            ->setReplyTo($reply_to, $obj->gpName)
-                                            ->setReturnPath($return_path, $obj->gpName)
-                                            ->send();
-    } // end of sendEmailSignupWelcome
+                ->setBodyHtml($text)
+                ->setSubject($subject)
+                ->addTo($email, $name)
+                ->addTo($to, $obj->gpName)
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send();
+    }
+
+// end of sendEmailSignupWelcome
 
     /**
      * Send Confirmation Email to signedup user
      * @param String $email : user email
      * @param String $name : user name
      */
-    public static function sendEmailSignupConfirm($email,$passwd,$confirmLink,$name='') {
+    public static function sendEmailSignupConfirm($email, $passwd, $confirmLink, $name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -330,8 +304,8 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($email, 0, strpos($email,'@'));
+        if (empty($name))
+            $name = substr($email, 0, strpos($email, '@'));
 
         $view->name = $name;
         $view->email = $email;
@@ -354,18 +328,19 @@ Class GP_GPAuth
         $obj->getMailIntance()->clearRecipients();
 
         $obj->getMailIntance()->setBodyText($subject)
-                            ->setBodyHtml($text)
-                            ->setSubject($subject)
-                            ->addTo($email, $name)
-                            ->addTo($to, $obj->gpName)
-                            ->setFrom($from, $obj->gpName)
-                            ->addCc($cc, $obj->gpName)
-                            ->addBcc($bcc, $obj->gpName)
-                            ->setReplyTo($reply_to, $obj->gpName)
-                            ->setReturnPath($return_path, $obj->gpName)
-                            ->send();
-    } // end of sendEmailSignupWelcome
+                ->setBodyHtml($text)
+                ->setSubject($subject)
+                ->addTo($email, $name)
+                ->addTo($to, $obj->gpName)
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send();
+    }
 
+// end of sendEmailSignupWelcome
 
     /**
      * Send Confirmation Email to user  on email change
@@ -374,7 +349,7 @@ Class GP_GPAuth
      * @param String $confirmLink : conformation link
      * @param String $name : user name
      */
-    public static function sendEmailUpdateEmailConfirm($newemail,$oldemail,$confirmLink,$name='') {
+    public static function sendEmailUpdateEmailConfirm($newemail, $oldemail, $confirmLink, $name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -384,15 +359,15 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($newemail, 0, strpos($newemail,'@'));
+        if (empty($name))
+            $name = substr($newemail, 0, strpos($newemail, '@'));
 
         $view->name = $name;
         $view->oldemail = $oldemail;
         $view->email = $newemail;
         $view->link = $baseurl;
         $view->confirmLink = $confirmLink;
-        
+
         $text = $view->render('mails/email_update_confirm.phtml');
 
         $lang_msg = self::getIntance()->translate->_('Confirm your updated gopogo email!');
@@ -408,23 +383,21 @@ Class GP_GPAuth
 
 
         $obj->getMailIntance()->clearRecipients();
-        
+
         $obj->getMailIntance()->setBodyText($subject)
-                            ->setBodyHtml($text)
-                            ->setSubject($subject)
-                            ->addTo($newemail, $name)
-                            ->addTo($to, $obj->gpName)
-                            ->setFrom($from, $obj->gpName)
-                            ->addCc($cc, $obj->gpName)
-                            ->addBcc($bcc, $obj->gpName)
-                            ->setReplyTo($reply_to, $obj->gpName)
-                            ->setReturnPath($return_path, $obj->gpName)
-                            ->send();
-        
-    } // end of sendEmailUpdateEmailConfirm
+                ->setBodyHtml($text)
+                ->setSubject($subject)
+                ->addTo($newemail, $name)
+                ->addTo($to, $obj->gpName)
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send();
+    }
 
-
-
+// end of sendEmailUpdateEmailConfirm
 
     /**
      * Send Confirmation Email to user  on email change
@@ -432,7 +405,7 @@ Class GP_GPAuth
      * @param String $email : user old email
      * @param String $name : user name
      */
-    public static function sendAccountEmailUpdateInfo($oldemail,$newemail,$name='') {
+    public static function sendAccountEmailUpdateInfo($oldemail, $newemail, $name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -442,13 +415,13 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($oldemail, 0, strpos($oldemail,'@'));
+        if (empty($name))
+            $name = substr($oldemail, 0, strpos($oldemail, '@'));
 
         $view->name = $name;
         $view->oldemail = $oldemail;
         $view->email = $newemail;
-        $view->link = $baseurl;        
+        $view->link = $baseurl;
 
         $text = $view->render('mails/email_update_info_user.phtml');
 
@@ -466,32 +439,31 @@ Class GP_GPAuth
         $obj->getMailIntance()->clearRecipients();
 
         $obj->getMailIntance()->setBodyText($subject)
-                            ->setBodyHtml($text)
-                            ->clearRecipients()
-                            ->clearSubject()
-                            ->setSubject($subject)
-                            ->addTo($oldemail, $name)
-                            ->addTo($to, $obj->gpName)
-                            ->clearFrom()   
-                            ->setFrom($from, $obj->gpName)
-                            ->addCc($cc, $obj->gpName)
-                            ->addBcc($bcc, $obj->gpName)
-                            ->clearReplyTo()
-                            ->setReplyTo($reply_to, $obj->gpName)
-                            ->clearReturnPath()
-                            ->setReturnPath($return_path, $obj->gpName)
-                            ->send();
+                ->setBodyHtml($text)
+                ->clearRecipients()
+                ->clearSubject()
+                ->setSubject($subject)
+                ->addTo($oldemail, $name)
+                ->addTo($to, $obj->gpName)
+                ->clearFrom()
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->clearReplyTo()
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->clearReturnPath()
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send();
+    }
 
-    } // end of sendAccountEmailUpdateInfo
+// end of sendAccountEmailUpdateInfo
 
-
-
-     /**
+    /**
      * Send Confirmation Email to signedup user
      * @param String $email : user email
      * @param String $name : user name
      */
-    public static function sendAccountPasswordChange($email,$passwd,$name='') {
+    public static function sendAccountPasswordChange($email, $passwd, $name='') {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -501,8 +473,8 @@ Class GP_GPAuth
 
         $view->setScriptPath(ROOT_PATH . '/public/themes/default/templates/');
 
-        if(empty($name))
-            $name = substr($email, 0, strpos($email,'@'));
+        if (empty($name))
+            $name = substr($email, 0, strpos($email, '@'));
 
         $view->name = $name;
         $view->email = $email;
@@ -526,23 +498,18 @@ Class GP_GPAuth
         $obj->getMailIntance()->clearRecipients();
 
         $obj->getMailIntance()->setBodyText($subject)
-                            ->setBodyHtml($text)
-                            ->clearRecipients()
-                            ->setSubject($subject)
-                            ->addTo($email, $name)
-                            ->addTo($to, $obj->gpName)
-                            ->setFrom($from, $obj->gpName)
-                            ->addCc($cc, $obj->gpName)
-                            ->addBcc($bcc, $obj->gpName)
-                            ->setReplyTo($reply_to, $obj->gpName)
-                            ->setReturnPath($return_path, $obj->gpName)
-                            ->send();
-    } // end of sendAccountPasswordChange
+                ->setBodyHtml($text)
+                ->clearRecipients()
+                ->setSubject($subject)
+                ->addTo($email, $name)
+                ->addTo($to, $obj->gpName)
+                ->setFrom($from, $obj->gpName)
+                ->addCc($cc, $obj->gpName)
+                ->addBcc($bcc, $obj->gpName)
+                ->setReplyTo($reply_to, $obj->gpName)
+                ->setReturnPath($return_path, $obj->gpName)
+                ->send();
+    }
 
-
-
-
-
-
-
+// end of sendAccountPasswordChange
 }

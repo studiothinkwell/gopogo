@@ -26,36 +26,33 @@
  * @access   public
  * @see      http://www.gopogo.com/Index
  */
+class IndexController extends Zend_Controller_Action {
 
-class IndexController extends Zend_Controller_Action
-{
     public $config = '';
-    
-    public function init()
-    {
+
+    public function init() {
         /* Initialize action controller here */
 
         //code to get baseurl and assign to view
-        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+        $this->config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", 'GOPOGO');
         $baseurl = $this->config->gopogo->url->base;
         $this->view->baseurl = $baseurl;
         $this->view->activeModule = "BrowsePlaylists";
     }
 
-    public function indexAction()
-    { 
-        $this->view->title = "Welcome to ".$this->config->gopogo->name;
+    public function indexAction() {
+        $this->view->title = "Welcome to " . $this->config->gopogo->name;
         $user = new Application_Model_DbTable_User();
         //generate confirmation message by using translater
         $session = $user->getSession();
         //assign to view the tooltip messages        
-        if ($session->tooltipDsp == "show") { 
+        if ($session->tooltipDsp == "show") {
             $session->tooltipMsg1 = "";
             $session->tooltipMsg2 = "";
         }
-        if(!empty($session->tooltipMsg1)) { 
+        if (!empty($session->tooltipMsg1)) {
             $session->tooltipDsp = "show";
-            if($session->isError == "yes")
+            if ($session->isError == "yes")
                 $this->view->showTooltip = "showError";
             else
                 $this->view->showTooltip = "showSuccess";
@@ -71,9 +68,8 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function howitworksAction()
-    {
-        $this->view->title = "How it works | ".$this->config->gopogo->name;
+    public function howitworksAction() {
+        $this->view->title = "How it works | " . $this->config->gopogo->name;
     }
 
     /**
@@ -84,9 +80,8 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function aboutAction()
-    {
-         $this->view->title = "About Us | ".$this->config->gopogo->name;
+    public function aboutAction() {
+        $this->view->title = "About Us | " . $this->config->gopogo->name;
     }
 
     /**
@@ -97,9 +92,8 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function contactAction()
-    {
-         $this->view->title = "Contact Us | ".$this->config->gopogo->name;
+    public function contactAction() {
+        $this->view->title = "Contact Us | " . $this->config->gopogo->name;
     }
 
     /**
@@ -110,26 +104,22 @@ class IndexController extends Zend_Controller_Action
      * @return json object - :
      * @author Mujaffar Sanadi <mujaffar@techdharma.com>
      */
-    public function legalAction()
-    {
-         $this->view->title = "Legal | ".$this->config->gopogo->name;
+    public function legalAction() {
+        $this->view->title = "Legal | " . $this->config->gopogo->name;
     }
-    
-    public function cssAction()
-    {
+
+    public function cssAction() {
         // action body
-
     }
 
-    public function codeAction()
-    {
-         $this->_helper->viewRenderer->setNoRender(true);
-         $captcha = new GP_Captcha();
-         $captcha->CreateImage(); die;
+    public function codeAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $captcha = new GP_Captcha();
+        $captcha->CreateImage();
+        die;
     }
 
-    public function ajaxhtmlAction()
-    {
+    public function ajaxhtmlAction() {
         $this->_helper->layout()->disableLayout();
         $partials = $this->getRequest()->getParam('partials');
         $this->view->partials = $partials;

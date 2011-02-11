@@ -5,43 +5,43 @@ app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
 app.gopogo.signup_url = app.gopogo.baseurl + 'User/Account/signup/';
 // profile url
-app.gopogo.profile_url = app.gopogo.baseurl + 'User/profile';
+app.gopogo.profile_url = app.gopogo.baseurl + 'profile';
 // logout url
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
 // profile update url's
 
-app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
+app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/Profileremote/ajaxupdatemyinfo';
 // message detail page
-app.gopogo.messagedtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+app.gopogo.messagedtl_url = app.gopogo.baseurl + 'User/Profileremote/ajaxmsgdtl';
 // reply for message url
-app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/profile/ajaxreplymsg';
+app.gopogo.replymessage_url = app.gopogo.baseurl + 'User/Profileremote/ajaxreplymsg';
 // message list url
-app.gopogo.msglist_url = app.gopogo.baseurl + 'User/profile/ajaxmsglist';
+app.gopogo.msglist_url = app.gopogo.baseurl + 'User/Profileremote/ajaxmsglist';
 // message detail url
-app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/profile/ajaxmsgdtl';
+app.gopogo.msgdtl_url = app.gopogo.baseurl + 'User/Profileremote/ajaxmsgdtl';
 // message delete url
-app.gopogo.deletemessage_url = app.gopogo.baseurl + 'User/profile/ajaxdelmsg';
+app.gopogo.deletemessage_url = app.gopogo.baseurl + 'User/Profileremote/ajaxmsgdel';
 // comment list url
-app.gopogo.commentlist_url = app.gopogo.baseurl + 'User/profile/ajaxcommentlist';
+app.gopogo.commentlist_url = app.gopogo.baseurl + 'User/Profileremote/ajaxcommentlist';
 // photos list url
-app.gopogo.photoslist_url = app.gopogo.baseurl + 'User/profile/ajaxphotoslist';
+app.gopogo.photoslist_url = app.gopogo.baseurl + 'User/Profileremote/ajaxphotoslist';
 
-app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/profile/ajaxupdatemyinfo';
+app.gopogo.profilemyinfo_url = app.gopogo.baseurl + 'User/Profileremote/ajaxupdatemyinfo';
 
 //account email update url
-app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountemailajax/';
+app.gopogo.accountemailupdate_url = app.gopogo.baseurl + 'User/Userremote/ajaxupdateaccemail/';
 //account pass update url
-app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountpassajax/';
+app.gopogo.accountpassupdate_url = app.gopogo.baseurl + 'User/Userremote/ajaxupdateaccpass/';
 //account username update url
-app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Account/updateaccountusernameajax/';
+app.gopogo.accountusernameupdate_url = app.gopogo.baseurl + 'User/Userremote/ajaxupdateaccusername/';
 //account facebook email update url
 app.gopogo.fbemailupdate_url = app.gopogo.baseurl + 'User/Account/ajaxaddfbemail/';
 //account facebook email remove url
 app.gopogo.fbRemoveEmail_url = app.gopogo.baseurl + 'User/Account/ajaxremovefbemail';
 //sign up facebook signup url
-app.gopogo.fbsignup_url = app.gopogo.baseurl + 'User/Account/fbsignin';
+app.gopogo.fbsignup_url = app.gopogo.baseurl + 'User/Userremote/fbsignin';
 
 //account partner remove url
 app.gopogo.accountremovepartner_url = app.gopogo.baseurl + 'Twitter/Index/removepartnerajax/';
@@ -541,9 +541,8 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
         })
         //function to close tooltip for error messages
         $.fn.closeErrorTooltip = function () {
-            //$(".clsErrorMsg").attr('style','display:none');
             $(".clsErrorMsg").hide();
-            var body=document.getElementsByTagName('body')[0];
+            var body = document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
@@ -551,15 +550,12 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
 
         //function to close tooltip for success messages
         $.fn.closeSuccessTooltip = function () {
-            //$(".clsSuccessMsg").attr('style','display:none');
             $(".clsSuccessMsg").hide();
-            var body=document.getElementsByTagName('body')[0];
+            var body = document.getElementsByTagName('body')[0];
             body.style.backgroundImage='url(/themes/default/images/bg-left.png)';
             $(".clsBlankDiv").attr('style','height:150px');
             $(".clsErrorText").text('');
         }
-
-
         $('.submenu-box .submenu-div').hover
         (
            function()

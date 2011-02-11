@@ -199,45 +199,8 @@ Class GP_GPCache
 
     protected function _initCache()
     {
-        if(self::$cache===null)
-        {
-            //echo "****************************************************";
-
-
-            //ZC_FileLogger::debug("Initilize caching!");
-
-
-            /*
-
-            // Standard frontends
-
-            public static $standardFrontends = array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
-
-            // Standard backends
-
-            public static $standardBackends =
-            array('File', 'Sqlite', 'Memcached', 'Libmemcached',
-                    'Apc', 'ZendPlatform','Xcache', 'TwoLevels', 'ZendServer_Disk',
-                    'ZendServer_ShMem');
-
-            // Standard backends which implement the ExtendedInterface
-
-            public static $standardExtendedBackends =
-            array('File', 'Apc', 'TwoLevels', 'Memcached', 'Libmemcached', 'Sqlite');
-
-            // Only for backward compatibility (may be removed in next major release)
-
-            public static $availableFrontends =
-                array('Core', 'Output', 'Class', 'File', 'Function', 'Page');
-
-            // Only for backward compatibility (may be removed in next major release)
-
-            public static $availableBackends =
-            array('File', 'Sqlite', 'Memcached', 'Libmemcached', 'Apc', 'ZendPlatform',
-                    'Xcache', 'TwoLevels');
-
-
-            */
+        if(self::$cache===null) {
+            
 
             if(empty($this->cacheSettings['frontendOptions']))
             {
@@ -300,10 +263,7 @@ Class GP_GPCache
      *  $frontendOptions array
      *  $backendOptions array
      */
-
-
-    public static function set($cdata,$key,$frontend='Core', $backend='File',$frontendOptions=array(),$backendOptions=array())
-    {
+    public static function set($cdata,$key,$frontend='Core', $backend='File',$frontendOptions=array(),$backendOptions=array()) {
         //echo "sdfsd";
 
         new self();
@@ -419,9 +379,9 @@ Class GP_GPCache
         {
             // getting a Zend_Cache_Core object
             self::$cache = Zend_Cache::factory($this->frontend,
-                                                 $this->backend,
-                                                 $this->frontendOptions,
-                                                 $this->backendOptions);
+                                               $this->backend,
+                                               $this->frontendOptions,
+                                               $this->backendOptions);
         }
 
         if(!empty($tags))
@@ -476,30 +436,18 @@ Class GP_GPCache
      *  $mode constant Zend_Cache::CLEANING_MODE options
      *  $tags array
      */
-    public static function removeByModeAndTags($mode=null,$tags=array())
-    {
+    public static function removeByModeAndTags($mode=null,$tags=array()) {
         new self();
-
-        if(self::$cache!==null)
-        {
-            if($mode!==null)
-            {
-                if(!empty($tags))
-                {
+        if(self::$cache!==null) {
+            if($mode!==null) {
+                if(!empty($tags)) {
                     self::$cache->clean($mode,$tags);
                 }
-                else
-                {
+                else {
                     self::$cache->clean($mode);
                 }
             }
         }
-
     }
-
-
-
 }
-
-
 ?>
