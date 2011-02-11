@@ -1,0 +1,47 @@
+
+<div class="select_area">
+    <div class="select_all_bg"><input id="selectAll" name="selectAll" type="checkbox" class="select_all_chk" onclick="selAllChk()"/></div>
+    <div><a href="javascript:void(0)" onclick="delMsg()" class="clsMsgDel select_delete_bg"></a></div>
+    <div class="filter_bg"> <input border="0" type="text" class="filter_area_bg"></div>
+</div>
+
+<div class="gray_date_subject_bg">
+    <div class="gray_bg_date_area">Date  </div>
+    <div class=""><a href="javascript:void(0)" class="black-arrow-bg" onclick="sortMsgList()"></a></div>
+    <div class="gray_bg_subject_area">Subject </div>
+    <div class="light-gray-downarrow"></div>
+</div>
+<div class="msgMainBg">
+    <?php
+    if (sizeof($this->msgList) > 0) {
+        $msgId = "";
+        foreach ($this->msgList as $msg) {
+            $msgId.=$msg['user_message_id'] . ",";
+    ?>
+
+            <div class="blue_box_area">
+                <div class="white_bg_area">
+                    <div class="square_bg"><input type="checkbox" name="msgChk" id="msgChk" value="<?php echo $msg['user_message_id']; ?>"/></div>
+                    <div class="white_bg_title"><?php echo $msg['user_name']; ?></div>
+                    <div class="white_bg_bluetext"> <a href="#" onclick="doReplyMsg(<?php echo $msg['user_playlist_sender_id']; ?>)"> <?php if ($msg['status_id'] == 6) { ?> Invitation <?php } ?> </a> <?php echo $this->substring($msg['Message_Subject'], 22); ?></div>
+                    <div class="second_row_text">
+                        <div class="white_bg_gray_text"><?php echo $msg['send_date']; ?></div>
+                        <div class="white_bg_dark_text"><?php echo $this->substring($msg['Message_Subject'], 32); ?> </div>
+                    </div>
+                </div>
+            </div>
+<?php }
+    } else { ?>
+    </div><div class="accountSectionBlueTitle"> No Record Found </div><div><?php } ?>
+    <div class="blue_box_area">
+        <?php
+        if (sizeof($this->msgList) > 0) {
+            echo $this->paging;
+        }
+        ?>
+    </div>
+</div>
+<div class="light_gray_bor_bg"> &nbsp;</div>
+
+<!-- HIDDEN FIELDS ARE DECLAIRED HERE -->
+<input type="hidden" name="hdnChkMsg" id="hdnChkMsg" class="clsHdnChkMsg" value="<?php echo $msgId; ?>"/>

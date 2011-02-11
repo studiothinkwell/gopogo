@@ -69,17 +69,6 @@ class GP_ToolKit {
     }
 
     /**
-     * Get the global config (if any) from the Registry.
-     * @return php string array as config options
-     */
-    /*public static function getConfigOptions()
-    {
-        //$bootstrap = $this->getInvokeArg('bootstrap');
-        //$options = $bootstrap->getOptions();
-        $configOptions = _getConfigOptions();
-    }*/
- 
-    /**
      *
      * @param String $base_url
      * @param String $pathRelative
@@ -219,5 +208,74 @@ class GP_ToolKit {
         return preg_match($strPattern, $str);
     }
 
+    /*********************model functions start***********************/
+
+    /**
+     * User : Encript Password
+     * @access public
+     * @param String  plain passsword
+     * @return String  encrypted string
+     */
+    
+    public function encryptPassword($str)
+    {
+        return sha1($str, true);
+    } // end of function encryptPassword
+
+
+    /**
+     * User : Generate Token for temporary password
+     * @access public
+     * @param  Integer Number of chars in string
+     * @return String  token string n chars
+     */
+
+    public function createRandomKey($amount)
+    {
+        $keyset  = "abcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $randkey = "";
+        for ($i=0; $i<$amount; $i++)
+                $randkey .= substr($keyset, rand(0, strlen($keyset)-1), 1);
+        return $randkey;
+    } // end of function createRandomKey
+
+    /**
+     * Encode a String
+     * @param String $string
+     * @param String $key
+     * @return String encoded string
+     */
+    private function encrypt($string, $key)
+    {
+        $result = '';
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)+ord($keychar));
+            $result.=$char;
+        }
+        return base64_encode($result);
+    } // end of function encrypt
+
+    /**
+     * Decode a String
+     * @param String $string
+     * @param String $key
+     * @return String decoded string
+     */
+    private function decrypt($string, $key)
+    {
+        $result = '';
+        $string = base64_decode($string);
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)-ord($keychar));
+            $result.=$char;
+        }
+        return $result;
+    } // end of function decrypt
+
+    /*********************model functions end***********************/
 }
 ?>

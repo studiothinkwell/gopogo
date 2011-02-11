@@ -45,9 +45,9 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     { 
         $this->view->title = "Welcome to ".$this->config->gopogo->name;
-        $user = new Application_Model_DbTable_User();
+        
         //generate confirmation message by using translater
-        $session = $user->getSession();
+        $session = GP_GPAuth::getSession();
         //assign to view the tooltip messages        
         if ($session->tooltipDsp == "show") { 
             $session->tooltipMsg1 = "";

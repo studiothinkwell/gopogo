@@ -33,7 +33,6 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
      */
     protected $_name = 'user_other_account_details';
 
-
     /**
      *
      * @var String encryption key
@@ -46,25 +45,31 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
      */
     protected static  $db = null;
 
-        /**
+    /**
      * Get DB Object
+     * @return object : Db object
      */
     protected function getDbInstance()
     {
-        if(self::$db===null)
-        {
-            self::$db = Zend_Registry::get('db');
+        try {
+            if(self::$db===null)
+            {
+                self::$db = Zend_Registry::get('db');
+            }
+        }
+        catch(Exception $e){
+            $lang_msg = $e->getMessage();
+            $logger = Zend_Registry::get('log');
+            $logger->log($lang_msg,Zend_Log::ERR);
         }
         return self::$db;
-    }
+    } // end of getDbInstance
 
      /**
      * User : get user twitter username  by user id
      * @access public
      * @param id  : user id
-     *
      * @return Array | bool : user's master data
-     *
      */
 
     public function selectTwitterUsernameByUserId($id,$accounttype)
@@ -72,7 +77,7 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
         // get Db instance
         $db = $this->getDbInstance();
         if(!is_object($db))
-            throw new Exception("",Zend_Log::CRIT);
+            throw new Exception("Unable to create DB object",Zend_Log::CRIT);
 
         try {
             // Stored procedure returns a single row
@@ -83,7 +88,6 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
             $rowArray = $stmt->fetch();
 
             $stmt->closeCursor();
-
 
         } catch (Some_Component_Exception $e) {
             if (strstr($e->getMessage(), 'unknown')) {
@@ -104,19 +108,12 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
             $logger->log($lang_msg,Zend_Log::ERR);
         }
 
-        
-        if (empty ($rowArray)) {
+        if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+            return $rowArray;
+        }
+        else
+        {
             return FALSE;
-        }else {
-
-            if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
-                
-                return $rowArray;
-            }
-            else
-            {
-                return FALSE;
-            }
         }
 
 
@@ -129,6 +126,7 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
      * @param String user id : id of user
      * @param String user name : twitter username
      * @param String is verified : verification status of user
+     * @return boolean true : if success, false : if fail
      */
 
     public function insertTwitterData($accTypeId,$userId,$userName,$isVerified ) {
@@ -170,6 +168,7 @@ class Application_Model_DbTable_Twitter extends Zend_Db_Table_Abstract {
      * @access public
      * @param Integer user_id : user id
      * @param Integer acount_type : partner account type
+     * @return boolean true : if success, false : if fail
      */
 
     function removePartner($user_id,$acount_type)

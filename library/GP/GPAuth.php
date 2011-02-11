@@ -157,22 +157,6 @@ Class GP_GPAuth
     } // end of __construct
 
     /**
-     * Get user session data
-     *
-     * @return Array user's session data
-     */
-
-    public static function getSession()
-    {
-        if(self::$session===null)
-        {
-            self::$session = self::getIntance()->getUserIntance()->getSession();
-        }
-        return self::$session;
-    } // end of getSession
-
-
-    /**
      * get front controller object
      * @return object front controller
      *
@@ -491,7 +475,8 @@ Class GP_GPAuth
      * @param String $email : user email
      * @param String $name : user name
      */
-    public static function sendAccountPasswordChange($email,$passwd,$name='') {
+    public static function sendAccountPasswordChange($email,$passwd,$name='')
+    {
         $obj = self::getIntance();
         $configs = $obj->getConfig();
 
@@ -540,9 +525,57 @@ Class GP_GPAuth
     } // end of sendAccountPasswordChange
 
 
+    /*********************model functions start***********************/
 
 
+    /**
+     * Set Loggedin User data in session
+     * @param Array $udata : user's information for stoing in sesssion
+     */
+
+    public static function logSession($udata) {
+
+        $userSession = new Zend_Session_Namespace('user-session');
+
+        foreach($udata as $ukey=>$uvalue) {
+             $userSession->$ukey = $uvalue;
+        }
+
+        //add profile information into user session
+
+        $rowArray = self::getIntance()->getUserIntance()->getUserProfileByUserId($udata['user_id']);
+
+        if(!empty($rowArray) && is_array($rowArray) && count($rowArray)>0){
+            foreach($rowArray as $ukey=>$uvalue) {
+                 $userSession->$ukey = $uvalue;
+            }
+        }
+
+    } // end of logSession
 
 
+    /**
+     * Destroy Loggedin User data from session
+     */
+
+    public static function destroySession()
+    {
+        Zend_Session::destroy(TRUE);
+
+    } // end of destroySession
+
+
+    /**
+     * Get Loggedin User data in session
+     * @return Array User Data array if present else not
+     */
+
+    public static function getSession()
+    {
+        $userSession = new Zend_Session_Namespace('user-session');
+        return $userSession;
+    } // end of getSession
+
+    /*********************model functions end***********************/
 
 }
