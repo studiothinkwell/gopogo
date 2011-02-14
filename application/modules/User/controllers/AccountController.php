@@ -223,7 +223,7 @@ class User_AccountController extends Zend_Controller_Action {
         try {
             $user = new Application_Model_DbTable_User();
             // distroy loggedin user's session data from session
-            $user->destroySession();
+            GP_GPAuth::destroySession();
             $lang_msg = $this->translate->_("You have successfully logged out from system!");
             $data['msg'] = $lang_msg;
             $data['status'] = 1;
