@@ -1,0 +1,33 @@
+<!--Forgot Password START-->
+<?php
+    $config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'GOPOGO');
+    $baseUrl = $config->gopogo->url->base;
+?>
+    <div  id="forgotBox" >
+        <div class="create-forgot-box" >
+            <div class="create-ac-head">
+                <div class="create-ac-leftbg"></div>
+                <div class="sign-in-middlebg">
+                    <div class="create-ac-head-txt">Forgot <b>Password?</b></div>
+                </div>
+
+                <div class="create-ac-rightbg">
+                    <div class="forgot-close-but clsForgotClose"></div>
+                </div>
+                <div class="sign-in-centerbg">
+                    <div class="forgot-box">
+                         <form action="" id="forgotBoxForm" name="forgotBoxForm" method="post">
+                     <div class="create-ac-input1"><input type="text" value="Email Address" onclick="if(this.value=='Email Address') {this.value = ''; $().setTextColor(this);}else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value=='') {this.value = 'Email Address';$().removeTextColor(this);}else if(this.value == 'Email Address'){ $().removeTextColor(this); } else {$().setTextColor(this);}" onkeypress="if(this.value=='Email Address') {this.value = ''; $().removeTextColor(this);}else{$().setTextColor(this);}" name="email" id="email" class="clsForgotEmail"/></div>
+                     <div class="forgot-txt">Type the characters you see in the picture below.. </div>
+                        <div class="forgot-row-mid" >
+                            <div class="forgot-row-m1"><img id="imageCaptcha"  /> </div>
+                            <div class="forgot-row-m2"><input type="text" class="clsForgotPass" value="Characters" onclick="if(this.value=='Characters') {this.value = ''; $().setTextColor(this);}else if(this.value == ''){ $().removeTextColor(this);}" onblur="if(this.value=='') {this.value = 'Characters'; $().removeTextColor(this);}else if(this.value == 'Characters'){ $().removeTextColor(this); } else {$().setTextColor(this);}" onkeypress="if(this.value=='Characters') {this.value = ''; $().removeTextColor(this);}else{$().setTextColor(this);}"  name="captcha" id="captcha-form" /></div>
+                            <div class="forgot-row-m3 clsForgotSubmitBox" id="forgotSubmitBox"></div>
+                       </div>
+                         </form>
+                    </div>
+                </div>
+                <div class="sign-in-bottombg"></div>
+            </div>
+        </div>
+    </div>
