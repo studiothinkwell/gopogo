@@ -1,15 +1,22 @@
 
-$(document).ready(function(){
+$(document).ready(function(){ 
+
+ var timeStamp = new Date().getTime();
+
 // login url
 app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
+app.gopogo.signinmodalbox_url = app.gopogo.baseurl + 'User/Account/loginmodalbox/';
 // signup url
 app.gopogo.signup_url = app.gopogo.baseurl + 'User/Account/signup/';
+app.gopogo.signupmodalbox_url = app.gopogo.baseurl + 'User/Account/signupmodalbox/';
 // profile url
 app.gopogo.profile_url = app.gopogo.baseurl + 'profile';
 // logout url
 app.gopogo.logout_url = app.gopogo.baseurl + 'User/Account/logout/';
 // forgot url
 app.gopogo.forgot_url = app.gopogo.baseurl + 'User/Account/forgotpassword/';
+app.gopogo.forgotmodalbox_url = app.gopogo.baseurl + 'User/Account/forgotmodalbox/';
+app.gopogo.forgotcaptcha_url = app.gopogo.baseurl + 'index/code';
 // profile update url's
 
 app.gopogo.updatemyinfo_url = app.gopogo.baseurl + 'User/Profileremote/ajaxupdatemyinfo';
@@ -51,6 +58,8 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
 
 
 // add events on load
+
+
 
 /**
  * This will apply toggle effect to bottom of page for advance search
@@ -152,6 +161,7 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
 
         // do login
         $.fn.doLogin = function(){
+            
             // get serialized form data of login form
             var fdata = $("#loginBoxForm").serialize();
             // make ajax request for login

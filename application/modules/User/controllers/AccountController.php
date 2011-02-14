@@ -696,4 +696,39 @@ class User_AccountController extends Zend_Controller_Action {
             $logger->log($lang_msg, Zend_Log::ERR);
         }
     }
+
+
+    /**
+     * Popup login modalbox window
+     * @access public     
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function loginmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout(); 
+    }
+
+    /**
+     * Popup forgot modalbox window
+     * @access public
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function forgotmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout();
+    }
+
+    /**
+     * Popup sign-up modalbox window
+     * @access public
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function signupmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout();
+    }
+    
 }

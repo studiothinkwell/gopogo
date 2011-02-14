@@ -1220,7 +1220,7 @@ vertical-align:bottom;
     width:588px;
     height:352px;
     border:0px solid red;
-    display: none;
+    display: block;
     top: 0px;
     left: 0px;
 }
@@ -1450,11 +1450,11 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:27px;
-    left:13px;    
+    left:13px;
+    *left:5px;
     background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
     top:-7px;
-    *left:5px;
 }
 
 
@@ -1462,7 +1462,7 @@ vertical-align:bottom;
 /**************************************Create Account END**************************************/
 /************************************** Sign in START **************************************/
 
-#loginBox, #forgotBox
+#loginBox, #forgotBox 
 {
     position:absolute;
     z-index: 999;
@@ -1471,10 +1471,11 @@ vertical-align:bottom;
     width:351px;
     height:302px;
     border:0px solid red;
-    display: none;
+    display: block;
     top:0px;
     left:0px
 }
+
 .sign-in-leftbg
 {
     position:relative;
@@ -3359,6 +3360,17 @@ width:270px;
 }
 .w924{
     width:924px;
+}
+
+#modalPopup
+{
+    position:fixed;
+    z-index: 999;
+    overflow: inherit;
+    border:0px solid red;
+    display: none;
+    width: auto;
+    height: auto;
 }
 
 .averageRatingMainBg{ 
