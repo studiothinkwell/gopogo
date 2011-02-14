@@ -24,9 +24,9 @@
 <!-- Footer Middle START-->
 <?php
 
-echo $this->partial('partials/login.phtml');
-echo $this->partial('partials/forgot.phtml',array('baseUrl'=>$baseUrl));
-echo $this->partial('partials/signup.phtml');
+//echo $this->partial('partials/login.phtml');
+//echo $this->partial('partials/forgot.phtml',array('baseUrl'=>$baseUrl));
+//echo $this->partial('partials/signup.phtml');
 echo $this->partial('partials/message.phtml');
 //echo $this->partial('partials/create_playlist_popup.phtml');
 
@@ -52,6 +52,9 @@ var app = [];
 app.gopogo = [];
 // base url of the site
 app.gopogo.baseurl = '<?php echo rtrim($baseUrl) ?>/';
+
+var modalData = [];
+    modalData.user = [];
 
 <?php
 
@@ -84,6 +87,6 @@ $fbIds = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini",'face
         document.getElementById('fb-root').appendChild(e);
     }());
 </script>
-
+<div id="modalPopup"></div>
 </body>
 </html>

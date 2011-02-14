@@ -1549,5 +1549,38 @@ class User_AccountController extends Zend_Controller_Action
         // Inser facebook data into other account details table
         $user->insertOtherAccountDetails(1,$session->user_id,$formData['email']);
     }
+
+    /**
+     * Popup login modalbox window
+     * @access public     
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function loginmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout(); 
+    }
+
+    /**
+     * Popup forgot modalbox window
+     * @access public
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function forgotmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout();
+    }
+
+    /**
+     * Popup sign-up modalbox window
+     * @access public
+     * @return html template
+     * @author Ajay <ajay@techdharma.com>
+     */
+    public function signupmodalboxAction()
+    {
+        $this->_helper->layout()->disableLayout();
+    }
     
 }
