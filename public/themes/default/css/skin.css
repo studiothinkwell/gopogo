@@ -1450,11 +1450,11 @@ vertical-align:bottom;
     float:left;
     width:105px;
     height:27px;
-    left:13px;
-    *left:5px;
-    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -px transparent;
+    left:13px;    
+    background:url(/themes/default/images/Create-account.png) no-repeat scroll -132px -4px transparent;
     cursor: pointer;
     top:-7px;
+    *left:5px;
 }
 
 

@@ -195,13 +195,7 @@ class User_UserremoteController extends Zend_Controller_Action {
                         $validFlag = false;
                     }
                 }
-                if ($validEmail == 0) {
-                    if ($validFlag) {
-                        $lang_msg = $this->translate->_("Please enter valid email!");
-                        $msg .= $lang_msg;
-                        $validFlag = false;
-                    }
-                }
+               
                 if (Zend_Validate::is($newEmail, 'EmailAddress')) {
                     // Yes, email appears to be valid
                 } else {

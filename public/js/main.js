@@ -1,5 +1,5 @@
 
-$(document).ready(function(){ 
+$(document).ready(function(){
 // login url
 app.gopogo.signin_url = app.gopogo.baseurl + 'User/Account/login/';
 // signup url
@@ -153,7 +153,7 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
         // do login
         $.fn.doLogin = function(){
             // get serialized form data of login form
-            var fdata = $("#loginBoxForm").serialize();            
+            var fdata = $("#loginBoxForm").serialize();
             // make ajax request for login
             $.ajax({
                url: app.gopogo.signin_url,
@@ -475,7 +475,7 @@ app.gopogo.yahoo_search_url1 = app.gopogo.baseurl + 'Playlist/Search/searchplace
 
         // log message if console is available else not
         // if force then alert if console is not available
-        $.fn.debugLog = function (msg,force){  
+        $.fn.debugLog = function (msg,force){
             var debugFlag = true;
             // console is defined
             if(app.gopogo.debug==1 && typeof console !== 'undefined' )

@@ -268,7 +268,7 @@ class Application_Model_DbTable_Account extends Zend_Db_Table_Abstract {
       * @return boolean true/false:: true : if success, false : if fail
       */
 
-    public function updateUserPass($id,$password) {
+    public function updateUserPass($id,$password) { 
         $encPassword = GP_ToolKit::encryptPassword($password);
         // get Db instance
         $db = $this->getDbInstance();

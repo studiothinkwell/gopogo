@@ -6,7 +6,7 @@ $(document).ready(function() {
 // call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
-         case 'myinfo':  
+         case 'myinfo':
             var fdata = {'userName':$(".inpclsDivUN").val(),'userDesc':$(".inpclsDivUD").val()};
             if($().validateUsername($(".inpclsDivUN").val())){
                 $.ajax({
@@ -15,7 +15,7 @@ $(document).ready(function() {
                   dataType: 'json',
                   data:fdata,
                   timeout: 99999,
-                  success: function(data){                      
+                  success: function(data){
                       $(".save_info").ajaxLoader();
                       //code to manage html after save process complete
                           var inpArr = new Array(2);
@@ -118,7 +118,7 @@ $(document).ready(function() {
               timeout: 99999,
               success: function(resp){
                   // do something with resp
-                  if(resp.status == 1) { 
+                  if(resp.status == 1) {
                        $().updateSuccess(resp);
                        $(".clsSubSuccess").text('.');
                        var inpArr = new Array(1);
@@ -149,7 +149,7 @@ $(document).ready(function() {
 
     // inplace editor
 
-    $.fn.inplaceEditor = function(inpArr,act) { 
+    $.fn.inplaceEditor = function(inpArr,act) {
 
          switch (act) {
            case "edit" :
@@ -301,7 +301,7 @@ $(".clsEUPro").click(function() {
                inpArr[0] = new Array("inpclsDivUN","clsDivUN");
                inpArr[1] = new Array("inpclsDivUD","clsDivUD");
                $().inplaceEditor(inpArr,"save");
-               $(".clsEUPro").removeClass('save');               
+               $(".clsEUPro").removeClass('save');
            }
        } else {
            $(".clsEUPro").hide();
@@ -348,35 +348,35 @@ $(".clsEUPro").click(function() {
         $().debugLog(evlFlag);
         return evlFlag;
 
-    } 
+    }
 
 
     // add signin box click handlar
 
     $(".signinbox").click(function(event) {
-        
+
         $().debugLog('signinbox');
-        
+
         //var clsClassName = event.target.parentNode.className;
 
         var clsClassName = $(event.target.parentNode).attr('class');
-        
+
         var regexSave = /save/;
-        
+
         // || $.isEmptyObject($(event.target.parentNode).attr('class'))
         if( clsClassName == '' || clsClassName == null || regexSave.test(clsClassName) ){
-            
+
             $().clearErrorMessage();
             //var actionClass = event.target.parentNode.parentNode.className;
             var actionClass = $(event.target.parentNode.parentNode).attr('class');
-            
+
             // update email action
-            // save            
+            // save
             $().debugLog('save');
             var regexUEmail = /email/;
             var regexUPassword = /password/;
             var regexUUsername = /username/;
-            
+
             if(regexUEmail.test(actionClass) || regexUEmail.test(clsClassName) ){
 
                 // save email
@@ -385,7 +385,7 @@ $(".clsEUPro").click(function() {
 
                 // validate email
                 if($().validateEmail(email)){
-                    
+
                     $().clearErrorMessage();
                     var fdata = {'email':email};
                     var settings = {'data':fdata,'url':app.gopogo.accountemailupdate_url};
@@ -393,7 +393,7 @@ $(".clsEUPro").click(function() {
                     $('.save-email').ajaxLoader();
 
                     $().updateSettings("email",settings);
-                    
+
                 } else {
 
                     var msg1 = 'Email not valid!';
@@ -405,12 +405,12 @@ $(".clsEUPro").click(function() {
                 }
 
             }else if(regexUPassword.test(actionClass) || regexUPassword.test(clsClassName) ){
-               
+
                 // save password
                 var oldPassword = $('.inpclsUpdateOldPassword').val();
                 var newPassword = $('.inpclsUpdateNewPassword').val();
-                var confirmNewPassword = $('.inpclsUpdateConfirmNewPassword').val();                
-               
+                var confirmNewPassword = $('.inpclsUpdateConfirmNewPassword').val();
+
                 var vlflag = true;
 
                 // validate password
@@ -461,7 +461,7 @@ $(".clsEUPro").click(function() {
                     $(".clsSubError").text('.');
                     $('.top-Msg-window-s').text('.');
                 }
-            
+
             }else if(regexUUsername.test(actionClass) || regexUUsername.test(clsClassName) ){
                 // save username
                 var username = $('.inpclsUpdateUsername').val();
@@ -490,14 +490,14 @@ $(".clsEUPro").click(function() {
             }
 
         }else if(typeof $(event.target.parentNode).attr('class') != undefined ){
-            
+
             $().clearErrorMessage();
             //var actionClass = event.target.parentNode.className;
             var actionClass = $(event.target.parentNode).attr('class');
 
             var regexUpdate = /update/;
             var regexCancel = /cancel/;
-            var regexSave = /save/;            
+            var regexSave = /save/;
 
             // update action
             if(regexUpdate.test(actionClass)){
@@ -544,8 +544,8 @@ $(".clsEUPro").click(function() {
 
 
     // reset classes
-    $.fn.resetClasses = function(){      
-        
+    $.fn.resetClasses = function(){
+
         $().debugLog('resetClasses');
 
         $('.emailbox').removeClass('d2').addClass("d1");
@@ -620,7 +620,7 @@ $(".clsEUPro").click(function() {
         $().debugLog('successUpdate');
         $().resetClasses();
 
-        // set values to display 
+        // set values to display
         switch(actionName) {
             case 'email':
                 $(".clsSubSuccess").text('Confirm again this new email : ' + data.email);
@@ -648,7 +648,7 @@ $(".clsEUPro").click(function() {
 
                 $('.facebookBox1').removeClass('d2').addClass("d1");
                 $('.facebookBox2').removeClass('d1').addClass("d2");
-                
+
                 break;
             default :
         }
@@ -747,13 +747,13 @@ $(".clsEUPro").click(function() {
         $('.remove-twitter').ajaxLoader();
 
         $().updateSettings("twitter",settings);
-        
+
     });
 
     // remove facebook
 
     $(".remove-facebook").click(function(event) {
-        
+
         $().debugLog('remove-facebook');
         $().debugLog(event);
 
@@ -774,21 +774,21 @@ $(".clsEUPro").click(function() {
 
         // opeen FB login pupup
         fblogin();
-        
+
     });
 
-    
+
 });
 
-function fblogin() { 
+function fblogin() {
     FB.login(function(response) {
       if (response.session) {
         // Get path of the url to chek it is Account update or fb signup
-        var wndwLocation = window.location.pathname; 
+        var wndwLocation = window.location.pathname;
         if (response.perms) {
           // user is logged in and granted some permissions.
-          // perms is a comma separated list of granted permissions          
-          if ( wndwLocation == '/account') { 
+          // perms is a comma separated list of granted permissions
+          if ( wndwLocation == '/account') {
               FB.api('/me', function(fbData) {
 
                 $().debugLog(fbData);
@@ -845,7 +845,7 @@ function fblogin() {
   // Global variable for storing sender and receiver ids
   var senderId;
   var receiverId;
-  function loadMsgList() {    
+  function loadMsgList() {
     //call ajax to generate message list on load
     var pData = {'msgSort':msgSort};
     $.ajax({
@@ -872,7 +872,7 @@ function fblogin() {
            complete: function() {
 
             }
-     });     
+     });
 }
 
 // function to sort message listing
@@ -923,7 +923,7 @@ function backMsgClick() {
      $(".clsMsgList").show();
  }
 
-function savemyinfo() { 
+function savemyinfo() {
     if (profile[0] != $(".inpclsDivUN").val() || profile[1] != $(".inpclsDivUD").val()) {
                 $().updateProfile("myinfo");
            } else {
@@ -944,7 +944,7 @@ function selAllChk() {
         for (i = 0; i < $("input[name=msgChk]").length; i++)
         $("input[name=msgChk]")[i].checked = true ;
     }
-    else { 
+    else {
         for (i = 0; i < $("input[name=msgChk]").length; i++)
         $("input[name=msgChk]")[i].checked = false ;
     }
@@ -954,7 +954,7 @@ function selAllChk() {
 function delMsg() {
     var delMsgIds="";
     for (i = 0; i < $("input[name=msgChk]").length; i++) {
-        if($("input[name=msgChk]")[i].checked == true ) { 
+        if($("input[name=msgChk]")[i].checked == true ) {
             delMsgIds+=$("input[name=msgChk]")[i].value;
         }
         // If value is not last one then append the comma else not
@@ -968,10 +968,10 @@ function delMsg() {
     // make array of global variable
     var arrMsgIds = explode(",",msgIds);
     // make array of del msg ids
-    var arrDelMsgIds = explode(",",delMsgIds); 
-    var sDelMsgIds=""; 
-    for(i=0;i<arrDelMsgIds.length;i++) { 
-        if(in_array(arrDelMsgIds[i],arrMsgIds)) { 
+    var arrDelMsgIds = explode(",",delMsgIds);
+    var sDelMsgIds="";
+    for(i=0;i<arrDelMsgIds.length;i++) {
+        if(in_array(arrDelMsgIds[i],arrMsgIds)) {
             // Append it to delete list
             sDelMsgIds+=arrDelMsgIds[i]+",";
         }
