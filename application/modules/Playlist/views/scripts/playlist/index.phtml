@@ -1,0 +1,50 @@
+<?php
+$this->title = "Login";
+$this->headTitle($this->title);
+//echo $this->form ;
+//echo $this->msg;
+?>
+
+
+        <div style="height:110px;"></div>
+        <!--  Body START-->
+        <div class="container" >
+            <div class="con-box" >
+
+                <form id="signup_form" name="signup_form" method="post" action="">
+                  <table width="961" height="112" border="1">
+                    <tr>
+                      <th scope="row">&nbsp;</th>
+                      <td><h1>Login</h1></td>
+                      <td><?php echo $this->msg ?></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">&nbsp;</th>
+                      <td><strong>Email</strong></td>
+                      <td><label>
+                        <input type="text" name="email" />
+                      </label></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">&nbsp;</th>
+                      <td><strong>Password</strong></td>
+                      <td><label>
+                        <input type="password" name="passwd" />
+                      </label></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">&nbsp;</th>
+                      <td align="center"><label>
+                        <input type="submit" name="Submit" value="Login" />
+                      </label></td>
+                      <td><label>
+                        <input type="reset" name="Submit2" value="Reset" />
+                      </label></td>
+                    </tr>
+                  </table>
+                </form>
+
+             </div>
+             <div class="blankdiv"></div>
+        </div>
