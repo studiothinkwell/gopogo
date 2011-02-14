@@ -127,12 +127,13 @@ class WS_User
         $validEmail = $this->user->checkUserByEmail($email);
         //echo '<br>checkUserByEmail= '.!empty($validEmail);
         if('1'==$validEmail) {
-                $temporaryUserPassword = $this->user->getUserFogotPassword($email);
-                } else {
-                $temporaryUserPassword ='0';
-                }
-	  // exit;
-       return $temporaryUserPassword; //='erjt4y74sdbnhb';
+            $account = new Application_Model_DbTable_Account();
+            $temporaryUserPassword = $account->getUserFogotPassword($email);
+        } else {
+            $temporaryUserPassword ='0';
+        }
+	// exit;
+        return $temporaryUserPassword; //='erjt4y74sdbnhb';
    }
 
    public function signUp()

@@ -193,24 +193,25 @@
                                 <div class="photo_title clsDivUN"><?php echo $session->user_name; ?></div>
                                 <div class="photo_description clsDivUD"><?php echo $session->user_profile_description; ?></div>
                             </div>
+
+                            <div class="averageRatingMainBg">
                             <div class="average_rating_text">Average Rating</div>
-                            <div style="width:201px">
-                                <!-- <input name="adv1" type="radio" class="star {split:2}"/>
-                                <input name="adv1" type="radio" class="star {split:2}"/> -->
-                            </div>
+
                             <div class="average_rating_image"></div>
                             <div class="average_edit_text clsProAction"><a href="javascript:void(0)" class="clsEUPro"><b>edit</b></a></div>
                             <div class="accountSectionBottomButtonBg save_info" style="display:none">
                                 <a href="#" onclick="savemyinfo()"><img border="0" src="/themes/default/images/save.png"></a>
                            </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="photo-message-comment-tab_area">
-                    <div class="message-tab-selected"><a href="#"></a></div>
-                    <div class="comments-tab"><a href="#"></a></div>
-                    <div class="photos-tab"><a href="#"></a></div>
+                    <div class="message-tab-selected"><a href="#" class="clsMessages"></a></div>
+                    <div class="comments-tab"><a href="#" class="clsComments comments-unselctedtab "></a></div>
+                    <div class="photos-tab"><a href="#" class="clsPhotos photos-unselctedtab"></a></div>
                 </div>
 
                 <div class="clsMsgList">
@@ -218,6 +219,14 @@
                 </div>
 
                 <div class="clsMsgRply">
+
+                </div>
+
+                <div class="clsCommentList">
+
+                </div>
+
+                <div class="clsPhotosList">
 
                 </div>
                 <!-- Right part end  -->

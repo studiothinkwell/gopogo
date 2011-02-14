@@ -2,7 +2,7 @@
 var profile = new Array(2);
 $(document).ready(function() {
 //call ajax to generate message list on load
-    loadMsgList();
+    //loadMsgList();
 // call ajax for update profile
     $.fn.updateProfile = function (area) {
         switch(area) {
@@ -15,7 +15,8 @@ $(document).ready(function() {
                   dataType: 'json',
                   data:fdata,
                   timeout: 99999,
-                  success: function(data){
+                  success: function(data){                      
+                      $(".save_info").ajaxLoader();
                       //code to manage html after save process complete
                           var inpArr = new Array(2);
                           inpArr[0] = new Array("inpclsDivUN","clsDivUN");
@@ -25,11 +26,12 @@ $(document).ready(function() {
                           $(".clsDivUN").text(profile[0]);
                           $(".clsDivUD").text(profile[1]);
                       }
-                      $(".clsEUPro").removeClass('save');
-                      $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
-                      $(".save_info").hide();
-                      $(".clsEUPro").show();
-                      // do something with resp
+                   },
+                   complete: function() {
+                       $(".accountSectionBottomButtonBg").ajaxLoaderRemove();
+                       $(".save_info").hide();
+                       $(".clsEUPro").removeClass('save');
+                       $(".clsEUPro").show();
                    }
                 });
             }
@@ -116,8 +118,7 @@ $(document).ready(function() {
               timeout: 99999,
               success: function(resp){
                   // do something with resp
-                  if(resp.status == 1) { // show error message
-
+                  if(resp.status == 1) { 
                        $().updateSuccess(resp);
                        $(".clsSubSuccess").text('.');
                        var inpArr = new Array(1);
@@ -300,8 +301,7 @@ $(".clsEUPro").click(function() {
                inpArr[0] = new Array("inpclsDivUN","clsDivUN");
                inpArr[1] = new Array("inpclsDivUD","clsDivUD");
                $().inplaceEditor(inpArr,"save");
-               $(".clsEUPro").removeClass('save');
-               $("b", ".clsEUPro").fadeOut(function(){$(this).text("edit").fadeIn()});
+               $(".clsEUPro").removeClass('save');               
            }
        } else {
            $(".clsEUPro").hide();
@@ -309,8 +309,6 @@ $(".clsEUPro").click(function() {
            // assign value to global variable of profile
            profile[0] = $(".clsDivUN").text();
            profile[1] = $(".clsDivUD").text();
-           var replacement = $("b", this).text() == "edit" ? "Save" : "edit";
-           $("b", this).fadeOut(function(){$(this).text(replacement).fadeIn()});
            inpArr = new Array(2);
            inpArr[0] = new Array("clsDivUN","clsDivUN","text","20");
            inpArr[1] = new Array("clsDivUD","clsDivUD","textarea");
@@ -786,11 +784,11 @@ function fblogin() {
     FB.login(function(response) {
       if (response.session) {
         // Get path of the url to chek it is Account update or fb signup
-        var wndwLocation = window.location.pathname; alert(wndwLocation);
+        var wndwLocation = window.location.pathname; 
         if (response.perms) {
           // user is logged in and granted some permissions.
-          // perms is a comma separated list of granted permissions
-          if ( wndwLocation == '/User/Account' || wndwLocation == '/user/Account' || wndwLocation == '/User/account/' || wndwLocation == '/user/account' || wndwLocation == '/User/Account/#') {
+          // perms is a comma separated list of granted permissions          
+          if ( wndwLocation == '/account') { 
               FB.api('/me', function(fbData) {
 
                 $().debugLog(fbData);
@@ -826,7 +824,7 @@ function fblogin() {
                       // Logout from facebook
                         FB.logout(function() {
                             // user is now logged out
-                            window.location = app.gopogo.profile_url;
+                            $(location).attr('href',app.gopogo.profile_url);
                         });
                    }
                 });
@@ -840,44 +838,78 @@ function fblogin() {
     }, {perms:'email'});
   }
 
-  function loadMsgList() {
+  // Global variable for storing messages id
+  var msgIds;
+  // Global variable for storting message list ( Asc, Desc)
+  var msgSort = "Desc";
+  // Global variable for storing sender and receiver ids
+  var senderId;
+  var receiverId;
+  function loadMsgList() {    
     //call ajax to generate message list on load
+    var pData = {'msgSort':msgSort};
     $.ajax({
           url: app.gopogo.msglist_url,
           type: 'POST',
+          data: pData,
           timeout: 99999,
           error: function(data){
               //alert(data);
               $().debugLog(data);
            },
           success: function(data) {
-                $(".clsMsgList").html(data);
+                if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    $(".clsMsgRply").hide();
+                    $(".clsCommentList").hide();
+                    $(".clsMsgList").html(data);
+                    $(".clsMsgList").show();
+                    msgIds = $(".clsHdnChkMsg").val();
+                }
            },
            complete: function() {
 
             }
-     });
+     });     
+}
+
+// function to sort message listing
+function sortMsgList() {
+    if (msgSort == 'Desc') {
+        $(".black-arrow-bg").style('background','url(/themes/default/images/inner-page-img.png) no-repeat scroll -173px -30px transparent;');
+        msgSort = 'Asc'; alert(1);
+    } else if (msgSort == 'Asc') {
+        msgSort = 'Desc';
+    }
+    loadMsgList();
 }
 
 //call ajax to reply for an message
-function doReplyMsg() {
+function doReplyMsg(receiverId) {
+    fdata = {'receiverId':receiverId};
     $.ajax({
           url: app.gopogo.replymessage_url,
           type: 'POST',
+          data:fdata,
           timeout: 99999,
-          error: function(data){
-              //alert(data);
+          error: function(data) {
               $().debugLog(data);
            },
           onload: function() {
 
           },
           success: function(data) {
-                //$('.gray_date_subject_bg').ajaxLoader();
-                $(".clsMsgList").hide();
-                $(".clsMsgRply").html(data);
-                $(".clsMsgRply").show();
-              // do something with resp
+               if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    //$('.gray_date_subject_bg').ajaxLoader();
+                    $(".clsMsgList").hide();
+                    $(".clsMsgRply").html(data);
+                    $(".clsMsgRply").show();
+                }
            },
            complete: function() {
                 //$('.gray_date_subject_bg').ajaxLoaderRemove();
@@ -906,3 +938,138 @@ function savemyinfo() {
                $(".clsEUPro").show();
            }
 }
+
+function selAllChk() {
+    if($("input[name=selectAll]")[0].checked == true) {
+        for (i = 0; i < $("input[name=msgChk]").length; i++)
+        $("input[name=msgChk]")[i].checked = true ;
+    }
+    else { 
+        for (i = 0; i < $("input[name=msgChk]").length; i++)
+        $("input[name=msgChk]")[i].checked = false ;
+    }
+}
+
+//function to delete messages
+function delMsg() {
+    var delMsgIds="";
+    for (i = 0; i < $("input[name=msgChk]").length; i++) {
+        if($("input[name=msgChk]")[i].checked == true ) { 
+            delMsgIds+=$("input[name=msgChk]")[i].value;
+        }
+        // If value is not last one then append the comma else not
+        if( i+1 != $("input[name=msgChk]").length ) {
+            delMsgIds+=",";
+        }
+    }
+
+    /* @security code check */
+    // Code to check return ids are actually present or not in our global variable msgIds
+    // make array of global variable
+    var arrMsgIds = explode(",",msgIds);
+    // make array of del msg ids
+    var arrDelMsgIds = explode(",",delMsgIds); 
+    var sDelMsgIds=""; 
+    for(i=0;i<arrDelMsgIds.length;i++) { 
+        if(in_array(arrDelMsgIds[i],arrMsgIds)) { 
+            // Append it to delete list
+            sDelMsgIds+=arrDelMsgIds[i]+",";
+        }
+    }
+    fdata = {'delMsgIds':delMsgIds};
+    // call an ajax to delete messages
+    // Post : Message ids
+    $.ajax({
+          url: app.gopogo.deletemessage_url,
+          type: 'POST',
+          data:fdata,
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function() {
+                // Call ajax to refresh message listing
+                loadMsgList();
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+//function to display comments on comment tab click
+$('.clsComments').click(function(){
+    loadCommentList();
+});
+
+//function to display messages on message tab click
+$('.clsMessages').click(function(){
+    loadMsgList();
+});
+
+//function to display photos on Photos tab click
+$('.clsPhotos').click(function(){
+    loadPhotosList();
+});
+
+function loadCommentList() {
+    $.ajax({
+          url: app.gopogo.commentlist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) {
+                if (data == 'logout') {
+                    $(location).attr('href',app.gopogo.baseurl);
+                }
+                else {
+                    // Show output data in clsComment div
+                    $(".clsMsgList").hide();
+                    $(".clsCommentList").html(data);
+                    $(".clsCommentList").show();
+                }
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
+function loadPhotosList() {
+    $.ajax({
+          url: app.gopogo.photoslist_url,
+          type: 'POST',
+          timeout: 99999,
+          error: function(data) {
+              $().debugLog(data);
+           },
+          onload: function() {
+
+          },
+          success: function(data) {
+              if (data == 'logout') {
+                  $(location).attr('href','/index/index');
+              }
+              else {
+                // Show output data in clsComment div
+                $(".clsMsgList").hide();
+                $(".clsReplyMsg").hide();
+                $(".clsCommentList").hide();
+                $(".clsPhotosList").html(data);
+                $(".clsPhotosList").show();
+              }
+           },
+           complete: function() {
+                //$('.gray_date_subject_bg').ajaxLoaderRemove();
+            }
+     });
+}
+
