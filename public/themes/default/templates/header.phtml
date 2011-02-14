@@ -1,4 +1,4 @@
-<?php 
+<?php
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     $this->headMeta()->appendName('keywords', 'Gopogo, Event, Playlist');
     $this->headMeta()->appendName('description', 'Gopogo, Event, Playlist');
@@ -32,7 +32,7 @@
             GP_Asset::addCss('/themes/default/css/chrome.css'); break;
        case GP_Browser::BROWSER_OPERA:
             GP_Asset::addCss('/themes/default/css/opera.css'); break;
-    } 
+    }
 
     GP_Asset::combieAndLoadCss();
 ?>
@@ -164,4 +164,4 @@
                     <li><?php echo $this->escape($message); ?></li>
                 <?php endforeach; ?>
                 </ul>
-                <?php endif; ?> 
+                <?php endif; ?>

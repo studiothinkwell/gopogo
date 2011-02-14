@@ -195,7 +195,11 @@ class User_UserremoteController extends Zend_Controller_Action {
                         $validFlag = false;
                     }
                 }
+<<<<<<< HEAD
 
+=======
+               
+>>>>>>> cd25ff630495957bfc97c2c33320de0a6ddf49ae
                 if (Zend_Validate::is($newEmail, 'EmailAddress')) {
                     // Yes, email appears to be valid
                 } else {
