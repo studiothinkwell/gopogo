@@ -14,7 +14,7 @@
  *
  * @category gopogo web service
  * @package WebService
- * @author   Ashish Shukla <ashish@techdharma.com>
+ * @author   Pir Sajad <pirs@techdharma.com>
  * @version  1.0
  * @copyright Copyright (c) 2010 Gopogo.com. (http://www.gopogo.com)
  * @link http://www.gopogo.com/WebService/Rest/
@@ -28,7 +28,7 @@
  *
  * @package  WebService module
  * @subpackage classes
- * @author   Ashish Shukla <ashish@techdharma.com>
+ * @author   Pir Sajad <pirs@techdharma.com>
  * @access   public
  * @see      http://www.gopogo.com/WebService/Rest/
  */
